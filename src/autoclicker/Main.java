@@ -6,13 +6,13 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 
 public class Main implements NativeKeyListener {
- MyFrame frame = new MyFrame();
+	MyFrame frame = new MyFrame();
 
 	public static void main(String[] args) {
 		// ############## SETTINGS ##############
-		Autoclicker.singleton.clicks = 10; // 0 means infinite
-		Autoclicker.singleton.holdDelay = 0;
-		Autoclicker.singleton.clickDelay = 50;
+		Autoclicker.clickDelay = 1000;
+		Autoclicker.clickDelay = 0;
+		Autoclicker.clicks = 10;
 
 		// key listener
 		try {
@@ -29,18 +29,18 @@ public class Main implements NativeKeyListener {
 	public void nativeKeyPressed(NativeKeyEvent nke) {
 		// when hotkey is pressed toggle the autoclicker
 		if (NativeKeyEvent.getKeyText(nke.getKeyCode()) == hotkey) {
+			
 			System.out.println(hotkey + " was pressed " + running);
 
-			// if going to start/restart make new object 
+			// if going to start/restart make new object
 			if (!running) {
 				clicker = new Autoclicker();
 			}
 			// if running stop if not running start
 			if (running) {
-				clicker.stop = true;
-				Autoclicker.singleton.stop = true;
+				Autoclicker.stop = true;
 				running = false;
-			} else if(!running) {
+			} else if (!running) {
 				clicker.start();
 				running = true;
 			}

@@ -7,15 +7,13 @@ import java.awt.event.InputEvent;
 public class Autoclicker extends Thread {
 
 	static Autoclicker singleton;
-	boolean stop = false;
+	static boolean stop = false;
 	static int clicks = 0;
 	static int holdDelay = 0;
 	static int clickDelay = 100;
 
-	
 	@Override
 	public void run() {
-		singleton = this;
 		// checking to click for a infinite or finite number
 		switch (clicks) {
 		// 0 clicks = inf clicks

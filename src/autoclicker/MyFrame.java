@@ -31,13 +31,14 @@ public class MyFrame extends JFrame {
 		clicksHotkeyL.setBounds(0, 180, 400, 20);
 
 		// background ########################
-		JPanel backgroundP[] = backgroundPanelFactory(6, Color.lightGray);
+		JPanel backgroundP[] = backgroundPanelFactory(7, Color.lightGray);
 		backgroundP[0].setBounds(20, 30, 340, 30);
 		backgroundP[1].setBounds(20, 70, 340, 30);
-		backgroundP[2].setBounds(20, 140, 340, 30);
-		backgroundP[3].setBounds(20, 210, 95, 30);
-		backgroundP[4].setBounds(125, 210, 115, 30);
-		backgroundP[5].setBounds(300, 210, 125, 30);
+		backgroundP[2].setBounds(20, 140, 165, 30);
+		backgroundP[3].setBounds(195, 140, 165, 30);
+		backgroundP[4].setBounds(20, 210, 95, 30);
+		backgroundP[5].setBounds(125, 210, 155, 30);
+		backgroundP[6].setBounds(300, 210, 125, 30);
 
 		int inputHeight = 20;
 		int inputWidth = 35;
@@ -63,12 +64,12 @@ public class MyFrame extends JFrame {
 		delayHoldTF[3].setBounds(290, delayHoldItemsY, inputWidth, inputHeight);
 
 		// random interval TF
-		JTextField[] randomizeTF = textFieldFactory(2, Color.pink);
-		randomizeTF[0].setBounds(130, randomizeItemsY, inputWidth, inputHeight);
+		JTextField[] randomizeTF = textFieldFactory(2, Color.white);
+		randomizeTF[0].setBounds(115, randomizeItemsY, inputWidth, inputHeight);
 		randomizeTF[1].setBounds(290, randomizeItemsY, inputWidth, inputHeight);
 		
 		// amount clicks TF
-		JTextField[] clicksTF = textFieldFactory(1, Color.cyan);
+		JTextField[] clicksTF = textFieldFactory(1, Color.white);
 		clicksTF[0].setBounds(70, clicksY, inputWidth, inputHeight);
 		
 		// ms, s, min, h labels ########################################
@@ -76,7 +77,7 @@ public class MyFrame extends JFrame {
 		JLabel[] msL = timeLabelFactory(4, "ms");
 		msL[0].setBounds(330, delayClickItemsY, 20, 20); // for click delay
 		msL[1].setBounds(330, delayHoldItemsY, 20, 20); // for hold delay
-		msL[2].setBounds(170, randomizeItemsY, 20, 20); // for click delay
+		msL[2].setBounds(155, randomizeItemsY, 20, 20); // for click delay
 		msL[3].setBounds(330, randomizeItemsY, 20, 20); // for hold delay
 
 		// s label
@@ -121,8 +122,10 @@ public class MyFrame extends JFrame {
 		
 		JCheckBox[] randomizeCB = checkBoxFactory(2);
 		randomizeCB[0].setBounds(70, randomizeItemsY, 15, 20);
-		randomizeCB[1].setBounds(200, randomizeItemsY, 15, 20);
+		randomizeCB[1].setBounds(240, randomizeItemsY, 15, 20);
 		
+		JComboBox<?> pressCB = comboBoxFactory();
+		pressCB.setBounds(170, clicksY, 100, 20);
 		
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -174,6 +177,8 @@ public class MyFrame extends JFrame {
 		this.add(randomizeCB[0]);
 		this.add(randomizeCB[1]);
 				
+		// adding dropdown
+		this.add(pressCB);
 		
 		// adding backgrounds
 		for (int i = 0; i < backgroundP.length; i++) {
@@ -264,8 +269,13 @@ public class MyFrame extends JFrame {
 		for(int i=0; i < checkBox.length; i++){
 			checkBox[i] = new JCheckBox();
 			checkBox[i].setBorder(null);
-			checkBox[i].setBackground(defaultBackgroundColor);
+			checkBox[i].setOpaque(false);
 		}
 		return checkBox;
+	}
+	public JComboBox<?> comboBoxFactory(){
+		String[] comboBoxOptions = {"MBUTTON1" ,"MBUTTON2","MBUTTON3","MBUTTON4","MBUTTON5"};
+		JComboBox<?> comboBox = new JComboBox<Object>(comboBoxOptions);
+		return comboBox;
 	}
 }
