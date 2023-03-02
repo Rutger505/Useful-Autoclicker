@@ -19,7 +19,7 @@ public class Autoclicker extends Thread {
 		// 0 clicks = inf clicks
 		case 0:
 			while (true) {
-				clickCycle();
+				clickCycle(-0);
 				if (stop) {
 					stop = false;
 					break;
@@ -30,9 +30,8 @@ public class Autoclicker extends Thread {
 		// if not 0 clicks click for how many "clicks" is
 		default:
 			for (int i = 0; i < clicks; i++) {
-				clickCycle();
+				clickCycle(i);
 				if (stop) {
-					System.out.println("i am trying to stop");
 					stop = false;
 					break;
 				}
@@ -48,17 +47,18 @@ public class Autoclicker extends Thread {
 	 * 
 	 * mouse release click delay.
 	 */
-	public void clickCycle() {
+	public void clickCycle(int i) {
 		if (clickDelay < 5) {
 			clickDelay = 5;
 		}
-
 		try {
 			mousePress();
 			wait(holdDelay);
 			mouseRelease();
 			wait(clickDelay);
 		} catch (AWTException e) {
+			System.out.println("error in cickCycle");
+			System.out.println(e);
 		}
 	}
 
@@ -67,9 +67,14 @@ public class Autoclicker extends Thread {
 	 * 
 	 * @throws AWTException
 	 */
-	public void mousePress() throws AWTException {
-		Robot robot = new Robot();
-		robot.mousePress(InputEvent.BUTTON1_MASK);
+	public void mousePress() throws AWTException {		
+		try {
+			Robot robot = new Robot();
+			robot.mousePress(InputEvent.BUTTON1_MASK);
+		} catch (AWTException e) {
+			System.out.println("error in mousePress");
+			System.out.println(e);
+		}
 	}
 
 	/**
@@ -77,9 +82,14 @@ public class Autoclicker extends Thread {
 	 * 
 	 * @throws AWTException
 	 */
-	public void mouseRelease() throws AWTException {
-		Robot robot = new Robot();
-		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+	public void mouseRelease() {
+		try {
+			Robot robot = new Robot();
+			robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		} catch (AWTException e) {
+			System.out.println("error in mouseRelease");
+			System.out.println(e);
+		}
 	}
 
 	/**

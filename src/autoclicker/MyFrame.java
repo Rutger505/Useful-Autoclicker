@@ -38,7 +38,7 @@ public class MyFrame extends JFrame {
 		backgroundP[3].setBounds(195, 140, 165, 30);
 		backgroundP[4].setBounds(20, 210, 95, 30);
 		backgroundP[5].setBounds(125, 210, 155, 30);
-		backgroundP[6].setBounds(300, 210, 125, 30);
+		backgroundP[6].setBounds(20, 250, 125, 30);
 
 		int inputHeight = 20;
 		int inputWidth = 35;
@@ -120,16 +120,18 @@ public class MyFrame extends JFrame {
 		JLabel pressL = textLabelFactory("Press:");
 		pressL.setBounds(135, clicksY, 80, 20);
 		
+		// check boxes ############################
 		JCheckBox[] randomizeCB = checkBoxFactory(2);
 		randomizeCB[0].setBounds(70, randomizeItemsY, 15, 20);
 		randomizeCB[1].setBounds(240, randomizeItemsY, 15, 20);
 		
+		// dropdown #############################
 		JComboBox<?> pressCB = comboBoxFactory();
-		pressCB.setBounds(170, clicksY, 100, 20);
+		pressCB.setBounds(180, clicksY, 90, 20);
 		
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(400, 290); // sets size of COMPLETE window(i think)
+		this.setSize(400, 330); // sets size of COMPLETE window(i think)
 		this.setResizable(false); // makes the windows resizable/ not resizable
 		this.setVisible(true); // makes windows visible
 		this.setLayout(null); // set positions manually

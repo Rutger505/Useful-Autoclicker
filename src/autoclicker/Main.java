@@ -8,14 +8,15 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 public class Main implements NativeKeyListener {
 	MyFrame frame = new MyFrame();
 
-	
-	// this is a tesst!############################
-	
-	
+	// ############ SETTING #################
+	static String hotkey = "T";
+	static boolean running = false;
+	Autoclicker clicker = new Autoclicker();
+
 	public static void main(String[] args) {
 		// ############## SETTINGS ##############
-		Autoclicker.clickDelay = 1000;
 		Autoclicker.clickDelay = 0;
+		Autoclicker.holdDelay = 1000;
 		Autoclicker.clicks = 10;
 
 		// key listener
@@ -26,16 +27,9 @@ public class Main implements NativeKeyListener {
 		GlobalScreen.addNativeKeyListener(new Main());
 	}
 
-	// ############ SETTING #################
-	static String hotkey = "T";
-	static boolean running = false;
-	Autoclicker clicker = new Autoclicker();
 	public void nativeKeyPressed(NativeKeyEvent nke) {
 		// when hotkey is pressed toggle the autoclicker
 		if (NativeKeyEvent.getKeyText(nke.getKeyCode()) == hotkey) {
-			
-			System.out.println(hotkey + " was pressed " + running);
-
 			// if going to start/restart make new object
 			if (!running) {
 				clicker = new Autoclicker();
