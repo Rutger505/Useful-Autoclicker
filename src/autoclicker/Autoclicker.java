@@ -3,23 +3,51 @@ package autoclicker;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
+import java.util.Random;
 
 public class Autoclicker extends Thread {
+	// ## settings from main ##
+	public static int clicks = 0;
+	public static int clickDelay = 0;
+	public static int holdDelay = 0;
 
-	static Autoclicker singleton;
-	static boolean stop = false;
-	static int clicks = 0;
-	static int holdDelay = 0;
-	static int clickDelay = 100;
+	public static boolean clickRandB = false;
+	public static boolean holdRandB = false;
+
+	public static int clickRand = 0;
+	public static int holdRand = 0;
+
+	public static int buttonNum = 0;
+
+	// idk
+	public static Autoclicker singleton;
+	// functional vars
+	public static boolean stop = false;
+	private static int clickDelayR = 0;
+	private static int holdDelayR = 0;
+	private Random r = new Random();
+
+	private static int button;
 
 	@Override
 	public void run() {
+		System.out.println("i start");
+		// setting wich button to press
+		button = MouseEvent.getMaskForButton(buttonNum + 1);
+
+		// if no click delay set to 1 to pre
+		if (clickDelay < 1) {
+			clickDelay = 1;
+		}
+
 		// checking to click for a infinite or finite number
 		switch (clicks) {
 		// 0 clicks = inf clicks
 		case 0:
 			while (true) {
-				clickCycle(-0);
+				randomizeDelay();
+				clickCycle();
 				if (stop) {
 					stop = false;
 					break;
@@ -30,7 +58,8 @@ public class Autoclicker extends Thread {
 		// if not 0 clicks click for how many "clicks" is
 		default:
 			for (int i = 0; i < clicks; i++) {
-				clickCycle(i);
+				randomizeDelay();
+				clickCycle();
 				if (stop) {
 					stop = false;
 					break;
@@ -38,69 +67,81 @@ public class Autoclicker extends Thread {
 			}
 			Main.running = false;
 		}
+		System.out.println("i stop");
 	}
 
 	/**
-	 * sets mouse delay to 5 if lower.<br>
 	 * 
-	 * mouse press hold delay. <br>
+	 * calculates random delay if turned on<br>
+	 * clickRand and holdRand as the range<br>
+	 * delay will range from -clickRand to +clickRand
 	 * 
-	 * mouse release click delay.
 	 */
-	public void clickCycle(int i) {
-		if (clickDelay < 5) {
-			clickDelay = 5;
+	public void randomizeDelay() {
+		clickDelayR = clickDelay;
+		// need to randomize?
+		if (clickRandB) {
+			clickDelayR = clickDelay + r.nextInt(clickRand * 2 + 1) - clickRand;
 		}
-		try {
-			mousePress();
-			wait(holdDelay);
-			mouseRelease();
-			wait(clickDelay);
-		} catch (AWTException e) {
-			System.out.println("error in cickCycle");
-			System.out.println(e);
+		holdDelayR = holdDelay;
+		// need to randomize?
+		if (holdRandB) {
+			holdDelayR = holdDelay + r.nextInt(holdRand * 2 + 1) - holdRand;
 		}
 	}
 
 	/**
-	 * Press mouse button
-	 * 
-	 * @throws AWTException
+	 * does a full click cycle:
+	 *  
+	 * mouse press<br>
+	 * hold delay <br>
+	 * mouse release <br>
+	 * click delay
 	 */
-	public void mousePress() throws AWTException {		
+	public void clickCycle() {
+		mousePress();
+		wait(clickDelayR);
+		mouseRelease();
+		wait(holdDelayR);
+	}
+
+	/**
+	 * press mouse button
+	 */
+	public void mousePress() {
 		try {
 			Robot robot = new Robot();
-			robot.mousePress(InputEvent.BUTTON1_MASK);
+			robot.mousePress(button);
 		} catch (AWTException e) {
-			System.out.println("error in mousePress");
-			System.out.println(e);
+			System.out.println("error in mouse press");
+			e.printStackTrace();
 		}
 	}
 
 	/**
 	 * release mouse button
-	 * 
-	 * @throws AWTException
 	 */
 	public void mouseRelease() {
 		try {
 			Robot robot = new Robot();
-			robot.mouseRelease(InputEvent.BUTTON1_MASK);
+			robot.mouseRelease(button);
 		} catch (AWTException e) {
-			System.out.println("error in mouseRelease");
-			System.out.println(e);
+			System.out.println("error in mouse release");
+			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * makes program sleep so many milliseconds
+	 * makes program sleep so many milliseconds<br>
+	 * if
 	 * 
-	 * @param ms how many ms to sleep
+	 * @param ms how many ms to sleep if less than 0 set to 0
 	 */
 	public void wait(int ms) {
 		try {
 			Thread.sleep(ms);
 		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 }
