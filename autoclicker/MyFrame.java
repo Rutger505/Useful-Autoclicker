@@ -10,6 +10,8 @@ import javax.swing.text.PlainDocument;
  * GUI where settings can be changed
  */
 public class MyFrame extends JFrame implements ActionListener {
+	private static final long serialVersionUID = 1L;
+
 	// spacing border for textfields
 	static Border whiteB = BorderFactory.createLineBorder(Color.white, 2);
 

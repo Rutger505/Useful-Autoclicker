@@ -5,6 +5,8 @@ import java.awt.Font;
 import javax.swing.*;
 
 public class HelpFrame extends JFrame {
+	private static final long serialVersionUID = 1L;
+	
 	private int frameWith = 350;
 	private int frameHeight = 300;
  	private Font fontDefault = new Font("arial", Font.PLAIN, 12);
