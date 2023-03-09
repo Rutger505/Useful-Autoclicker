@@ -31,8 +31,10 @@ public class MyIntFilter extends DocumentFilter {
 		StringBuilder sb = new StringBuilder();
 		sb.append(doc.getText(0, doc.getLength()));
 		sb.insert(offset, string);
-
-		if (test(sb.toString()) && sb.length() <4) {
+		
+		System.out.println(doc);
+		System.out.println(doc.getLength());
+		if (test(sb.toString()) && doc.getLength() + string.length() <= limit) {
 			super.insertString(fb, offset, string, attr);
 		} else {
 			System.out.println("mag niet");
@@ -42,7 +44,7 @@ public class MyIntFilter extends DocumentFilter {
 	@Override
 	public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
 			throws BadLocationException {
-
+		
 		Document doc = fb.getDocument();
 		StringBuilder sb = new StringBuilder();
 		sb.append(doc.getText(0, doc.getLength()));
@@ -53,7 +55,6 @@ public class MyIntFilter extends DocumentFilter {
 		} else {
 			// warn the user and don't allow the insert
 		}
-
 	}
 
 	@Override

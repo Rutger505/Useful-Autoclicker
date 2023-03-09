@@ -1,8 +1,7 @@
 package autoclicker;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.PlainDocument;
@@ -14,20 +13,21 @@ public class MyFrame extends JFrame implements ActionListener {
 	// spacing border for textfields
 	static Border whiteB = BorderFactory.createLineBorder(Color.white, 2);
 
-	static JTextField[] delayClickTF = textFieldFactory(4, Color.white, whiteB);
-	static JTextField[] delayHoldTF = textFieldFactory(4, Color.white, whiteB);
-	static JTextField[] randomizeTF = textFieldFactory(2, Color.white, whiteB);
-	static JTextField[] clicksTF = textFieldFactory(1, Color.white, whiteB);
-	static JCheckBox[] randomizeCB = checkBoxFactory(2);
-	static String[] comboBoxOptions = { "left", "middle", "right", "side front", "side back" };
-	static JComboBox<?> buttonCB = comboBoxFactory(comboBoxOptions);
-	static JButton button;
+	public static JTextField[] delayClickTF = textFieldFactory(4, Color.white, whiteB);
+	public static JTextField[] delayHoldTF = textFieldFactory(4, Color.white, whiteB);
+	public static JTextField[] randomizeTF = textFieldFactory(2, Color.white, whiteB);
+	public static JTextField[] clicksTF = textFieldFactory(1, Color.white, whiteB);
+	public static JCheckBox[] randomizeCB = checkBoxFactory(2);
+	public static String[] comboBoxOptions = { "left", "middle", "right", "side front", "side back" };
+	public static JComboBox<?> buttonCB = comboBoxFactory(comboBoxOptions);
+	public static JButton hotkeyB;
+	private JButton helpB;
 
 	// fonts
-	Font fontDefault = new Font("arial", Font.PLAIN, 12);
+	private static Font fontDefault = new Font("arial", Font.PLAIN, 12);
 
 	// default background color
-	Color defaultBackgroundColor = Color.lightGray;
+	private static Color defaultBackgroundColor = Color.lightGray;
 
 	public MyFrame() {
 		int screenWidth = 400;
@@ -47,8 +47,8 @@ public class MyFrame extends JFrame implements ActionListener {
 		// inisialize components and place ########################################
 		// label signs ###################################
 		// text sign that says "Click delay/Hold delay"
-		JLabel delayL = LabelFactory("Click delay/Hold delay", true, true, defaultBackgroundColor);
-		delayL.setBounds(0, 0, screenWidth, labelHeight);
+		JLabel intervalL = LabelFactory("Click interval/Hold time", true, true, defaultBackgroundColor);
+		intervalL.setBounds(0, 0, screenWidth, labelHeight+5);
 
 		// text sign that says "Randomize click interval"
 		JLabel randomizeL = LabelFactory("Randomize click interval", true, true, defaultBackgroundColor);
@@ -60,19 +60,19 @@ public class MyFrame extends JFrame implements ActionListener {
 
 		// variable texts labels ########################################
 		// "Click delay:" label
-		JLabel clickDelayL = LabelFactory("Click delay:", false, false, defaultBackgroundColor);
-		clickDelayL.setBounds(30, delayClickItemsY, 80, labelHeight); // for click delay
+		JLabel clickintervalL = LabelFactory("Click interval:", false, false, defaultBackgroundColor);
+		clickintervalL.setBounds(30, delayClickItemsY, 80, labelHeight); // for click delay
 
 		// "Hold delay:" label
-		JLabel holdDelayL = LabelFactory("Hold delay:", false, false, defaultBackgroundColor);
-		holdDelayL.setBounds(30, delayHoldItemsY, 80, labelHeight); // for click delay
+		JLabel holdintervalL = LabelFactory("Hold time:", false, false, defaultBackgroundColor);
+		holdintervalL.setBounds(30, delayHoldItemsY, 80, labelHeight); // for click delay
 
 		// "Click:" label
-		JLabel clickL = LabelFactory("Click:", false, false, defaultBackgroundColor);
+		JLabel clickL = LabelFactory("Click interv:", false, false, defaultBackgroundColor);
 		clickL.setBounds(30, randomizeItemsY, 80, labelHeight); // for random interval "click:"
 
 		// "Hold:" label
-		JLabel holdL = LabelFactory("Hold:", false, false, defaultBackgroundColor);
+		JLabel holdL = LabelFactory("Hold time:", false, false, defaultBackgroundColor);
 		holdL.setBounds(200, randomizeItemsY, 80, labelHeight); // for random interval "hold:"
 
 		// "Clicks:" label
@@ -85,26 +85,30 @@ public class MyFrame extends JFrame implements ActionListener {
 
 		// Time text labels ########################################
 		// ms label
-		JLabel[] msL = timeLabelFactory(4, "ms");
+		int[][] msLCords = { { 328, delayClickItemsY, timeLabelWidth, labelHeight },
+				{ 328, delayHoldItemsY, timeLabelWidth, labelHeight },
+				{ 153, randomizeItemsY, timeLabelWidth, labelHeight },
+				{ 328, randomizeItemsY, timeLabelWidth, labelHeight } };
+		JLabel[] msL = timeLabelFactory(4, "ms", msLCords);
 		msL[0].setBounds(328, delayClickItemsY, timeLabelWidth, labelHeight); // for click delay
 		msL[1].setBounds(328, delayHoldItemsY, timeLabelWidth, labelHeight); // for hold delay
 		msL[2].setBounds(153, randomizeItemsY, timeLabelWidth, labelHeight); // for randomize click
 		msL[3].setBounds(328, randomizeItemsY, timeLabelWidth, labelHeight); // for randomize hold
 
 		// s label
-		JLabel[] sL = timeLabelFactory(2, "s");
-		sL[0].setBounds(268, delayClickItemsY, timeLabelWidth, labelHeight); // for click delay
-		sL[1].setBounds(268, delayHoldItemsY, timeLabelWidth, labelHeight); // for hold delay
+		int[][] sLCords = { { 268, delayClickItemsY, timeLabelWidth, labelHeight },
+				{ 268, delayHoldItemsY, timeLabelWidth, labelHeight } };
+		JLabel[] sL = timeLabelFactory(2, "s", sLCords);
 
 		// min label
-		JLabel[] mL = timeLabelFactory(2, "m");
-		mL[0].setBounds(208, delayClickItemsY, timeLabelWidth, labelHeight); // for click delay
-		mL[1].setBounds(208, delayHoldItemsY, timeLabelWidth, labelHeight); // for hold delay
+		int[][] mLCords = { { 208, delayClickItemsY, timeLabelWidth, labelHeight },
+				{ 208, delayHoldItemsY, timeLabelWidth, labelHeight } };
+		JLabel[] mL = timeLabelFactory(2, "m", mLCords);
 
 		// h label
-		JLabel[] hL = timeLabelFactory(2, "h");
-		hL[0].setBounds(148, delayClickItemsY, timeLabelWidth, labelHeight); // for click delay
-		hL[1].setBounds(148, delayHoldItemsY, timeLabelWidth, labelHeight); // for hold delay
+		int[][] hLCords = { { 148, delayClickItemsY, timeLabelWidth, labelHeight },
+				{ 148, delayHoldItemsY, timeLabelWidth, labelHeight } };
+		JLabel[] hL = timeLabelFactory(2, "h", hLCords);
 
 		// textfields #########################
 		// click delay TF
@@ -130,12 +134,16 @@ public class MyFrame extends JFrame implements ActionListener {
 		clicksTF[0].setBounds(70, clicksY, inputWidth, inputHeight);
 
 		// button ###################################
-		button = buttonFactory("Click to select hotkey(" + Main.hotkey + ")");
-		button.setBounds(20, 250, 165, 30);
+		// help button
+		helpB = buttonFactory("?", BorderFactory.createLineBorder(Color.black));
+		helpB.setBounds(360, 4, 17, 17);
+		// hotkey button
+		hotkeyB = buttonFactory("Click to select hotkey(" + Main.hotkey + ")", null);
+		hotkeyB.setBounds(20, 250, 165, 30);
 
 		// check boxes ############################
-		randomizeCB[0].setBounds(70, randomizeItemsY, 15, 20);
-		randomizeCB[1].setBounds(240, randomizeItemsY, 15, 20);
+		randomizeCB[0].setBounds(95, randomizeItemsY, 15, 20);
+		randomizeCB[1].setBounds(270, randomizeItemsY, 15, 20);
 
 		// dropdown #############################
 		buttonCB.setBounds(180, clicksY, 90, 20);
@@ -159,56 +167,65 @@ public class MyFrame extends JFrame implements ActionListener {
 
 		// adding components ####################
 		// adding textfields
-		addComp(null, delayClickTF);
-		addComp(null, delayHoldTF);
-		addComp(null, randomizeTF);
-		addComp(null, clicksTF);
+		addComp(delayClickTF);
+		addComp(delayHoldTF);
+		addComp(randomizeTF);
+		addComp(clicksTF);
 
-		// adding button
-		addComp(button, null);
+		// adding hotkey button
+		addComp(hotkeyB);
+		// adding help button
+		addComp(helpB);
 
 		// addig checkboxes
-		addComp(null, randomizeCB);
+		addComp(randomizeCB);
 
 		// adding dropdown
-		addComp(buttonCB, null);
+		addComp(buttonCB);
 
 		// adding sign labels
-		addComp(delayL, null);
-		addComp(randomizeL, null);
-		addComp(clicksHotkeyL, null);
+		addComp(intervalL);
+		addComp(randomizeL);
+		addComp(clicksHotkeyL);
 
 		// adding text labels
-		addComp(clickDelayL, null);
-		addComp(holdDelayL, null);
-		addComp(clickL, null);
-		addComp(holdL, null);
-		addComp(clicksL, null);
-		addComp(buttonL, null);
+		addComp(clickintervalL);
+		addComp(holdintervalL);
+		addComp(clickL);
+		addComp(holdL);
+		addComp(clicksL);
+		addComp(buttonL);
 
 		// adding ms, s, min, h label
-		addComp(null, msL);
-		addComp(null, sL);
-		addComp(null, mL);
-		addComp(null, hL);
+		addComp(msL);
+		addComp(sL);
+		addComp(mL);
+		addComp(hL);
 
 		// adding backgrounds
-		addComp(null, backgroundP);
+		addComp(backgroundP);
 	}
 
 	/**
-	 * adds components(array or not) to frame
+	 * adds component to frame
 	 * 
-	 * @param component  component to add
-	 * @param componentA component array to add
+	 * @param comp component to add
 	 */
-	public void addComp(Component component, Component[] componentA) {
-		if (component != null) {
-			this.add(component);
+	public void addComp(Component comp) {
+		if (comp != null) {
+			this.add(comp);
 		}
-		if (componentA != null) {
-			for (int i = 0; i < componentA.length; i++) {
-				this.add(componentA[i]);
+	}
+
+	/**
+	 * adds component array to frame
+	 * 
+	 * @param compA component array to add
+	 */
+	public void addComp(Component[] compA) {
+		if (compA != null) {
+			for (int i = 0; i < compA.length; i++) {
+				this.add(compA[i]);
 			}
 		}
 	}
@@ -241,12 +258,13 @@ public class MyFrame extends JFrame implements ActionListener {
 	 * @param internalText what to set inside label
 	 * @return the label(s) made
 	 */
-	public JLabel[] timeLabelFactory(int amount, String internalText) {
+	public JLabel[] timeLabelFactory(int amount, String internalText, int[][] cords) {
 		JLabel[] label = new JLabel[amount];
 		for (int i = 0; i < label.length; i++) {
 			label[i] = new JLabel();
 			label[i].setText(internalText);
 			label[i].setFont(fontDefault);
+			label[i].setBounds(cords[i][0], cords[i][1], cords[i][2], cords[i][3]);
 		}
 		return label;
 	}
@@ -299,6 +317,7 @@ public class MyFrame extends JFrame implements ActionListener {
 		for (int i = 0; i < checkBox.length; i++) {
 			checkBox[i] = new JCheckBox();
 			checkBox[i].setBorder(null);
+			checkBox[i].setFocusable(false);
 			checkBox[i].setOpaque(false);
 		}
 		return checkBox;
@@ -310,12 +329,12 @@ public class MyFrame extends JFrame implements ActionListener {
 	 * @param internalText what to put in button
 	 * @return
 	 */
-	public JButton buttonFactory(String internalText) {
+	public JButton buttonFactory(String internalText, Border border) {
 		JButton button = new JButton();
 		button.setBackground(defaultBackgroundColor);
 		button.setFont(fontDefault);
 		button.setText(internalText);
-		button.setBorder(null);
+		button.setBorder(border);
 		button.setFocusable(false);
 		button.addActionListener(this);
 		button.setOpaque(true);
@@ -329,21 +348,46 @@ public class MyFrame extends JFrame implements ActionListener {
 	 */
 	public static JComboBox<String> comboBoxFactory(String[] options) {
 		JComboBox<String> comboBox = new JComboBox<String>(options);
-		comboBox.setBackground(null);
-		comboBox.setForeground(null);
+		comboBox.setBackground(Color.white);
 		comboBox.setFocusable(false);
+		comboBox.setFont(fontDefault);
 		return comboBox;
 	}
 
+
+	HelpFrame helpFrame = new HelpFrame();
 	/**
 	 * if button is pressed search for hew hotkey and set button to "Press new
 	 * hotkey"
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == button) {
+		if (e.getSource() == hotkeyB) {
 			Main.newHotkey = true;
-			button.setText("Press new hotkey");
+			hotkeyB.setText("Press new hotkey");
+		} else if(e.getSource() == helpB) {
+			centerPopup();
+			helpFrame.setVisible(true);
 		}
+	}
+
+	public void centerPopup() {
+		Point position = this.getLocationOnScreen();
+		int x = position.x;
+		int y = position.y;
+
+		int tw = this.getWidth();
+		int th = this.getHeight();
+
+		int pw = helpFrame.getWidth();
+		int ph = helpFrame.getHeight();
+
+		double formX = (1 - (double) pw / tw) / 2;
+		double formY = (1 - (double) ph / th) / 2;
+		
+		int calcX = (int) Math.round(x + (tw * formX));
+		int calcY = (int) Math.round(y + (th * formY));
+
+		helpFrame.setLocation(calcX, calcY);
 	}
 }

@@ -1,7 +1,5 @@
 package autoclicker;
 
-import java.awt.Color;
-
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
@@ -34,7 +32,7 @@ public class Main implements NativeKeyListener {
 	public void nativeKeyPressed(NativeKeyEvent nke) {
 		if (newHotkey) {
 			hotkey = NativeKeyEvent.getKeyText(nke.getKeyCode());
-			MyFrame.button.setText("Click to select hotkey(" + hotkey + ")");
+			MyFrame.hotkeyB.setText("Click to select hotkey(" + hotkey + ")");
 			newHotkey = false;
 		} else if (NativeKeyEvent.getKeyText(nke.getKeyCode()) == hotkey) {
 			toggleClicker();
