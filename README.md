@@ -17,3 +17,7 @@ This program was made by me to see if I could build a helpful tool. The Function
 * Click on the file "Usefull Autoclicker 1.0.jar"
 * Click on the download button
 * Your will be able to imidiatly uuse the Autoclicker
+
+## known issues
+
+* Autoclicker using high amount of usage
