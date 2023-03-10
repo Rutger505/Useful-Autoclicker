@@ -2,7 +2,7 @@
 
 ## Powerfull Autoclicker up to 400CPS with great functions
 
-This program was made by me to see if I could build a helpfull tool. The Functions the Autoclicker contains are nice paired together with a (almost) unlocked Autoclicker you won't forget it
+This program was made by me to see if I could build a helpful tool. The Functions in the Autoclicker are nice, paired together with a (almost) unlocked Autoclicker you won't forget it.
 
 * Sleek design
 * Up to 400 clicks per second
@@ -11,3 +11,9 @@ This program was made by me to see if I could build a helpfull tool. The Functio
 * 5 Mouse buttons to Autoclick
 * Hotkey changer
 * Full explanation in the program
+
+## how to download
+
+* Click on the file "Usefull Autoclicker 1.0.jar"
+* Click on the download button
+* Your will be able to imidiatly uuse the Autoclicker
