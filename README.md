@@ -14,7 +14,7 @@ This program was made by me to see if I could build a helpful tool. The Function
 
 ## how to download
 
-* download java from: https://www.java.com/download/ie_manual.jsp
-* Click on the file "Usefull Autoclicker 1.0.jar"
+* install java jdk from here: https://www.oracle.com/nl/java/technologies/downloads/#jdk19-windows
+* Click on the file "Usefull Autoclicker 1.0.exe"
 * Click on the download button
-* Your will be able to imidiatly uuse the Autoclicker
+* Open your new Autoclicker!
