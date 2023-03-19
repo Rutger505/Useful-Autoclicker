@@ -9,7 +9,7 @@ import javax.swing.*;
 /**
  * frame when Help button is pressed with all information needed
  */
-public class HelpFrame extends JFrame {
+public class HelpGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private int frameWidth = 350;
@@ -24,36 +24,37 @@ public class HelpFrame extends JFrame {
 	private int fontTextS = 12;
 	private Font fontText = new Font("arial", Font.PLAIN, fontTextS);
 
-	public HelpFrame() {
+	public HelpGUI() {
 		// part 1
 		int[] Ti1C = { 0, 0, aFrameWidth, titleHeight };
-		JLabel Ti1 = labelFactory("Click interval/Hold time", fontTitle, Ti1C, true);
+		JLabel Ti1 = labelFactory("Click interval/Hold time", fontTitle, Ti1C, GUI.defaultBackgroundColor);
 		int[] Te1C = { 0, 24, aFrameWidth, 40 };
 		JLabel Te1 = labelFactory(
 				"<html><b>Click interval</b> means the time between clicks. <br> "
 						+ " <b>Hold time</b> means the time between a mouse press and release.</html>",
-				fontText, Te1C, false);
+				fontText, Te1C, null);
 
 		// part 2
 		int[] Ti2C = { 0, 72, aFrameWidth, titleHeight };
-		JLabel Ti2 = labelFactory("Randomize click interval", fontTitle, Ti2C, true);
+		JLabel Ti2 = labelFactory("Randomize click interval", fontTitle, Ti2C, GUI.defaultBackgroundColor);
 		int[] Te2C = { 0, 96, aFrameWidth, 70 };
 		JLabel Te2 = labelFactory(
 				"<html><b>Randomize click interval</b> means there is a random number around the interval depending of range.<br>"
 						+ " <b>Example:</b> If interval is 100ms with a random interval range of 20ms the click interval will be a random number between 80 and 140.</html>",
-				fontText, Te2C, false);
+				fontText, Te2C, null);
 
 		// part 3
 		int[] Ti3C = { 0, 174, aFrameWidth, titleHeight };
-		JLabel Ti3 = labelFactory("Clicks/Button/Hotkey", fontTitle, Ti3C, true);
+		JLabel Ti3 = labelFactory("Clicks/Button/Hotkey", fontTitle, Ti3C, GUI.defaultBackgroundColor);
 		int[] Te3C = { 0, 198, aFrameWidth, 50 };
 		JLabel Te3 = labelFactory("<html><b>Clicks</b> means how many times the Autoclicker will click.<br>"
 				+ " <b>Button</b> means the button that the Autoclicker will press.<br>"
-				+ " <b>Hotkey</b> means the button to activate the Autoclicker</html>", fontText, Te3C, false);
+				+ " <b>Hotkey</b> means the button to activate the Autoclicker</html>", fontText, Te3C, null);
 
 		this.setIconImage(GUI.icon.getImage());
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setSize(frameWidth, frameHeight);
+		this.getContentPane().setBackground(Color.white);
 		this.setTitle("Help");
 		this.setLayout(null);
 		this.setResizable(false);
@@ -69,8 +70,8 @@ public class HelpFrame extends JFrame {
 		addComp(Te1);
 		addComp(Te2);
 		addComp(Te3);
-
 	}
+	
 /**
  * Makes label
  * 
@@ -80,12 +81,12 @@ public class HelpFrame extends JFrame {
  * @param background want background?
  * @return the label
  */
- 	private JLabel labelFactory(String internalText, Font font, int[] bounds, boolean background) {
+ 	private JLabel labelFactory(String internalText, Font font, int[] bounds, Color background) {
 		JLabel label = new JLabel();
 		label.setFont(font);
 		label.setText(internalText);
-		label.setBackground(Color.LIGHT_GRAY);
-		label.setOpaque(background);
+		label.setBackground(background);
+		label.setOpaque(true);
 		label.setBounds(bounds[0], bounds[1], bounds[2], bounds[3]);
 		return label;
 	}

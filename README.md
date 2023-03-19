@@ -1,11 +1,12 @@
-# Usefull-Autoclicker-1.0
+# Usefull Autoclicker 1.0
 
 ## Powerfull Autoclicker up to 400CPS with great functions
 
-This program was made by me to see if I could build a helpful tool. The Functions in the Autoclicker are nice, paired together with a (almost) unlocked Autoclicker you won't forget it.
+## Features
 
 * Sleek design
 * Up to 400 clicks per second
+* Able to hold down mouse button
 * precise control of clicking speed
 * Randomizer for gaming
 * 5 Mouse buttons to Autoclick
@@ -15,6 +16,6 @@ This program was made by me to see if I could build a helpful tool. The Function
 ## how to download
 
 * Install Java JDK from here: https://www.oracle.com/nl/java/technologies/downloads/#jdk19-windows
-* Click on the file "Usefull Autoclicker 1.0.exe"
+* Click on the file "Usefull Autoclicker 1.0.jar"
 * Click on the download button
 * Open your new Autoclicker!

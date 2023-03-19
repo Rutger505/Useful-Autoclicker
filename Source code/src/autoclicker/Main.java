@@ -1,11 +1,12 @@
 package autoclicker;
 
-import java.awt.AWTException;
-
+import java.net.ServerSocket;
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
+
+import fileHider.FileHider;
 
 public class Main implements NativeKeyListener {
 	public static Double AutoclickerVers = 1.0;
@@ -13,9 +14,19 @@ public class Main implements NativeKeyListener {
 	private static Autoclicker clicker;
 	private static GUI frame;
 	public static boolean newHotkey = false;
-	public static String hotkey = "T";
-
+	public static int hotkey = 59; // F1
+	public static String hotkeyT = NativeKeyEvent.getKeyText(hotkey); // F1
+	
+	@SuppressWarnings("resource")
 	public static void main(String[] args){
+		// only one instance of program
+		try {
+			// when the program is launched twice the second cant connect to port and terminates
+			new ServerSocket(1324);
+		} catch (Exception e) {
+			System.exit(0);
+		}
+		
 		// Clicker
 		clicker = new Autoclicker();
 		// GUI
@@ -37,16 +48,13 @@ public class Main implements NativeKeyListener {
 	 * else if the key pressed is equal to hotkey toggle clicker
 	 */
 	public void nativeKeyReleased(NativeKeyEvent nke) {
-		System.out.println("key pressed");
 		if (newHotkey) {
-			hotkey = NativeKeyEvent.getKeyText(nke.getKeyCode());
-			GUI.hotkeyB.setText("Click to select hotkey(" + hotkey + ")");
+			hotkey = nke.getKeyCode();
+			hotkeyT = NativeKeyEvent.getKeyText(nke.getKeyCode());
+			GUI.hotkeyB.setText("Select hotkey(" + hotkeyT + ")");
 			newHotkey = false;
-		} else if (NativeKeyEvent.getKeyText(nke.getKeyCode()) == hotkey) {
-			try {
-				toggleClicker();
-			} catch (Exception e) {
-			}
+		} else if (nke.getKeyCode() == hotkey) {
+			toggleClicker();
 		}
 	}
 
@@ -59,7 +67,6 @@ public class Main implements NativeKeyListener {
 		if (!Autoclicker.running) {
 			clicker = new Autoclicker();
 		}
-		
 		if (Autoclicker.running) {
 			Autoclicker.stop = true;
 			frame.setTitle(frame.frameTitle + "  -  Stopped");

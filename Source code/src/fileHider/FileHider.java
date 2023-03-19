@@ -1,4 +1,4 @@
-package autoclicker;
+package fileHider;
 
 import java.io.File;
 import java.nio.file.Files;

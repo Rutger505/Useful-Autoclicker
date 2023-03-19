@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.PlainDocument;
 
+import textFieldFilter.TextFieldFilter;
+
 /**
  * GUI where settings can be changed
  */
@@ -21,7 +23,7 @@ public class GUI extends JFrame implements ActionListener {
 	public static JComboBox<?> buttonCB;
 	public static JButton hotkeyB;
 	private JButton helpB;
-	private HelpFrame helpFrame = new HelpFrame();
+	private HelpGUI helpFrame = new HelpGUI();
 
 	// frame title
 	public String frameTitle = "Usefull Autoclicker " + Main.AutoclickerVers;
@@ -33,9 +35,10 @@ public class GUI extends JFrame implements ActionListener {
 	// fonts
 	private static Font fontDefault = new Font("arial", Font.PLAIN, 12);
 
-	// default background color
-	private static Color defaultBackgroundColor = new Color(225, 225, 225);
+	// background color
+	public static Color defaultBackgroundColor = new Color(230, 230, 230);
 
+	// icon
 	public static final ImageIcon icon = new ImageIcon("icon.png");
 
 	public GUI() {
@@ -163,7 +166,7 @@ public class GUI extends JFrame implements ActionListener {
 		helpB = buttonFactory("?", BorderFactory.createLineBorder(Color.gray), helpBCords);
 		// hotkey button
 		int[] hotkeyBCords = { 20, clicks2Y, 165, 30 };
-		hotkeyB = buttonFactory("Click to select hotkey(" + Main.hotkey + ")", null, hotkeyBCords);
+		hotkeyB = buttonFactory("Select hotkey(" + Main.hotkeyT + ")", null, hotkeyBCords);
 
 		// backgrounds ########################
 		int[][] backgroundC = { { 20, 30, 340, 30 }, { 20, 70, 340, 30 }, { 20, 140, 165, 30 }, { 195, 140, 165, 30 },
@@ -296,7 +299,7 @@ public class GUI extends JFrame implements ActionListener {
 			textField[i].setText("0");
 			textField[i].setBounds(cords[i][0], cords[i][1], cords[i][2], cords[i][3]);
 			PlainDocument document = (PlainDocument) (textField[i].getDocument());
-			document.setDocumentFilter(new MyIntFilter(4));
+			document.setDocumentFilter(new TextFieldFilter(4));
 		}
 		return textField;
 	}
@@ -317,7 +320,7 @@ public class GUI extends JFrame implements ActionListener {
 		textField.setText("0");
 		textField.setBounds(cords[0], cords[1], cords[2], cords[3]);
 		PlainDocument document = (PlainDocument) (textField.getDocument());
-		document.setDocumentFilter(new MyIntFilter(4));
+		document.setDocumentFilter(new TextFieldFilter(4));
 		return textField;
 	}
 
@@ -353,6 +356,7 @@ public class GUI extends JFrame implements ActionListener {
 		button.setBorder(border);
 		button.setFocusable(false);
 		button.addActionListener(this);
+		button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		button.setOpaque(true);
 		button.setBounds(cords[0], cords[1], cords[2], cords[3]);
 		return button;
