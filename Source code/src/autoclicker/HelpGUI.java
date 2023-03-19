@@ -19,12 +19,19 @@ public class HelpGUI extends JFrame {
 
 	private int titleHeight = 20;
 
+	// fonts
 	private int fontTitleS = 16;
 	private Font fontTitle = new Font("arial", Font.PLAIN, fontTitleS);
 	private int fontTextS = 12;
 	private Font fontText = new Font("arial", Font.PLAIN, fontTextS);
+	
+	// icon
+	private static ImageIcon icon = new ImageIcon();
 
 	public HelpGUI() {
+		icon = new ImageIcon(getClass().getResource(GUI.iconPath));
+		
+		
 		// part 1
 		int[] Ti1C = { 0, 0, aFrameWidth, titleHeight };
 		JLabel Ti1 = labelFactory("Click interval/Hold time", fontTitle, Ti1C, GUI.defaultBackgroundColor);
@@ -51,7 +58,7 @@ public class HelpGUI extends JFrame {
 				+ " <b>Button</b> means the button that the Autoclicker will press.<br>"
 				+ " <b>Hotkey</b> means the button to activate the Autoclicker</html>", fontText, Te3C, null);
 
-		this.setIconImage(GUI.icon.getImage());
+		this.setIconImage(icon.getImage());
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setSize(frameWidth, frameHeight);
 		this.getContentPane().setBackground(Color.white);

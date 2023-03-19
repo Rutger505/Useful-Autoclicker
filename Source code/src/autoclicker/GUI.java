@@ -28,20 +28,30 @@ public class GUI extends JFrame implements ActionListener {
 	// frame title
 	public String frameTitle = "Usefull Autoclicker " + Main.AutoclickerVers;
 
-	// spacing border for textfields
-	private static Color textFieldColor = Color.white;
-	private static Border textFieldB = BorderFactory.createLineBorder(textFieldColor, 2);
-
 	// fonts
 	private static Font fontDefault = new Font("arial", Font.PLAIN, 12);
 
 	// background color
-	public static Color defaultBackgroundColor = new Color(230, 230, 230);
+	private static int brR = 230;
+	private static int brG = 230;
+	private static int brB = 230;
+	public static Color defaultBackgroundColor = new Color(brR, brG, brB);
 
-	// icon
-	public static final ImageIcon icon = new ImageIcon("icon.png");
+	// spacing border for textfields
+	private static Color textFieldColor = Color.white;
+	private static Border textFieldB = BorderFactory.createLineBorder(textFieldColor, 2);
+
+	// border for help button
+	public static Color helpButtonBC = new Color(brR - 50, brG - 50, brB - 50);
+	private static Border helpBB = BorderFactory.createLineBorder(helpButtonBC, 1);
+	
+	public static String iconPath ="/resources/icon.png";
+
+	private static ImageIcon icon = new ImageIcon();
 
 	public GUI() {
+		icon = new ImageIcon(getClass().getResource(iconPath));
+		
 		int frameWidth = 400;
 		int frameHeight = 330;
 		// actual frame width
@@ -163,7 +173,7 @@ public class GUI extends JFrame implements ActionListener {
 		// button ###################################
 		// help button
 		int[] helpBCords = { 360, 4, 17, 17 };
-		helpB = buttonFactory("?", BorderFactory.createLineBorder(Color.gray), helpBCords);
+		helpB = buttonFactory("?", helpBB, helpBCords);
 		// hotkey button
 		int[] hotkeyBCords = { 20, clicks2Y, 165, 30 };
 		hotkeyB = buttonFactory("Select hotkey(" + Main.hotkeyT + ")", null, hotkeyBCords);

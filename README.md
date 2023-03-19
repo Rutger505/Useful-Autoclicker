@@ -2,6 +2,8 @@
 
 ## Powerfull Autoclicker up to 400CPS with great functions
 
+![image](https://user-images.githubusercontent.com/119070855/226204455-dfa63a32-8092-4568-9e36-084990be85ea.png)
+
 ## Features
 
 * Sleek design
