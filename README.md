@@ -18,6 +18,6 @@
 ## how to download
 
 * Install Java JDK from here: https://www.oracle.com/nl/java/technologies/downloads/#jdk19-windows
-* Click on the file "Usefull Autoclicker 1.0.jar"
+* Click on the file "Usefull Autoclicker.jar"
 * Click on the download button
 * Open your new Autoclicker!
