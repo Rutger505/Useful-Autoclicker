@@ -39,7 +39,6 @@ public class GUI extends JFrame implements ActionListener {
    private final JCheckBox[] shouldRandomizeCB;
    private final JTextField[] randomizeRangeTF;
    private final JTextField clickAmountTF;
-   private final JCheckBox autoclickOnMouseHoldCB;
    private final JComboBox<String> buttonSelectCB;
    private final JButton helpButton;
 
@@ -58,29 +57,32 @@ public class GUI extends JFrame implements ActionListener {
       int clicksItemsY = 215;
       int clicksItems2Y = 255;
 
+      // used throughout the GUI ########################################################
+      // backgrounds
+      JPanel[] backgrounds = panelFactory(new int[][]{ {20, 140, 165, 30}, {195, 140, 165, 30}, {20, 250, 95, 30}, {195, 210, 155, 30}, {20, 30, 340, 30}, {20, 70, 340, 30}});
+      // time identifiers
+      JLabel[] millisecondsL = labelFactory("ms", true, false, new int[][]{{328, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {328, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {153, randomizeItemsY, timeIdentifierLabelWidth, labelHeight}, {328, randomizeItemsY, timeIdentifierLabelWidth, labelHeight}});
+
+      JLabel[] secondL = labelFactory("s", true, false, new int[][]{{268, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {268, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}});
+
+      JLabel[] minutesL = labelFactory("m", true, false, new int[][]{{208, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {208, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}});
+
+      JLabel[] hourL = labelFactory("h", true, false, new int[][]{{148, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {148, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}});
+
 
       // first section ########################################################
       JLabel delayLabel = labelFactory("Click interval/Hold time", true, true, new int[]{0, 0, MAIN_FRAME_ACTUAL_WIDTH, labelHeight + 5});
-
-      JLabel clickDelayL = labelFactory("Click interval:", false, false, new int[]{30, clickDelayItemsY, 80, labelHeight});
-      JLabel holdeDelayL = labelFactory("Hold time:", false, false, new int[]{30, holdDelayItemsY, 80, labelHeight});
 
       Color helpButtonBorderColor = new Color(200, 200, 200);
       Border helpButtonBorder = BorderFactory.createLineBorder(helpButtonBorderColor, 1);
       helpButton = buttonFactory("?", helpButtonBorder, this, new int[]{360, 4, 17, 17});
 
-      clickDelayTF = textFieldFactory(4, new int[][]{
-              {290, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT},
-              {230, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT},
-              {170, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT},
-              {110, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
+      JLabel clickDelayL = labelFactory("Click interval:", false, false, new int[]{30, clickDelayItemsY, 80, labelHeight});
+      clickDelayTF = textFieldFactory(4, new int[][]{{290, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {230, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {170, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {110, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
       clickDelayTF[0].setText("100");
 
-      holdDelayTF = textFieldFactory(4, new int[][]{
-              {290, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT},
-              {230, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT},
-              {170, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT},
-              {110, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
+      JLabel holdDelayL = labelFactory("Hold time:", false, false, new int[]{30, holdDelayItemsY, 80, labelHeight});
+      holdDelayTF = textFieldFactory(4, new int[][]{{290, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {230, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {170, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {110, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
 
       // second section ########################################################
       JLabel randomizeLabel = labelFactory("Randomize click interval", true, true, new int[]{0, 110, MAIN_FRAME_ACTUAL_WIDTH, labelHeight});
@@ -88,14 +90,9 @@ public class GUI extends JFrame implements ActionListener {
       JLabel clickRandomizeL = labelFactory("Click inter:", false, false, new int[]{30, randomizeItemsY, 80, labelHeight});
       JLabel holdRandomizeL = labelFactory("Hold time:", false, false, new int[]{200, randomizeItemsY, 80, labelHeight});
 
-      shouldRandomizeCB = checkBoxFactory(new int[][]{
-              {95, randomizeItemsY, 15, 20},
-              {270, randomizeItemsY, 15, 20}
-      });
+      shouldRandomizeCB = checkBoxFactory(new int[][]{{95, randomizeItemsY, 15, 20}, {270, randomizeItemsY, 15, 20}});
 
-      randomizeRangeTF = textFieldFactory(4, new int[][]{
-              {115, randomizeItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT},
-              {290, randomizeItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
+      randomizeRangeTF = textFieldFactory(4, new int[][]{{115, randomizeItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {290, randomizeItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
       randomizeRangeTF[0].setText("20");
       randomizeRangeTF[1].setText("20");
 
@@ -104,46 +101,11 @@ public class GUI extends JFrame implements ActionListener {
 
       JLabel clickAmountL = labelFactory("Clicks:", false, false, new int[]{30, clicksItems2Y, 80, labelHeight});
       clickAmountTF = textFieldFactory(5, new int[]{70, clicksItems2Y, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT});
-      clickAmountTF.setPreferredSize(new Dimension(TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT));
 
       JLabel buttonSelectL = labelFactory("Button:", false, false, new int[]{205, clicksItemsY, 80, labelHeight});
-      String[] buttonSelectOptions = {"left", "middle", "right", "side front", "side back"};
-      buttonSelectCB = comboBoxFactory(buttonSelectOptions, new int[]{
-              250, clicksItemsY, 90, 20
-      });
+      String[] buttonSelectOptions = {"left", "right", "middle", "side front", "side back"};
+      buttonSelectCB = comboBoxFactory(buttonSelectOptions, new int[]{250, clicksItemsY, 90, 20});
 
-      JLabel autoclickOnMouseHoldL = labelFactory("Autoclick on button hold:", false, false, new int[]{135, clicksItems2Y, 190, labelHeight});
-      autoclickOnMouseHoldCB = checkBoxFactory(new int[]{275, clicksItems2Y, 15, 20});
-
-      // used throughout the GUI ########################################################
-      // backgrounds
-      JPanel[] backgrounds = panelFactory(new int[][]{
-              {20, 30, 340, 30},
-              {20, 70, 340, 30},
-              {20, 140, 165, 30},
-              {195, 140, 165, 30},
-              {20, 250, 95, 30},
-              {195, 210, 155, 30},
-//              {125, 250, 175, 30}
-      });
-      // time identifiers
-      JLabel[] millisecondsL = labelFactory("ms", true, false, new int[][]{
-              {328, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight},
-              {328, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight},
-              {153, randomizeItemsY, timeIdentifierLabelWidth, labelHeight},
-              {328, randomizeItemsY, timeIdentifierLabelWidth, labelHeight}});
-
-      JLabel[] secondL = labelFactory("s", true, false, new int[][]{
-              {268, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight},
-              {268, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}});
-
-      JLabel[] minutesL = labelFactory("m", true, false, new int[][]{
-              {208, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight},
-              {208, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}});
-
-      JLabel[] hourL = labelFactory("h", true, false, new int[][]{
-              {148, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight},
-              {148, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}});
 
       // adding components ########################################################
       // adding text fields
@@ -157,7 +119,6 @@ public class GUI extends JFrame implements ActionListener {
 
       // adding checkboxes
       addComponent(shouldRandomizeCB, this);
-//      addComponent(autoclickOnMouseHoldCB, this);
 
       // adding dropdown
       addComponent(buttonSelectCB, this);
@@ -169,14 +130,13 @@ public class GUI extends JFrame implements ActionListener {
 
       // adding text labels
       addComponent(clickDelayL, this);
-      addComponent(holdeDelayL, this);
+      addComponent(holdDelayL, this);
       addComponent(clickRandomizeL, this);
       addComponent(holdRandomizeL, this);
       addComponent(clickAmountL, this);
       addComponent(buttonSelectL, this);
-//      addComponent(autoclickOnMouseHoldL, this);
 
-      // adding time identifier labels
+      // adding time identifiers
       addComponent(millisecondsL, this);
       addComponent(secondL, this);
       addComponent(minutesL, this);
@@ -185,13 +145,12 @@ public class GUI extends JFrame implements ActionListener {
       // adding backgrounds
       addComponent(backgrounds, this);
 
-
       // frame itself
       this.setIconImage(Constants.FRAME_ICON);
       this.setTitle(MAIN_FRAME_TITLE);
       this.setSize(MAIN_FRAME_WIDTH, MAIN_FRAME_HEIGHT);
       this.setResizable(false);
-      this.getContentPane().setBackground(Color.white);
+      this.getContentPane().setBackground(Constants.FRAME_COLOR);
       this.setLayout(null);
       this.setLocationRelativeTo(null);
       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -218,10 +177,6 @@ public class GUI extends JFrame implements ActionListener {
       return clickAmountTF;
    }
 
-   public JCheckBox getAutoClickOnMouseHold() {
-      return autoclickOnMouseHoldCB;
-   }
-
    public JComboBox<String> getButtonSelect() {
       return buttonSelectCB;
    }
@@ -243,8 +198,9 @@ public class GUI extends JFrame implements ActionListener {
     */
    public void addComponent(JComponent component, JFrame frame) {
       frame.add(component);
-      if (frame.isVisible()){
+      if (frame.isVisible()) {
          frame.repaint();
+         frame.setVisible(true);
       }
    }
 
@@ -258,9 +214,22 @@ public class GUI extends JFrame implements ActionListener {
       for (Component component : componentArray) {
          frame.add(component);
       }
-      if (frame.isVisible()){
+      if (frame.isVisible()) {
          frame.repaint();
       }
+   }
+
+   private JPanel panelFactory(LayoutManager layout, boolean background, JComponent[] components, int[] coordinates) {
+      JPanel panel = new JPanel(layout);
+      panel.setBackground(Constants.DEFAULT_BACKGROUND_COLOR);
+      panel.setOpaque(background);
+      if (coordinates != null){
+         panel.setBounds(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
+      }
+      for (JComponent component : components) {
+         panel.add(component);
+      }
+      return panel;
    }
 
    /**
@@ -374,7 +343,7 @@ public class GUI extends JFrame implements ActionListener {
     * @param coordinates coordinates and size of the checkboxes
     * @return the checkbox array
     */
-   private JCheckBox[] checkBoxFactory(int[][] coordinates) {
+   public JCheckBox[] checkBoxFactory(int[][] coordinates) {
       JCheckBox[] checkBox = new JCheckBox[coordinates.length];
       for (int i = 0; i < checkBox.length; i++) {
          checkBox[i] = new JCheckBox();
@@ -391,8 +360,9 @@ public class GUI extends JFrame implements ActionListener {
     * @param coordinates coordinates and size of the checkboxes
     * @return the checkbox
     */
-   private JCheckBox checkBoxFactory(int[] coordinates) {
+   public JCheckBox checkBoxFactory(ActionListener actionListener, int[] coordinates) {
       JCheckBox checkBox = new JCheckBox();
+      checkBox.addActionListener(actionListener);
       checkBox.setBorder(null);
       checkBox.setOpaque(false);
       checkBox.setBounds(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);

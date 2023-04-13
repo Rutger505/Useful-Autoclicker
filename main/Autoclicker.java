@@ -10,8 +10,8 @@ import static java.lang.Math.abs;
 public class Autoclicker extends Thread {
    // ## settings ##
    private int clicks = 0;
-   private int clickDelay = 0;
-   private int holdDelay = 0;
+   private long clickDelay = 0;
+   private long holdDelay = 0;
 
    private boolean clickShouldRandomize = false;
    private boolean holdShouldRandomize = false;
@@ -22,13 +22,12 @@ public class Autoclicker extends Thread {
    private int button;
 
    // functional vars
+   private long holdDelayOriginal;
+   private long clickDelayOriginal;
    private final GUI gui;
    private final Random random = new Random();
    private Robot robot;
    private boolean running = false;
-   private boolean shouldStop = false;
-   private int holdDelayOriginal;
-   private int clickDelayOriginal;
 
    public Autoclicker(GUI gui) {
       this.gui = gui;
@@ -36,42 +35,6 @@ public class Autoclicker extends Thread {
          robot = new Robot();
       } catch (AWTException ignored) {
       }
-   }
-
-   @Override
-   public void run() {
-      running = true;
-      gui.setTitle(GUI.MAIN_FRAME_TITLE + "  -  Clicking");
-
-      getSettings();
-
-      // prevent crashing or lagging
-      if (clickDelay < 1) {
-         clickDelay = 1;
-      }
-
-      if (clicks == 0) {
-         do {
-            randomizeDelay();
-
-            clickCycle();
-         } while (!shouldStop);
-      } else {
-         for (int i = 0; i < clicks && !shouldStop; i++) {
-            randomizeDelay();
-
-            clickCycle();
-         }
-      }
-      running = false;
-      gui.setTitle(GUI.MAIN_FRAME_TITLE + "  -  Stopped");
-   }
-
-   /**
-    * Stop Autoclicker
-    */
-   public void stopClicker() {
-      shouldStop = true;
    }
 
    /**
@@ -89,18 +52,18 @@ public class Autoclicker extends Thread {
    private void getSettings() {
       JTextField[] clickDelayRaw = gui.getClickDelay();
       clickDelay = 0;
-      clickDelay += advancedParseInt(clickDelayRaw[3].getText()) * 3_600_000;
-      clickDelay += advancedParseInt(clickDelayRaw[2].getText()) * 60_000;
-      clickDelay += advancedParseInt(clickDelayRaw[1].getText()) * 1_000;
-      clickDelay += advancedParseInt(clickDelayRaw[0].getText());
+      clickDelay += advancedParseLong(clickDelayRaw[3].getText()) * 3_600_000;
+      clickDelay += advancedParseLong(clickDelayRaw[2].getText()) * 60_000;
+      clickDelay += advancedParseLong(clickDelayRaw[1].getText()) * 1_000;
+      clickDelay += advancedParseLong(clickDelayRaw[0].getText());
       clickDelayOriginal = clickDelay;
 
       JTextField[] holdDelayRaw = gui.getHoldDelay();
       holdDelay = 0;
-      holdDelay += advancedParseInt(holdDelayRaw[3].getText()) * 3_600_000;
-      holdDelay += advancedParseInt(holdDelayRaw[2].getText()) * 60_000;
-      holdDelay += advancedParseInt(holdDelayRaw[1].getText()) * 1_000;
-      holdDelay += advancedParseInt(holdDelayRaw[0].getText());
+      holdDelay += advancedParseLong(holdDelayRaw[3].getText()) * 3_600_000;
+      holdDelay += advancedParseLong(holdDelayRaw[2].getText()) * 60_000;
+      holdDelay += advancedParseLong(holdDelayRaw[1].getText()) * 1_000;
+      holdDelay += advancedParseLong(holdDelayRaw[0].getText());
       holdDelayOriginal = holdDelay;
 
       JCheckBox[] shouldRandomizeRaw = gui.getShouldRandomize();
@@ -115,7 +78,60 @@ public class Autoclicker extends Thread {
       clicks = advancedParseInt(gui.getClickAmount().getText());
 
       int buttonNumber = gui.getButtonSelect().getSelectedIndex() + 1;
+      if (buttonNumber == 2) {
+         buttonNumber = 3;
+      } else if (buttonNumber == 3) {
+         buttonNumber = 2;
+      }
+
       button = MouseEvent.getMaskForButton(buttonNumber);
+   }
+
+
+   /**
+    * Stop Autoclicker
+    */
+   public void stopClicker() {
+      this.interrupt();
+   }
+
+   @Override
+   public void run() {
+      running = true;
+      gui.setTitle(GUI.MAIN_FRAME_TITLE + "  -  Clicking");
+
+      getSettings();
+
+      // prevent crashing or lagging
+      if (clickDelay < 1) {
+         clickDelay = 1;
+      }
+
+      if (clicks == 0) {
+         while (true) {
+            randomizeDelay();
+
+            try {
+               clickCycle();
+            } catch (InterruptedException e) {
+               this.interrupt();
+               break;
+            }
+         }
+      } else {
+         for (int i = 0; i < clicks; i++) {
+            randomizeDelay();
+
+            try {
+               clickCycle();
+            } catch (InterruptedException e) {
+               this.interrupt();
+               break;
+            }
+         }
+      }
+      running = false;
+      gui.setTitle(GUI.MAIN_FRAME_TITLE + "  -  Stopped");
    }
 
    /**
@@ -138,11 +154,11 @@ public class Autoclicker extends Thread {
     * mouse release <br>
     * click delay
     */
-   private void clickCycle() {
+   private void clickCycle() throws InterruptedException {
       mousePress();
-      wait(holdDelay);
+      waitMs(holdDelay);
       mouseRelease();
-      wait(clickDelay);
+      waitMs(clickDelay);
    }
 
    /**
@@ -151,6 +167,7 @@ public class Autoclicker extends Thread {
    private void mousePress() {
       try {
          robot.mousePress(button);
+         System.out.println("Pressed");
       } catch (Exception e) {
          try {
             robot = new Robot();
@@ -166,6 +183,7 @@ public class Autoclicker extends Thread {
    private void mouseRelease() {
       try {
          robot.mouseRelease(button);
+         System.out.println("Released");
       } catch (Exception e) {
          try {
             robot = new Robot();
@@ -190,15 +208,25 @@ public class Autoclicker extends Thread {
    }
 
    /**
+    * Parses string to long returns 0 if not possible
+    *
+    * @param input String to parse
+    * @return a parsed long or 0 depending on if input is parsable.
+    */
+   private long advancedParseLong(String input) {
+      try {
+         return Long.parseLong(input);
+      } catch (NumberFormatException e) {
+         return 0;
+      }
+   }
+
+   /**
     * Sleep
     *
     * @param ms how many ms to sleep if less than 0 set to 0.
     */
-   private void wait(int ms) {
-      try {
-         Thread.sleep(ms);
-      } catch (InterruptedException ignored) {
-      }
-
+   public void waitMs(long ms) throws InterruptedException {
+      Thread.sleep(ms);
    }
 }
