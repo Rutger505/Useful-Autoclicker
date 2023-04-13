@@ -1,6 +1,6 @@
-# Usefull Autoclicker 1.0
+# Useful Autoclicker 1.0
 
-## Powerfull Autoclicker up to 400CPS with great functions
+## Powerful Autoclicker up to 400CPS with great functions
 
 ![image](https://user-images.githubusercontent.com/119070855/226204455-dfa63a32-8092-4568-9e36-084990be85ea.png)
 
@@ -18,6 +18,6 @@
 ## how to download
 
 * Install Java JDK from here: https://www.oracle.com/nl/java/technologies/downloads/#jdk19-windows
-* Click on the file "Usefull Autoclicker.jar"
-* Click on the download button
+* Click on the latest release on the right side
+* Click on the file "Useful Autoclicker.jar"
 * Open your new Autoclicker!
