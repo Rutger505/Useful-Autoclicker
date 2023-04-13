@@ -9,6 +9,7 @@ import com.github.kwhat.jnativehook.mouse.NativeMouseListener;
 import fileHider.FileHider;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,13 +17,15 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
    private final GUI gui;
    private Autoclicker clicker;
    private final JButton newHotkeyButton;
+   private final JCheckBox autoclickOnMouseHoldCheckBox;
 
    private boolean newHotkey = false;
    private int hotkey = 59;
    private String hotkeyText = "F1";
    private int mouseButton = 1;
-   private String mouseButtonText = "Left";
 
+   private int registeredPressing = 0;
+   private boolean autoclickOnMouseHold = false;
 
    public InputListener(GUI gui) {
       this.gui = gui;
@@ -43,38 +46,76 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       // new hotkey button
       newHotkeyButton = gui.buttonFactory("Select Hotkey(" + hotkeyText + ")", null, this, new int[]{20, 210, 165, 30});
       gui.addComponent(newHotkeyButton, gui);
+
+
+      JLabel autoclickOnMouseHoldLabel = gui.labelFactory("Autoclick on button hold:", false, false, new int[]{135, 255, 190, 20});
+      autoclickOnMouseHoldCheckBox = gui.checkBoxFactory(this, new int[]{275, 255, 15, 20});
+
+      JPanel autoclickOnMouseHoldPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 9));
+      autoclickOnMouseHoldPanel.setBounds(125, 250, 175, 30);
+      autoclickOnMouseHoldPanel.add(autoclickOnMouseHoldLabel);
+      autoclickOnMouseHoldPanel.add(autoclickOnMouseHoldCheckBox);
+
+//      gui.addComponent(autoclickOnMouseHoldPanel , gui);
    }
 
    @Override
    public void nativeKeyPressed(NativeKeyEvent e) {
       int keyPressed = e.getKeyCode();
-      boolean autoclickOnHold = gui.getAutoClickOnMouseHold().isSelected();
 
       if (newHotkey) {
          newHotkey(e);
-      } else if (keyPressed == hotkey && !autoclickOnHold) {
+      } else if (keyPressed == hotkey && !autoclickOnMouseHold) {
          toggleClicker();
       }
    }
 
    @Override
    public void nativeMousePressed(NativeMouseEvent e) {
-//      int mouseButton = e.getButton();
-//      System.out.println("mouse pressed: " + mouseButton);
-//      System.out.println();
+
+      if (autoclickOnMouseHold) {
+         int buttonPressed = e.getButton();
+
+
+         if (buttonPressed == mouseButton) {
+            if (registeredPressing == 0 && autoclickOnMouseHold) {
+//               toggleClicker(true);
+            }
+            registeredPressing++;
+         }
+      }
    }
 
    @Override
    public void nativeMouseReleased(NativeMouseEvent e) {
-//      int mouseButton = e.getButton();
-//      System.out.println("mouse released: " + mouseButton);
-//      System.out.println();
+
+      if (autoclickOnMouseHold){
+         int buttonPressed = e.getButton();
+
+         if (buttonPressed == mouseButton) {
+            registeredPressing--;
+            if (registeredPressing == 0) {
+//               toggleClicker(false);
+            }
+         }
+      }
+
    }
 
    @Override
    public void actionPerformed(ActionEvent e) {
-      newHotkeyButton.setText("Press new hotkey");
-      newHotkey = true;
+      // new hotkey button ########################################################
+      if (e.getSource() == newHotkeyButton) {
+         newHotkeyButton.setText("Press new hotkey");
+         newHotkey = true;
+      } else if (e.getSource() == autoclickOnMouseHoldCheckBox) {
+         autoclickOnMouseHold = autoclickOnMouseHoldCheckBox.isSelected();
+
+         if (!autoclickOnMouseHoldCheckBox.isSelected()) {
+            toggleClicker(false);
+         }
+      }
+
    }
 
    /**
@@ -85,6 +126,20 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
          clicker = new Autoclicker(gui);
          clicker.start();
       } else {
+         clicker.stopClicker();
+      }
+   }
+
+   /**
+    * Toggles the clicker to a specific state
+    *
+    * @param activate true to activate, false to deactivate clicker
+    */
+   private void toggleClicker(boolean activate) {
+      if (activate && !clicker.isRunning()) {
+         clicker = new Autoclicker(gui);
+         clicker.start();
+      } else if (!activate && clicker.isRunning()) {
          clicker.stopClicker();
       }
    }

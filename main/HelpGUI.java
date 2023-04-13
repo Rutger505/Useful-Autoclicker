@@ -4,9 +4,6 @@ import resources.Constants;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 
 /**
  * Frame when Help button is pressed with all information needed
