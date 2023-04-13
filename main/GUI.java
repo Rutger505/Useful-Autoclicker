@@ -219,19 +219,6 @@ public class GUI extends JFrame implements ActionListener {
       }
    }
 
-   private JPanel panelFactory(LayoutManager layout, boolean background, JComponent[] components, int[] coordinates) {
-      JPanel panel = new JPanel(layout);
-      panel.setBackground(Constants.DEFAULT_BACKGROUND_COLOR);
-      panel.setOpaque(background);
-      if (coordinates != null){
-         panel.setBounds(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
-      }
-      for (JComponent component : components) {
-         panel.add(component);
-      }
-      return panel;
-   }
-
    /**
     * Makes panel array
     *

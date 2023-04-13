@@ -167,7 +167,6 @@ public class Autoclicker extends Thread {
    private void mousePress() {
       try {
          robot.mousePress(button);
-         System.out.println("Pressed");
       } catch (Exception e) {
          try {
             robot = new Robot();
@@ -183,7 +182,6 @@ public class Autoclicker extends Thread {
    private void mouseRelease() {
       try {
          robot.mouseRelease(button);
-         System.out.println("Released");
       } catch (Exception e) {
          try {
             robot = new Robot();

@@ -56,7 +56,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       autoclickOnMouseHoldPanel.add(autoclickOnMouseHoldLabel);
       autoclickOnMouseHoldPanel.add(autoclickOnMouseHoldCheckBox);
 
-      gui.addComponent(autoclickOnMouseHoldPanel , gui);
+//      gui.addComponent(autoclickOnMouseHoldPanel , gui);
    }
 
    @Override
@@ -66,7 +66,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       if (newHotkey) {
          newHotkey(e);
       } else if (keyPressed == hotkey && !autoclickOnMouseHold) {
-         System.out.println("hotkey pressed");
          toggleClicker();
       }
    }
@@ -80,10 +79,9 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
 
          if (buttonPressed == mouseButton) {
             if (registeredPressing == 0 && autoclickOnMouseHold) {
-               toggleClicker(true);
+//               toggleClicker(true);
             }
             registeredPressing++;
-            System.out.println(registeredPressing);
          }
       }
    }
@@ -97,9 +95,8 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
          if (buttonPressed == mouseButton) {
             registeredPressing--;
             if (registeredPressing == 0) {
-               toggleClicker(false);
+//               toggleClicker(false);
             }
-            System.out.println(registeredPressing);
          }
       }
 
