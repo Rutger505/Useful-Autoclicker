@@ -104,7 +104,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
 
    @Override
    public void actionPerformed(ActionEvent e) {
-      // new hotkey button ########################################################
       if (e.getSource() == newHotkeyButton) {
          newHotkeyButton.setText("Press new hotkey");
          newHotkey = true;

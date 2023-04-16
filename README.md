@@ -24,7 +24,7 @@
 * Click on the file "Useful Autoclicker.jar"
 * Open your new Autoclicker!
 
-### downloading <ins>with<ins/> JDK installed
+### downloading <ins>with</ins> JDK installed
 * Click on the latest release on the right side
 * Click on the file "Useful Autoclicker.jar"
 * Open your new Autoclicker!
