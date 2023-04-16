@@ -17,7 +17,7 @@ public class GUI extends JFrame implements ActionListener {
    private final HelpGUI helpGUI;
 
    // title/version
-   public static final double AUTOCLICKER_VERSION = 1.1;
+   public static final double AUTOCLICKER_VERSION = 1.2;
    public static final String MAIN_FRAME_TITLE = "Useful Autoclicker " + AUTOCLICKER_VERSION;
 
    // sizes
