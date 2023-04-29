@@ -96,7 +96,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
             registeredPressing--;
 
             if (registeredPressing == 0) {
-               toggleClicker();
+               toggleClicker(false);
             }
          }
       }
@@ -111,7 +111,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
          autoclickOnMouseHold = autoclickOnMouseHoldCheckBox.isSelected();
 
          if (!autoclickOnMouseHold) {
-            toggleClicker();
+            toggleClicker(false);
          }
       }
    }
@@ -123,8 +123,10 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       if (!clicker.isRunning()) {
          clicker = new Autoclicker(gui);
          clicker.start();
+         System.out.println("Started");
       } else {
          clicker.stopClicker();
+         System.out.println("Stopped");
       }
    }
 
@@ -137,8 +139,11 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       if (activate && !clicker.isRunning()) {
          clicker = new Autoclicker(gui);
          clicker.start();
-      } else if (!activate && !clicker.isRunning()) {
+         System.out.println("Started");
+      } else if (!activate && clicker.isRunning()) {
          clicker.stopClicker();
+         System.out.println("Stopped");
+         registeredPressing = 0;
       }
    }
 
