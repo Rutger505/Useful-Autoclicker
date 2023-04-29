@@ -47,54 +47,15 @@ public class Autoclicker extends Thread {
    }
 
    /**
-    * gets settings from GUI
-    */
-   private void getSettings() {
-      JTextField[] clickDelayRaw = gui.getClickDelay();
-      clickDelay = 0;
-      clickDelay += advancedParseLong(clickDelayRaw[3].getText()) * 3_600_000;
-      clickDelay += advancedParseLong(clickDelayRaw[2].getText()) * 60_000;
-      clickDelay += advancedParseLong(clickDelayRaw[1].getText()) * 1_000;
-      clickDelay += advancedParseLong(clickDelayRaw[0].getText());
-      clickDelayOriginal = clickDelay;
-
-      JTextField[] holdDelayRaw = gui.getHoldDelay();
-      holdDelay = 0;
-      holdDelay += advancedParseLong(holdDelayRaw[3].getText()) * 3_600_000;
-      holdDelay += advancedParseLong(holdDelayRaw[2].getText()) * 60_000;
-      holdDelay += advancedParseLong(holdDelayRaw[1].getText()) * 1_000;
-      holdDelay += advancedParseLong(holdDelayRaw[0].getText());
-      holdDelayOriginal = holdDelay;
-
-      JCheckBox[] shouldRandomizeRaw = gui.getShouldRandomize();
-      clickShouldRandomize = shouldRandomizeRaw[0].isSelected();
-
-      holdShouldRandomize = shouldRandomizeRaw[1].isSelected();
-
-      JTextField[] randomizeRangeRaw = gui.getRandomizeRange();
-      clickRandomizeRange = advancedParseInt(randomizeRangeRaw[0].getText());
-      holdRandomizeRange = advancedParseInt(randomizeRangeRaw[1].getText());
-
-      clicks = advancedParseInt(gui.getClickAmount().getText());
-
-      int buttonNumber = gui.getButtonSelect().getSelectedIndex() + 1;
-      if (buttonNumber == 2) {
-         buttonNumber = 3;
-      } else if (buttonNumber == 3) {
-         buttonNumber = 2;
-      }
-
-      button = MouseEvent.getMaskForButton(buttonNumber);
-   }
-
-
-   /**
     * Stop Autoclicker
     */
    public void stopClicker() {
       this.interrupt();
    }
 
+   /**
+    * Driver method
+    */
    @Override
    public void run() {
       running = true;
@@ -102,32 +63,17 @@ public class Autoclicker extends Thread {
 
       getSettings();
 
-      // prevent crashing or lagging
-      if (clickDelay < 1) {
-         clickDelay = 1;
-      }
-
       if (clicks == 0) {
-         while (true) {
+         while (!Thread.interrupted()) {
             randomizeDelay();
 
-            try {
-               clickCycle();
-            } catch (InterruptedException e) {
-               this.interrupt();
-               break;
-            }
+            clickCycle();
          }
       } else {
-         for (int i = 0; i < clicks; i++) {
+         for (int i = 0; i < clicks && !Thread.interrupted(); i++) {
             randomizeDelay();
 
-            try {
-               clickCycle();
-            } catch (InterruptedException e) {
-               this.interrupt();
-               break;
-            }
+            clickCycle();
          }
       }
       running = false;
@@ -154,7 +100,7 @@ public class Autoclicker extends Thread {
     * mouse release <br>
     * click delay
     */
-   private void clickCycle() throws InterruptedException {
+   private void clickCycle() {
       mousePress();
       waitMs(holdDelay);
       mouseRelease();
@@ -192,6 +138,51 @@ public class Autoclicker extends Thread {
    }
 
    /**
+    * gets settings from GUI
+    */
+   private void getSettings() {
+      JTextField[] clickDelayRaw = gui.getClickDelay();
+      clickDelay = 0;
+      clickDelay += advancedParseLong(clickDelayRaw[3].getText()) * 3_600_000;
+      clickDelay += advancedParseLong(clickDelayRaw[2].getText()) * 60_000;
+      clickDelay += advancedParseLong(clickDelayRaw[1].getText()) * 1_000;
+      clickDelay += advancedParseLong(clickDelayRaw[0].getText());
+      // prevent crashing or lagging
+      if (clickDelay < 1) {
+         clickDelay = 1;
+      }
+      clickDelayOriginal = clickDelay;
+
+      JTextField[] holdDelayRaw = gui.getHoldDelay();
+      holdDelay = 0;
+      holdDelay += advancedParseLong(holdDelayRaw[3].getText()) * 3_600_000;
+      holdDelay += advancedParseLong(holdDelayRaw[2].getText()) * 60_000;
+      holdDelay += advancedParseLong(holdDelayRaw[1].getText()) * 1_000;
+      holdDelay += advancedParseLong(holdDelayRaw[0].getText());
+      holdDelayOriginal = holdDelay;
+
+      JCheckBox[] shouldRandomizeRaw = gui.getShouldRandomize();
+      clickShouldRandomize = shouldRandomizeRaw[0].isSelected();
+
+      holdShouldRandomize = shouldRandomizeRaw[1].isSelected();
+
+      JTextField[] randomizeRangeRaw = gui.getRandomizeRange();
+      clickRandomizeRange = advancedParseInt(randomizeRangeRaw[0].getText());
+      holdRandomizeRange = advancedParseInt(randomizeRangeRaw[1].getText());
+
+      clicks = advancedParseInt(gui.getClickAmount().getText());
+
+      int buttonNumber = gui.getButtonSelect().getSelectedIndex() + 1;
+      if (buttonNumber == 2) {
+         buttonNumber = 3;
+      } else if (buttonNumber == 3) {
+         buttonNumber = 2;
+      }
+
+      button = MouseEvent.getMaskForButton(buttonNumber);
+   }
+
+   /**
     * Parses string to int returns 0 if not possible
     *
     * @param input String to parse
@@ -224,7 +215,11 @@ public class Autoclicker extends Thread {
     *
     * @param ms how many ms to sleep if less than 0 set to 0.
     */
-   public void waitMs(long ms) throws InterruptedException {
-      Thread.sleep(ms);
+   public void waitMs(long ms) {
+      try {
+         Thread.sleep(ms);
+      } catch (InterruptedException e) {
+         this.interrupt();
+      }
    }
 }

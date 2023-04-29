@@ -20,9 +20,9 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
    private final JCheckBox autoclickOnMouseHoldCheckBox;
 
    private boolean newHotkey = false;
-   private int hotkey = 59;
-   private String hotkeyText = "F1";
-   private int mouseButton = 1;
+   private int hotkey = 59; // F1
+   private String hotkeyText = NativeKeyEvent.getKeyText(hotkey);
+   private int mouseButtonSelected = 1;
 
    private int registeredPressing = 0;
    private boolean autoclickOnMouseHold = false;
@@ -56,7 +56,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       autoclickOnMouseHoldPanel.add(autoclickOnMouseHoldLabel);
       autoclickOnMouseHoldPanel.add(autoclickOnMouseHoldCheckBox);
 
-//      gui.addComponent(autoclickOnMouseHoldPanel , gui);
+      gui.addComponent(autoclickOnMouseHoldPanel, gui);
    }
 
    @Override
@@ -72,34 +72,34 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
 
    @Override
    public void nativeMousePressed(NativeMouseEvent e) {
+      if (!autoclickOnMouseHold) {
+         return;
+      }
+      mouseButtonSelected = gui.getButtonSelect().getSelectedIndex() + 1;
+      int buttonPressed = e.getButton();
 
-      if (autoclickOnMouseHold) {
-         int buttonPressed = e.getButton();
-
-
-         if (buttonPressed == mouseButton) {
-            if (registeredPressing == 0 && autoclickOnMouseHold) {
-//               toggleClicker(true);
-            }
-            registeredPressing++;
+      if (buttonPressed == mouseButtonSelected) {
+         if (registeredPressing == 0) {
+            toggleClicker(true);
          }
+         registeredPressing++;
       }
    }
 
    @Override
    public void nativeMouseReleased(NativeMouseEvent e) {
+      if (!autoclickOnMouseHold) {
+         return;
+      }
+      int buttonPressed = e.getButton();
 
-      if (autoclickOnMouseHold){
-         int buttonPressed = e.getButton();
+      if (buttonPressed == mouseButtonSelected) {
+         registeredPressing--;
 
-         if (buttonPressed == mouseButton) {
-            registeredPressing--;
-            if (registeredPressing == 0) {
-//               toggleClicker(false);
-            }
+         if (registeredPressing == 0) {
+            toggleClicker(false);
          }
       }
-
    }
 
    @Override
@@ -110,11 +110,10 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       } else if (e.getSource() == autoclickOnMouseHoldCheckBox) {
          autoclickOnMouseHold = autoclickOnMouseHoldCheckBox.isSelected();
 
-         if (!autoclickOnMouseHoldCheckBox.isSelected()) {
+         if (!autoclickOnMouseHold) {
             toggleClicker(false);
          }
       }
-
    }
 
    /**
@@ -140,6 +139,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
          clicker.start();
       } else if (!activate && clicker.isRunning()) {
          clicker.stopClicker();
+         registeredPressing = 0;
       }
    }
 
