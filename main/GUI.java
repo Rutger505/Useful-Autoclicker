@@ -18,7 +18,7 @@ public class GUI extends JFrame implements ActionListener {
 
    // title/version
    public static final double AUTOCLICKER_VERSION = 2;
-   public static final String MAIN_FRAME_TITLE = "Useful Autoclicker " + AUTOCLICKER_VERSION + "-pre1";
+   public static final String MAIN_FRAME_TITLE = "Useful Autoclicker " + AUTOCLICKER_VERSION + "-pre2";
 
    // sizes
    public static final int MAIN_FRAME_WIDTH = 400;

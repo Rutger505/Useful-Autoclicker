@@ -20,8 +20,8 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
    private final JCheckBox autoclickOnMouseHoldCheckBox;
 
    private boolean newHotkey = false;
-   private int hotkey = 59;
-   private String hotkeyText = "F1";
+   private int hotkey = 59; // F1
+   private String hotkeyText = NativeKeyEvent.getKeyText(hotkey);
    private int mouseButtonSelected = 1;
 
    private int registeredPressing = 0;
@@ -72,32 +72,32 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
 
    @Override
    public void nativeMousePressed(NativeMouseEvent e) {
+      if (!autoclickOnMouseHold) {
+         return;
+      }
+      mouseButtonSelected = gui.getButtonSelect().getSelectedIndex() + 1;
+      int buttonPressed = e.getButton();
 
-      if (autoclickOnMouseHold) {
-         mouseButtonSelected = gui.getButtonSelect().getSelectedIndex() + 1;
-         int buttonPressed = e.getButton();
-
-         if (buttonPressed == mouseButtonSelected) {
-            if (registeredPressing == 0 && autoclickOnMouseHold) {
-               toggleClicker(true);
-            }
-            registeredPressing++;
+      if (buttonPressed == mouseButtonSelected) {
+         if (registeredPressing == 0) {
+            toggleClicker(true);
          }
+         registeredPressing++;
       }
    }
 
    @Override
    public void nativeMouseReleased(NativeMouseEvent e) {
+      if (!autoclickOnMouseHold) {
+         return;
+      }
+      int buttonPressed = e.getButton();
 
-      if (autoclickOnMouseHold) {
-         int buttonPressed = e.getButton();
+      if (buttonPressed == mouseButtonSelected) {
+         registeredPressing--;
 
-         if (buttonPressed == mouseButtonSelected) {
-            registeredPressing--;
-
-            if (registeredPressing == 0) {
-               toggleClicker(false);
-            }
+         if (registeredPressing == 0) {
+            toggleClicker(false);
          }
       }
    }
@@ -123,10 +123,8 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       if (!clicker.isRunning()) {
          clicker = new Autoclicker(gui);
          clicker.start();
-         System.out.println("Started");
       } else {
          clicker.stopClicker();
-         System.out.println("Stopped");
       }
    }
 
@@ -139,10 +137,8 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       if (activate && !clicker.isRunning()) {
          clicker = new Autoclicker(gui);
          clicker.start();
-         System.out.println("Started");
       } else if (!activate && clicker.isRunning()) {
          clicker.stopClicker();
-         System.out.println("Stopped");
          registeredPressing = 0;
       }
    }
