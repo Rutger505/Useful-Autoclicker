@@ -1,5 +1,7 @@
 package main;
 
+import fileUtilities.ClickerData;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 
@@ -9,6 +11,8 @@ public class Main {
 
       GUI gui = new GUI();
       new InputListener(gui);
+
+      ClickerData data = new ClickerData();
    }
 
    /**

@@ -6,26 +6,25 @@
 
 ## Features
 
-* Sleek design
 * Up to 400 clicks per second
 * Autoclick when holding down mouse button
 * Able to hold down mouse button
-* Precise control of clicking speed
 * Randomizer for gaming
 * 5 Mouse buttons to Autoclick
+* Precise control of clicking speed
 * Hotkey changer
 * Full explanation in the program
 
-## how to download
+## How to download
 
-### downloading <ins>without</ins> JDK(Java) installed
+### Downloading <ins>without</ins> JDK(Java) installed
 * Install Java JDK from here: https://www.oracle.com/java/technologies/downloads/
 * Choose your correct operating system and download the installer
 * Click on the latest release on the right side
 * Click on the file "Useful Autoclicker.jar"
 * Open your new Autoclicker!
 
-### downloading <ins>with</ins> JDK(Java) installed
+### Downloading <ins>with</ins> JDK(Java) installed
 * Click on the latest release on the right side
 * Click on the file "Useful Autoclicker.jar"
 * Open your new Autoclicker!

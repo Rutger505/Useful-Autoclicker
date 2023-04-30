@@ -1,4 +1,4 @@
-package fileHider;
+package fileUtilities;
 
 import java.io.File;
 import java.nio.file.Files;
