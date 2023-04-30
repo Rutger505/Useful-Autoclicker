@@ -1,5 +1,6 @@
 package main;
 
+import fileUtilities.ClickerData;
 import resources.Constants;
 import textFieldFilter.TextFieldFilter;
 
@@ -44,6 +45,7 @@ public class GUI extends JFrame implements ActionListener {
 
    public GUI() {
       helpGUI = new HelpGUI(this);
+      ClickerData clickerData = new ClickerData();
 
       // label sizes
       int labelHeight = 20;
@@ -59,7 +61,7 @@ public class GUI extends JFrame implements ActionListener {
 
       // used throughout the GUI ########################################################
       // backgrounds
-      JPanel[] backgrounds = panelFactory(new int[][]{ {20, 140, 165, 30}, {195, 140, 165, 30}, {20, 250, 95, 30}, {195, 210, 155, 30}, {20, 30, 340, 30}, {20, 70, 340, 30}});
+      JPanel[] backgrounds = panelFactory(new int[][]{{20, 140, 165, 30}, {195, 140, 165, 30}, {20, 250, 95, 30}, {195, 210, 155, 30}, {20, 30, 340, 30}, {20, 70, 340, 30}});
       // time identifiers
       JLabel[] millisecondsL = labelFactory("ms", true, false, new int[][]{{328, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {328, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {153, randomizeItemsY, timeIdentifierLabelWidth, labelHeight}, {328, randomizeItemsY, timeIdentifierLabelWidth, labelHeight}});
 
@@ -78,11 +80,10 @@ public class GUI extends JFrame implements ActionListener {
       helpButton = buttonFactory("?", helpButtonBorder, this, new int[]{360, 4, 17, 17});
 
       JLabel clickDelayL = labelFactory("Click interval:", false, false, new int[]{30, clickDelayItemsY, 80, labelHeight});
-      clickDelayTF = textFieldFactory(4, new int[][]{{290, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {230, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {170, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {110, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
-      clickDelayTF[0].setText("100");
+      clickDelayTF = textFieldFactory(4, clickerData.getClickDelay(), new int[][]{{290, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {230, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {170, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {110, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
 
       JLabel holdDelayL = labelFactory("Hold time:", false, false, new int[]{30, holdDelayItemsY, 80, labelHeight});
-      holdDelayTF = textFieldFactory(4, new int[][]{{290, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {230, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {170, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {110, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
+      holdDelayTF = textFieldFactory(4, clickerData.getHoldDelay(), new int[][]{{290, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {230, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {170, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {110, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
 
       // second section ########################################################
       JLabel randomizeLabel = labelFactory("Randomize click interval", true, true, new int[]{0, 110, MAIN_FRAME_ACTUAL_WIDTH, labelHeight});
@@ -90,17 +91,15 @@ public class GUI extends JFrame implements ActionListener {
       JLabel clickRandomizeL = labelFactory("Click inter:", false, false, new int[]{30, randomizeItemsY, 80, labelHeight});
       JLabel holdRandomizeL = labelFactory("Hold time:", false, false, new int[]{200, randomizeItemsY, 80, labelHeight});
 
-      shouldRandomizeCB = checkBoxFactory(new int[][]{{95, randomizeItemsY, 15, 20}, {270, randomizeItemsY, 15, 20}});
+      shouldRandomizeCB = checkBoxFactory(clickerData.getRandomizeDelay(), new int[][]{{95, randomizeItemsY, 15, 20}, {270, randomizeItemsY, 15, 20}});
 
-      randomizeRangeTF = textFieldFactory(4, new int[][]{{115, randomizeItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {290, randomizeItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
-      randomizeRangeTF[0].setText("20");
-      randomizeRangeTF[1].setText("20");
+      randomizeRangeTF = textFieldFactory(4, clickerData.getRandomizeRange(), new int[][]{{115, randomizeItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {290, randomizeItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
 
       // third section ########################################################
       JLabel miscellaneousLabel = labelFactory("Clicks/Button/Hotkey", true, true, new int[]{0, 180, MAIN_FRAME_ACTUAL_WIDTH, labelHeight});
 
       JLabel clickAmountL = labelFactory("Clicks:", false, false, new int[]{30, clicksItems2Y, 80, labelHeight});
-      clickAmountTF = textFieldFactory(5, new int[]{70, clicksItems2Y, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT});
+      clickAmountTF = textFieldFactory(5, clickerData.getClicks(), new int[]{70, clicksItems2Y, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT});
 
       JLabel buttonSelectL = labelFactory("Button:", false, false, new int[]{205, clicksItemsY, 80, labelHeight});
       String[] buttonSelectOptions = {"left", "right", "middle", "side front", "side back"};
@@ -292,13 +291,13 @@ public class GUI extends JFrame implements ActionListener {
     * @param coordinates    coordinates and size of the text fields
     * @return the text fields made
     */
-   private JTextField[] textFieldFactory(int textFieldLimit, int[][] coordinates) {
+   private JTextField[] textFieldFactory(int textFieldLimit, int[] value, int[][] coordinates) {
       JTextField[] textField = new JTextField[coordinates.length];
       for (int i = 0; i < textField.length; i++) {
          textField[i] = new JTextField();
          textField[i].setBorder(TEXT_FIELD_BORDER);
          textField[i].setBackground(TEXT_FIELD_COLOR);
-         textField[i].setText("0");
+         textField[i].setText(String.valueOf(value[i]));
          textField[i].setBounds(coordinates[i][0], coordinates[i][1], coordinates[i][2], coordinates[i][3]);
          PlainDocument document = (PlainDocument) (textField[i].getDocument());
          document.setDocumentFilter(new TextFieldFilter(textFieldLimit));
@@ -313,11 +312,11 @@ public class GUI extends JFrame implements ActionListener {
     * @param coordinates    coordinates and size of the text fields
     * @return the text fields made
     */
-   private JTextField textFieldFactory(int textFieldLimit, int[] coordinates) {
+   private JTextField textFieldFactory(int textFieldLimit, int value, int[] coordinates) {
       JTextField textField = new JTextField();
       textField.setBorder(TEXT_FIELD_BORDER);
       textField.setBackground(TEXT_FIELD_COLOR);
-      textField.setText("0");
+      textField.setText(String.valueOf(value));
       textField.setBounds(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
       PlainDocument document = (PlainDocument) (textField.getDocument());
       document.setDocumentFilter(new TextFieldFilter(textFieldLimit));
@@ -330,10 +329,11 @@ public class GUI extends JFrame implements ActionListener {
     * @param coordinates coordinates and size of the checkboxes
     * @return the checkbox array
     */
-   public JCheckBox[] checkBoxFactory(int[][] coordinates) {
+   public JCheckBox[] checkBoxFactory(boolean[] value, int[][] coordinates) {
       JCheckBox[] checkBox = new JCheckBox[coordinates.length];
       for (int i = 0; i < checkBox.length; i++) {
          checkBox[i] = new JCheckBox();
+         checkBox[i].setSelected(value[i]);
          checkBox[i].setBorder(null);
          checkBox[i].setOpaque(false);
          checkBox[i].setBounds(coordinates[i][0], coordinates[i][1], coordinates[i][2], coordinates[i][3]);
@@ -347,9 +347,10 @@ public class GUI extends JFrame implements ActionListener {
     * @param coordinates coordinates and size of the checkboxes
     * @return the checkbox
     */
-   public JCheckBox checkBoxFactory(ActionListener actionListener, int[] coordinates) {
+   public JCheckBox checkBoxFactory(ActionListener actionListener, boolean value, int[] coordinates) {
       JCheckBox checkBox = new JCheckBox();
       checkBox.addActionListener(actionListener);
+      checkBox.setSelected(value);
       checkBox.setBorder(null);
       checkBox.setOpaque(false);
       checkBox.setBounds(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);

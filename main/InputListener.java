@@ -6,6 +6,7 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 import com.github.kwhat.jnativehook.mouse.NativeMouseEvent;
 import com.github.kwhat.jnativehook.mouse.NativeMouseListener;
+import fileUtilities.ClickerData;
 import fileUtilities.FileHider;
 
 import javax.swing.*;
@@ -48,9 +49,10 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       newHotkeyButton = gui.buttonFactory("Select Hotkey(" + hotkeyText + ")", null, this, new int[]{20, 210, 165, 30});
       gui.addComponent(newHotkeyButton, gui);
 
+      ClickerData clickerData = new ClickerData();
 
       JLabel autoclickOnMouseHoldLabel = gui.labelFactory("Autoclick on button hold:", false, false, new int[]{135, 255, 190, 20});
-      autoclickOnMouseHoldCheckBox = gui.checkBoxFactory(this, new int[]{275, 255, 15, 20});
+      autoclickOnMouseHoldCheckBox = gui.checkBoxFactory(this, clickerData.getAutoclickOnMouseHold(), new int[]{275, 255, 15, 20});
 
       JPanel autoclickOnMouseHoldPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 9));
       autoclickOnMouseHoldPanel.setBounds(125, 250, 175, 30);
