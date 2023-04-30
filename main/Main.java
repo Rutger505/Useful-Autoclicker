@@ -2,6 +2,7 @@ package main;
 
 import fileUtilities.ClickerData;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.ServerSocket;
 
@@ -22,7 +23,11 @@ public class Main {
       try {
          new ServerSocket(1324);
       } catch (IOException e) {
-         System.exit(0);
+         System.out.println("Program is already running. Exiting...");
+         String message = "<html>Program is already running. Exiting...</html>";
+         String title = "Already running";
+         JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
+         System.exit(1);
       }
    }
 }

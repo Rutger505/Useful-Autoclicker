@@ -35,6 +35,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       try {
          GlobalScreen.registerNativeHook();
       } catch (NativeHookException e) {
+         System.out.println("(InputListener) JNativeHook could not be started");
          e.printStackTrace();
       }
       GlobalScreen.addNativeKeyListener(this);

@@ -22,6 +22,7 @@ public class FileHider {
 
          Files.setAttribute(path, "dos:hidden", Boolean.TRUE, LinkOption.NOFOLLOW_LINKS);
       } catch (Exception ignored) {
+         System.out.println("(FileHider) JNativeHook file could not be hidden");
       }
    }
 }
