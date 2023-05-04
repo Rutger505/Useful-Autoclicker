@@ -9,10 +9,14 @@ import java.awt.*;
  * Frame when Help button is pressed with all information needed
  */
 public class HelpGUI extends JFrame {
-   public static final int HELP_FRAME_WIDTH = 360;
-   public static final int HELP_FRAME_HEIGHT = 325;
-   public static final int HELP_FRAME_ACTUAL_WIDTH = 334;
+   private static final int HELP_FRAME_WIDTH = 360;
+   private static final int HELP_FRAME_HEIGHT = 325;
+   private static final int HELP_FRAME_ACTUAL_WIDTH = 334;
 
+   /**
+    * Make help frame
+    * @param gui GUI to use functions for making components
+    */
    public HelpGUI(GUI gui) {
       int titleHeight = 20;
 
@@ -41,14 +45,14 @@ public class HelpGUI extends JFrame {
       gui.addComponent(miscellaneousTextLabel, this);
 
 
-      this.setIconImage(Constants.FRAME_ICON);
-      this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-      this.setSize(HELP_FRAME_WIDTH, HELP_FRAME_HEIGHT);
-      this.getContentPane().setBackground(Color.white);
-      this.setTitle("Help");
-      this.setLayout(null);
-      this.setResizable(false);
-      this.setAlwaysOnTop(true);
-      this.setVisible(false);
+      setIconImage(Constants.FRAME_ICON);
+      setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+      setSize(HELP_FRAME_WIDTH, HELP_FRAME_HEIGHT);
+      getContentPane().setBackground(Color.white);
+      setTitle("Help");
+      setLayout(null);
+      setResizable(false);
+      setAlwaysOnTop(true);
+      setVisible(false);
    }
 }

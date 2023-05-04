@@ -18,20 +18,20 @@ public class GUI extends JFrame implements ActionListener {
    private final HelpGUI helpGUI;
 
    // title/version
-   public static final double AUTOCLICKER_VERSION = 2;
-   public static final String MAIN_FRAME_TITLE = "Useful Autoclicker " + AUTOCLICKER_VERSION;
+   private static final double AUTOCLICKER_VERSION = 2.1;
+   static final String MAIN_FRAME_TITLE = "Useful Autoclicker " + AUTOCLICKER_VERSION;
 
    // sizes
-   public static final int MAIN_FRAME_WIDTH = 400;
-   public static final int MAIN_FRAME_HEIGHT = 330;
-   public static final int MAIN_FRAME_ACTUAL_WIDTH = 384;
+   private static final int MAIN_FRAME_WIDTH = 400;
+   private static final int MAIN_FRAME_HEIGHT = 330;
+   private static final int MAIN_FRAME_ACTUAL_WIDTH = 384;
 
-   public static final int TEXT_FIELD_WIDTH = 35;
-   public static final int TEXT_FIELD_HEIGHT = 20;
+   private static final int TEXT_FIELD_WIDTH = 35;
+   private static final int TEXT_FIELD_HEIGHT = 20;
 
    // colors
-   public static final Color TEXT_FIELD_COLOR = new Color(255, 255, 255);
-   public static final Border TEXT_FIELD_BORDER = BorderFactory.createLineBorder(TEXT_FIELD_COLOR, 2);
+   private static final Color TEXT_FIELD_COLOR = new Color(255, 255, 255);
+   private static final Border TEXT_FIELD_BORDER = BorderFactory.createLineBorder(TEXT_FIELD_COLOR, 2);
 
 
    // components
@@ -43,6 +43,9 @@ public class GUI extends JFrame implements ActionListener {
    private final JComboBox<String> buttonSelectCB;
    private final JButton helpButton;
 
+   /**
+    * Makes GUI
+    */
    public GUI() {
       helpGUI = new HelpGUI(this);
       ClickerData clickerData = new ClickerData();
@@ -103,7 +106,7 @@ public class GUI extends JFrame implements ActionListener {
 
       JLabel buttonSelectL = labelFactory("Button:", false, false, new int[]{205, clicksItemsY, 80, labelHeight});
       String[] buttonSelectOptions = {"left", "right", "middle", "side front", "side back"};
-      buttonSelectCB = comboBoxFactory(buttonSelectOptions, new int[]{250, clicksItemsY, 90, 20});
+      buttonSelectCB = comboBoxFactory(buttonSelectOptions, clickerData.getButton(), new int[]{250, clicksItemsY, 90, 20});
 
 
       // adding components ########################################################
@@ -145,41 +148,58 @@ public class GUI extends JFrame implements ActionListener {
       addComponent(backgrounds, this);
 
       // frame itself
-      this.setIconImage(Constants.FRAME_ICON);
-      this.setTitle(MAIN_FRAME_TITLE);
-      this.setSize(MAIN_FRAME_WIDTH, MAIN_FRAME_HEIGHT);
-      this.setResizable(false);
-      this.getContentPane().setBackground(Constants.FRAME_COLOR);
-      this.setLayout(null);
-      this.setLocationRelativeTo(null);
-      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      this.setVisible(true);
+      setIconImage(Constants.FRAME_ICON);
+      setTitle(MAIN_FRAME_TITLE);
+      setSize(MAIN_FRAME_WIDTH, MAIN_FRAME_HEIGHT);
+      setResizable(false);
+      getContentPane().setBackground(Constants.FRAME_COLOR);
+      setLayout(null);
+      setLocationRelativeTo(null);
+      setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+      setVisible(true);
    }
 
+   /**
+    * @return click delay text fields
+    */
    public JTextField[] getClickDelay() {
       return clickDelayTF;
    }
 
+   /**
+    * @return hold delay text fields
+    */
    public JTextField[] getHoldDelay() {
       return holdDelayTF;
    }
 
+   /**
+    * @return should randomize checkboxes
+    */
    public JCheckBox[] getShouldRandomize() {
       return shouldRandomizeCB;
    }
 
+   /**
+    * @return randomize range text fields
+    */
    public JTextField[] getRandomizeRange() {
       return randomizeRangeTF;
    }
 
+   /**
+    * @return click amount text fields
+    */
    public JTextField getClickAmount() {
       return clickAmountTF;
    }
 
+   /**
+    * @return button select combo box
+    */
    public JComboBox<String> getButtonSelect() {
       return buttonSelectCB;
    }
-
 
    @Override
    public void actionPerformed(ActionEvent e) {
@@ -209,7 +229,7 @@ public class GUI extends JFrame implements ActionListener {
     * @param componentArray component array to add
     * @param frame          frame to add to
     */
-   public void addComponent(JComponent[] componentArray, JFrame frame) {
+   private void addComponent(JComponent[] componentArray, JFrame frame) {
       for (Component component : componentArray) {
          frame.add(component);
       }
@@ -244,7 +264,7 @@ public class GUI extends JFrame implements ActionListener {
     * @param coordinates  coordinates and size of the labels
     * @return the label
     */
-   public JLabel[] labelFactory(String internalText, boolean center, boolean background, int[][] coordinates) {
+   private JLabel[] labelFactory(String internalText, boolean center, boolean background, int[][] coordinates) {
       JLabel[] label = new JLabel[coordinates.length];
       for (int i = 0; i < label.length; i++) {
          label[i] = new JLabel();
@@ -252,8 +272,8 @@ public class GUI extends JFrame implements ActionListener {
          label[i].setFont(Constants.DEFAULT_FONT);
          label[i].setBackground(Constants.DEFAULT_BACKGROUND_COLOR);
          if (center) {
-            label[i].setHorizontalAlignment(JLabel.CENTER);
-            label[i].setVerticalAlignment(JLabel.CENTER);
+            label[i].setHorizontalAlignment(SwingConstants.CENTER);
+            label[i].setVerticalAlignment(SwingConstants.CENTER);
          }
          label[i].setOpaque(background);
          label[i].setBounds(coordinates[i][0], coordinates[i][1], coordinates[i][2], coordinates[i][3]);
@@ -276,8 +296,8 @@ public class GUI extends JFrame implements ActionListener {
       label.setFont(Constants.DEFAULT_FONT);
       label.setBackground(Constants.DEFAULT_BACKGROUND_COLOR);
       if (center) {
-         label.setHorizontalAlignment(JLabel.CENTER);
-         label.setVerticalAlignment(JLabel.CENTER);
+         label.setHorizontalAlignment(SwingConstants.CENTER);
+         label.setVerticalAlignment(SwingConstants.CENTER);
       }
       label.setOpaque(background);
       label.setBounds(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
@@ -326,10 +346,11 @@ public class GUI extends JFrame implements ActionListener {
    /**
     * Makes checkbox array
     *
+    * @param value      what is the value of the checkboxes
     * @param coordinates coordinates and size of the checkboxes
     * @return the checkbox array
     */
-   public JCheckBox[] checkBoxFactory(boolean[] value, int[][] coordinates) {
+   private JCheckBox[] checkBoxFactory(boolean[] value, int[][] coordinates) {
       JCheckBox[] checkBox = new JCheckBox[coordinates.length];
       for (int i = 0; i < checkBox.length; i++) {
          checkBox[i] = new JCheckBox();
@@ -344,6 +365,8 @@ public class GUI extends JFrame implements ActionListener {
    /**
     * Makes checkbox
     *
+    * @param actionListener action listener for the checkbox
+    * @param value         what is the value of the checkboxes
     * @param coordinates coordinates and size of the checkboxes
     * @return the checkbox
     */
@@ -362,6 +385,7 @@ public class GUI extends JFrame implements ActionListener {
     *
     * @param internalText what to put in button
     * @param border       what border add
+    * @param actionListener action listener for the button
     * @param coordinates  coordinates and size of the button
     * @return the button
     */
@@ -386,8 +410,10 @@ public class GUI extends JFrame implements ActionListener {
     * @param coordinates coordinates and size of the combobox
     * @return the combobox
     */
-   private JComboBox<String> comboBoxFactory(String[] options, int[] coordinates) {
+   private JComboBox<String> comboBoxFactory(String[] options, int value, int[] coordinates) {
       JComboBox<String> comboBox = new JComboBox<>(options);
+      comboBox.setSelectedIndex(value);
+      comboBox.setCursor(new Cursor(Cursor.HAND_CURSOR));
       comboBox.setBackground(Constants.FRAME_COLOR);
       comboBox.setFocusable(false);
       comboBox.setFont(Constants.DEFAULT_FONT);

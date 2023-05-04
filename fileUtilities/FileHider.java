@@ -1,6 +1,7 @@
 package fileUtilities;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -21,7 +22,7 @@ public class FileHider {
          Path path = Paths.get(file.getAbsolutePath());
 
          Files.setAttribute(path, "dos:hidden", Boolean.TRUE, LinkOption.NOFOLLOW_LINKS);
-      } catch (Exception ignored) {
+      } catch (IOException e) {
          System.out.println("(FileHider) JNativeHook file could not be hidden");
       }
    }

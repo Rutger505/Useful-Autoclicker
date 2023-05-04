@@ -1,19 +1,19 @@
 package main;
 
-import fileUtilities.ClickerData;
-
 import javax.swing.*;
 import java.io.IOException;
 import java.net.ServerSocket;
 
 public class Main {
+   /**
+    * Starts the program
+    * @param args command line arguments?
+    */
    public static void main(String[] args) {
       checkRunning();
 
       GUI gui = new GUI();
       new InputListener(gui);
-
-      ClickerData data = new ClickerData();
    }
 
    /**
