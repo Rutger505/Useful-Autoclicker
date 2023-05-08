@@ -42,6 +42,7 @@ public class GUI extends JFrame implements ActionListener {
    private final JTextField clickAmountTF;
    private final JComboBox<String> buttonSelectCB;
    private final JButton helpButton;
+   public final JButton defaultsButton;
 
    /**
     * Makes GUI
@@ -78,9 +79,11 @@ public class GUI extends JFrame implements ActionListener {
       // first section ########################################################
       JLabel delayLabel = labelFactory("Click interval/Hold time", true, true, new int[]{0, 0, MAIN_FRAME_ACTUAL_WIDTH, labelHeight + 5});
 
-      Color helpButtonBorderColor = new Color(200, 200, 200);
-      Border helpButtonBorder = BorderFactory.createLineBorder(helpButtonBorderColor, 1);
-      helpButton = buttonFactory("?", helpButtonBorder, this, new int[]{360, 4, 17, 17});
+      Color topButtonBorderColor = new Color(200, 200, 200);
+      Border topButtonBorder = BorderFactory.createLineBorder(topButtonBorderColor, 1);
+      defaultsButton = buttonFactory("Defaults", topButtonBorder, this, new int[]{10, 4, 60, 17});
+      add(defaultsButton);
+      helpButton = buttonFactory("?", topButtonBorder, this, new int[]{360, 4, 17, 17});
 
       JLabel clickDelayL = labelFactory("Click interval:", false, false, new int[]{30, clickDelayItemsY, 80, labelHeight});
       clickDelayTF = textFieldFactory(4, clickerData.getClickDelay(), new int[][]{{290, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {230, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {170, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {110, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});

@@ -125,6 +125,8 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
          if (!autoclickOnMouseHold) {
             toggleClicker(false);
          }
+      } else {
+         System.out.println("Unknown action performed");
       }
    }
 
