@@ -50,6 +50,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       // hide JNativeHook file
       new FileHider("JNativeHook.x86_64.dll");
 
+      // GUI components
       // new hotkey button
       hotkey = clickerData.getHotkeyCode();
       hotkeyText = NativeKeyEvent.getKeyText(hotkey);
@@ -64,10 +65,8 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       autoclickOnMouseHoldPanel.add(autoclickOnMouseHoldLabel);
       autoclickOnMouseHoldPanel.add(autoclickOnMouseHoldCheckBox);
 
-      gui.addComponent(newHotkeyButton, gui);
-      gui.addComponent(autoclickOnMouseHoldPanel, gui);
-
-
+      gui.add(newHotkeyButton);
+      gui.add(autoclickOnMouseHoldPanel);
    }
 
    @Override

@@ -114,41 +114,41 @@ public class GUI extends JFrame implements ActionListener {
 
       // adding components ########################################################
       // adding text fields
-      addComponent(clickDelayTF, this);
-      addComponent(holdDelayTF, this);
-      addComponent(randomizeRangeTF, this);
-      addComponent(clickAmountTF, this);
+      add(clickDelayTF);
+      add(holdDelayTF);
+      add(randomizeRangeTF);
+      add(clickAmountTF);
 
       // adding buttons
-      addComponent(helpButton, this);
+      add(helpButton);
 
       // adding checkboxes
-      addComponent(shouldRandomizeCB, this);
+      add(shouldRandomizeCB);
 
       // adding dropdown
-      addComponent(buttonSelectCB, this);
+      add(buttonSelectCB, this);
 
       // adding section labels
-      addComponent(delayLabel, this);
-      addComponent(randomizeLabel, this);
-      addComponent(miscellaneousLabel, this);
+      add(delayLabel, this);
+      add(randomizeLabel, this);
+      add(miscellaneousLabel, this);
 
       // adding text labels
-      addComponent(clickDelayL, this);
-      addComponent(holdDelayL, this);
-      addComponent(clickRandomizeL, this);
-      addComponent(holdRandomizeL, this);
-      addComponent(clickAmountL, this);
-      addComponent(buttonSelectL, this);
+      add(clickDelayL);
+      add(holdDelayL);
+      add(clickRandomizeL);
+      add(holdRandomizeL);
+      add(clickAmountL);
+      add(buttonSelectL);
 
       // adding time identifiers
-      addComponent(millisecondsL, this);
-      addComponent(secondL, this);
-      addComponent(minutesL, this);
-      addComponent(hourL, this);
+      add(millisecondsL);
+      add(secondL);
+      add(minutesL);
+      add(hourL);
 
       // adding backgrounds
-      addComponent(backgrounds, this);
+      add(backgrounds);
 
       // frame itself
       setIconImage(Constants.FRAME_ICON);
@@ -216,13 +216,12 @@ public class GUI extends JFrame implements ActionListener {
     * adds component to frame
     *
     * @param component component to add
-    * @param frame     frame to add to
     */
-   public void addComponent(JComponent component, JFrame frame) {
-      frame.add(component);
-      if (frame.isVisible()) {
-         frame.repaint();
-         frame.setVisible(true);
+   public void add(JComponent component) {
+      this.add(component);
+      if (this.isVisible()) {
+         this.repaint();
+         this.setVisible(true);
       }
    }
 
@@ -230,14 +229,13 @@ public class GUI extends JFrame implements ActionListener {
     * adds component array to frame
     *
     * @param componentArray component array to add
-    * @param frame          frame to add to
     */
-   private void addComponent(JComponent[] componentArray, JFrame frame) {
+   private void add(JComponent[] componentArray) {
       for (Component component : componentArray) {
-         frame.add(component);
+         this.add(component);
       }
-      if (frame.isVisible()) {
-         frame.repaint();
+      if (this.isVisible()) {
+         this.repaint();
       }
    }
 

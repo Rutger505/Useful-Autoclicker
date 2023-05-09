@@ -35,15 +35,14 @@ public class HelpGUI extends JFrame {
 
 
       // adding components
-      gui.addComponent(delayLabel, this);
-      gui.addComponent(delayTextLabel, this);
+      add(delayLabel);
+      add(delayTextLabel);
 
-      gui.addComponent(randomizeLabel, this);
-      gui.addComponent(randomizeTextLabel, this);
+      add(randomizeLabel);
+      add(randomizeTextLabel);
 
-      gui.addComponent(miscellaneousLabel, this);
-      gui.addComponent(miscellaneousTextLabel, this);
-
+      add(miscellaneousLabel);
+      add(miscellaneousTextLabel);
 
       setIconImage(Constants.FRAME_ICON);
       setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
