@@ -1,5 +1,6 @@
 package main;
 
+import GUI.GUI;
 import fileUtilities.ClickerData;
 
 import javax.swing.*;
