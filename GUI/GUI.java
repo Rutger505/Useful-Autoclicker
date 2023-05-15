@@ -31,6 +31,13 @@ public class GUI extends JFrame {
    private final JTextField clickAmountTF;
    private final JComboBox<String> buttonSelectCB;
 
+
+   public JButton getNewHotkeyButton() {
+      return newHotkeyButton;
+   }
+
+   private final JButton newHotkeyButton;
+
    public JButton getHelpButton() {
       return helpButton;
    }
@@ -57,6 +64,11 @@ public class GUI extends JFrame {
       int randomizeItemsY = 145;
       int clicksItemsY = 215;
       int clicksItems2Y = 255;
+
+
+      newHotkeyButton = components.buttonFactory("Select Hotkey( Test )", null, new int[]{20, 210, 165, 30});
+      add(newHotkeyButton);
+
 
       // used throughout the GUI ########################################################
       // backgrounds

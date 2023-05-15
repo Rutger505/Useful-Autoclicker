@@ -1,6 +1,7 @@
 package main;
 
-import GUI.*;
+import GUI.GUI;
+import GUI.HelpGUI;
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
@@ -10,16 +11,14 @@ import com.github.kwhat.jnativehook.mouse.NativeMouseListener;
 import fileUtilities.ClickerData;
 import fileUtilities.FileHider;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class InputListener implements NativeKeyListener, NativeMouseListener, ActionListener {
+public class InputListener implements NativeKeyListener, NativeMouseListener {
    private final ClickerData clickerData = new ClickerData();
    private final HelpGUI helpGUI = new HelpGUI();
    private final GUI gui;
    private Autoclicker clicker;
-   private final JButton newHotkeyButton;
 
    private boolean newHotkey;
    private int hotkey;
@@ -39,6 +38,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       clicker = new Autoclicker(gui);
 
 
+      // help gui button
       gui.getHelpButton().addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
@@ -46,6 +46,43 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
             helpGUI.setVisible(true);
          }
       });
+
+      // autoclick on mouse hold
+      gui.getAutoclickOnMouseHold().addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            autoclickOnMouseHold = gui.getAutoclickOnMouseHold().isSelected();
+
+            if (!autoclickOnMouseHold) {
+               toggleClicker(false);
+            }
+         }
+      });
+
+      // new hotkey button
+      hotkey = clickerData.getHotkeyCode();
+      hotkeyText = NativeKeyEvent.getKeyText(hotkey);
+      gui.getNewHotkeyButton().setText("Select Hotkey(" + hotkeyText + ")");
+      gui.getNewHotkeyButton().addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            toggleClicker(false);
+            newHotkey = true;
+            gui.getNewHotkeyButton().setText("Press new hotkey");
+         }
+      });
+
+      gui.getClickDelay()[0].addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            System.out.println("SOMETING HAPPEND!");
+         }
+      });
+
+
+
+
+
 
       // add key and mouse listener
       try {
@@ -59,17 +96,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
 
       // hide JNativeHook file
       new FileHider("JNativeHook.x86_64.dll");
-
-      JComponentFactory components = new JComponentFactory();
-
-      // GUI components
-      // new hotkey button
-      hotkey = clickerData.getHotkeyCode();
-      hotkeyText = NativeKeyEvent.getKeyText(hotkey);
-      newHotkeyButton = components.buttonFactory("Select Hotkey(" + hotkeyText + ")", null, new int[]{20, 210, 165, 30});
-      newHotkeyButton.setName(String.valueOf(hotkey));
-
-      gui.addComp(newHotkeyButton);
    }
 
    @Override
@@ -115,22 +141,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       }
    }
 
-   @Override
-   public void actionPerformed(ActionEvent e) {
-      System.out.println("Action performed");
-      if (e.getSource() == newHotkeyButton) {
-         toggleClicker(false);
-         newHotkey = true;
-         newHotkeyButton.setText("Press new hotkey");
-      } else if (e.getSource() == gui.getAutoclickOnMouseHold()) {
-         autoclickOnMouseHold = gui.getAutoclickOnMouseHold().isSelected();
-
-         if (!autoclickOnMouseHold) {
-            toggleClicker(false);
-         }
-      }
-   }
-
    /**
     * Toggles the clicker
     */
@@ -168,7 +178,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
    private void newHotkey(NativeKeyEvent e) {
       hotkey = e.getKeyCode();
       hotkeyText = NativeKeyEvent.getKeyText(hotkey);
-      newHotkeyButton.setText("Select Hotkey(" + hotkeyText + ")");
+      gui.getNewHotkeyButton().setText("Select Hotkey(" + hotkeyText + ")");
       newHotkey = false;
    }
 }
