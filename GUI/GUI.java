@@ -1,6 +1,7 @@
 package GUI;
 
 import fileUtilities.ClickerData;
+import main.InputListener;
 import resources.Constants;
 import textFieldFilter.TextFieldFilter;
 
@@ -19,7 +20,7 @@ public class GUI extends JFrame implements ActionListener {
 
    // title/version
    private static final double AUTOCLICKER_VERSION = 2.1;
-   static final String MAIN_FRAME_TITLE = "Useful Autoclicker " + AUTOCLICKER_VERSION;
+   public static final String MAIN_FRAME_TITLE = "Useful Autoclicker " + AUTOCLICKER_VERSION;
 
    // sizes
    private static final int MAIN_FRAME_WIDTH = 400;
@@ -42,7 +43,9 @@ public class GUI extends JFrame implements ActionListener {
    private final JTextField clickAmountTF;
    private final JComboBox<String> buttonSelectCB;
    private final JButton helpButton;
-   public final JButton defaultsButton;
+   private final JButton defaultsButton;
+
+   private final JCheckBox autoclickOnMouseHoldCheckBox;
 
    /**
     * Makes GUI
@@ -111,6 +114,16 @@ public class GUI extends JFrame implements ActionListener {
       String[] buttonSelectOptions = {"left", "right", "middle", "side front", "side back"};
       buttonSelectCB = comboBoxFactory(buttonSelectOptions, clickerData.getButton(), new int[]{250, clicksItemsY, 90, 20});
 
+      // autoclick on hold
+      JLabel autoclickOnMouseHoldLabel = labelFactory("Autoclick on button hold:", false, false, new int[]{135, 255, 190, 20});
+      autoclickOnMouseHoldCheckBox = checkBoxFactory(InputListener.getInstance(), clickerData.shouldAutoclickOnMouseHold(), new int[]{275, 255, 15, 20});
+      JPanel autoclickOnMouseHoldPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 9));
+      autoclickOnMouseHoldPanel.setBounds(125, 250, 175, 30);
+      autoclickOnMouseHoldPanel.add(autoclickOnMouseHoldLabel);
+      autoclickOnMouseHoldPanel.add(autoclickOnMouseHoldCheckBox);
+
+
+      add(autoclickOnMouseHoldPanel);
 
       // adding components ########################################################
       // adding text fields
@@ -126,12 +139,12 @@ public class GUI extends JFrame implements ActionListener {
       add(shouldRandomizeCB);
 
       // adding dropdown
-      add(buttonSelectCB, this);
+      add(buttonSelectCB);
 
       // adding section labels
-      add(delayLabel, this);
-      add(randomizeLabel, this);
-      add(miscellaneousLabel, this);
+      add(delayLabel);
+      add(randomizeLabel);
+      add(miscellaneousLabel);
 
       // adding text labels
       add(clickDelayL);
@@ -204,8 +217,16 @@ public class GUI extends JFrame implements ActionListener {
       return buttonSelectCB;
    }
 
+   /**
+    * @return autoclick on mouse hold checkbox
+    */
+   public JCheckBox getAutoclickOnMouseHold() {
+      return autoclickOnMouseHoldCheckBox;
+   }
+
    @Override
    public void actionPerformed(ActionEvent e) {
+      System.out.println("(GUI) Action performed");
       if (e.getSource() == helpButton) {
          helpGUI.setLocationRelativeTo(this);
          helpGUI.setVisible(true);
@@ -217,7 +238,7 @@ public class GUI extends JFrame implements ActionListener {
     *
     * @param component component to add
     */
-   public void add(JComponent component) {
+   public void addComp(JComponent component) {
       this.add(component);
       if (this.isVisible()) {
          this.repaint();
@@ -371,7 +392,7 @@ public class GUI extends JFrame implements ActionListener {
     * @param coordinates coordinates and size of the checkboxes
     * @return the checkbox
     */
-   public JCheckBox checkBoxFactory(ActionListener actionListener, boolean value, int[] coordinates) {
+   private JCheckBox checkBoxFactory(ActionListener actionListener, boolean value, int[] coordinates) {
       JCheckBox checkBox = new JCheckBox();
       checkBox.addActionListener(actionListener);
       checkBox.setSelected(value);

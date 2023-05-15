@@ -11,7 +11,6 @@ import fileUtilities.ClickerData;
 import fileUtilities.FileHider;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,7 +19,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
    private final GUI gui;
    private Autoclicker clicker;
    private final JButton newHotkeyButton;
-   private final JCheckBox autoclickOnMouseHoldCheckBox;
 
    private boolean newHotkey;
    private int hotkey;
@@ -30,6 +28,10 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
    private int registeredPressing;
    private boolean autoclickOnMouseHold;
 
+
+
+   private static InputListener inputListener;
+
    /**
     * Setup input listener(JNativeHook) and makes components for GUI.
     * @param gui GUI for making components
@@ -37,6 +39,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
    public InputListener(GUI gui) {
       this.gui = gui;
       clicker = new Autoclicker(gui);
+      inputListener = this;
 
       // add key and mouse listener
       try {
@@ -58,16 +61,16 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       newHotkeyButton = gui.buttonFactory("Select Hotkey(" + hotkeyText + ")", null, this, new int[]{20, 210, 165, 30});
       newHotkeyButton.setName(String.valueOf(hotkey));
 
-      // autoclick on hold
-      JLabel autoclickOnMouseHoldLabel = gui.labelFactory("Autoclick on button hold:", false, false, new int[]{135, 255, 190, 20});
-      autoclickOnMouseHoldCheckBox = gui.checkBoxFactory(this, clickerData.shouldAutoclickOnMouseHold(), new int[]{275, 255, 15, 20});
-      JPanel autoclickOnMouseHoldPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 9));
-      autoclickOnMouseHoldPanel.setBounds(125, 250, 175, 30);
-      autoclickOnMouseHoldPanel.add(autoclickOnMouseHoldLabel);
-      autoclickOnMouseHoldPanel.add(autoclickOnMouseHoldCheckBox);
-
       gui.add(newHotkeyButton);
-      gui.add(autoclickOnMouseHoldPanel);
+   }
+
+   /**
+    * @return InputListener
+    */
+   public static InputListener getInstance() {
+      System.out.println("got InputListener");
+      System.out.println(inputListener);
+      return inputListener;
    }
 
    @Override
@@ -115,18 +118,17 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
 
    @Override
    public void actionPerformed(ActionEvent e) {
+      System.out.println("Action performed");
       if (e.getSource() == newHotkeyButton) {
          toggleClicker(false);
          newHotkey = true;
          newHotkeyButton.setText("Press new hotkey");
-      } else if (e.getSource() == autoclickOnMouseHoldCheckBox) {
-         autoclickOnMouseHold = autoclickOnMouseHoldCheckBox.isSelected();
+      } else if (e.getSource() == gui.getAutoclickOnMouseHold()) {
+         autoclickOnMouseHold = gui.getAutoclickOnMouseHold().isSelected();
 
          if (!autoclickOnMouseHold) {
             toggleClicker(false);
          }
-      } else {
-         System.out.println("Unknown action performed");
       }
    }
 
