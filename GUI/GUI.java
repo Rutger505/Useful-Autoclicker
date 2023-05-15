@@ -6,15 +6,11 @@ import resources.Constants;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * GUI where settings can be changed
  */
-public class GUI extends JFrame implements ActionListener {
-   private final HelpGUI helpGUI;
-
+public class GUI extends JFrame {
    // title/version
    private static final double AUTOCLICKER_VERSION = 2.1;
    public static final String MAIN_FRAME_TITLE = "Useful Autoclicker " + AUTOCLICKER_VERSION;
@@ -34,6 +30,11 @@ public class GUI extends JFrame implements ActionListener {
    private final JTextField[] randomizeRangeTF;
    private final JTextField clickAmountTF;
    private final JComboBox<String> buttonSelectCB;
+
+   public JButton getHelpButton() {
+      return helpButton;
+   }
+
    private final JButton helpButton;
    private final JButton defaultsButton;
    private final JCheckBox autoclickOnMouseHoldCheckBox;
@@ -43,7 +44,6 @@ public class GUI extends JFrame implements ActionListener {
     */
    public GUI() {
       JComponentFactory components = new JComponentFactory();
-      helpGUI = new HelpGUI();
       ClickerData clickerData = new ClickerData();
 
       // label sizes
@@ -76,9 +76,9 @@ public class GUI extends JFrame implements ActionListener {
 
       Color topButtonBorderColor = new Color(200, 200, 200);
       Border topButtonBorder = BorderFactory.createLineBorder(topButtonBorderColor, 1);
-      defaultsButton = components.buttonFactory("Defaults", topButtonBorder, this, new int[]{10, 4, 60, 17});
+      defaultsButton = components.buttonFactory("Defaults", topButtonBorder, new int[]{10, 4, 60, 17});
       add(defaultsButton);
-      helpButton = components.buttonFactory("?", topButtonBorder, this, new int[]{360, 4, 17, 17});
+      helpButton = components.buttonFactory("?", topButtonBorder, new int[]{360, 4, 17, 17});
 
       JLabel clickDelayL = components.labelFactory("Click interval:", false, false, new int[]{30, clickDelayItemsY, 80, labelHeight});
       clickDelayTF = components.textFieldFactory(4, clickerData.getClickDelay(), new int[][]{{290, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {230, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {170, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {110, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
@@ -108,7 +108,7 @@ public class GUI extends JFrame implements ActionListener {
 
       // autoclick on hold
       JLabel autoclickOnMouseHoldLabel = components.labelFactory("Autoclick on button hold:", false, false, new int[]{135, 255, 190, 20});
-      autoclickOnMouseHoldCheckBox = components.checkBoxFactory(this, clickerData.shouldAutoclickOnMouseHold(), new int[]{275, 255, 15, 20});
+      autoclickOnMouseHoldCheckBox = components.checkBoxFactory( clickerData.shouldAutoclickOnMouseHold(), new int[]{275, 255, 15, 20});
       JPanel autoclickOnMouseHoldPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 9));
       autoclickOnMouseHoldPanel.setBounds(125, 250, 175, 30);
       autoclickOnMouseHoldPanel.add(autoclickOnMouseHoldLabel);
@@ -168,6 +168,33 @@ public class GUI extends JFrame implements ActionListener {
    }
 
    /**
+    * adds component to frame
+    *
+    * @param component component to add
+    */
+   public void addComp(JComponent component) {
+      this.add(component);
+      if (this.isVisible()) {
+         this.repaint();
+         this.setVisible(true);
+      }
+   }
+
+   /**
+    * adds component array to frame
+    *
+    * @param componentArray component array to add
+    */
+   private void add(JComponent[] componentArray) {
+      for (Component component : componentArray) {
+         this.add(component);
+      }
+      if (this.isVisible()) {
+         this.repaint();
+      }
+   }
+
+   /**
     * @return click delay text fields
     */
    public JTextField[] getClickDelay() {
@@ -215,42 +242,4 @@ public class GUI extends JFrame implements ActionListener {
    public JCheckBox getAutoclickOnMouseHold() {
       return autoclickOnMouseHoldCheckBox;
    }
-
-   @Override
-   public void actionPerformed(ActionEvent e) {
-      System.out.println("(GUI) Action performed");
-      if (e.getSource() == helpButton) {
-         helpGUI.setLocationRelativeTo(this);
-         helpGUI.setVisible(true);
-      }
-   }
-
-   /**
-    * adds component to frame
-    *
-    * @param component component to add
-    */
-   public void addComp(JComponent component) {
-      this.add(component);
-      if (this.isVisible()) {
-         this.repaint();
-         this.setVisible(true);
-      }
-   }
-
-   /**
-    * adds component array to frame
-    *
-    * @param componentArray component array to add
-    */
-   private void add(JComponent[] componentArray) {
-      for (Component component : componentArray) {
-         this.add(component);
-      }
-      if (this.isVisible()) {
-         this.repaint();
-      }
-   }
-
-
 }

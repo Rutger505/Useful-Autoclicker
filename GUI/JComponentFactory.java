@@ -7,7 +7,6 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.PlainDocument;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 /**
  * Class for making all JComponents in this project
@@ -146,14 +145,12 @@ public class JComponentFactory {
    /**
     * Makes checkbox
     *
-    * @param actionListener action listener for the checkbox
     * @param value         what is the value of the checkboxes
     * @param coordinates coordinates and size of the checkboxes
     * @return the checkbox
     */
-   public JCheckBox checkBoxFactory(ActionListener actionListener, boolean value, int[] coordinates) {
+   public JCheckBox checkBoxFactory( boolean value, int[] coordinates) {
       JCheckBox checkBox = new JCheckBox();
-      checkBox.addActionListener(actionListener);
       checkBox.setSelected(value);
       checkBox.setBorder(null);
       checkBox.setOpaque(false);
@@ -166,18 +163,16 @@ public class JComponentFactory {
     *
     * @param internalText what to put in button
     * @param border       what border add
-    * @param actionListener action listener for the button
     * @param coordinates  coordinates and size of the button
     * @return the button
     */
-   public JButton buttonFactory(String internalText, Border border, ActionListener actionListener, int[] coordinates) {
+   public JButton buttonFactory(String internalText, Border border,  int[] coordinates) {
       JButton button = new JButton();
       button.setBackground(Constants.DEFAULT_BACKGROUND_COLOR);
       button.setFont(Constants.DEFAULT_FONT);
       button.setText(internalText);
       button.setBorder(border);
       button.setFocusable(false);
-      button.addActionListener(actionListener);
       button.setCursor(new Cursor(Cursor.HAND_CURSOR));
       button.setOpaque(true);
       button.setBounds(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);

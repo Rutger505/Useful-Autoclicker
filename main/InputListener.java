@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 
 public class InputListener implements NativeKeyListener, NativeMouseListener, ActionListener {
    private final ClickerData clickerData = new ClickerData();
+   private final HelpGUI helpGUI = new HelpGUI();
    private final GUI gui;
    private Autoclicker clicker;
    private final JButton newHotkeyButton;
@@ -30,11 +31,21 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
 
    /**
     * Setup input listener(JNativeHook) and makes components for GUI.
+    *
     * @param gui GUI for making components
     */
    public InputListener(GUI gui) {
       this.gui = gui;
       clicker = new Autoclicker(gui);
+
+
+      gui.getHelpButton().addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            helpGUI.setLocationRelativeTo(gui);
+            helpGUI.setVisible(true);
+         }
+      });
 
       // add key and mouse listener
       try {
@@ -55,7 +66,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       // new hotkey button
       hotkey = clickerData.getHotkeyCode();
       hotkeyText = NativeKeyEvent.getKeyText(hotkey);
-      newHotkeyButton = components.buttonFactory("Select Hotkey(" + hotkeyText + ")", null, this, new int[]{20, 210, 165, 30});
+      newHotkeyButton = components.buttonFactory("Select Hotkey(" + hotkeyText + ")", null, new int[]{20, 210, 165, 30});
       newHotkeyButton.setName(String.valueOf(hotkey));
 
       gui.addComp(newHotkeyButton);
