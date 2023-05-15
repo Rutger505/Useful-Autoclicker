@@ -1,6 +1,6 @@
 package main;
 
-import GUI.GUI;
+import GUI.*;
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
@@ -30,7 +30,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
 
 
 
-   private static InputListener inputListener;
+   private static InputListener singleton;
 
    /**
     * Setup input listener(JNativeHook) and makes components for GUI.
@@ -39,7 +39,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
    public InputListener(GUI gui) {
       this.gui = gui;
       clicker = new Autoclicker(gui);
-      inputListener = this;
+      singleton = this;
 
       // add key and mouse listener
       try {
@@ -54,11 +54,13 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       // hide JNativeHook file
       new FileHider("JNativeHook.x86_64.dll");
 
+      JComponentFactory components = new JComponentFactory();
+
       // GUI components
       // new hotkey button
       hotkey = clickerData.getHotkeyCode();
       hotkeyText = NativeKeyEvent.getKeyText(hotkey);
-      newHotkeyButton = gui.buttonFactory("Select Hotkey(" + hotkeyText + ")", null, this, new int[]{20, 210, 165, 30});
+      newHotkeyButton = components.buttonFactory("Select Hotkey(" + hotkeyText + ")", null, this, new int[]{20, 210, 165, 30});
       newHotkeyButton.setName(String.valueOf(hotkey));
 
       gui.add(newHotkeyButton);
@@ -69,8 +71,8 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
     */
    public static InputListener getInstance() {
       System.out.println("got InputListener");
-      System.out.println(inputListener);
-      return inputListener;
+      System.out.println(singleton);
+      return singleton;
    }
 
    @Override
