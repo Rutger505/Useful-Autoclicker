@@ -11,8 +11,10 @@ import javax.swing.text.DocumentFilter;
 public class TextFieldFilter extends DocumentFilter {
    private final int limit;
 
+   /**
+    * @param limit max length of text field
+    */
    public TextFieldFilter(int limit) {
-      super();
       this.limit = limit;
    }
 
@@ -22,7 +24,7 @@ public class TextFieldFilter extends DocumentFilter {
     * @param text to try to parse
     * @return if text is integer
     */
-   private boolean test(String text) {
+   private boolean isInt(String text) {
       try {
          Integer.parseInt(text);
          return true;
@@ -32,16 +34,16 @@ public class TextFieldFilter extends DocumentFilter {
    }
 
    @Override
-   public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr)
+   public void insertString(FilterBypass fb, int offset, String text, AttributeSet attr)
            throws BadLocationException {
 
       Document doc = fb.getDocument();
       StringBuilder sb = new StringBuilder();
       sb.append(doc.getText(0, doc.getLength()));
-      sb.insert(offset, string);
+      sb.insert(offset, text);
 
-      if (test(sb.toString()) && sb.length() <= limit) {
-         super.insertString(fb, offset, string, attr);
+      if (isInt(sb.toString()) && sb.length() <= limit) {
+         super.insertString(fb, offset, text, attr);
       }
    }
 
@@ -54,7 +56,7 @@ public class TextFieldFilter extends DocumentFilter {
       sb.append(doc.getText(0, doc.getLength()));
       sb.replace(offset, offset + length, text);
 
-      if (test(sb.toString()) && sb.length() <= limit) {
+      if (isInt(sb.toString()) && sb.length() <= limit) {
          super.replace(fb, offset, length, text, attrs);
       }
    }
@@ -67,10 +69,10 @@ public class TextFieldFilter extends DocumentFilter {
       sb.append(doc.getText(0, doc.getLength()));
       sb.delete(offset, offset + length);
 
-      if (sb.toString().length() == 0) {
+      if (sb.toString().isEmpty()) {
          super.replace(fb, offset, length, "", null);
       } else {
-         if (test(sb.toString())) {
+         if (isInt(sb.toString())) {
             super.remove(fb, offset, length);
          }
       }
