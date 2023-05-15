@@ -28,10 +28,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
    private int registeredPressing;
    private boolean autoclickOnMouseHold;
 
-
-
-   private static InputListener singleton;
-
    /**
     * Setup input listener(JNativeHook) and makes components for GUI.
     * @param gui GUI for making components
@@ -39,7 +35,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
    public InputListener(GUI gui) {
       this.gui = gui;
       clicker = new Autoclicker(gui);
-      singleton = this;
 
       // add key and mouse listener
       try {
@@ -63,16 +58,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener, Ac
       newHotkeyButton = components.buttonFactory("Select Hotkey(" + hotkeyText + ")", null, this, new int[]{20, 210, 165, 30});
       newHotkeyButton.setName(String.valueOf(hotkey));
 
-      gui.add(newHotkeyButton);
-   }
-
-   /**
-    * @return InputListener
-    */
-   public static InputListener getInstance() {
-      System.out.println("got InputListener");
-      System.out.println(singleton);
-      return singleton;
+      gui.addComp(newHotkeyButton);
    }
 
    @Override

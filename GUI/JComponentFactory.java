@@ -87,6 +87,7 @@ public class JComponentFactory {
     * Makes text field array
     *
     * @param textFieldLimit how many characters can be in the textField
+    * @param value         what is the value of the text field
     * @param coordinates    coordinates and size of the text fields
     * @return the text fields made
     */
@@ -108,6 +109,7 @@ public class JComponentFactory {
     * Makes text field
     *
     * @param textFieldLimit how many characters can be in the textField
+    * @param value        what is the value of the text field
     * @param coordinates    coordinates and size of the text fields
     * @return the text fields made
     */
@@ -186,6 +188,7 @@ public class JComponentFactory {
     * Makes a combobox (dropdown with options)
     *
     * @param options     what options to put in the dropdown
+    * @param value      what is the value of the combobox
     * @param coordinates coordinates and size of the combobox
     * @return the combobox
     */

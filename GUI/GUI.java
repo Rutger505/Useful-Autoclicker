@@ -1,7 +1,6 @@
 package GUI;
 
 import fileUtilities.ClickerData;
-import main.InputListener;
 import resources.Constants;
 
 import javax.swing.*;
@@ -44,7 +43,7 @@ public class GUI extends JFrame implements ActionListener {
     */
    public GUI() {
       JComponentFactory components = new JComponentFactory();
-      helpGUI = new HelpGUI(this);
+      helpGUI = new HelpGUI();
       ClickerData clickerData = new ClickerData();
 
       // label sizes
@@ -109,7 +108,7 @@ public class GUI extends JFrame implements ActionListener {
 
       // autoclick on hold
       JLabel autoclickOnMouseHoldLabel = components.labelFactory("Autoclick on button hold:", false, false, new int[]{135, 255, 190, 20});
-      autoclickOnMouseHoldCheckBox = components.checkBoxFactory(InputListener.getInstance(), clickerData.shouldAutoclickOnMouseHold(), new int[]{275, 255, 15, 20});
+      autoclickOnMouseHoldCheckBox = components.checkBoxFactory(this, clickerData.shouldAutoclickOnMouseHold(), new int[]{275, 255, 15, 20});
       JPanel autoclickOnMouseHoldPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 9));
       autoclickOnMouseHoldPanel.setBounds(125, 250, 175, 30);
       autoclickOnMouseHoldPanel.add(autoclickOnMouseHoldLabel);

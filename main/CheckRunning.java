@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public class CheckRunning {
-   private final int port = 1324;
+   private static final int port = 1324;
 
    /**
     * Checks if the program is already running. Exits if it is.
@@ -21,7 +21,7 @@ public class CheckRunning {
    }
 
    /**
-    * Checks if the program is already running by using a internet port.
+    * Checks if the program is already running by using an internet port.
     */
    private boolean isRunning() {
       try {
