@@ -1,32 +1,14 @@
 package main;
 
 import GUI.GUI;
-import fileUtilities.ClickerData;
+import settings.Settings;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.InputEvent;
 import java.util.Random;
 
 import static java.lang.Math.abs;
 
 public class Autoclicker extends Thread {
-   // settings
-   private int clicks;
-   private long clickDelay;
-   private long holdDelay;
-
-   private boolean shouldRandomizeClick;
-   private boolean shouldRandomizeHold;
-
-   private int clickRandomizeRange;
-   private int holdRandomizeRange;
-
-   private int button;
-
-   // functional vars
-   private long holdDelayOriginal;
-   private long clickDelayOriginal;
    private final GUI gui;
    private final Random random = new Random();
    private Robot robot;
@@ -71,14 +53,14 @@ public class Autoclicker extends Thread {
 
       getSettings();
 
-      if (clicks == 0) {
+      if (Settings.clicks == 0) {
          while (!Thread.interrupted()) {
             randomizeDelay();
 
             clickCycle();
          }
       } else {
-         for (int i = 0; i < clicks && !Thread.interrupted(); i++) {
+         for (int i = 0; i < Settings.clicks && !Thread.interrupted(); i++) {
             randomizeDelay();
 
             clickCycle();
@@ -92,11 +74,11 @@ public class Autoclicker extends Thread {
     * Randomizes delay of click and hold delay.
     */
    private void randomizeDelay() {
-      if (shouldRandomizeClick) {
-         clickDelay = abs(clickDelayOriginal + random.nextInt(clickRandomizeRange * 2) - clickRandomizeRange);
+      if (Settings.shouldRandomizeClick) {
+         Settings.clickDelay = abs(Settings.clickDelayOriginal + random.nextInt(Settings.clickRandomizeRange * 2) - Settings.clickRandomizeRange);
       }
-      if (shouldRandomizeHold) {
-         holdDelay = abs(holdDelayOriginal + random.nextInt(holdRandomizeRange * 2) - holdRandomizeRange);
+      if (Settings.shouldRandomizeHold) {
+         Settings.holdDelay = abs(Settings.holdDelayOriginal + random.nextInt(Settings.holdRandomizeRange * 2) - Settings.holdRandomizeRange);
       }
    }
 
@@ -110,9 +92,9 @@ public class Autoclicker extends Thread {
     */
    private void clickCycle() {
       mousePress();
-      waitMs(holdDelay);
+      waitMs(Settings.holdDelay);
       mouseRelease();
-      waitMs(clickDelay);
+      waitMs(Settings.clickDelay);
    }
 
    /**
@@ -120,7 +102,7 @@ public class Autoclicker extends Thread {
     */
    private void mousePress() {
       try {
-         robot.mousePress(button);
+         robot.mousePress(Settings.button);
       } catch (RuntimeException e) {
          try {
             robot = new Robot();
@@ -135,7 +117,7 @@ public class Autoclicker extends Thread {
     */
    private void mouseRelease() {
       try {
-         robot.mouseRelease(button);
+         robot.mouseRelease(Settings.button);
       } catch (RuntimeException e) {
          try {
             robot = new Robot();
@@ -149,51 +131,19 @@ public class Autoclicker extends Thread {
     * Gets settings from GUI and saves them
     */
    private void getSettings() {
-      JTextField[] clickDelayTF = gui.getClickDelay();
-      JTextField[] holdDelayTF = gui.getHoldDelay();
-      int[] clickDelayRaw = new int[clickDelayTF.length];
-      int[] holdDelayRaw = new int[holdDelayTF.length];
+      int[] clickDelayRaw = new int[4];
+      int[] holdDelayRaw = new int[4];
       for (int i = 0; i < clickDelayRaw.length; i++) {
-         clickDelayRaw[i] = advancedParseInt(clickDelayTF[i].getText());
-         holdDelayRaw[i] = advancedParseInt(holdDelayTF[i].getText());
+         clickDelayRaw[i] = advancedParseInt(gui.getClickDelay()[i].getText());
+         holdDelayRaw[i] = advancedParseInt(gui.getHoldDelay()[i].getText());
       }
-      clickDelay = 0;
-      clickDelay += clickDelayRaw[3] * 3_600_000L;
-      clickDelay += clickDelayRaw[2] * 60_000L;
-      clickDelay += clickDelayRaw[1] * 1_000L;
-      clickDelay += clickDelayRaw[0];
-      clickDelayOriginal = clickDelay;
-      holdDelay = 0;
-      holdDelay += holdDelayRaw[3] * 3_600_000L;
-      holdDelay += holdDelayRaw[2] * 60_000L;
-      holdDelay += holdDelayRaw[1] * 1_000L;
-      holdDelay += holdDelayRaw[0];
-      holdDelayOriginal = holdDelay;
+      Settings.toMsClickDelay(clickDelayRaw);
+      Settings.toMsHoldDelay(holdDelayRaw);
 
-      // prevent crashing or lagging
-      if (clickDelay < 1) {
-         clickDelay = 1;
-      }
+      Settings.clickRandomizeRange = advancedParseInt(gui.getRandomizeRange()[0].getText());
+      Settings.holdRandomizeRange = advancedParseInt(gui.getRandomizeRange()[1].getText());
 
-      JCheckBox[] shouldRandomizeRaw = gui.getShouldRandomize();
-      shouldRandomizeClick = shouldRandomizeRaw[0].isSelected();
-      shouldRandomizeHold = shouldRandomizeRaw[1].isSelected();
-
-      JTextField[] randomizeRangeRaw = gui.getRandomizeRange();
-      clickRandomizeRange = advancedParseInt(randomizeRangeRaw[0].getText());
-      holdRandomizeRange = advancedParseInt(randomizeRangeRaw[1].getText());
-
-      clicks = advancedParseInt(gui.getClickAmount().getText());
-
-      int buttonNumber = gui.getButtonSelect().getSelectedIndex() + 1;
-      if (buttonNumber == 2) {
-         buttonNumber = 3;
-      } else if (buttonNumber == 3) {
-         buttonNumber = 2;
-      }
-      button = InputEvent.getMaskForButton(buttonNumber);
-
-      new ClickerData().saveClickerSettings(clickDelayRaw, holdDelayRaw, shouldRandomizeClick, shouldRandomizeHold, clickRandomizeRange, holdRandomizeRange, buttonNumber , clicks);
+      Settings.clicks = advancedParseInt(gui.getClickAmount().getText());
    }
 
    /**

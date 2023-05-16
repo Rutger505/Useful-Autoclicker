@@ -1,24 +1,16 @@
 package fileUtilities;
 
+import settings.Settings;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
+import java.awt.event.InputEvent;
 import java.io.*;
 
 public class ClickerData {
 
    private static final String FILE_NAME = "clickerData.txt";
    private final String dataPath;
-
-   private int[] clickDelay = new int[4];
-   private int[] holdDelay = new int[4];
-   private boolean shouldRandomizeClickDelay;
-   private boolean shouldRandomizeHoldDelay;
-   private int randomizeClickDelayRange;
-   private int randomizeHoldDelayRange;
-   private int hotkeyCode;
-   private int button;
-   private int clicks;
-   private boolean autoclickOnMouseHold;
 
    /**
     * Makes data file if it doesn't exist
@@ -36,80 +28,6 @@ public class ClickerData {
       getSettings();
    }
 
-
-   /**
-    * @return click delay
-    */
-   public int[] getClickDelay() {
-      return clickDelay;
-   }
-
-   /**
-    * @return hold delay
-    */
-   public int[] getHoldDelay() {
-      return holdDelay;
-   }
-
-   /**
-    * @return should randomize delay
-    */
-   public boolean[] getRandomizeDelay() {
-      return new boolean[]{shouldRandomizeClickDelay, shouldRandomizeHoldDelay};
-   }
-
-   /**
-    * @return randomize range
-    */
-   public int[] getRandomizeRange() {
-      return new int[]{randomizeClickDelayRange, randomizeHoldDelayRange};
-   }
-
-   /**
-    * @return hotkey code
-    */
-   public int getHotkeyCode() {
-      return hotkeyCode;
-   }
-
-   /**
-    * @return buttonNumber
-    */
-   public int getButton() {
-      return button;
-   }
-
-   /**
-    * @return clicks
-    */
-   public int getClicks() {
-      return clicks;
-   }
-
-   /**
-    * @return autoclick on mouse hold
-    */
-   public boolean shouldAutoclickOnMouseHold() {
-      return autoclickOnMouseHold;
-   }
-
-   /**
-    * Sets default settings
-    */
-   private void setDefaultSettings() {
-      clickDelay = new int[]{0, 0, 0, 100};
-      holdDelay = new int[]{0, 0, 0, 10};
-      shouldRandomizeClickDelay = false;
-      shouldRandomizeHoldDelay = false;
-      randomizeClickDelayRange = 20;
-      randomizeHoldDelayRange = 20;
-      hotkeyCode = 59;
-      button = 0;
-      clicks = 0;
-      autoclickOnMouseHold = false;
-      writeFile();
-   }
-
    /*
     * Gets data from file
     */
@@ -124,20 +42,29 @@ public class ClickerData {
          JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
       }
 
-      for (int i = 0; i < clickDelay.length; i++) {
-         clickDelay[i] = Integer.parseInt(readValue(reader));
+      for (int i = 0; i < Settings.clickDelayArray.length; i++) {
+         Settings.clickDelayArray[i] = Integer.parseInt(readValue(reader));
       }
-      for (int i = 0; i < holdDelay.length; i++) {
-         holdDelay[i] = Integer.parseInt(readValue(reader));
+      Settings.toMsClickDelay(Settings.clickDelayArray);
+      for (int i = 0; i < Settings.holdDelayArray.length; i++) {
+         Settings.holdDelayArray[i] = Integer.parseInt(readValue(reader));
       }
-      shouldRandomizeClickDelay = Boolean.parseBoolean(readValue(reader));
-      shouldRandomizeHoldDelay = Boolean.parseBoolean(readValue(reader));
-      randomizeClickDelayRange = Integer.parseInt(readValue(reader));
-      randomizeHoldDelayRange = Integer.parseInt(readValue(reader));
-      hotkeyCode = Integer.parseInt(readValue(reader));
-      button = Integer.parseInt(readValue(reader));
-      clicks = Integer.parseInt(readValue(reader));
-      autoclickOnMouseHold = Boolean.parseBoolean(readValue(reader));
+      Settings.toMsClickDelay(Settings.holdDelayArray);
+
+      Settings.shouldRandomizeClick = Boolean.parseBoolean(readValue(reader));
+      Settings.shouldRandomizeHold = Boolean.parseBoolean(readValue(reader));
+
+      Settings.clickRandomizeRange = Integer.parseInt(readValue(reader));
+      Settings.holdRandomizeRange = Integer.parseInt(readValue(reader));
+
+      Settings.hotkey = Integer.parseInt(readValue(reader));
+
+      Settings.buttonNumber = Integer.parseInt(readValue(reader));
+      Settings.button = InputEvent.getMaskForButton(Settings.buttonNumber + 1);
+
+      Settings.clicks = Integer.parseInt(readValue(reader));
+
+      Settings.autoclickOnMouseHold = Boolean.parseBoolean(readValue(reader));
    }
 
    /*
@@ -162,7 +89,7 @@ public class ClickerData {
          return value.toString();
 
       } catch (IOException e) {
-         setDefaultSettings();
+         writeFile();
          System.out.println("(File read) Error reading file");
          String message = "<html>There was an error while loading your settings.<br>Try restarting the Autoclicker and deleting the following folder:<br>" + dataPath + "</html>";
          String title = "(Reading data) Error loading settings";
@@ -171,64 +98,28 @@ public class ClickerData {
       }
    }
 
-   /**
-    * Saves data to file.
-    *
-    * @param clickDelay                array of click delay
-    * @param holdDelay                 array of hold delay
-    * @param shouldRandomizeClickDelay boolean should randomize click delay
-    * @param shouldRandomizeHoldDelay  boolean should randomize hold delay
-    * @param randomizeClickDelayRange  int randomize click delay range
-    * @param randomizeHoldDelayRange   int randomize hold delay range
-    * @param button                    int button
-    * @param clicks                    amount clicks
-    */
-   public void saveClickerSettings(int[] clickDelay, int[] holdDelay, boolean shouldRandomizeClickDelay, boolean shouldRandomizeHoldDelay, int randomizeClickDelayRange, int randomizeHoldDelayRange, int button, int clicks) {
-      this.clickDelay = clickDelay;
-      this.holdDelay = holdDelay;
-      this.shouldRandomizeClickDelay = shouldRandomizeClickDelay;
-      this.shouldRandomizeHoldDelay = shouldRandomizeHoldDelay;
-      this.randomizeClickDelayRange = randomizeClickDelayRange;
-      this.randomizeHoldDelayRange = randomizeHoldDelayRange;
-      this.button = button;
-      this.clicks = clicks;
-      writeFile();
-   }
-
-   /**
-    * Saves data to file.
-    *
-    * @param hotkeyCode           hotkey code
-    * @param autoclickOnMouseHold autoclick on mouse hold.
-    */
-   public void saveInputListenerSettings(int hotkeyCode, boolean autoclickOnMouseHold) {
-      this.hotkeyCode = hotkeyCode;
-      this.autoclickOnMouseHold = autoclickOnMouseHold;
-      writeFile();
-   }
-
    private void writeFile() {
       try {
          FileWriter writer = new FileWriter(dataPath + FILE_NAME);
          String[] timeNames = {"ms", "s", "m", "h"};
 
-         for (int i = 0; i < clickDelay.length; i++) {
-            writer.write("clickDelay_" + timeNames[i] + " " + clickDelay[i] + "\n");
+         for (int i = 0; i < Settings.clickDelayArray.length; i++) {
+            writer.write("clickDelay_" + timeNames[i] + " " + Settings.clickDelayArray[i] + "\n");
          }
-         for (int i = 0; i < holdDelay.length; i++) {
-            writer.write("holdTime_" + timeNames[i] + " " + holdDelay[i] + "\n");
+         for (int i = 0; i < Settings.holdDelayArray.length; i++) {
+            writer.write("holdTime_" + timeNames[i] + " " + Settings.holdDelayArray[i] + "\n");
          }
 
-         writer.write("shouldRandomize_clickDelay " + shouldRandomizeClickDelay + "\n");
-         writer.write("shouldRandomize_holdTime " + shouldRandomizeHoldDelay + "\n");
+         writer.write("shouldRandomize_clickDelay " + Settings.shouldRandomizeClick + "\n");
+         writer.write("shouldRandomize_holdTime " + Settings.shouldRandomizeHold + "\n");
 
-         writer.write("randomizeRange_clickDelay " + randomizeClickDelayRange + "\n");
-         writer.write("randomizeRange_holdTime " + randomizeHoldDelayRange + "\n");
+         writer.write("randomizeRange_clickDelay " + Settings.clickRandomizeRange + "\n");
+         writer.write("randomizeRange_holdTime " + Settings.holdRandomizeRange + "\n");
 
-         writer.write("hotkeyCode " + hotkeyCode + "\n");
-         writer.write("button " + button + "\n");
-         writer.write("clicks " + clicks + "\n");
-         writer.write("autoclickOnHold " + autoclickOnMouseHold + "\n");
+         writer.write("hotkeyCode " + Settings.hotkey + "\n");
+         writer.write("button " + Settings.button + "\n");
+         writer.write("clicks " + Settings.clicks + "\n");
+         writer.write("autoclickOnHold " + Settings.autoclickOnMouseHold + "\n");
 
          writer.close();
       } catch (IOException e) {
@@ -276,7 +167,7 @@ public class ClickerData {
       if (!file.exists()) {
          try {
             file.createNewFile();
-            setDefaultSettings();
+            writeFile();
          } catch (IOException e) {
             System.out.println("(make file) file not could not be created");
             String message = "<html>There was an error while saving your settings.</html>";

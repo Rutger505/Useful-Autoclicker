@@ -34,16 +34,16 @@ public class TextFieldFilter extends DocumentFilter {
    }
 
    @Override
-   public void insertString(FilterBypass fb, int offset, String text, AttributeSet attr)
+   public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr)
            throws BadLocationException {
 
       Document doc = fb.getDocument();
       StringBuilder sb = new StringBuilder();
       sb.append(doc.getText(0, doc.getLength()));
-      sb.insert(offset, text);
+      sb.insert(offset, string);
 
       if (isInt(sb.toString()) && sb.length() <= limit) {
-         super.insertString(fb, offset, text, attr);
+         super.insertString(fb, offset, string, attr);
       }
    }
 
@@ -57,6 +57,8 @@ public class TextFieldFilter extends DocumentFilter {
       sb.replace(offset, offset + length, text);
 
       if (isInt(sb.toString()) && sb.length() <= limit) {
+         System.out.println("(TextFieldFilter) string replaced");
+         System.out.println(sb);
          super.replace(fb, offset, length, text, attrs);
       }
    }
