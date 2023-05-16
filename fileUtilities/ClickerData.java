@@ -41,30 +41,31 @@ public class ClickerData {
          String title = "(Finding data file) Error finding settings file";
          JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
       }
-
-      for (int i = 0; i < Settings.clickDelayArray.length; i++) {
-         Settings.clickDelayArray[i] = Integer.parseInt(readValue(reader));
+      int[] temp = new int[Settings.getClickDelayArray().length];
+      for (int i = 0; i < Settings.getClickDelayArray().length; i++) {
+         temp[i] = Integer.parseInt(readValue(reader));
       }
-      Settings.toMsClickDelay(Settings.clickDelayArray);
-      for (int i = 0; i < Settings.holdDelayArray.length; i++) {
-         Settings.holdDelayArray[i] = Integer.parseInt(readValue(reader));
+      Settings.setClickDelay(temp);
+
+      for (int i = 0; i < Settings.getClickDelayArray().length; i++) {
+         temp[i] = Integer.parseInt(readValue(reader));
       }
-      Settings.toMsClickDelay(Settings.holdDelayArray);
+      Settings.setHoldDelay(temp);
 
-      Settings.shouldRandomizeClick = Boolean.parseBoolean(readValue(reader));
-      Settings.shouldRandomizeHold = Boolean.parseBoolean(readValue(reader));
+      Settings.setShouldRandomizeClick(Boolean.parseBoolean(readValue(reader)));
+      Settings.setShouldRandomizeHold(Boolean.parseBoolean(readValue(reader)));
 
-      Settings.clickRandomizeRange = Integer.parseInt(readValue(reader));
-      Settings.holdRandomizeRange = Integer.parseInt(readValue(reader));
+      Settings.setClickRandomizeRange(Integer.parseInt(readValue(reader)));
+      Settings.setHoldRandomizeRange(Integer.parseInt(readValue(reader)));
 
-      Settings.hotkey = Integer.parseInt(readValue(reader));
+      Settings.setHotkey(Integer.parseInt(readValue(reader)));
 
-      Settings.buttonNumber = Integer.parseInt(readValue(reader));
-      Settings.button = InputEvent.getMaskForButton(Settings.buttonNumber + 1);
+      Settings.setButtonNumber(Integer.parseInt(readValue(reader)));
+      Settings.setButton(InputEvent.getMaskForButton(Settings.getButtonNumber() + 1));
 
-      Settings.clicks = Integer.parseInt(readValue(reader));
+      Settings.setClicks(Integer.parseInt(readValue(reader)));
 
-      Settings.autoclickOnMouseHold = Boolean.parseBoolean(readValue(reader));
+      Settings.setAutoclickOnMouseHold(Boolean.parseBoolean(readValue(reader)));
    }
 
    /**
@@ -98,28 +99,31 @@ public class ClickerData {
       }
    }
 
-   private static void writeFile() {
+   /**
+    * Writes the file in the data folder with the settings from settings class.
+    */
+   public static void writeFile() {
       try {
          FileWriter writer = new FileWriter(dataPath + FILE_NAME);
          String[] timeNames = {"ms", "s", "m", "h"};
 
-         for (int i = 0; i < Settings.clickDelayArray.length; i++) {
-            writer.write("clickDelay_" + timeNames[i] + " " + Settings.clickDelayArray[i] + "\n");
+         for (int i = 0; i < Settings.getClickDelayArray().length; i++) {
+            writer.write("clickDelay_" + timeNames[i] + " " + Settings.getClickDelayArray()[i] + "\n");
          }
-         for (int i = 0; i < Settings.holdDelayArray.length; i++) {
-            writer.write("holdTime_" + timeNames[i] + " " + Settings.holdDelayArray[i] + "\n");
+         for (int i = 0; i < Settings.getHoldDelayArray().length; i++) {
+            writer.write("holdTime_" + timeNames[i] + " " + Settings.getHoldDelayArray()[i] + "\n");
          }
 
-         writer.write("shouldRandomize_clickDelay " + Settings.shouldRandomizeClick + "\n");
-         writer.write("shouldRandomize_holdTime " + Settings.shouldRandomizeHold + "\n");
+         writer.write("shouldRandomize_clickDelay " + Settings.shouldRandomizeClick() + "\n");
+         writer.write("shouldRandomize_holdTime " + Settings.shouldRandomizeHold() + "\n");
 
-         writer.write("randomizeRange_clickDelay " + Settings.clickRandomizeRange + "\n");
-         writer.write("randomizeRange_holdTime " + Settings.holdRandomizeRange + "\n");
+         writer.write("randomizeRange_clickDelay " + Settings.getClickRandomizeRange() + "\n");
+         writer.write("randomizeRange_holdTime " + Settings.getHoldRandomizeRange() + "\n");
 
-         writer.write("hotkeyCode " + Settings.hotkey + "\n");
-         writer.write("button " + Settings.button + "\n");
-         writer.write("clicks " + Settings.clicks + "\n");
-         writer.write("autoclickOnHold " + Settings.autoclickOnMouseHold + "\n");
+         writer.write("hotkeyCode " + Settings.getHotkey() + "\n");
+         writer.write("button " + Settings.getButton() + "\n");
+         writer.write("clicks " + Settings.getClicks() + "\n");
+         writer.write("autoclickOnHold " + Settings.shouldAutoclickOnMouseHold() + "\n");
 
          writer.close();
       } catch (IOException e) {

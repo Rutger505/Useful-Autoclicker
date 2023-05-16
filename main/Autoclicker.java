@@ -53,14 +53,14 @@ public class Autoclicker extends Thread {
 
       getSettings();
 
-      if (Settings.clicks == 0) {
+      if (Settings.getClicks() == 0) {
          while (!Thread.interrupted()) {
             randomizeDelay();
 
             clickCycle();
          }
       } else {
-         for (int i = 0; i < Settings.clicks && !Thread.interrupted(); i++) {
+         for (int i = 0; i < Settings.getClicks() && !Thread.interrupted(); i++) {
             randomizeDelay();
 
             clickCycle();
@@ -74,11 +74,11 @@ public class Autoclicker extends Thread {
     * Randomizes delay of click and hold delay.
     */
    private void randomizeDelay() {
-      if (Settings.shouldRandomizeClick) {
-         Settings.clickDelay = abs(Settings.clickDelayOriginal + random.nextInt(Settings.clickRandomizeRange * 2) - Settings.clickRandomizeRange);
+      if (Settings.shouldRandomizeClick()) {
+         Settings.setClickDelay(abs(Settings.getClickDelayOriginal() + random.nextInt(Settings.getClickRandomizeRange() * 2) - Settings.getClickRandomizeRange()));
       }
-      if (Settings.shouldRandomizeHold) {
-         Settings.holdDelay = abs(Settings.holdDelayOriginal + random.nextInt(Settings.holdRandomizeRange * 2) - Settings.holdRandomizeRange);
+      if (Settings.shouldRandomizeHold()) {
+         Settings.setHoldDelay(abs(Settings.getHoldDelayOriginal() + random.nextInt(Settings.getHoldRandomizeRange() * 2) - Settings.getHoldRandomizeRange()));
       }
    }
 
@@ -92,9 +92,9 @@ public class Autoclicker extends Thread {
     */
    private void clickCycle() {
       mousePress();
-      waitMs(Settings.holdDelay);
+      waitMs(Settings.getHoldDelay());
       mouseRelease();
-      waitMs(Settings.clickDelay);
+      waitMs(Settings.getClickDelay());
    }
 
    /**
@@ -102,7 +102,7 @@ public class Autoclicker extends Thread {
     */
    private void mousePress() {
       try {
-         robot.mousePress(Settings.button);
+         robot.mousePress(Settings.getButton());
       } catch (RuntimeException e) {
          try {
             robot = new Robot();
@@ -117,7 +117,7 @@ public class Autoclicker extends Thread {
     */
    private void mouseRelease() {
       try {
-         robot.mouseRelease(Settings.button);
+         robot.mouseRelease(Settings.getButton());
       } catch (RuntimeException e) {
          try {
             robot = new Robot();
@@ -137,13 +137,13 @@ public class Autoclicker extends Thread {
          clickDelayRaw[i] = advancedParseInt(gui.getClickDelay()[i].getText());
          holdDelayRaw[i] = advancedParseInt(gui.getHoldDelay()[i].getText());
       }
-      Settings.toMsClickDelay(clickDelayRaw);
-      Settings.toMsHoldDelay(holdDelayRaw);
+      Settings.setClickDelay(clickDelayRaw);
+      Settings.setHoldDelay(holdDelayRaw);
 
-      Settings.clickRandomizeRange = advancedParseInt(gui.getRandomizeRange()[0].getText());
-      Settings.holdRandomizeRange = advancedParseInt(gui.getRandomizeRange()[1].getText());
+      Settings.setClickRandomizeRange(advancedParseInt(gui.getRandomizeRange()[0].getText()));
+      Settings.setHoldRandomizeRange(advancedParseInt(gui.getRandomizeRange()[1].getText()));
 
-      Settings.clicks = advancedParseInt(gui.getClickAmount().getText());
+      Settings.setClicks(advancedParseInt(gui.getClickAmount().getText()));
    }
 
    /**

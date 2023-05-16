@@ -48,10 +48,10 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       gui.getAutoclickOnMouseHold().addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            Settings.autoclickOnMouseHold = gui.getAutoclickOnMouseHold().isSelected();
-            System.out.println("(InputListener) Autoclick on mouse hold: " + Settings.autoclickOnMouseHold);
+            Settings.setAutoclickOnMouseHold(gui.getAutoclickOnMouseHold().isSelected());
+            System.out.println("(InputListener) Autoclick on mouse hold: " + Settings.shouldAutoclickOnMouseHold());
 
-            if (!Settings.autoclickOnMouseHold) {
+            if (!Settings.shouldAutoclickOnMouseHold()) {
                toggleClicker(false);
             }
          }
@@ -61,8 +61,8 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       gui.getShouldRandomize()[0].addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            Settings.shouldRandomizeClick = gui.getShouldRandomize()[0].isSelected();
-            System.out.println("(InputListener) Should randomize click: " + Settings.shouldRandomizeClick);
+            Settings.setShouldRandomizeClick(gui.getShouldRandomize()[0].isSelected());
+            System.out.println("(InputListener) Should randomize click: " + Settings.shouldRandomizeClick());
          }
       });
 
@@ -70,8 +70,8 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       gui.getShouldRandomize()[1].addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            Settings.shouldRandomizeHold = gui.getShouldRandomize()[1].isSelected();
-            System.out.println("(InputListener) Should randomize hold: " + Settings.shouldRandomizeHold);
+            Settings.setShouldRandomizeHold(gui.getShouldRandomize()[1].isSelected());
+            System.out.println("(InputListener) Should randomize hold: " + Settings.shouldRandomizeHold());
          }
       });
 
@@ -103,8 +103,8 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
             } else if (buttonNumber == 3) {
                buttonNumber = 2;
             }
-            Settings.button = InputEvent.getMaskForButton(buttonNumber);
-            Settings.buttonNumber = gui.getButtonSelect().getSelectedIndex();
+            Settings.setButton(InputEvent.getMaskForButton(buttonNumber));
+            Settings.setButtonNumber(gui.getButtonSelect().getSelectedIndex());
          }
       });
 
@@ -515,7 +515,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       });
 
 
-
       // add key and mouse listener #############################################################################
       try {
          GlobalScreen.registerNativeHook();
@@ -536,14 +535,14 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
 
       if (newHotkey) {
          newHotkey(nativeEvent);
-      } else if (keyPressed == Settings.hotkey && !Settings.autoclickOnMouseHold) {
+      } else if (keyPressed == Settings.getHotkey() && !Settings.shouldAutoclickOnMouseHold()) {
          toggleClicker();
       }
    }
 
    @Override
    public void nativeMousePressed(NativeMouseEvent nativeEvent) {
-      if (!Settings.autoclickOnMouseHold) {
+      if (!Settings.shouldAutoclickOnMouseHold()) {
          return;
       }
       mouseButtonSelected = gui.getButtonSelect().getSelectedIndex() + 1;
@@ -559,7 +558,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
 
    @Override
    public void nativeMouseReleased(NativeMouseEvent nativeEvent) {
-      if (!Settings.autoclickOnMouseHold) {
+      if (!Settings.shouldAutoclickOnMouseHold()) {
          return;
       }
       int buttonPressed = nativeEvent.getButton();
@@ -606,11 +605,10 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
     * @param e the key event
     */
    private void newHotkey(NativeKeyEvent e) {
-      Settings.hotkey = e.getKeyCode();
-      Settings.hotkeyText = NativeKeyEvent.getKeyText(Settings.hotkey);
-      gui.getNewHotkeyButton().setText("Select Hotkey(" + Settings.hotkeyText + ")");
+      Settings.setHotkey(e.getKeyCode());
+      gui.getNewHotkeyButton().setText("Select Hotkey(" + Settings.getHotkeyText() + ")");
       newHotkey = false;
-      System.out.println("(InputListener) New hotkey: " + Settings.hotkeyText);
+      System.out.println("(InputListener) New hotkey: " + Settings.getHotkeyText());
    }
 
    /**
