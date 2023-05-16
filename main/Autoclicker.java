@@ -51,8 +51,6 @@ public class Autoclicker extends Thread {
       running = true;
       gui.setTitle(GUI.MAIN_FRAME_TITLE + "  -  Clicking");
 
-      getSettings();
-
       if (Settings.getClicks() == 0) {
          while (!Thread.interrupted()) {
             randomizeDelay();
@@ -125,25 +123,6 @@ public class Autoclicker extends Thread {
          }
          System.out.println("error in mouse release");
       }
-   }
-
-   /**
-    * Gets settings from GUI and saves them
-    */
-   private void getSettings() {
-      int[] clickDelayRaw = new int[4];
-      int[] holdDelayRaw = new int[4];
-      for (int i = 0; i < clickDelayRaw.length; i++) {
-         clickDelayRaw[i] = advancedParseInt(gui.getClickDelay()[i].getText());
-         holdDelayRaw[i] = advancedParseInt(gui.getHoldDelay()[i].getText());
-      }
-      Settings.setClickDelay(clickDelayRaw);
-      Settings.setHoldDelay(holdDelayRaw);
-
-      Settings.setClickRandomizeRange(advancedParseInt(gui.getRandomizeRange()[0].getText()));
-      Settings.setHoldRandomizeRange(advancedParseInt(gui.getRandomizeRange()[1].getText()));
-
-      Settings.setClicks(advancedParseInt(gui.getClickAmount().getText()));
    }
 
    /**

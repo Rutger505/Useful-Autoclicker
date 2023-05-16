@@ -66,6 +66,11 @@ public class Settings {
       ClickerData.writeFile();
    }
 
+   public static void setClickDelay(int element, int index){
+      clickDelayArray[index] = element;
+      setClickDelay(clickDelayArray);
+   }
+
    public static long getClickDelayOriginal() {
       return clickDelayOriginal;
    }
@@ -87,6 +92,11 @@ public class Settings {
       holdDelayOriginal = holdDelay;
       holdDelayArray = holdDelayRaw;
       ClickerData.writeFile();
+   }
+
+   public static void setHoldDelay(int element, int index){
+      holdDelayArray[index] = element;
+      setHoldDelay(holdDelayArray);
    }
 
    public static void setHoldDelay(long holdDelay) {
@@ -126,6 +136,14 @@ public class Settings {
    public static void setClickRandomizeRange(int clickRandomizeRange) {
       Settings.clickRandomizeRange = clickRandomizeRange;
       ClickerData.writeFile();
+   }
+
+   public static void setRandomizeRange(int element, int index){
+      if (index == 0){
+         setClickRandomizeRange(element);
+      } else if (index == 1){
+         setHoldRandomizeRange(element);
+      }
    }
 
    public static int getButtonNumber() {

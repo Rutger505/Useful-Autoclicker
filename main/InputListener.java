@@ -127,377 +127,138 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       PlainDocument[] clickDelayDocument = new PlainDocument[4];
       for (int i = 0; i < clickDelayDocument.length; i++) {
          clickDelayDocument[i] = (PlainDocument) gui.getClickDelay()[i].getDocument();
+         int finalI = i;
+         clickDelayDocument[i].setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+               Document doc = fb.getDocument();
+               StringBuilder sb = new StringBuilder();
+               sb.append(doc.getText(0, doc.getLength()));
+               sb.replace(offset, offset + length, text);
+
+               if (isInt(sb.toString()) && sb.length() <= limitDefault) {
+                  super.replace(fb, offset, length, text, attrs);
+                  Settings.setClickDelay(Integer.parseInt(doc.getText(0, doc.getLength())), finalI);
+                  System.out.println("(InputListener)(ClickDelay) string replaced " + finalI);
+               }
+            }
+
+            @Override
+            public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
+               Document doc = fb.getDocument();
+               StringBuilder sb = new StringBuilder();
+               sb.append(doc.getText(0, doc.getLength()));
+               sb.delete(offset, offset + length);
+
+               if (sb.toString().isEmpty()) {
+                  super.replace(fb, offset, length, "", null);
+               } else {
+                  if (isInt(sb.toString())) {
+                     super.remove(fb, offset, length);
+                     Settings.setClickDelay(Integer.parseInt(doc.getText(0, doc.getLength())), finalI);
+                     System.out.println("(InputListener)(ClickDelay) string removed " + finalI);
+                  }
+               }
+            }
+         });
       }
-      clickDelayDocument[0].setDocumentFilter(new DocumentFilter() {
-         @Override
-         public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.replace(offset, offset + length, text);
-
-            if (isInt(sb.toString()) && sb.length() <= limitDefault) {
-               System.out.println("(InputListener)(ClickDelay) string replaced");
-               System.out.println(sb);
-               super.replace(fb, offset, length, text, attrs);
-            }
-         }
-
-         @Override
-         public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.delete(offset, offset + length);
-
-            if (sb.toString().isEmpty()) {
-               super.replace(fb, offset, length, "", null);
-            } else {
-               if (isInt(sb.toString())) {
-                  System.out.println("(InputListener)(ClickDelay) string Removed");
-                  super.remove(fb, offset, length);
-               }
-            }
-         }
-      });
-      clickDelayDocument[1].setDocumentFilter(new DocumentFilter() {
-         @Override
-         public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.replace(offset, offset + length, text);
-
-            if (isInt(sb.toString()) && sb.length() <= limitDefault) {
-               System.out.println("(InputListener)(ClickDelay) string replaced");
-               System.out.println(sb);
-               super.replace(fb, offset, length, text, attrs);
-            }
-         }
-
-         @Override
-         public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.delete(offset, offset + length);
-
-            if (sb.toString().isEmpty()) {
-               super.replace(fb, offset, length, "", null);
-            } else {
-               if (isInt(sb.toString())) {
-                  System.out.println("(InputListener)(ClickDelay) string Removed");
-                  super.remove(fb, offset, length);
-               }
-            }
-         }
-      });
-      clickDelayDocument[2].setDocumentFilter(new DocumentFilter() {
-         @Override
-         public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.replace(offset, offset + length, text);
-
-            if (isInt(sb.toString()) && sb.length() <= limitDefault) {
-               System.out.println("(InputListener)(ClickDelay) string replaced");
-               System.out.println(sb);
-               super.replace(fb, offset, length, text, attrs);
-            }
-         }
-
-         @Override
-         public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.delete(offset, offset + length);
-
-            if (sb.toString().isEmpty()) {
-               super.replace(fb, offset, length, "", null);
-            } else {
-               if (isInt(sb.toString())) {
-                  System.out.println("(InputListener)(ClickDelay) string Removed");
-                  super.remove(fb, offset, length);
-               }
-            }
-         }
-      });
-      clickDelayDocument[3].setDocumentFilter(new DocumentFilter() {
-         @Override
-         public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.replace(offset, offset + length, text);
-
-            if (isInt(sb.toString()) && sb.length() <= limitDefault) {
-               System.out.println("(InputListener)(ClickDelay) string replaced");
-               System.out.println(sb);
-               super.replace(fb, offset, length, text, attrs);
-            }
-         }
-
-         @Override
-         public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.delete(offset, offset + length);
-
-            if (sb.toString().isEmpty()) {
-               super.replace(fb, offset, length, "", null);
-            } else {
-               if (isInt(sb.toString())) {
-                  System.out.println("(InputListener)(ClickDelay) string Removed");
-                  super.remove(fb, offset, length);
-               }
-            }
-         }
-      });
 
       PlainDocument[] holdDelayDocument = new PlainDocument[4];
       for (int i = 0; i < holdDelayDocument.length; i++) {
          holdDelayDocument[i] = (PlainDocument) gui.getHoldDelay()[i].getDocument();
+         int finalI = i;
+         holdDelayDocument[i].setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+               Document doc = fb.getDocument();
+               StringBuilder sb = new StringBuilder();
+               sb.append(doc.getText(0, doc.getLength()));
+               sb.replace(offset, offset + length, text);
+
+               if (isInt(sb.toString()) && sb.length() <= limitDefault) {
+                  super.replace(fb, offset, length, text, attrs);
+                  Settings.setHoldDelay(Integer.parseInt(doc.getText(0, doc.getLength())), finalI);
+                  System.out.println("(InputListener)(HoldDelay) string replaced " + finalI);
+               }
+            }
+
+            @Override
+            public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
+               Document doc = fb.getDocument();
+               StringBuilder sb = new StringBuilder();
+               sb.append(doc.getText(0, doc.getLength()));
+               sb.delete(offset, offset + length);
+
+               if (sb.toString().isEmpty()) {
+                  super.replace(fb, offset, length, "", null);
+               } else {
+                  if (isInt(sb.toString())) {
+                     super.remove(fb, offset, length);
+                     Settings.setHoldDelay(Integer.parseInt(doc.getText(0, doc.getLength())), finalI);
+                     System.out.println("(InputListener)(HoldDelay) string removed " + finalI);
+                  }
+               }
+            }
+         });
       }
-      holdDelayDocument[0].setDocumentFilter(new DocumentFilter() {
-         @Override
-         public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.replace(offset, offset + length, text);
-
-            if (isInt(sb.toString()) && sb.length() <= limitDefault) {
-               System.out.println("(InputListener)(HoldDelay) string replaced");
-               System.out.println(sb);
-               super.replace(fb, offset, length, text, attrs);
-            }
-         }
-
-         @Override
-         public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.delete(offset, offset + length);
-
-            if (sb.toString().isEmpty()) {
-               super.replace(fb, offset, length, "", null);
-            } else {
-               if (isInt(sb.toString())) {
-                  System.out.println("(InputListener)(HoldDelay) string Removed");
-                  super.remove(fb, offset, length);
-               }
-            }
-         }
-      });
-      holdDelayDocument[1].setDocumentFilter(new DocumentFilter() {
-         @Override
-         public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.replace(offset, offset + length, text);
-
-            if (isInt(sb.toString()) && sb.length() <= limitDefault) {
-               System.out.println("(InputListener)(HoldDelay) string replaced");
-               System.out.println(sb);
-               super.replace(fb, offset, length, text, attrs);
-            }
-         }
-
-         @Override
-         public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.delete(offset, offset + length);
-
-            if (sb.toString().isEmpty()) {
-               super.replace(fb, offset, length, "", null);
-            } else {
-               if (isInt(sb.toString())) {
-                  System.out.println("(InputListener)(HoldDelay) string Removed");
-                  super.remove(fb, offset, length);
-               }
-            }
-         }
-      });
-      holdDelayDocument[2].setDocumentFilter(new DocumentFilter() {
-         @Override
-         public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.replace(offset, offset + length, text);
-
-            if (isInt(sb.toString()) && sb.length() <= limitDefault) {
-               System.out.println("(InputListener)(HoldDelay) string replaced");
-               System.out.println(sb);
-               super.replace(fb, offset, length, text, attrs);
-            }
-         }
-
-         @Override
-         public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.delete(offset, offset + length);
-
-            if (sb.toString().isEmpty()) {
-               super.replace(fb, offset, length, "", null);
-            } else {
-               if (isInt(sb.toString())) {
-                  System.out.println("(InputListener)(HoldDelay) string Removed");
-                  super.remove(fb, offset, length);
-               }
-            }
-         }
-      });
-      holdDelayDocument[3].setDocumentFilter(new DocumentFilter() {
-         @Override
-         public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.replace(offset, offset + length, text);
-
-            if (isInt(sb.toString()) && sb.length() <= limitDefault) {
-               System.out.println("(InputListener)(HoldDelay) string replaced");
-               System.out.println(sb);
-               super.replace(fb, offset, length, text, attrs);
-            }
-         }
-
-         @Override
-         public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.delete(offset, offset + length);
-
-            if (sb.toString().isEmpty()) {
-               super.replace(fb, offset, length, "", null);
-            } else {
-               if (isInt(sb.toString())) {
-                  System.out.println("(InputListener)(HoldDelay) string Removed");
-                  super.remove(fb, offset, length);
-               }
-            }
-         }
-      });
 
       PlainDocument[] clickRandomizeRangeDocument = new PlainDocument[2];
       for (int i = 0; i < clickRandomizeRangeDocument.length; i++) {
          clickRandomizeRangeDocument[i] = (PlainDocument) gui.getRandomizeRange()[i].getDocument();
+         int finalI = i;
+         clickRandomizeRangeDocument[i].setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+               Document doc = fb.getDocument();
+               StringBuilder sb = new StringBuilder();
+               sb.append(doc.getText(0, doc.getLength()));
+               sb.replace(offset, offset + length, text);
+
+               if (isInt(sb.toString()) && sb.length() <= limitDefault) {
+                  super.replace(fb, offset, length, text, attrs);
+                  Settings.setRandomizeRange(Integer.parseInt(doc.getText(0, doc.getLength())), finalI);
+                  System.out.println("(InputListener)(RandomizeClick) string replaced " + finalI);
+               }
+            }
+
+            @Override
+            public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
+               Document doc = fb.getDocument();
+               StringBuilder sb = new StringBuilder();
+               sb.append(doc.getText(0, doc.getLength()));
+               sb.delete(offset, offset + length);
+
+               if (sb.toString().isEmpty()) {
+                  super.replace(fb, offset, length, "", null);
+               } else {
+                  if (isInt(sb.toString())) {
+                     super.remove(fb, offset, length);
+                     Settings.setRandomizeRange(Integer.parseInt(doc.getText(0, doc.getLength())), finalI);
+                     System.out.println("(InputListener)(RandomizeClick) string removed " + finalI);
+                  }
+               }
+            }
+         });
       }
-      clickRandomizeRangeDocument[0].setDocumentFilter(new DocumentFilter() {
-         @Override
-         public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
 
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.replace(offset, offset + length, text);
-
-            if (isInt(sb.toString()) && sb.length() <= limitDefault) {
-               System.out.println("(InputListener)(RandomizeClick) string replaced");
-               System.out.println(sb);
-               super.replace(fb, offset, length, text, attrs);
-            }
-         }
-
-         @Override
-         public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.delete(offset, offset + length);
-
-            if (sb.toString().isEmpty()) {
-               super.replace(fb, offset, length, "", null);
-            } else {
-               if (isInt(sb.toString())) {
-                  System.out.println("(InputListener)(RandomizeClick) string Removed");
-                  super.remove(fb, offset, length);
-               }
-            }
-         }
-      });
-      clickRandomizeRangeDocument[1].setDocumentFilter(new DocumentFilter() {
-         @Override
-         public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.replace(offset, offset + length, text);
-
-            if (isInt(sb.toString()) && sb.length() <= limitDefault) {
-               System.out.println("(InputListener)(RandomizeHold) string replaced");
-               System.out.println(sb);
-               super.replace(fb, offset, length, text, attrs);
-            }
-         }
-
-         @Override
-         public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.delete(offset, offset + length);
-
-            if (sb.toString().isEmpty()) {
-               super.replace(fb, offset, length, "", null);
-            } else {
-               if (isInt(sb.toString())) {
-                  System.out.println("(InputListener)(RandomizeHold) string Removed");
-                  super.remove(fb, offset, length);
-               }
-            }
-         }
-      });
       PlainDocument clicksDocument = (PlainDocument) gui.getClickAmount().getDocument();
       clicksDocument.setDocumentFilter(new DocumentFilter() {
          @Override
          public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-
             Document doc = fb.getDocument();
             StringBuilder sb = new StringBuilder();
             sb.append(doc.getText(0, doc.getLength()));
             sb.replace(offset, offset + length, text);
 
             if (isInt(sb.toString()) && sb.length() <= limitClicks) {
-               System.out.println("(InputListener)(ClickAmount) string replaced");
-               System.out.println(sb);
                super.replace(fb, offset, length, text, attrs);
+               Settings.setClicks(Integer.parseInt(doc.getText(0, doc.getLength())));
+               System.out.println("(InputListener)(ClickAmount) string replaced");
             }
          }
 
          @Override
          public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-
             Document doc = fb.getDocument();
             StringBuilder sb = new StringBuilder();
             sb.append(doc.getText(0, doc.getLength()));
@@ -507,8 +268,9 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
                super.replace(fb, offset, length, "", null);
             } else {
                if (isInt(sb.toString())) {
-                  System.out.println("(InputListener)(ClickAmount) string Removed");
                   super.remove(fb, offset, length);
+                  Settings.setClicks(Integer.parseInt(doc.getText(0, doc.getLength())));
+                  System.out.println("(InputListener)(ClickAmount) string removed");
                }
             }
          }

@@ -47,10 +47,11 @@ public class ClickerData {
       }
       Settings.setClickDelay(temp);
 
-      for (int i = 0; i < Settings.getClickDelayArray().length; i++) {
-         temp[i] = Integer.parseInt(readValue(reader));
+      int[] temp2 = new int[Settings.getHoldDelayArray().length];
+      for (int i = 0; i < Settings.getHoldDelayArray().length; i++) {
+         temp2[i] = Integer.parseInt(readValue(reader));
       }
-      Settings.setHoldDelay(temp);
+      Settings.setHoldDelay(temp2);
 
       Settings.setShouldRandomizeClick(Boolean.parseBoolean(readValue(reader)));
       Settings.setShouldRandomizeHold(Boolean.parseBoolean(readValue(reader)));
@@ -121,7 +122,7 @@ public class ClickerData {
          writer.write("randomizeRange_holdTime " + Settings.getHoldRandomizeRange() + "\n");
 
          writer.write("hotkeyCode " + Settings.getHotkey() + "\n");
-         writer.write("button " + Settings.getButton() + "\n");
+         writer.write("buttonNumber " + Settings.getButtonNumber() + "\n");
          writer.write("clicks " + Settings.getClicks() + "\n");
          writer.write("autoclickOnHold " + Settings.shouldAutoclickOnMouseHold() + "\n");
 
