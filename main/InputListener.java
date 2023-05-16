@@ -8,7 +8,6 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 import com.github.kwhat.jnativehook.mouse.NativeMouseEvent;
 import com.github.kwhat.jnativehook.mouse.NativeMouseListener;
-import fileUtilities.ClickerData;
 import fileUtilities.FileHider;
 import settings.Settings;
 
@@ -18,7 +17,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 
 public class InputListener implements NativeKeyListener, NativeMouseListener {
-   private final ClickerData clickerData = new ClickerData();
    private final HelpGUI helpGUI = new HelpGUI();
    private final GUI gui;
    private Autoclicker clicker;

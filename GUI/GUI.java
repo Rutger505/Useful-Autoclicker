@@ -1,6 +1,5 @@
 package GUI;
 
-import fileUtilities.ClickerData;
 import resources.Constants;
 import settings.Settings;
 
@@ -42,7 +41,6 @@ public class GUI extends JFrame {
     */
    public GUI() {
       JComponentFactory components = new JComponentFactory();
-      ClickerData clickerData = new ClickerData();
 
       // label sizes
       int labelHeight = 20;

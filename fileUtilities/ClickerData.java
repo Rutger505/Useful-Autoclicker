@@ -10,7 +10,7 @@ import java.io.*;
 public class ClickerData {
 
    private static final String FILE_NAME = "clickerData.txt";
-   private final String dataPath;
+   private static String dataPath = null;
 
    /**
     * Makes data file if it doesn't exist
@@ -28,7 +28,7 @@ public class ClickerData {
       getSettings();
    }
 
-   /*
+   /**
     * Gets data from file
     */
    private void getSettings() {
@@ -67,7 +67,7 @@ public class ClickerData {
       Settings.autoclickOnMouseHold = Boolean.parseBoolean(readValue(reader));
    }
 
-   /*
+   /**
     * Reads one line from file
     * @param reader FileReader to read where reader left off
     * @return String value of line.
@@ -98,7 +98,7 @@ public class ClickerData {
       }
    }
 
-   private void writeFile() {
+   private static void writeFile() {
       try {
          FileWriter writer = new FileWriter(dataPath + FILE_NAME);
          String[] timeNames = {"ms", "s", "m", "h"};
@@ -130,7 +130,7 @@ public class ClickerData {
       }
    }
 
-   /*
+   /**
     * Gets windows drive
     * @return windows drive
     */
@@ -150,9 +150,8 @@ public class ClickerData {
       return windowsDrive;
    }
 
-   /*
+   /**
     * Makes folder
-    * @param folderPath path of folder to be made
     */
    private void makeFolder() {
       new File(dataPath).mkdir();
@@ -174,8 +173,6 @@ public class ClickerData {
             String title = "(make file) file not could not be created";
             JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
          }
-
       }
-
    }
 }
