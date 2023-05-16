@@ -1,6 +1,7 @@
 package settings;
 
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
+import fileUtilities.ClickerData;
 
 import java.awt.event.InputEvent;
 
@@ -38,10 +39,16 @@ public class Settings {
 
    public static void setClicks(int clicks) {
       Settings.clicks = clicks;
+      ClickerData.writeFile();
    }
 
    public static long getClickDelay() {
       return clickDelay;
+   }
+
+   public static void setClickDelay(long clickDelay) {
+      Settings.clickDelay = clickDelay;
+      ClickerData.writeFile();
    }
 
    public static void setClickDelay(int[] clickDelayRaw) {
@@ -56,10 +63,7 @@ public class Settings {
       }
       clickDelayOriginal = clickDelay;
       clickDelayArray = clickDelayRaw;
-   }
-
-   public static void setClickDelay(long clickDelay) {
-      Settings.clickDelay = clickDelay;
+      ClickerData.writeFile();
    }
 
    public static long getClickDelayOriginal() {
@@ -82,44 +86,28 @@ public class Settings {
       holdDelay += holdDelayRaw[0];
       holdDelayOriginal = holdDelay;
       holdDelayArray = holdDelayRaw;
+      ClickerData.writeFile();
    }
 
    public static void setHoldDelay(long holdDelay) {
       Settings.holdDelay = holdDelay;
+      ClickerData.writeFile();
    }
 
    public static long getHoldDelayOriginal() {
       return holdDelayOriginal;
    }
 
-
    public static int[] getHoldDelayArray() {
       return holdDelayArray;
    }
-
 
    public static boolean shouldRandomizeClick() {
       return shouldRandomizeClick;
    }
 
-   public static void setShouldRandomizeClick(boolean shouldRandomizeClick) {
-      Settings.shouldRandomizeClick = shouldRandomizeClick;
-   }
-
    public static boolean shouldRandomizeHold() {
       return shouldRandomizeHold;
-   }
-
-   public static void setShouldRandomizeHold(boolean shouldRandomizeHold) {
-      Settings.shouldRandomizeHold = shouldRandomizeHold;
-   }
-
-   public static int getClickRandomizeRange() {
-      return clickRandomizeRange;
-   }
-
-   public static void setClickRandomizeRange(int clickRandomizeRange) {
-      Settings.clickRandomizeRange = clickRandomizeRange;
    }
 
    public static int getHoldRandomizeRange() {
@@ -128,6 +116,16 @@ public class Settings {
 
    public static void setHoldRandomizeRange(int holdRandomizeRange) {
       Settings.holdRandomizeRange = holdRandomizeRange;
+      ClickerData.writeFile();
+   }
+
+   public static int getClickRandomizeRange() {
+      return clickRandomizeRange;
+   }
+
+   public static void setClickRandomizeRange(int clickRandomizeRange) {
+      Settings.clickRandomizeRange = clickRandomizeRange;
+      ClickerData.writeFile();
    }
 
    public static int getButtonNumber() {
@@ -136,6 +134,7 @@ public class Settings {
 
    public static void setButtonNumber(int buttonNumber) {
       Settings.buttonNumber = buttonNumber;
+      ClickerData.writeFile();
    }
 
    public static int getButton() {
@@ -144,6 +143,7 @@ public class Settings {
 
    public static void setButton(int button) {
       Settings.button = button;
+      ClickerData.writeFile();
    }
 
    public static int getHotkey() {
@@ -153,6 +153,7 @@ public class Settings {
    public static void setHotkey(int hotkey) {
       Settings.hotkey = hotkey;
       Settings.hotkeyText = NativeKeyEvent.getKeyText(hotkey);
+      ClickerData.writeFile();
    }
 
    public static String getHotkeyText() {
@@ -163,7 +164,18 @@ public class Settings {
       return autoclickOnMouseHold;
    }
 
+   public static void setShouldRandomizeClick(boolean shouldRandomizeClick) {
+      Settings.shouldRandomizeClick = shouldRandomizeClick;
+      ClickerData.writeFile();
+   }
+
+   public static void setShouldRandomizeHold(boolean shouldRandomizeHold) {
+      Settings.shouldRandomizeHold = shouldRandomizeHold;
+      ClickerData.writeFile();
+   }
+
    public static void setAutoclickOnMouseHold(boolean autoclickOnMouseHold) {
       Settings.autoclickOnMouseHold = autoclickOnMouseHold;
+      ClickerData.writeFile();
    }
 }
