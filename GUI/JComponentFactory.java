@@ -1,11 +1,9 @@
 package GUI;
 
 import resources.Constants;
-import textFieldFilter.TextFieldFilter;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.text.PlainDocument;
 import java.awt.*;
 
 /**
@@ -85,12 +83,11 @@ public class JComponentFactory {
    /**
     * Makes text field array
     *
-    * @param textFieldLimit how many characters can be in the textField
     * @param value         what is the value of the text field
     * @param coordinates    coordinates and size of the text fields
     * @return the text fields made
     */
-   public JTextField[] textFieldFactory(int textFieldLimit, int[] value, int[][] coordinates) {
+   public JTextField[] textFieldFactory(int[] value, int[][] coordinates) {
       JTextField[] textField = new JTextField[coordinates.length];
       for (int i = 0; i < textField.length; i++) {
          textField[i] = new JTextField();
@@ -98,8 +95,6 @@ public class JComponentFactory {
          textField[i].setBackground(TEXT_FIELD_COLOR);
          textField[i].setText(String.valueOf(value[i]));
          textField[i].setBounds(coordinates[i][0], coordinates[i][1], coordinates[i][2], coordinates[i][3]);
-         PlainDocument document = (PlainDocument) (textField[i].getDocument());
-         document.setDocumentFilter(new TextFieldFilter(textFieldLimit));
       }
       return textField;
    }
@@ -107,19 +102,16 @@ public class JComponentFactory {
    /**
     * Makes text field
     *
-    * @param textFieldLimit how many characters can be in the textField
     * @param value        what is the value of the text field
     * @param coordinates    coordinates and size of the text fields
     * @return the text fields made
     */
-   public JTextField textFieldFactory(int textFieldLimit, int value, int[] coordinates) {
+   public JTextField textFieldFactory(int value, int[] coordinates) {
       JTextField textField = new JTextField();
       textField.setBorder(TEXT_FIELD_BORDER);
       textField.setBackground(TEXT_FIELD_COLOR);
       textField.setText(String.valueOf(value));
       textField.setBounds(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
-      PlainDocument document = (PlainDocument) (textField.getDocument());
-      document.setDocumentFilter(new TextFieldFilter(textFieldLimit));
       return textField;
    }
 
