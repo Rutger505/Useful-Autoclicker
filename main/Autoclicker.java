@@ -1,6 +1,5 @@
 package main;
 
-import GUI.GUI;
 import settings.Settings;
 
 import java.awt.*;
@@ -9,18 +8,14 @@ import java.util.Random;
 import static java.lang.Math.abs;
 
 public class Autoclicker extends Thread {
-   private final GUI gui;
    private final Random random = new Random();
    private Robot robot;
    private boolean running;
 
    /**
     * Sets up robot
-    *
-    * @param gui GUI object for getting settings
     */
-   public Autoclicker(GUI gui) {
-      this.gui = gui;
+   public Autoclicker() {
       try {
          robot = new Robot();
       } catch (AWTException ignored) {
@@ -49,7 +44,6 @@ public class Autoclicker extends Thread {
    @Override
    public void run() {
       running = true;
-      gui.setTitle(GUI.MAIN_FRAME_TITLE + "  -  Clicking");
 
       if (Settings.getClicks() == 0) {
          while (!Thread.interrupted()) {
@@ -65,7 +59,6 @@ public class Autoclicker extends Thread {
          }
       }
       running = false;
-      gui.setTitle(GUI.MAIN_FRAME_TITLE + "  -  Stopped");
    }
 
    /**

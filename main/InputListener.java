@@ -32,8 +32,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
     */
    public InputListener(GUI gui) {
       this.gui = gui;
-      clicker = new Autoclicker(gui);
-
+      this.clicker = new Autoclicker();
 
       // help gui button
       gui.getHelpButton().addActionListener(new ActionListener() {
@@ -120,88 +119,49 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       });
 
 
-      // document Filters        ##################################################################################################
+      // document Filters ##################################################################################################
       int limitDefault = 4;
       int limitClicks = 5;
 
+      // Hold and Click Delay TextField Filters
       PlainDocument[] clickDelayDocument = new PlainDocument[4];
+      PlainDocument[] holdDelayDocument = new PlainDocument[4];
       for (int i = 0; i < clickDelayDocument.length; i++) {
          clickDelayDocument[i] = (PlainDocument) gui.getClickDelay()[i].getDocument();
+         holdDelayDocument[i] = (PlainDocument) gui.getHoldDelay()[i].getDocument();
          int finalI = i;
+
          clickDelayDocument[i].setDocumentFilter(new DocumentFilter() {
             @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-               Document doc = fb.getDocument();
-               StringBuilder sb = new StringBuilder();
-               sb.append(doc.getText(0, doc.getLength()));
-               sb.replace(offset, offset + length, text);
-
-               if (isInt(sb.toString()) && sb.length() <= limitDefault) {
-                  super.replace(fb, offset, length, text, attrs);
-                  Settings.setClickDelay(Integer.parseInt(doc.getText(0, doc.getLength())), finalI);
-                  System.out.println("(InputListener)(ClickDelay) string replaced " + finalI);
+               if (onTextAdd(fb, offset, length, text, attrs, limitDefault)) {
+                  Settings.setClickDelay(Integer.parseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
                }
             }
-
             @Override
             public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-               Document doc = fb.getDocument();
-               StringBuilder sb = new StringBuilder();
-               sb.append(doc.getText(0, doc.getLength()));
-               sb.delete(offset, offset + length);
-
-               if (sb.toString().isEmpty()) {
-                  super.replace(fb, offset, length, "", null);
-               } else {
-                  if (isInt(sb.toString())) {
-                     super.remove(fb, offset, length);
-                     Settings.setClickDelay(Integer.parseInt(doc.getText(0, doc.getLength())), finalI);
-                     System.out.println("(InputListener)(ClickDelay) string removed " + finalI);
-                  }
+               if (onTextRemove(fb, offset, length)) {
+                  Settings.setClickDelay(Integer.parseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
                }
             }
          });
-      }
-
-      PlainDocument[] holdDelayDocument = new PlainDocument[4];
-      for (int i = 0; i < holdDelayDocument.length; i++) {
-         holdDelayDocument[i] = (PlainDocument) gui.getHoldDelay()[i].getDocument();
-         int finalI = i;
          holdDelayDocument[i].setDocumentFilter(new DocumentFilter() {
             @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-               Document doc = fb.getDocument();
-               StringBuilder sb = new StringBuilder();
-               sb.append(doc.getText(0, doc.getLength()));
-               sb.replace(offset, offset + length, text);
-
-               if (isInt(sb.toString()) && sb.length() <= limitDefault) {
-                  super.replace(fb, offset, length, text, attrs);
-                  Settings.setHoldDelay(Integer.parseInt(doc.getText(0, doc.getLength())), finalI);
-                  System.out.println("(InputListener)(HoldDelay) string replaced " + finalI);
+               if (onTextAdd(fb, offset, length, text, attrs, limitDefault)) {
+                  Settings.setHoldDelay(Integer.parseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
                }
             }
-
             @Override
             public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-               Document doc = fb.getDocument();
-               StringBuilder sb = new StringBuilder();
-               sb.append(doc.getText(0, doc.getLength()));
-               sb.delete(offset, offset + length);
-
-               if (sb.toString().isEmpty()) {
-                  super.replace(fb, offset, length, "", null);
-               } else {
-                  if (isInt(sb.toString())) {
-                     super.remove(fb, offset, length);
-                     Settings.setHoldDelay(Integer.parseInt(doc.getText(0, doc.getLength())), finalI);
-                     System.out.println("(InputListener)(HoldDelay) string removed " + finalI);
-                  }
+               if(onTextRemove(fb, offset, length)) {
+                  Settings.setHoldDelay(Integer.parseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
                }
             }
          });
       }
 
+      // Randomize Range TextField Filters
       PlainDocument[] clickRandomizeRangeDocument = new PlainDocument[2];
       for (int i = 0; i < clickRandomizeRangeDocument.length; i++) {
          clickRandomizeRangeDocument[i] = (PlainDocument) gui.getRandomizeRange()[i].getDocument();
@@ -209,73 +169,35 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
          clickRandomizeRangeDocument[i].setDocumentFilter(new DocumentFilter() {
             @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-               Document doc = fb.getDocument();
-               StringBuilder sb = new StringBuilder();
-               sb.append(doc.getText(0, doc.getLength()));
-               sb.replace(offset, offset + length, text);
-
-               if (isInt(sb.toString()) && sb.length() <= limitDefault) {
-                  super.replace(fb, offset, length, text, attrs);
-                  Settings.setRandomizeRange(Integer.parseInt(doc.getText(0, doc.getLength())), finalI);
-                  System.out.println("(InputListener)(RandomizeClick) string replaced " + finalI);
+               if(onTextAdd(fb, offset, length, text, attrs, limitDefault)) {
+                  Settings.setRandomizeRange(Integer.parseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
                }
             }
-
             @Override
             public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-               Document doc = fb.getDocument();
-               StringBuilder sb = new StringBuilder();
-               sb.append(doc.getText(0, doc.getLength()));
-               sb.delete(offset, offset + length);
-
-               if (sb.toString().isEmpty()) {
-                  super.replace(fb, offset, length, "", null);
-               } else {
-                  if (isInt(sb.toString())) {
-                     super.remove(fb, offset, length);
-                     Settings.setRandomizeRange(Integer.parseInt(doc.getText(0, doc.getLength())), finalI);
-                     System.out.println("(InputListener)(RandomizeClick) string removed " + finalI);
-                  }
+               if(onTextRemove(fb, offset, length)) {
+                  Settings.setRandomizeRange(Integer.parseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
                }
             }
          });
       }
 
+      // Click Amount TextField Filters
       PlainDocument clicksDocument = (PlainDocument) gui.getClickAmount().getDocument();
       clicksDocument.setDocumentFilter(new DocumentFilter() {
          @Override
          public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.replace(offset, offset + length, text);
-
-            if (isInt(sb.toString()) && sb.length() <= limitClicks) {
-               super.replace(fb, offset, length, text, attrs);
-               Settings.setClicks(Integer.parseInt(doc.getText(0, doc.getLength())));
-               System.out.println("(InputListener)(ClickAmount) string replaced");
+            if (onTextAdd(fb, offset, length, text, attrs, limitClicks)) {
+               Settings.setClicks(Integer.parseInt(fb.getDocument().getText(0, fb.getDocument().getLength())));
             }
          }
-
          @Override
          public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-            Document doc = fb.getDocument();
-            StringBuilder sb = new StringBuilder();
-            sb.append(doc.getText(0, doc.getLength()));
-            sb.delete(offset, offset + length);
-
-            if (sb.toString().isEmpty()) {
-               super.replace(fb, offset, length, "", null);
-            } else {
-               if (isInt(sb.toString())) {
-                  super.remove(fb, offset, length);
-                  Settings.setClicks(Integer.parseInt(doc.getText(0, doc.getLength())));
-                  System.out.println("(InputListener)(ClickAmount) string removed");
-               }
+            if (onTextRemove(fb, offset, length)) {
+               Settings.setClicks(Integer.parseInt(fb.getDocument().getText(0, fb.getDocument().getLength())));
             }
          }
       });
-
 
       // add key and mouse listener #############################################################################
       try {
@@ -289,6 +211,34 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
 
       // hide JNativeHook file
       new FileHider("JNativeHook.x86_64.dll");
+   }
+
+   private boolean onTextAdd(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs, int maxSize) throws BadLocationException {
+      Document doc = fb.getDocument();
+      StringBuilder sb = new StringBuilder();
+      sb.append(doc.getText(0, doc.getLength()));
+      sb.replace(offset, offset + length, text);
+
+      if (isInt(sb.toString()) && sb.length() <= maxSize) {
+         fb.replace(offset, length, text, attrs);
+         return true;
+      }
+      return false;
+   }
+
+   private boolean onTextRemove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
+      Document doc = fb.getDocument();
+      StringBuilder sb = new StringBuilder();
+      sb.append(doc.getText(0, doc.getLength()));
+      sb.delete(offset, offset + length);
+
+      if (sb.toString().isEmpty()) {
+         fb.replace(offset, length, "", null);
+      } else if (isInt(sb.toString())) {
+         fb.remove(offset, length);
+         return true;
+      }
+      return false;
    }
 
    @Override
@@ -339,10 +289,9 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
     */
    private void toggleClicker() {
       if (!clicker.isRunning()) {
-         clicker = new Autoclicker(gui);
-         clicker.start();
+         startClicker();
       } else {
-         clicker.stopClicker();
+         stopClicker();
       }
    }
 
@@ -353,12 +302,28 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
     */
    private void toggleClicker(boolean activate) {
       if (activate && !clicker.isRunning()) {
-         clicker = new Autoclicker(gui);
-         clicker.start();
+         startClicker();
       } else if (!activate && clicker.isRunning()) {
-         clicker.stopClicker();
-         registeredPressing = 0;
+         stopClicker();
       }
+   }
+
+   /**
+    * Starts the clicker and updates the gui title.
+    */
+   private void startClicker() {
+      clicker = new Autoclicker();
+      clicker.start();
+      gui.setTitle(GUI.MAIN_FRAME_TITLE + "  -  Clicking");
+   }
+
+   /**
+    * Stops the clicker, sets registeredPressing to 0 and updates the gui title.
+    */
+   private void stopClicker() {
+      clicker.stopClicker();
+      registeredPressing = 0;
+      gui.setTitle(GUI.MAIN_FRAME_TITLE + "  -  Stopped");
    }
 
    /**
