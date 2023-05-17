@@ -213,34 +213,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       new FileHider("JNativeHook.x86_64.dll");
    }
 
-   private boolean onTextAdd(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs, int maxSize) throws BadLocationException {
-      Document doc = fb.getDocument();
-      StringBuilder sb = new StringBuilder();
-      sb.append(doc.getText(0, doc.getLength()));
-      sb.replace(offset, offset + length, text);
-
-      if (isInt(sb.toString()) && sb.length() <= maxSize) {
-         fb.replace(offset, length, text, attrs);
-         return true;
-      }
-      return false;
-   }
-
-   private boolean onTextRemove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-      Document doc = fb.getDocument();
-      StringBuilder sb = new StringBuilder();
-      sb.append(doc.getText(0, doc.getLength()));
-      sb.delete(offset, offset + length);
-
-      if (sb.toString().isEmpty()) {
-         fb.replace(offset, length, "", null);
-      } else if (isInt(sb.toString())) {
-         fb.remove(offset, length);
-         return true;
-      }
-      return false;
-   }
-
    @Override
    public void nativeKeyPressed(NativeKeyEvent nativeEvent) {
       int keyPressed = nativeEvent.getKeyCode();
@@ -282,6 +254,53 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
             toggleClicker(false);
          }
       }
+   }
+
+   /**
+    * Adds new string to the textField if it is an integer and total string size is less than maxSize.
+    * @param fb FilterBypass
+    * @param offset idk
+    * @param length idk
+    * @param text string to add
+    * @param attrs idk
+    * @param maxSize max size of the string
+    * @return true if string was added, false if not
+    * @throws BadLocationException idk
+    */
+   private boolean onTextAdd(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs, int maxSize) throws BadLocationException {
+      Document doc = fb.getDocument();
+      StringBuilder sb = new StringBuilder();
+      sb.append(doc.getText(0, doc.getLength()));
+      sb.replace(offset, offset + length, text);
+
+      if (isInt(sb.toString()) && sb.length() <= maxSize) {
+         fb.replace(offset, length, text, attrs);
+         return true;
+      }
+      return false;
+   }
+
+   /**
+    * Removes text from the textField.
+    * @param fb FilterBypass
+    * @param offset idk
+    * @param length idk
+    * @return true if string was removed, false if not
+    * @throws BadLocationException idk
+    */
+   private boolean onTextRemove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
+      Document doc = fb.getDocument();
+      StringBuilder sb = new StringBuilder();
+      sb.append(doc.getText(0, doc.getLength()));
+      sb.delete(offset, offset + length);
+
+      if (sb.toString().isEmpty()) {
+         fb.replace(offset, length, "", null);
+      } else if (isInt(sb.toString())) {
+         fb.remove(offset, length);
+         return true;
+      }
+      return false;
    }
 
    /**
