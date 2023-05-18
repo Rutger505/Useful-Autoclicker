@@ -35,6 +35,30 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       this.gui = gui;
       this.clicker = new Autoclicker();
 
+      // default button
+
+      gui.getDefaultsButton().addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            gui.getButtonSelect().setSelectedIndex(0);
+            gui.getShouldRandomize()[0].setSelected(false);
+            gui.getShouldRandomize()[1].setSelected(false);
+            gui.getAutoclickOnMouseHold().setSelected(false);
+
+            gui.getClickAmount().setText("0");
+
+            gui.getRandomizeRange()[0].setText("20");
+            gui.getRandomizeRange()[1].setText("20");
+
+            for (int i = 0; i < gui.getClickDelay().length; i++) {
+               gui.getClickDelay()[i].setText("0");
+               gui.getHoldDelay()[i].setText("0");
+            }
+            gui.getClickDelay()[0].setText("100");
+            gui.getHoldDelay()[0].setText("10");
+         }
+      });
+
       // help gui button
       gui.getHelpButton().addActionListener(new ActionListener() {
          @Override
@@ -83,13 +107,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
             toggleClicker(false);
             newHotkey = true;
             gui.getNewHotkeyButton().setText("Press new hotkey");
-         }
-      });
-
-      gui.getClickDelay()[0].addActionListener(new ActionListener() {
-         @Override
-         public void actionPerformed(ActionEvent e) {
-            System.out.println("(InputListener) Pressed enter on textField");
          }
       });
 

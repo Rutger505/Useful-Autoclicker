@@ -89,6 +89,10 @@ public class Settings {
       holdDelay += holdDelayRaw[2] * 60_000L;
       holdDelay += holdDelayRaw[1] * 1_000L;
       holdDelay += holdDelayRaw[0];
+      // prevent not registering clicks
+      if (holdDelay < 1) {
+         holdDelay = 1;
+      }
       holdDelayOriginal = holdDelay;
       holdDelayArray = holdDelayRaw;
       ClickerData.writeFile();
