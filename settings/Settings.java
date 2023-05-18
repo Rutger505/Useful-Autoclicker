@@ -196,4 +196,8 @@ public class Settings {
       Settings.autoclickOnMouseHold = autoclickOnMouseHold;
       ClickerData.writeFile();
    }
+
+   private Settings(){
+      throw new IllegalStateException("Utility class");
+   }
 }

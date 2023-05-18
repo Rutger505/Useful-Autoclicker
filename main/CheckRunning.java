@@ -6,14 +6,14 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public class CheckRunning {
-   private static final int port = 1324;
+   private final int port = 1324;
 
    /**
     * Checks if the program is already running. Exits if it is.
     */
    public CheckRunning() {
       if (isRunning()){
-         Error.showError("Aleady running", "Program is already running. Exiting...", "Program is already running. Exiting...");
+         Error.showError("Already running", "Program is already running. Exiting...", "Program is already running. Exiting...");
          System.exit(1);
       }
    }

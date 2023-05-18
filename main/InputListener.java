@@ -62,7 +62,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
          @Override
          public void actionPerformed(ActionEvent e) {
             Settings.setShouldRandomizeClick(gui.getShouldRandomize()[0].isSelected());
-            System.out.println("(InputListener) Should randomize click: " + Settings.shouldRandomizeClick());
+            System.out.println("(InputListener) Should randomize the click: " + Settings.shouldRandomizeClick());
          }
       });
 
@@ -204,7 +204,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       try {
          GlobalScreen.registerNativeHook();
       } catch (NativeHookException e) {
-         Error.showError("HotkeyListener", "The hotkeyListener could not be started try restarting the program.", "(InputListener) JNativeHook could not be started");
+         Error.showError("HotkeyListener", "The hotkeyListener was unable to start. Try restarting the program.", "(InputListener) JNativeHook could not be started");
          e.printStackTrace();
       }
       GlobalScreen.addNativeKeyListener(this);
@@ -215,7 +215,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
    }
 
    /**
-    * Tries to parse it to an int, if it fails it returns 0
+    * Tries to parse it to an int, if it fails it returns 0/
     * @param text String to parse
     * @return String parsed or 0
     */
