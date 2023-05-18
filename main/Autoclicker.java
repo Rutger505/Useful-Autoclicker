@@ -119,20 +119,6 @@ public class Autoclicker extends Thread {
    }
 
    /**
-    * Parses string to int returns 0 if not possible
-    *
-    * @param input String to parse
-    * @return a parsed int or 0 depending on if input is parsable.
-    */
-   private int advancedParseInt(String input) {
-      try {
-         return Integer.parseInt(input);
-      } catch (NumberFormatException e) {
-         return 0;
-      }
-   }
-
-   /**
     * Sleep
     *
     * @param ms how many ms to sleep if less than 0 set to 0.

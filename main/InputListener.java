@@ -134,29 +134,29 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
          clickDelayDocument[i].setDocumentFilter(new DocumentFilter() {
             @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-               if (onTextAdd(fb, offset, length, text, attrs, limitDefault)) {
-                  Settings.setClickDelay(Integer.parseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
-               }
+               onTextAdd(fb, offset, length, text, attrs, limitDefault);
+                  Settings.setClickDelay(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
+
             }
             @Override
             public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-               if (onTextRemove(fb, offset, length)) {
-                  Settings.setClickDelay(Integer.parseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
-               }
+               onTextRemove(fb, offset, length);
+                  Settings.setClickDelay(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
+
             }
          });
          holdDelayDocument[i].setDocumentFilter(new DocumentFilter() {
             @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-               if (onTextAdd(fb, offset, length, text, attrs, limitDefault)) {
-                  Settings.setHoldDelay(Integer.parseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
-               }
+               onTextAdd(fb, offset, length, text, attrs, limitDefault);
+                  Settings.setHoldDelay(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
+
             }
             @Override
             public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-               if(onTextRemove(fb, offset, length)) {
-                  Settings.setHoldDelay(Integer.parseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
-               }
+               onTextRemove(fb, offset, length);
+                  Settings.setHoldDelay(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
+
             }
          });
       }
@@ -169,15 +169,15 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
          clickRandomizeRangeDocument[i].setDocumentFilter(new DocumentFilter() {
             @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-               if(onTextAdd(fb, offset, length, text, attrs, limitDefault)) {
-                  Settings.setRandomizeRange(Integer.parseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
-               }
+               onTextAdd(fb, offset, length, text, attrs, limitDefault);
+                  Settings.setRandomizeRange(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
+
             }
             @Override
             public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-               if(onTextRemove(fb, offset, length)) {
-                  Settings.setRandomizeRange(Integer.parseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
-               }
+               onTextRemove(fb, offset, length);
+                  Settings.setRandomizeRange(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
+
             }
          });
       }
@@ -187,15 +187,15 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       clicksDocument.setDocumentFilter(new DocumentFilter() {
          @Override
          public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-            if (onTextAdd(fb, offset, length, text, attrs, limitClicks)) {
-               Settings.setClicks(Integer.parseInt(fb.getDocument().getText(0, fb.getDocument().getLength())));
-            }
+            onTextAdd(fb, offset, length, text, attrs, limitClicks);
+               Settings.setClicks(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())));
+
          }
          @Override
          public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-            if (onTextRemove(fb, offset, length)) {
-               Settings.setClicks(Integer.parseInt(fb.getDocument().getText(0, fb.getDocument().getLength())));
-            }
+            onTextRemove(fb, offset, length);
+               Settings.setClicks(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())));
+
          }
       });
 
@@ -211,6 +211,19 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
 
       // hide JNativeHook file
       new FileHider("JNativeHook.x86_64.dll");
+   }
+
+   /**
+    * Tries to parse it to an int, if it fails it returns 0
+    * @param text String to parse
+    * @return String parsed or 0
+    */
+   private int advancedParseInt(String text) {
+      try {
+         return Integer.parseInt(text);
+      } catch (NumberFormatException e) {
+         return 0;
+      }
    }
 
    @Override
@@ -267,7 +280,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
     * @return true if string was added, false if not
     * @throws BadLocationException idk
     */
-   private boolean onTextAdd(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs, int maxSize) throws BadLocationException {
+   private void onTextAdd(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs, int maxSize) throws BadLocationException {
       Document doc = fb.getDocument();
       StringBuilder sb = new StringBuilder();
       sb.append(doc.getText(0, doc.getLength()));
@@ -275,9 +288,9 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
 
       if (isInt(sb.toString()) && sb.length() <= maxSize) {
          fb.replace(offset, length, text, attrs);
-         return true;
+         return;
       }
-      return false;
+      return;
    }
 
    /**
@@ -288,7 +301,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
     * @return true if string was removed, false if not
     * @throws BadLocationException idk
     */
-   private boolean onTextRemove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
+   private void onTextRemove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
       Document doc = fb.getDocument();
       StringBuilder sb = new StringBuilder();
       sb.append(doc.getText(0, doc.getLength()));
@@ -298,9 +311,9 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
          fb.replace(offset, length, "", null);
       } else if (isInt(sb.toString())) {
          fb.remove(offset, length);
-         return true;
+         return;
       }
-      return false;
+      return;
    }
 
    /**
