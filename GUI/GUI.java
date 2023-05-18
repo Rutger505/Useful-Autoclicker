@@ -1,20 +1,16 @@
 package GUI;
 
-import fileUtilities.ClickerData;
 import resources.Constants;
+import settings.Settings;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * GUI where settings can be changed
  */
-public class GUI extends JFrame implements ActionListener {
-   private final HelpGUI helpGUI;
-
+public class GUI extends JFrame {
    // title/version
    private static final double AUTOCLICKER_VERSION = 2.1;
    public static final String MAIN_FRAME_TITLE = "Useful Autoclicker " + AUTOCLICKER_VERSION;
@@ -34,7 +30,9 @@ public class GUI extends JFrame implements ActionListener {
    private final JTextField[] randomizeRangeTF;
    private final JTextField clickAmountTF;
    private final JComboBox<String> buttonSelectCB;
+
    private final JButton helpButton;
+   private final JButton newHotkeyButton;
    private final JButton defaultsButton;
    private final JCheckBox autoclickOnMouseHoldCheckBox;
 
@@ -43,8 +41,6 @@ public class GUI extends JFrame implements ActionListener {
     */
    public GUI() {
       JComponentFactory components = new JComponentFactory();
-      helpGUI = new HelpGUI();
-      ClickerData clickerData = new ClickerData();
 
       // label sizes
       int labelHeight = 20;
@@ -57,6 +53,11 @@ public class GUI extends JFrame implements ActionListener {
       int randomizeItemsY = 145;
       int clicksItemsY = 215;
       int clicksItems2Y = 255;
+
+
+      newHotkeyButton = components.buttonFactory("Select Hotkey(" + Settings.getHotkeyText() + ")", null, new int[]{20, 210, 165, 30});
+      add(newHotkeyButton);
+
 
       // used throughout the GUI ########################################################
       // backgrounds
@@ -76,15 +77,14 @@ public class GUI extends JFrame implements ActionListener {
 
       Color topButtonBorderColor = new Color(200, 200, 200);
       Border topButtonBorder = BorderFactory.createLineBorder(topButtonBorderColor, 1);
-      defaultsButton = components.buttonFactory("Defaults", topButtonBorder, this, new int[]{10, 4, 60, 17});
-      add(defaultsButton);
-      helpButton = components.buttonFactory("?", topButtonBorder, this, new int[]{360, 4, 17, 17});
+      defaultsButton = components.buttonFactory("Defaults", topButtonBorder, new int[]{10, 4, 60, 17});
+      helpButton = components.buttonFactory("?", topButtonBorder, new int[]{360, 4, 17, 17});
 
       JLabel clickDelayL = components.labelFactory("Click interval:", false, false, new int[]{30, clickDelayItemsY, 80, labelHeight});
-      clickDelayTF = components.textFieldFactory(4, clickerData.getClickDelay(), new int[][]{{290, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {230, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {170, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {110, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
+      clickDelayTF = components.textFieldFactory(Settings.getClickDelayArray(), new int[][]{{290, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {230, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {170, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {110, clickDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
 
       JLabel holdDelayL = components.labelFactory("Hold time:", false, false, new int[]{30, holdDelayItemsY, 80, labelHeight});
-      holdDelayTF = components.textFieldFactory(4, clickerData.getHoldDelay(), new int[][]{{290, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {230, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {170, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {110, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
+      holdDelayTF = components.textFieldFactory(Settings.getHoldDelayArray(), new int[][]{{290, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {230, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {170, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {110, holdDelayItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
 
       // second section ########################################################
       JLabel randomizeLabel = components.labelFactory("Randomize click interval", true, true, new int[]{0, 110, MAIN_FRAME_ACTUAL_WIDTH, labelHeight});
@@ -92,23 +92,23 @@ public class GUI extends JFrame implements ActionListener {
       JLabel clickRandomizeL = components.labelFactory("Click inter:", false, false, new int[]{30, randomizeItemsY, 80, labelHeight});
       JLabel holdRandomizeL = components.labelFactory("Hold time:", false, false, new int[]{200, randomizeItemsY, 80, labelHeight});
 
-      shouldRandomizeCB = components.checkBoxFactory(clickerData.getRandomizeDelay(), new int[][]{{95, randomizeItemsY, 15, 20}, {270, randomizeItemsY, 15, 20}});
+      shouldRandomizeCB = components.checkBoxFactory(new boolean[]{Settings.shouldRandomizeClick(), Settings.shouldRandomizeHold()}, new int[][]{{95, randomizeItemsY, 15, 20}, {270, randomizeItemsY, 15, 20}});
 
-      randomizeRangeTF = components.textFieldFactory(4, clickerData.getRandomizeRange(), new int[][]{{115, randomizeItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {290, randomizeItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
+      randomizeRangeTF = components.textFieldFactory(new int[]{Settings.getClickRandomizeRange(), Settings.getHoldRandomizeRange()}, new int[][]{{115, randomizeItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}, {290, randomizeItemsY, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT}});
 
       // third section ########################################################
       JLabel miscellaneousLabel = components.labelFactory("Clicks/Button/Hotkey", true, true, new int[]{0, 180, MAIN_FRAME_ACTUAL_WIDTH, labelHeight});
 
       JLabel clickAmountL = components.labelFactory("Clicks:", false, false, new int[]{30, clicksItems2Y, 80, labelHeight});
-      clickAmountTF = components.textFieldFactory(5, clickerData.getClicks(), new int[]{70, clicksItems2Y, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT});
+      clickAmountTF = components.textFieldFactory(Settings.getClicks(), new int[]{70, clicksItems2Y, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT});
 
       JLabel buttonSelectL = components.labelFactory("Button:", false, false, new int[]{205, clicksItemsY, 80, labelHeight});
       String[] buttonSelectOptions = {"left", "right", "middle", "side front", "side back"};
-      buttonSelectCB = components.comboBoxFactory(buttonSelectOptions, clickerData.getButton(), new int[]{250, clicksItemsY, 90, 20});
+      buttonSelectCB = components.comboBoxFactory(buttonSelectOptions, Settings.getButtonNumber(), new int[]{250, clicksItemsY, 90, 20});
 
       // autoclick on hold
       JLabel autoclickOnMouseHoldLabel = components.labelFactory("Autoclick on button hold:", false, false, new int[]{135, 255, 190, 20});
-      autoclickOnMouseHoldCheckBox = components.checkBoxFactory(this, clickerData.shouldAutoclickOnMouseHold(), new int[]{275, 255, 15, 20});
+      autoclickOnMouseHoldCheckBox = components.checkBoxFactory(Settings.shouldAutoclickOnMouseHold(), new int[]{275, 255, 15, 20});
       JPanel autoclickOnMouseHoldPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 9));
       autoclickOnMouseHoldPanel.setBounds(125, 250, 175, 30);
       autoclickOnMouseHoldPanel.add(autoclickOnMouseHoldLabel);
@@ -116,6 +116,7 @@ public class GUI extends JFrame implements ActionListener {
 
 
       add(autoclickOnMouseHoldPanel);
+      add(defaultsButton);
 
       // adding components ########################################################
       // adding text fields
@@ -168,6 +169,20 @@ public class GUI extends JFrame implements ActionListener {
    }
 
    /**
+    * adds component array to frame
+    *
+    * @param componentArray component array to add
+    */
+   private void add(JComponent[] componentArray) {
+      for (Component component : componentArray) {
+         this.add(component);
+      }
+      if (this.isVisible()) {
+         this.repaint();
+      }
+   }
+
+   /**
     * @return click delay text fields
     */
    public JTextField[] getClickDelay() {
@@ -216,41 +231,24 @@ public class GUI extends JFrame implements ActionListener {
       return autoclickOnMouseHoldCheckBox;
    }
 
-   @Override
-   public void actionPerformed(ActionEvent e) {
-      System.out.println("(GUI) Action performed");
-      if (e.getSource() == helpButton) {
-         helpGUI.setLocationRelativeTo(this);
-         helpGUI.setVisible(true);
-      }
+   /**
+    * @return new hotkey button
+    */
+   public JButton getNewHotkeyButton() {
+      return newHotkeyButton;
    }
 
    /**
-    * adds component to frame
-    *
-    * @param component component to add
+    * @return help button
     */
-   public void addComp(JComponent component) {
-      this.add(component);
-      if (this.isVisible()) {
-         this.repaint();
-         this.setVisible(true);
-      }
+   public JButton getHelpButton() {
+      return helpButton;
    }
 
    /**
-    * adds component array to frame
-    *
-    * @param componentArray component array to add
+    * @return defaults button
     */
-   private void add(JComponent[] componentArray) {
-      for (Component component : componentArray) {
-         this.add(component);
-      }
-      if (this.isVisible()) {
-         this.repaint();
-      }
+   public JButton getDefaultsButton() {
+      return defaultsButton;
    }
-
-
 }

@@ -1,6 +1,7 @@
 package main;
 
 import GUI.GUI;
+import fileUtilities.ClickerData;
 
 public class Main {
    /**
@@ -9,6 +10,7 @@ public class Main {
     */
    public static void main(String[] args) {
       new CheckRunning();
+      new ClickerData();
 
       GUI gui = new GUI();
       new InputListener(gui);
