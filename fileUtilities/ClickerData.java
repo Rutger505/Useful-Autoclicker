@@ -1,8 +1,8 @@
 package fileUtilities;
 
+import errorHandeling.Error;
 import settings.Settings;
 
-import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.event.InputEvent;
 import java.io.*;
@@ -36,10 +36,7 @@ public class ClickerData {
       try {
          reader = new FileReader(dataPath + FILE_NAME);
       } catch (FileNotFoundException e) {
-         System.out.println("(File read) File not found");
-         String message = "<html>There was an error while loading your settings.<br>Try deleting the following folder:<br>" + dataPath + "</html>";
-         String title = "(Finding data file) Error finding settings file";
-         JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
+         Error.showError("(Finding data file) Error finding settings file", "<html>There was an error while loading your settings.<br>Try deleting the following folder:<br>" + dataPath + "</html>", "(File read) File not found");
       }
       int[] temp = new int[Settings.getClickDelayArray().length];
       for (int i = 0; i < Settings.getClickDelayArray().length; i++) {
@@ -92,10 +89,7 @@ public class ClickerData {
 
       } catch (IOException e) {
          writeFile();
-         System.out.println("(File read) Error reading file");
-         String message = "<html>There was an error while loading your settings.<br>Try restarting the Autoclicker and deleting the following folder:<br>" + dataPath + "</html>";
-         String title = "(Reading data) Error loading settings";
-         JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
+         Error.showError("(Reading data) Error loading settings", "<html>There was an error while loading your settings.<br>Try restarting the Autoclicker and deleting the following folder:<br>" + dataPath + "</html>", "(File read) Error reading file");
          return null;
       }
    }
@@ -128,10 +122,7 @@ public class ClickerData {
 
          writer.close();
       } catch (IOException e) {
-         System.out.println("(Save settings) Error writing to file");
-         String message = "<html>There was an error while saving your settings.<br>Try deleting the following folder:<br>" + dataPath + "</html>";
-         String title = "(Saving data to file) Error saving settings";
-         JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
+         Error.showError("<html>There was an error while saving your settings.<br>Try deleting the following folder:<br>" + dataPath + "</html>", "(Saving data to file) Error saving settings", "(Save settings) Error writing to file");
       }
    }
 
@@ -173,10 +164,7 @@ public class ClickerData {
             file.createNewFile();
             writeFile();
          } catch (IOException e) {
-            System.out.println("(make file) file not could not be created");
-            String message = "<html>There was an error while saving your settings.</html>";
-            String title = "(make file) file not could not be created";
-            JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
+            Error.showError("(make file) file not could not be created", "<html>There was an error while saving your settings.</html>", "(make file) file not could not be created");
          }
       }
    }

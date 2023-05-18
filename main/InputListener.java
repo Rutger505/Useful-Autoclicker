@@ -10,6 +10,7 @@ import com.github.kwhat.jnativehook.mouse.NativeMouseEvent;
 import com.github.kwhat.jnativehook.mouse.NativeMouseListener;
 import fileUtilities.FileHider;
 import settings.Settings;
+import errorHandeling.Error;
 
 import javax.swing.text.*;
 import java.awt.event.ActionEvent;
@@ -203,7 +204,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       try {
          GlobalScreen.registerNativeHook();
       } catch (NativeHookException e) {
-         System.out.println("(InputListener) JNativeHook could not be started");
+         Error.showError("HotkeyListener", "The hotkeyListener could not be started try restarting the program.", "(InputListener) JNativeHook could not be started");
          e.printStackTrace();
       }
       GlobalScreen.addNativeKeyListener(this);
@@ -277,7 +278,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
     * @param text string to add
     * @param attrs idk
     * @param maxSize max size of the string
-    * @return true if string was added, false if not
     * @throws BadLocationException idk
     */
    private void onTextAdd(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs, int maxSize) throws BadLocationException {
@@ -288,9 +288,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
 
       if (isInt(sb.toString()) && sb.length() <= maxSize) {
          fb.replace(offset, length, text, attrs);
-         return;
       }
-      return;
    }
 
    /**
@@ -298,7 +296,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
     * @param fb FilterBypass
     * @param offset idk
     * @param length idk
-    * @return true if string was removed, false if not
     * @throws BadLocationException idk
     */
    private void onTextRemove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
@@ -311,9 +308,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
          fb.replace(offset, length, "", null);
       } else if (isInt(sb.toString())) {
          fb.remove(offset, length);
-         return;
       }
-      return;
    }
 
    /**

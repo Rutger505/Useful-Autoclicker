@@ -169,19 +169,6 @@ public class GUI extends JFrame {
    }
 
    /**
-    * adds component to frame
-    *
-    * @param component component to add
-    */
-   public void addComp(JComponent component) {
-      this.add(component);
-      if (this.isVisible()) {
-         this.repaint();
-         this.setVisible(true);
-      }
-   }
-
-   /**
     * adds component array to frame
     *
     * @param componentArray component array to add
