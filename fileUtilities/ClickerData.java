@@ -4,7 +4,6 @@ import errorHandeling.Error;
 import settings.Settings;
 
 import javax.swing.filechooser.FileSystemView;
-import java.awt.event.InputEvent;
 import java.io.*;
 
 public class ClickerData {
@@ -59,7 +58,6 @@ public class ClickerData {
       Settings.setHotkey(Integer.parseInt(readValue(reader)));
 
       Settings.setButtonNumber(Integer.parseInt(readValue(reader)));
-      Settings.setButton(InputEvent.getMaskForButton(Settings.getButtonNumber() + 1));
 
       Settings.setClicks(Integer.parseInt(readValue(reader)));
 

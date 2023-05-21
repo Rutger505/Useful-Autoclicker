@@ -89,6 +89,10 @@ public class Settings {
       holdDelay += holdDelayRaw[2] * 60_000L;
       holdDelay += holdDelayRaw[1] * 1_000L;
       holdDelay += holdDelayRaw[0];
+      // prevent not registering clicks
+      if (holdDelay < 1) {
+         holdDelay = 1;
+      }
       holdDelayOriginal = holdDelay;
       holdDelayArray = holdDelayRaw;
       ClickerData.writeFile();
@@ -152,16 +156,18 @@ public class Settings {
 
    public static void setButtonNumber(int buttonNumber) {
       Settings.buttonNumber = buttonNumber;
+      int number = buttonNumber;
+      if (number == 2) {
+         number = 3;
+      } else if (number == 3) {
+         number = 2;
+      }
+      Settings.button = InputEvent.getMaskForButton(number + 1);
       ClickerData.writeFile();
    }
 
    public static int getButton() {
       return button;
-   }
-
-   public static void setButton(int button) {
-      Settings.button = button;
-      ClickerData.writeFile();
    }
 
    public static int getHotkey() {
