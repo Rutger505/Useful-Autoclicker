@@ -23,7 +23,7 @@ public class HelpGUI extends JFrame {
 
       // part 1
       JLabel delayLabel = components.labelFactory("Click interval/Hold time", true, true, new int[]{0, 0, actualFrameWidth, titleHeight});
-      JLabel delayTextLabel = components.labelFactory("<html><b>Click interval</b> means the time between clicks. <br>  <b>Hold time</b> means the time between a mouse press and release.</html>", false, false, new int[]{10, 24, textWidth, 40});
+      JLabel delayTextLabel = components.labelFactory("<html><b>Click interval</b> means the time between clicks. <br>  <b>Hold time</b> means the time between a mouse press and release.</html>", false, false, new int[]{10, 20, textWidth, 40});
 
       // part 2
       JLabel randomizeLabel = components.labelFactory("Randomize click interval", true, true, new int[]{0, 60, actualFrameWidth, titleHeight});
@@ -32,7 +32,7 @@ public class HelpGUI extends JFrame {
 
       // part 3
       JLabel miscellaneousLabel = components.labelFactory("Clicks/Button/Hotkey", true, true, new int[]{0, 160, actualFrameWidth, titleHeight});
-      JLabel miscellaneousTextLabel = components.labelFactory("<html><b>Clicks</b> means how many times the Autoclicker will click. 0 means infinite<br> <b>Button</b> means the button that the Autoclicker will press.<br> <b>Hotkey</b> means the button to activate the Autoclicker.<br><b>Autoclick on hold</b> means that if you hold down the button that is selected the autoclicker will start, when you release the mouse button the autoclicker will stop.<br></html>", false, false, new int[]{10, 185, textWidth, 184});
+      JLabel miscellaneousTextLabel = components.labelFactory("<html><b>Clicks</b> means how many times the Autoclicker will click. 0 means infinite<br> <b>Button</b> means the button that the Autoclicker will press.<br> <b>Hotkey</b> means the button to activate the Autoclicker.<br><b>Autoclick on hold</b> means that if you hold down the button that is selected the autoclicker will start, when you release the mouse button the autoclicker will stop.<br></html>", false, false, new int[]{10, 185, textWidth, 100});
 
 
       // adding components

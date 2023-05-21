@@ -74,9 +74,6 @@ public class JComponentFactory {
       if (center) {
          label.setHorizontalAlignment(SwingConstants.CENTER);
          label.setVerticalAlignment(SwingConstants.CENTER);
-      } else {
-         label.setHorizontalAlignment(SwingConstants.LEFT);
-         label.setVerticalAlignment(SwingConstants.TOP);
       }
       label.setOpaque(background);
       label.setBounds(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
