@@ -77,7 +77,7 @@ public class GUI extends JFrame {
 
       Color topButtonBorderColor = new Color(200, 200, 200);
       Border topButtonBorder = BorderFactory.createLineBorder(topButtonBorderColor, 1);
-      defaultsButton = components.buttonFactory("Defaults", topButtonBorder, new int[]{10, 4, 60, 17});
+      defaultsButton = components.buttonFactory("Default", topButtonBorder, new int[]{10, 4, 45, 17});
       helpButton = components.buttonFactory("?", topButtonBorder, new int[]{360, 4, 17, 17});
 
       JLabel clickDelayL = components.labelFactory("Click interval:", false, false, new int[]{30, clickDelayItemsY, 80, labelHeight});

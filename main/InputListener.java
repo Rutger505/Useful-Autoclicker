@@ -8,14 +8,13 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 import com.github.kwhat.jnativehook.mouse.NativeMouseEvent;
 import com.github.kwhat.jnativehook.mouse.NativeMouseListener;
+import errorHandeling.Error;
 import fileUtilities.FileHider;
 import settings.Settings;
-import errorHandeling.Error;
 
 import javax.swing.text.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
 
 public class InputListener implements NativeKeyListener, NativeMouseListener {
    private final HelpGUI helpGUI = new HelpGUI();
@@ -40,22 +39,36 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       gui.getDefaultsButton().addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            gui.getButtonSelect().setSelectedIndex(0);
-            gui.getShouldRandomize()[0].setSelected(false);
-            gui.getShouldRandomize()[1].setSelected(false);
-            gui.getAutoclickOnMouseHold().setSelected(false);
-
-            gui.getClickAmount().setText("0");
-
-            gui.getRandomizeRange()[0].setText("20");
-            gui.getRandomizeRange()[1].setText("20");
-
+            // click and hold delay
             for (int i = 0; i < gui.getClickDelay().length; i++) {
                gui.getClickDelay()[i].setText("0");
                gui.getHoldDelay()[i].setText("0");
             }
             gui.getClickDelay()[0].setText("100");
             gui.getHoldDelay()[0].setText("10");
+
+            Settings.setClickDelay(new int[]{100, 0, 0, 0});
+            Settings.setHoldDelay(new int[]{10, 0, 0, 0});
+
+            // randomize click and hold
+            for (int i = 0; i < gui.getRandomizeRange().length; i++) {
+               gui.getRandomizeRange()[i].setText("20");
+               gui.getShouldRandomize()[i].setSelected(false);
+            }
+            Settings.setClickRandomizeRange(20);
+            Settings.setHoldRandomizeRange(20);
+            Settings.setShouldRandomizeClick(false);
+            Settings.setShouldRandomizeHold(false);
+
+            // misc
+            gui.getClickAmount().setText("0");
+            Settings.setClicks(0);
+
+            gui.getButtonSelect().setSelectedIndex(0);
+            Settings.setButtonNumber(0);
+
+            gui.getAutoclickOnMouseHold().setSelected(false);
+            Settings.setAutoclickOnMouseHold(false);
          }
       });
 
@@ -114,13 +127,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       gui.getButtonSelect().addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            int buttonNumber = gui.getButtonSelect().getSelectedIndex() + 1;
-            if (buttonNumber == 2) {
-               buttonNumber = 3;
-            } else if (buttonNumber == 3) {
-               buttonNumber = 2;
-            }
-            Settings.setButton(InputEvent.getMaskForButton(buttonNumber));
             Settings.setButtonNumber(gui.getButtonSelect().getSelectedIndex());
          }
       });

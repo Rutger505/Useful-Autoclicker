@@ -156,16 +156,18 @@ public class Settings {
 
    public static void setButtonNumber(int buttonNumber) {
       Settings.buttonNumber = buttonNumber;
+      int number = buttonNumber;
+      if (number == 2) {
+         number = 3;
+      } else if (number == 3) {
+         number = 2;
+      }
+      Settings.button = InputEvent.getMaskForButton(number + 1);
       ClickerData.writeFile();
    }
 
    public static int getButton() {
       return button;
-   }
-
-   public static void setButton(int button) {
-      Settings.button = button;
-      ClickerData.writeFile();
    }
 
    public static int getHotkey() {
