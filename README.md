@@ -5,7 +5,6 @@
 ![image](https://user-images.githubusercontent.com/119070855/232733386-f12beb46-be38-4c62-9a4d-d5b51dbf9995.png)
 
 ## Features
-
 * Up to 400 clicks per second
 * Autoclick when holding down mouse button
 * Able to hold down mouse button
@@ -18,7 +17,7 @@
 ## How to download
 
 ### Downloading <ins>without</ins> JDK(Java) installed
-* Install Java JDK from here: https://www.oracle.com/java/technologies/downloads/
+* Install Java SE from here: https://www.java.com/en/download/
 * Choose your correct operating system and download the installer
 * Click on the latest release on the right side
 * Click on the file "Useful Autoclicker.jar"
