@@ -65,12 +65,22 @@ public class Autoclicker extends Thread {
     * Randomizes delay of click and hold delay.
     */
    private void randomizeDelay() {
-      if (Settings.shouldRandomizeClick()) {
-         Settings.setClickDelay(abs(Settings.getClickDelayOriginal() + random.nextInt(Settings.getClickRandomizeRange() * 2) - Settings.getClickRandomizeRange()));
+      try {
+         if (Settings.shouldRandomizeClick()) {
+            Settings.setClickDelay(abs(Settings.getClickDelayOriginal() + random.nextInt(Settings.getClickRandomizeRange() * 2) - Settings.getClickRandomizeRange()));
+         }
+      } catch (IllegalArgumentException e) {
+         Settings.setShouldRandomizeClick(false);
       }
-      if (Settings.shouldRandomizeHold()) {
-         Settings.setHoldDelay(abs(Settings.getHoldDelayOriginal() + random.nextInt(Settings.getHoldRandomizeRange() * 2) - Settings.getHoldRandomizeRange()));
+
+      try {
+         if (Settings.shouldRandomizeHold()) {
+            Settings.setHoldDelay(abs(Settings.getHoldDelayOriginal() + random.nextInt(Settings.getHoldRandomizeRange() * 2) - Settings.getHoldRandomizeRange()));
+         }
+      } catch (IllegalArgumentException e) {
+         Settings.setShouldRandomizeHold(false);
       }
+
    }
 
    /**
