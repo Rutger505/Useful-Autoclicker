@@ -15,25 +15,20 @@ import java.awt.event.ActionListener;
  * GUI where settings can be changed
  */
 public class GUI extends JFrame implements ActionListener {
-   private final HelpGUI helpGUI;
-
    // title/version
    private static final double AUTOCLICKER_VERSION = 2.1;
    static final String MAIN_FRAME_TITLE = "Useful Autoclicker " + AUTOCLICKER_VERSION;
-
    // sizes
    private static final int MAIN_FRAME_WIDTH = 400;
    private static final int MAIN_FRAME_HEIGHT = 330;
    private static final int MAIN_FRAME_ACTUAL_WIDTH = 384;
-
    private static final int TEXT_FIELD_WIDTH = 35;
    private static final int TEXT_FIELD_HEIGHT = 20;
-
    // colors
    private static final Color TEXT_FIELD_COLOR = new Color(255, 255, 255);
    private static final Border TEXT_FIELD_BORDER = BorderFactory.createLineBorder(TEXT_FIELD_COLOR, 2);
-
-
+   public final JButton defaultsButton;
+   private final HelpGUI helpGUI;
    // components
    private final JTextField[] clickDelayTF;
    private final JTextField[] holdDelayTF;
@@ -42,7 +37,6 @@ public class GUI extends JFrame implements ActionListener {
    private final JTextField clickAmountTF;
    private final JComboBox<String> buttonSelectCB;
    private final JButton helpButton;
-   public final JButton defaultsButton;
 
    /**
     * Makes GUI
@@ -126,12 +120,12 @@ public class GUI extends JFrame implements ActionListener {
       add(shouldRandomizeCB);
 
       // adding dropdown
-      add(buttonSelectCB, this);
+      add(buttonSelectCB);
 
       // adding section labels
-      add(delayLabel, this);
-      add(randomizeLabel, this);
-      add(miscellaneousLabel, this);
+      add(delayLabel);
+      add(randomizeLabel);
+      add(miscellaneousLabel);
 
       // adding text labels
       add(clickDelayL);
@@ -209,19 +203,6 @@ public class GUI extends JFrame implements ActionListener {
       if (e.getSource() == helpButton) {
          helpGUI.setLocationRelativeTo(this);
          helpGUI.setVisible(true);
-      }
-   }
-
-   /**
-    * adds component to frame
-    *
-    * @param component component to add
-    */
-   public void add(JComponent component) {
-      this.add(component);
-      if (this.isVisible()) {
-         this.repaint();
-         this.setVisible(true);
       }
    }
 
@@ -347,7 +328,7 @@ public class GUI extends JFrame implements ActionListener {
    /**
     * Makes checkbox array
     *
-    * @param value      what is the value of the checkboxes
+    * @param value       what is the value of the checkboxes
     * @param coordinates coordinates and size of the checkboxes
     * @return the checkbox array
     */
@@ -367,8 +348,8 @@ public class GUI extends JFrame implements ActionListener {
     * Makes checkbox
     *
     * @param actionListener action listener for the checkbox
-    * @param value         what is the value of the checkboxes
-    * @param coordinates coordinates and size of the checkboxes
+    * @param value          what is the value of the checkboxes
+    * @param coordinates    coordinates and size of the checkboxes
     * @return the checkbox
     */
    public JCheckBox checkBoxFactory(ActionListener actionListener, boolean value, int[] coordinates) {
@@ -384,10 +365,10 @@ public class GUI extends JFrame implements ActionListener {
    /**
     * Makes a Button
     *
-    * @param internalText what to put in button
-    * @param border       what border add
+    * @param internalText   what to put in button
+    * @param border         what border add
     * @param actionListener action listener for the button
-    * @param coordinates  coordinates and size of the button
+    * @param coordinates    coordinates and size of the button
     * @return the button
     */
    public JButton buttonFactory(String internalText, Border border, ActionListener actionListener, int[] coordinates) {
