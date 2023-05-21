@@ -27,3 +27,10 @@
 * Click on the latest release on the right side
 * Click on the file "Useful Autoclicker.jar"
 * Open your new Autoclicker!
+
+## Not starting?
+* download java again: https://www.java.com/en/download/
+* try making .bat file in the same directory with this code:
+```
+java -jar "Useful Autoclicker.jar"
+```
