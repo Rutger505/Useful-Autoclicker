@@ -5,8 +5,6 @@ import settings.Settings;
 import java.awt.*;
 import java.util.Random;
 
-import static java.lang.Math.abs;
-
 public class Autoclicker extends Thread {
    private final Random random = new Random();
    private Robot robot;
@@ -67,7 +65,7 @@ public class Autoclicker extends Thread {
    private void randomizeDelay() {
       try {
          if (Settings.shouldRandomizeClick()) {
-            Settings.setClickDelay(abs(Settings.getClickDelayOriginal() + random.nextInt(Settings.getClickRandomizeRange() * 2) - Settings.getClickRandomizeRange()));
+            Settings.setClickDelay(Math.abs(Settings.getClickDelayOriginal() + random.nextInt(Settings.getClickRandomizeRange() * 2) - Settings.getClickRandomizeRange()));
          }
       } catch (IllegalArgumentException e) {
          Settings.setShouldRandomizeClick(false);
@@ -75,7 +73,7 @@ public class Autoclicker extends Thread {
 
       try {
          if (Settings.shouldRandomizeHold()) {
-            Settings.setHoldDelay(abs(Settings.getHoldDelayOriginal() + random.nextInt(Settings.getHoldRandomizeRange() * 2) - Settings.getHoldRandomizeRange()));
+            Settings.setHoldDelay(Math.abs(Settings.getHoldDelayOriginal() + random.nextInt(Settings.getHoldRandomizeRange() * 2) - Settings.getHoldRandomizeRange()));
          }
       } catch (IllegalArgumentException e) {
          Settings.setShouldRandomizeHold(false);
