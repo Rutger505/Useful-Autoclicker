@@ -1,6 +1,7 @@
 package main;
 
 import settings.Settings;
+import errorHandeling.Error;
 
 import java.awt.*;
 import java.util.Random;
@@ -16,13 +17,12 @@ public class Autoclicker extends Thread {
    public Autoclicker() {
       try {
          robot = new Robot();
-      } catch (AWTException ignored) {
+      } catch (AWTException e) {
+         Error.showError("Error starting Autoclicker", "Error starting Autoclicker try restarting the autoclicker", "(Autoclicker) Error creating robot");
       }
    }
 
    /**
-    * Return if program is running
-    *
     * @return if program is running
     */
    public boolean isRunning() {
@@ -33,7 +33,7 @@ public class Autoclicker extends Thread {
     * Stop Autoclicker
     */
    public void stopClicker() {
-      interrupt();
+      this.interrupt();
    }
 
    /**
