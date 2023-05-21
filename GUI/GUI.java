@@ -44,7 +44,6 @@ public class GUI extends JFrame {
 
       // label sizes
       int labelHeight = 20;
-
       int timeIdentifierLabelWidth = 20;
 
       // y levels of components
@@ -63,13 +62,13 @@ public class GUI extends JFrame {
       // backgrounds
       JPanel[] backgrounds = components.panelFactory(new int[][]{{20, 140, 165, 30}, {195, 140, 165, 30}, {20, 250, 95, 30}, {195, 210, 155, 30}, {20, 30, 340, 30}, {20, 70, 340, 30}});
       // time identifiers
-      JLabel[] millisecondsL = components.labelFactory("ms", true, false, new int[][]{{328, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {328, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {153, randomizeItemsY, timeIdentifierLabelWidth, labelHeight}, {328, randomizeItemsY, timeIdentifierLabelWidth, labelHeight}});
+      JLabel[] millisecondsL = components.labelFactory("ms", false, false, new int[][]{{328, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {328, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {153, randomizeItemsY, timeIdentifierLabelWidth, labelHeight}, {328, randomizeItemsY, timeIdentifierLabelWidth, labelHeight}});
 
-      JLabel[] secondL = components.labelFactory("s", true, false, new int[][]{{268, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {268, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}});
+      JLabel[] secondL = components.labelFactory("s", false, false, new int[][]{{268, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {268, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}});
 
-      JLabel[] minutesL = components.labelFactory("m", true, false, new int[][]{{208, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {208, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}});
+      JLabel[] minutesL = components.labelFactory("m", false, false, new int[][]{{208, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {208, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}});
 
-      JLabel[] hourL = components.labelFactory("h", true, false, new int[][]{{148, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {148, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}});
+      JLabel[] hourL = components.labelFactory("h", false, false, new int[][]{{148, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {148, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}});
 
 
       // first section ########################################################
