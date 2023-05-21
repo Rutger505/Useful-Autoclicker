@@ -1,11 +1,10 @@
 package main;
 
 import settings.Settings;
+import errorHandeling.Error;
 
 import java.awt.*;
 import java.util.Random;
-
-import static java.lang.Math.abs;
 
 public class Autoclicker extends Thread {
    private final Random random = new Random();
@@ -18,13 +17,12 @@ public class Autoclicker extends Thread {
    public Autoclicker() {
       try {
          robot = new Robot();
-      } catch (AWTException ignored) {
+      } catch (AWTException e) {
+         Error.showError("Error starting Autoclicker", "Error starting Autoclicker try restarting the autoclicker", "(Autoclicker) Error creating robot");
       }
    }
 
    /**
-    * Return if program is running
-    *
     * @return if program is running
     */
    public boolean isRunning() {
@@ -35,7 +33,7 @@ public class Autoclicker extends Thread {
     * Stop Autoclicker
     */
    public void stopClicker() {
-      interrupt();
+      this.interrupt();
    }
 
    /**
@@ -65,12 +63,22 @@ public class Autoclicker extends Thread {
     * Randomizes delay of click and hold delay.
     */
    private void randomizeDelay() {
-      if (Settings.shouldRandomizeClick()) {
-         Settings.setClickDelay(abs(Settings.getClickDelayOriginal() + random.nextInt(Settings.getClickRandomizeRange() * 2) - Settings.getClickRandomizeRange()));
+      try {
+         if (Settings.shouldRandomizeClick()) {
+            Settings.setClickDelay(Math.abs(Settings.getClickDelayOriginal() + random.nextInt(Settings.getClickRandomizeRange() * 2) - Settings.getClickRandomizeRange()));
+         }
+      } catch (IllegalArgumentException e) {
+         Settings.setShouldRandomizeClick(false);
       }
-      if (Settings.shouldRandomizeHold()) {
-         Settings.setHoldDelay(abs(Settings.getHoldDelayOriginal() + random.nextInt(Settings.getHoldRandomizeRange() * 2) - Settings.getHoldRandomizeRange()));
+
+      try {
+         if (Settings.shouldRandomizeHold()) {
+            Settings.setHoldDelay(Math.abs(Settings.getHoldDelayOriginal() + random.nextInt(Settings.getHoldRandomizeRange() * 2) - Settings.getHoldRandomizeRange()));
+         }
+      } catch (IllegalArgumentException e) {
+         Settings.setShouldRandomizeHold(false);
       }
+
    }
 
    /**
