@@ -32,7 +32,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
     */
    public InputListener(GUI gui) {
       this.gui = gui;
-      this.clicker = new Autoclicker();
+      this.clicker = new Autoclicker(this);
 
       // default button
 
@@ -277,7 +277,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
          }
          registeredPressing++;
 
-         if (registeredPressing < 2) {
+         if (registeredPressing > 2) {
             registeredPressing = 2;
          }
       }
@@ -291,6 +291,10 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       int buttonPressed = nativeEvent.getButton();
 
       if (buttonPressed == mouseButtonSelected) {
+         if(registeredPressing < 1){
+            registeredPressing = 1;
+         }
+
          registeredPressing--;
 
          if (registeredPressing == 0) {
@@ -370,7 +374,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
     * Starts the clicker and updates the gui title.
     */
    private void startClicker() {
-      clicker = new Autoclicker();
+      clicker = new Autoclicker(this);
       clicker.start();
       gui.setTitle(GUI.MAIN_FRAME_TITLE + "  -  Clicking");
    }
@@ -378,7 +382,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
    /**
     * Stops the clicker, sets registeredPressing to 0 and updates the gui title.
     */
-   private void stopClicker() {
+   public void stopClicker() {
       clicker.stopClicker();
       registeredPressing = 0;
       gui.setTitle(GUI.MAIN_FRAME_TITLE + "  -  Stopped");
