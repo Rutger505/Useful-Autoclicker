@@ -10,8 +10,8 @@ public class ClickerData {
 
    private static final String FILE_NAME = "clickerData.txt";
    private static String dataPath = null;
-   private static int TEST_BOOLEAN = 0;
-   private static int TEST_INT = 1;
+   private static final int TEST_BOOLEAN = 0;
+   private static final int TEST_INT = 1;
    private FileReader reader;
    /**
     * Makes data file if it doesn't exist
@@ -99,17 +99,20 @@ public class ClickerData {
    }
 
    /**
-    * Gets value from file and checks if it is parsable to desired type.
+    * Gets value from the config file and checks if it is parsable to desired type.
     *
     * @return String value of line.
     */
    private String processValue(int type) {
       String value = readValue();
       if (type == TEST_BOOLEAN) {
-         try{
-            Boolean.parseBoolean(value);
+         if(value == null) {
+            Error.unidentifiedChangeError();
+            return "false";
+         }
+         if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
             return value;
-         } catch (Exception e) {
+         } else {
             Error.unidentifiedChangeError();
             return "false";
          }
@@ -119,12 +122,12 @@ public class ClickerData {
          try {
             Integer.parseInt(value);
             return value;
-         } catch (Exception e) {
+         } catch (NumberFormatException e) {
             Error.unidentifiedChangeError();
             return "0";
          }
       }
-      throw new IllegalArgumentException("Type must be either TEST_BOOLEAN or TEST_INT");
+      throw new IllegalArgumentException("Type must be either TEST_BOOLEAN or TEST_INT.");
    }
 
    /**

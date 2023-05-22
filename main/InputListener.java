@@ -50,7 +50,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
             Settings.setClickDelay(new int[]{100, 0, 0, 0});
             Settings.setHoldDelay(new int[]{10, 0, 0, 0});
 
-            // randomize click and hold
+            // randomize the click and hold delay.
             for (int i = 0; i < gui.getRandomizeRange().length; i++) {
                gui.getRandomizeRange()[i].setText("20");
                gui.getShouldRandomize()[i].setSelected(false);
@@ -86,7 +86,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
          @Override
          public void actionPerformed(ActionEvent e) {
             Settings.setAutoclickOnMouseHold(gui.getAutoclickOnMouseHold().isSelected());
-            System.out.println("(InputListener) Autoclick on mouse hold: " + Settings.shouldAutoclickOnMouseHold());
 
             if (!Settings.shouldAutoclickOnMouseHold()) {
                toggleClicker(false);
@@ -99,7 +98,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
          @Override
          public void actionPerformed(ActionEvent e) {
             Settings.setShouldRandomizeClick(gui.getShouldRandomize()[0].isSelected());
-            System.out.println("(InputListener) Should randomize the click: " + Settings.shouldRandomizeClick());
          }
       });
 
@@ -108,7 +106,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
          @Override
          public void actionPerformed(ActionEvent e) {
             Settings.setShouldRandomizeHold(gui.getShouldRandomize()[1].isSelected());
-            System.out.println("(InputListener) Should randomize hold: " + Settings.shouldRandomizeHold());
          }
       });
 
@@ -396,7 +393,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       Settings.setHotkey(e.getKeyCode());
       gui.getNewHotkeyButton().setText("Select Hotkey(" + Settings.getHotkeyText() + ")");
       newHotkey = false;
-      System.out.println("(InputListener) New hotkey: " + Settings.getHotkeyText());
    }
 
    /**
