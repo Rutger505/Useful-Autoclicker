@@ -108,11 +108,9 @@ public class ClickerData {
       if (type == TEST_BOOLEAN) {
          try{
             Boolean.parseBoolean(value);
-            System.out.println(value);
             return value;
          } catch (Exception e) {
             Error.unidentifiedChangeError();
-            System.out.println("false");
             return "false";
          }
       }
@@ -120,11 +118,9 @@ public class ClickerData {
       if (type == TEST_INT) {
          try {
             Integer.parseInt(value);
-            System.out.println(value);
             return value;
          } catch (Exception e) {
             Error.unidentifiedChangeError();
-            System.out.println("0");
             return "0";
          }
       }
