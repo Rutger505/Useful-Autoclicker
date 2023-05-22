@@ -16,14 +16,14 @@
 
 ## How to download
 
-### Downloading <ins>without</ins> JDK(Java) installed
+### Downloading <ins>without</ins> Java installed
 * Install Java SE from here: https://www.java.com/en/download/
 * Choose your correct operating system and download the installer
 * Click on the latest release on the right side
 * Click on the file "Useful Autoclicker.jar"
 * Open your new Autoclicker!
 
-### Downloading <ins>with</ins> JDK(Java) installed
+### Downloading <ins>with</ins> Java installed
 * Click on the latest release on the right side
 * Click on the file "Useful Autoclicker.jar"
 * Open your new Autoclicker!
@@ -32,5 +32,9 @@
 * download java again: https://www.java.com/en/download/
 * try making .bat file in the same directory with this code:
 ```
-java -jar "Useful Autoclicker.jar"
+java -jar "Useful-Autoclicker.jar"
+```
+* Did the autoclicker suddenly stopped working? try deleting the following file:
+```
+C:\Users\%USERNAME%\AppData\Roaming\Useful-Autoclicker\clickerData.txt
 ```

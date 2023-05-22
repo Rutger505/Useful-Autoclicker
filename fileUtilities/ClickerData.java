@@ -13,6 +13,7 @@ public class ClickerData {
    private static final int TEST_BOOLEAN = 0;
    private static final int TEST_INT = 1;
    private FileReader reader;
+
    /**
     * Makes data file if it doesn't exist
     * and gets settings from a file.
@@ -21,7 +22,7 @@ public class ClickerData {
       // get data path
       File windowsDrive = getWindowsDrive();
       String user = System.getProperty("user.name");
-      dataPath = windowsDrive + "Users/" + user + "/AppData/Roaming/Useful Autoclicker/";
+      dataPath = windowsDrive + "Users/" + user + "/AppData/Roaming/Useful-Autoclicker/";
 
 
       makeFolder();
