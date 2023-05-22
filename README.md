@@ -30,7 +30,7 @@
 
 ## Not starting?
 * download java again: https://www.java.com/en/download/
-* try making .bat file in the same directory with this code:
+* Make a txt file and paste the following code. Then save it as a .bat file.
 ```
 java -jar "Useful-Autoclicker.jar"
 ```

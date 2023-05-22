@@ -8,13 +8,15 @@ import java.util.Random;
 
 public class Autoclicker extends Thread {
    private final Random random = new Random();
+   private final InputListener inputListener;
    private Robot robot;
    private boolean running;
 
    /**
     * Sets up robot
     */
-   public Autoclicker() {
+   public Autoclicker(InputListener inputListener) {
+      this.inputListener = inputListener;
       try {
          robot = new Robot();
       } catch (AWTException e) {
@@ -57,6 +59,7 @@ public class Autoclicker extends Thread {
          }
       }
       running = false;
+      inputListener.stopClicker();
    }
 
    /**
