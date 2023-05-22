@@ -11,12 +11,12 @@ public class Settings {
 
    private static long clickDelay = 100;
    private static long clickDelayOriginal = 100;
-   private static int[] clickDelayArray = {0, 0, 0, 100};
+   private static int[] clickDelayArray = {100, 0, 0, 0};
 
 
    private static long holdDelay = 10;
    private static long holdDelayOriginal = 10;
-   private static int[] holdDelayArray = {0, 0, 0, 10};
+   private static int[] holdDelayArray = {10, 0, 0, 0};
 
    private static boolean shouldRandomizeClick = false;
    private static boolean shouldRandomizeHold = false;
