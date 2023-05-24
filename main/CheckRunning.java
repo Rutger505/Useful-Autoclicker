@@ -7,6 +7,7 @@ import java.net.ServerSocket;
 
 public class CheckRunning {
    private final int port = 1324;
+   private static ServerSocket prevention;
 
    /**
     * Checks if the program is already running. Exits if it is.
@@ -23,7 +24,7 @@ public class CheckRunning {
     */
    private boolean isRunning() {
       try {
-         new ServerSocket(port);
+         prevention = new ServerSocket(port);
          return false;
       } catch (IOException e) {
          return true;
