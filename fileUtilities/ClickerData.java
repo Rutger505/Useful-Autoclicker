@@ -9,6 +9,8 @@ import java.io.*;
 public class ClickerData {
 
    private static final String FILE_NAME = "clickerData.txt";
+   public static final File WINDOWS_DRIVE = getWindowsDrive();
+   public static String USER = System.getProperty("user.name");
    private static String dataPath = null;
    private static final int TEST_BOOLEAN = 0;
    private static final int TEST_INT = 1;
@@ -20,9 +22,7 @@ public class ClickerData {
     */
    public ClickerData() {
       // get data path
-      File windowsDrive = getWindowsDrive();
-      String user = System.getProperty("user.name");
-      dataPath = windowsDrive + "Users/" + user + "/AppData/Roaming/Useful-Autoclicker/";
+      dataPath = WINDOWS_DRIVE + "Users/" + USER + "/AppData/Roaming/Useful-Autoclicker/";
 
 
       makeFolder();
@@ -164,7 +164,7 @@ public class ClickerData {
     *
     * @return windows drive
     */
-   private File getWindowsDrive() {
+   private static File getWindowsDrive() {
       FileSystemView fileSystemView = FileSystemView.getFileSystemView();
       File[] drives = File.listRoots();
       File windowsDrive = null;
