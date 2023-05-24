@@ -13,7 +13,7 @@ import java.awt.*;
 public class GUI extends JFrame {
    // title/version
    private static final double AUTOCLICKER_VERSION = 2.1;
-   public static final String MAIN_FRAME_TITLE = "Useful Autoclicker " + AUTOCLICKER_VERSION + "-pre1";
+   public static final String MAIN_FRAME_TITLE = "Useful Autoclicker " + AUTOCLICKER_VERSION + "-pre2";
    
    // components
    private final JTextField[] clickDelayTF;
