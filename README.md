@@ -1,6 +1,6 @@
 # Useful Autoclicker
 
-## Powerful Autoclicker up to 400CPS with great functions
+## Powerful Autoclicker with great features
 
 ![Screenshot of Autoclicker](https://user-images.githubusercontent.com/119070855/232733386-f12beb46-be38-4c62-9a4d-d5b51dbf9995.png)
 
@@ -19,7 +19,7 @@
 
 ### Downloading <ins>without</ins> Java installed
 
-* Install Java SE from <ins>[here](https://www.java.com/en/download/)<ins>
+* Install Java SE from [here](https://www.java.com/en/download/)
 * Choose your correct operating system and download the installer
 * Click on the latest release on the right side
 * Click on the file "Useful Autoclicker.jar"
@@ -33,7 +33,7 @@
 
 ## Not starting?
 
-* download java again <ins>[here](https://www.java.com/en/download/)<ins>
+* download java again [here](https://www.java.com/en/download/)
 * Make a txt file and paste the following code. Then save it as a .bat file.
 
 ```
