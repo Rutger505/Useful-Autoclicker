@@ -35,7 +35,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       this.clicker = new Autoclicker(this);
 
       // default button
-
       gui.getDefaultsButton().addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
@@ -69,6 +68,9 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
 
             gui.getAutoclickOnMouseHold().setSelected(false);
             Settings.setAutoclickOnMouseHold(false);
+            if (!Settings.shouldAutoclickOnMouseHold()) {
+               toggleClicker(false);
+            }
          }
       });
 
@@ -128,17 +130,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
          }
       });
 
-      // default button
-      gui.getDefaultsButton().addActionListener(new ActionListener() {
-         @Override
-         public void actionPerformed(ActionEvent e) {
-            gui.getButtonSelect().setSelectedIndex(0);
-            gui.getShouldRandomize()[0].setSelected(false);
-            gui.getShouldRandomize()[1].setSelected(false);
-            gui.getAutoclickOnMouseHold().setSelected(false);
-         }
-      });
-
 
       // document Filters ##################################################################################################
       int limitDefault = 4;
@@ -157,7 +148,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
                onTextAdd(fb, offset, length, text, attrs, limitDefault);
                Settings.setClickDelay(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
-
             }
 
             @Override
