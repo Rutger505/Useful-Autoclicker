@@ -5,6 +5,7 @@ import settings.Settings;
 
 import java.awt.*;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Autoclicker extends Thread {
    private final Random random = new Random();
@@ -120,18 +121,21 @@ public class Autoclicker extends Thread {
     *
     * @param ms how many ms to sleep if less than 0 set to 0.
     */
-   private synchronized void waitMs(long ms) {
+   private void waitMs(long ms) {
       try {
-         System.out.println("Desired elapsed time: " + ms + " milliseconds");
+         System.out.println("(Autoclicker sleep) Desired elapsedTime: " + ms + "ms");
          long startTime = System.nanoTime();
-         this.wait(ms);
-         long endTime = System.nanoTime();
-         long elapsedTimeInMillis = (endTime - startTime) / 1_000_000; // Convert nanoseconds to milliseconds
-
-         System.out.println("Actual elapsed time: " + elapsedTimeInMillis + " milliseconds");
-
+         long elapsedTime;
+         while (true) {
+            elapsedTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime);
+            if (elapsedTime >= ms){
+               break;
+            }
+            Thread.sleep(1);
+         }
+         System.out.println("(Autoclicker sleep) Actual elapsedTime:  " + elapsedTime + "ms");
       } catch (InterruptedException e) {
-         interrupt();
+         Thread.currentThread().interrupt();
       }
    }
 }
