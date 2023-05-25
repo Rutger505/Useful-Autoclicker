@@ -39,7 +39,7 @@ public class Autoclicker extends Thread {
       running = true;
 
       if (Settings.getClicks() == 0) {
-         while (!Thread.interrupted()) {
+         while (!Thread.currentThread().isInterrupted()) {
             randomizeDelay();
 
             clickCycle();
@@ -120,9 +120,16 @@ public class Autoclicker extends Thread {
     *
     * @param ms how many ms to sleep if less than 0 set to 0.
     */
-   private void waitMs(long ms) {
+   private synchronized void waitMs(long ms) {
       try {
-         Thread.sleep(ms);
+         System.out.println("Desired elapsed time: " + ms + " milliseconds");
+         long startTime = System.nanoTime();
+         this.wait(ms);
+         long endTime = System.nanoTime();
+         long elapsedTimeInMillis = (endTime - startTime) / 1_000_000; // Convert nanoseconds to milliseconds
+
+         System.out.println("Actual elapsed time: " + elapsedTimeInMillis + " milliseconds");
+
       } catch (InterruptedException e) {
          interrupt();
       }
