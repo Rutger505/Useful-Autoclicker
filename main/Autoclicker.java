@@ -1,7 +1,7 @@
 package main;
 
-import settings.Settings;
 import errorHandeling.Error;
+import settings.Settings;
 
 import java.awt.*;
 import java.util.Random;
@@ -32,13 +32,6 @@ public class Autoclicker extends Thread {
    }
 
    /**
-    * Stop Autoclicker
-    */
-   public void stopClicker() {
-      this.interrupt();
-   }
-
-   /**
     * Driver method
     */
    @Override
@@ -66,22 +59,13 @@ public class Autoclicker extends Thread {
     * Randomizes delay of click and hold delay.
     */
    private void randomizeDelay() {
-      try {
-         if (Settings.shouldRandomizeClick()) {
-            Settings.setClickDelay(Math.abs(Settings.getClickDelayOriginal() + random.nextInt(Settings.getClickRandomizeRange() * 2) - Settings.getClickRandomizeRange()));
-         }
-      } catch (IllegalArgumentException e) {
-         Settings.setShouldRandomizeClick(false);
+      if (Settings.shouldRandomizeClick() && Settings.getClickRandomizeRange() > 0) {
+         Settings.setClickDelay(Math.abs(Settings.getClickDelayOriginal() + random.nextInt(Settings.getClickRandomizeRange() * 2) - Settings.getClickRandomizeRange()));
       }
 
-      try {
-         if (Settings.shouldRandomizeHold()) {
-            Settings.setHoldDelay(Math.abs(Settings.getHoldDelayOriginal() + random.nextInt(Settings.getHoldRandomizeRange() * 2) - Settings.getHoldRandomizeRange()));
-         }
-      } catch (IllegalArgumentException e) {
-         Settings.setShouldRandomizeHold(false);
+      if (Settings.shouldRandomizeHold() && Settings.getHoldRandomizeRange() > 0) {
+         Settings.setHoldDelay(Math.abs(Settings.getHoldDelayOriginal() + random.nextInt(Settings.getHoldRandomizeRange() * 2) - Settings.getHoldRandomizeRange()));
       }
-
    }
 
    /**
@@ -108,6 +92,7 @@ public class Autoclicker extends Thread {
       } catch (RuntimeException e) {
          try {
             robot = new Robot();
+            robot.mousePress(Settings.getButton());
          } catch (AWTException ignored) {
          }
          System.out.println("error in mouse press");
@@ -123,6 +108,7 @@ public class Autoclicker extends Thread {
       } catch (RuntimeException e) {
          try {
             robot = new Robot();
+            robot.mouseRelease(Settings.getButton());
          } catch (AWTException ignored) {
          }
          System.out.println("error in mouse release");
