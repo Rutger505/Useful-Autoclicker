@@ -192,9 +192,6 @@ public class ClickerData {
       } catch (FileAlreadyExistsException ignored) {
       } catch (Exception e) {
          Error.showError("(make folder) folder not could not be created", "<html>There was an error while saving your settings.</html>", "(make folder) folder not could not be created");
-         for (StackTraceElement element : e.getStackTrace()) {
-            Error.showError("tite", element.toString(), "tite");
-         }
       }
    }
 
