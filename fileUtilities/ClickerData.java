@@ -5,15 +5,18 @@ import settings.Settings;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.*;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class ClickerData {
 
-   private static final String FILE_NAME = "clickerData.txt";
    public static final File WINDOWS_DRIVE = getWindowsDrive();
-   public static String USER = System.getProperty("user.name");
-   private static String dataPath = null;
+   private static final String FILE_NAME = "clickerData.txt";
    private static final int TEST_BOOLEAN = 0;
    private static final int TEST_INT = 1;
+   public static String USER = System.getProperty("user.name");
+   private static String dataPath = null;
    private FileReader reader;
 
    /**
@@ -59,8 +62,29 @@ public class ClickerData {
 
          writer.close();
       } catch (IOException e) {
-         Error.showError("<html>There was an error while saving your settings.<br>Try restarting the Autoclicker or deleting the following folder:<br>" + dataPath + "</html>", "(Saving data to file) Error saving settings", "(Save settings) Error writing to file");
+         Error.showError("(Saving data to file) Error saving settings", "<html>There was an error while saving your settings.<br>Try restarting the Autoclicker or deleting the following folder:<br>" + dataPath + "<br>" + e.getMessage() + "</html>", "<html>There was an error while saving your settings.<br>Try restarting the Autoclicker or deleting the following folder:<br>" + dataPath + e.getStackTrace() + "</html>");
       }
+   }
+
+   /**
+    * Gets windows drive
+    *
+    * @return windows drive
+    */
+   private static File getWindowsDrive() {
+      FileSystemView fileSystemView = FileSystemView.getFileSystemView();
+      File[] drives = File.listRoots();
+      File windowsDrive = null;
+      for (File drive : drives) {
+         // if drive is local disk (windows disk)
+         String systemDriveDescription = fileSystemView.getSystemTypeDescription(drive);
+         if (systemDriveDescription.equals("Local Disk")) {
+            // set this drive to Windows Drive
+            windowsDrive = drive;
+            break;
+         }
+      }
+      return windowsDrive;
    }
 
    /**
@@ -107,7 +131,7 @@ public class ClickerData {
    private String processValue(int type) {
       String value = readValue();
       if (type == TEST_BOOLEAN) {
-         if(value == null) {
+         if (value == null) {
             Error.unidentifiedChangeError();
             return "false";
          }
@@ -160,31 +184,18 @@ public class ClickerData {
    }
 
    /**
-    * Gets windows drive
-    *
-    * @return windows drive
-    */
-   private static File getWindowsDrive() {
-      FileSystemView fileSystemView = FileSystemView.getFileSystemView();
-      File[] drives = File.listRoots();
-      File windowsDrive = null;
-      for (File drive : drives) {
-         // if drive is local disk (windows disk)
-         String systemDriveDescription = fileSystemView.getSystemTypeDescription(drive);
-         if (systemDriveDescription.equals("Local Disk")) {
-            // set this drive to Windows Drive
-            windowsDrive = drive;
-            break;
-         }
-      }
-      return windowsDrive;
-   }
-
-   /**
     * Makes folder
     */
    private void makeFolder() {
-      new File(dataPath).mkdir();
+      try {
+         Files.createDirectory(Paths.get(dataPath + "\\"));
+      } catch (FileAlreadyExistsException ignored) {
+      } catch (Exception e) {
+         Error.showError("(make folder) folder not could not be created", "<html>There was an error while saving your settings.</html>", "(make folder) folder not could not be created");
+         for (StackTraceElement element : e.getStackTrace()) {
+            Error.showError("tite", element.toString(), "tite");
+         }
+      }
    }
 
    /*
