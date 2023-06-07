@@ -156,13 +156,13 @@ public class Settings {
 
    public static void setButtonNumber(int buttonNumber) {
       Settings.buttonNumber = buttonNumber;
-      int number = buttonNumber;
+      int number = buttonNumber + 1;
       if (number == 2) {
          number = 3;
       } else if (number == 3) {
          number = 2;
       }
-      Settings.button = InputEvent.getMaskForButton(number + 1);
+      Settings.button = InputEvent.getMaskForButton(number);
       ClickerData.writeFile();
    }
 

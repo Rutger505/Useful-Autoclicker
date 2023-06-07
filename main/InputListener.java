@@ -127,6 +127,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
          @Override
          public void actionPerformed(ActionEvent e) {
             Settings.setButtonNumber(gui.getButtonSelect().getSelectedIndex());
+            toggleClicker(false);
          }
       });
 
