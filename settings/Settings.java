@@ -34,7 +34,7 @@ public class Settings {
    private static boolean autoclickOnMouseHold = false;
 
    public static int getClicks() {
-      return clicks;
+      return ClickerData.shouldUseDefaults ? DefaultSettings.clicks : clicks;
    }
 
    public static void setClicks(int clicks) {
@@ -43,7 +43,7 @@ public class Settings {
    }
 
    public static long getClickDelay() {
-      return clickDelay;
+      return ClickerData.shouldUseDefaults ? DefaultSettings.clickDelay : clickDelay;
    }
 
    public static void setClickDelay(long clickDelay) {
@@ -72,15 +72,15 @@ public class Settings {
    }
 
    public static long getClickDelayOriginal() {
-      return clickDelayOriginal;
+      return ClickerData.shouldUseDefaults ? DefaultSettings.clickDelayOriginal : clickDelayOriginal;
    }
 
    public static int[] getClickDelayArray() {
-      return clickDelayArray;
+      return ClickerData.shouldUseDefaults ? DefaultSettings.clickDelayArray : clickDelayArray;
    }
 
    public static long getHoldDelay() {
-      return holdDelay;
+      return ClickerData.shouldUseDefaults ? DefaultSettings.holdDelay : holdDelay;
    }
 
    public static void setHoldDelay(int[] holdDelayRaw) {
@@ -109,23 +109,23 @@ public class Settings {
    }
 
    public static long getHoldDelayOriginal() {
-      return holdDelayOriginal;
+      return ClickerData.shouldUseDefaults ? DefaultSettings.holdDelayOriginal : holdDelayOriginal;
    }
 
    public static int[] getHoldDelayArray() {
-      return holdDelayArray;
+      return ClickerData.shouldUseDefaults ? DefaultSettings.holdDelayArray : holdDelayArray;
    }
 
    public static boolean shouldRandomizeClick() {
-      return shouldRandomizeClick;
+      return ClickerData.shouldUseDefaults ? DefaultSettings.shouldRandomizeClick : shouldRandomizeClick;
    }
 
    public static boolean shouldRandomizeHold() {
-      return shouldRandomizeHold;
+      return ClickerData.shouldUseDefaults ? DefaultSettings.shouldRandomizeHold : shouldRandomizeHold;
    }
 
    public static int getHoldRandomizeRange() {
-      return holdRandomizeRange;
+      return ClickerData.shouldUseDefaults ? DefaultSettings.holdRandomizeRange : holdRandomizeRange;
    }
 
    public static void setHoldRandomizeRange(int holdRandomizeRange) {
@@ -134,7 +134,7 @@ public class Settings {
    }
 
    public static int getClickRandomizeRange() {
-      return clickRandomizeRange;
+      return ClickerData.shouldUseDefaults ? DefaultSettings.clickRandomizeRange : clickRandomizeRange;
    }
 
    public static void setClickRandomizeRange(int clickRandomizeRange) {
@@ -151,27 +151,27 @@ public class Settings {
    }
 
    public static int getButtonNumber() {
-      return buttonNumber;
+      return ClickerData.shouldUseDefaults ? DefaultSettings.buttonNumber : buttonNumber;
    }
 
    public static void setButtonNumber(int buttonNumber) {
       Settings.buttonNumber = buttonNumber;
-      int number = buttonNumber;
+      int number = buttonNumber + 1;
       if (number == 2) {
          number = 3;
       } else if (number == 3) {
          number = 2;
       }
-      Settings.button = InputEvent.getMaskForButton(number + 1);
+      Settings.button = InputEvent.getMaskForButton(number);
       ClickerData.writeFile();
    }
 
    public static int getButton() {
-      return button;
+      return ClickerData.shouldUseDefaults ? DefaultSettings.button : button;
    }
 
    public static int getHotkey() {
-      return hotkey;
+      return ClickerData.shouldUseDefaults ? DefaultSettings.hotkey : hotkey;
    }
 
    public static void setHotkey(int hotkey) {
@@ -181,11 +181,11 @@ public class Settings {
    }
 
    public static String getHotkeyText() {
-      return hotkeyText;
+      return ClickerData.shouldUseDefaults ? DefaultSettings.hotkeyText : hotkeyText;
    }
 
    public static boolean shouldAutoclickOnMouseHold() {
-      return autoclickOnMouseHold;
+      return ClickerData.shouldUseDefaults ? DefaultSettings.autoclickOnMouseHold : autoclickOnMouseHold;
    }
 
    public static void setShouldRandomizeClick(boolean shouldRandomizeClick) {
