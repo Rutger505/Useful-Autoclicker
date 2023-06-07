@@ -100,6 +100,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
          @Override
          public void actionPerformed(ActionEvent e) {
             Settings.setShouldRandomizeClick(gui.getShouldRandomize()[0].isSelected());
+            Settings.setClickDelay(Settings.getClickDelayOriginal());
          }
       });
 
@@ -108,6 +109,8 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
          @Override
          public void actionPerformed(ActionEvent e) {
             Settings.setShouldRandomizeHold(gui.getShouldRandomize()[1].isSelected());
+            Settings.setHoldDelay(Settings.getHoldDelayOriginal());
+
          }
       });
 
