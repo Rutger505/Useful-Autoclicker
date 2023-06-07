@@ -123,7 +123,6 @@ public class Autoclicker extends Thread {
     */
    private void waitMs(long ms) {
       try {
-         System.out.println("(Autoclicker sleep) Desired elapsedTime: " + ms + "ms");
          long startTime = System.nanoTime();
          long elapsedTime;
          while (true) {
@@ -133,7 +132,6 @@ public class Autoclicker extends Thread {
             }
             Thread.sleep(1);
          }
-         System.out.println("(Autoclicker sleep) Actual elapsedTime:  " + elapsedTime + "ms");
       } catch (InterruptedException e) {
          Thread.currentThread().interrupt();
       }
