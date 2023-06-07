@@ -282,7 +282,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
       int buttonPressed = nativeEvent.getButton();
 
       if (buttonPressed == mouseButtonSelected) {
-         if(registeredPressing < 1){
+         if (registeredPressing < 1) {
             registeredPressing = 1;
          }
 
@@ -374,7 +374,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
     * Stops the clicker, sets registeredPressing to 0 and updates the gui title.
     */
    public void stopClicker() {
-      clicker.stopClicker();
+      clicker.interrupt();
       registeredPressing = 0;
       gui.setTitle(GUI.MAIN_FRAME_TITLE + "  -  Stopped");
    }

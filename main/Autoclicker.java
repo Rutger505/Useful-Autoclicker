@@ -1,10 +1,11 @@
 package main;
 
-import settings.Settings;
 import errorHandeling.Error;
+import settings.Settings;
 
 import java.awt.*;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Autoclicker extends Thread {
    private final Random random = new Random();
@@ -32,13 +33,6 @@ public class Autoclicker extends Thread {
    }
 
    /**
-    * Stop Autoclicker
-    */
-   public void stopClicker() {
-      this.interrupt();
-   }
-
-   /**
     * Driver method
     */
    @Override
@@ -46,7 +40,7 @@ public class Autoclicker extends Thread {
       running = true;
 
       if (Settings.getClicks() == 0) {
-         while (!Thread.interrupted()) {
+         while (!Thread.currentThread().isInterrupted()) {
             randomizeDelay();
 
             clickCycle();
@@ -66,22 +60,13 @@ public class Autoclicker extends Thread {
     * Randomizes delay of click and hold delay.
     */
    private void randomizeDelay() {
-      try {
-         if (Settings.shouldRandomizeClick()) {
-            Settings.setClickDelay(Math.abs(Settings.getClickDelayOriginal() + random.nextInt(Settings.getClickRandomizeRange() * 2) - Settings.getClickRandomizeRange()));
-         }
-      } catch (IllegalArgumentException e) {
-         Settings.setShouldRandomizeClick(false);
+      if (Settings.shouldRandomizeClick() && Settings.getClickRandomizeRange() > 0) {
+         Settings.setClickDelay(Math.abs(Settings.getClickDelayOriginal() + random.nextInt(Settings.getClickRandomizeRange() * 2) - Settings.getClickRandomizeRange()));
       }
 
-      try {
-         if (Settings.shouldRandomizeHold()) {
-            Settings.setHoldDelay(Math.abs(Settings.getHoldDelayOriginal() + random.nextInt(Settings.getHoldRandomizeRange() * 2) - Settings.getHoldRandomizeRange()));
-         }
-      } catch (IllegalArgumentException e) {
-         Settings.setShouldRandomizeHold(false);
+      if (Settings.shouldRandomizeHold() && Settings.getHoldRandomizeRange() > 0) {
+         Settings.setHoldDelay(Math.abs(Settings.getHoldDelayOriginal() + random.nextInt(Settings.getHoldRandomizeRange() * 2) - Settings.getHoldRandomizeRange()));
       }
-
    }
 
    /**
@@ -108,6 +93,7 @@ public class Autoclicker extends Thread {
       } catch (RuntimeException e) {
          try {
             robot = new Robot();
+            robot.mousePress(Settings.getButton());
          } catch (AWTException ignored) {
          }
          System.out.println("error in mouse press");
@@ -123,6 +109,7 @@ public class Autoclicker extends Thread {
       } catch (RuntimeException e) {
          try {
             robot = new Robot();
+            robot.mouseRelease(Settings.getButton());
          } catch (AWTException ignored) {
          }
          System.out.println("error in mouse release");
@@ -136,9 +123,17 @@ public class Autoclicker extends Thread {
     */
    private void waitMs(long ms) {
       try {
-         Thread.sleep(ms);
+         long startTime = System.nanoTime();
+         long elapsedTime;
+         while (true) {
+            elapsedTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime);
+            if (elapsedTime >= ms){
+               break;
+            }
+            Thread.sleep(1);
+         }
       } catch (InterruptedException e) {
-         interrupt();
+         Thread.currentThread().interrupt();
       }
    }
 }
