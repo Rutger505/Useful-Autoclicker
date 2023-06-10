@@ -1,0 +1,15 @@
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\bin\Debug\Useful-Autoclicker.exe.config
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\bin\Debug\Useful-Autoclicker.exe
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\bin\Debug\Useful-Autoclicker.pdb
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\obj\Debug\Useful_Autoclicker.csproj.AssemblyReference.cache
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\obj\Debug\Useful_Autoclicker.csproj.SuggestedBindingRedirects.cache
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\obj\Debug\MainWindow.baml
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\obj\Debug\MainWindow.g.cs
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\obj\Debug\App.g.cs
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\obj\Debug\Useful-Autoclicker_MarkupCompile.cache
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\obj\Debug\Useful-Autoclicker.g.resources
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\obj\Debug\Useful_Autoclicker.Properties.Resources.resources
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\obj\Debug\Useful_Autoclicker.csproj.GenerateResource.cache
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\obj\Debug\Useful_Autoclicker.csproj.CoreCompileInputs.cache
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\obj\Debug\Useful-Autoclicker.exe
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\obj\Debug\Useful-Autoclicker.pdb
