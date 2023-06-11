@@ -23,6 +23,11 @@ namespace Useful_Autoclicker
         public MainWindow()
         {
             InitializeComponent();
+            TextBlock hello = FindName("hello") as TextBlock;
+            if (hello != null)
+            {
+                hello.Text = "Hello, World!";
+            }
         }
     }
 }
