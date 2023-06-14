@@ -4,24 +4,50 @@
              xmlns:local="clr-namespace:Useful_Autoclicker"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <!-- Constants -->
+        <SolidColorBrush x:Key="PrimairyColor"
+                         Color="#1B1B1B" />
+
+        <SolidColorBrush x:Key="HeaderColor"
+                         Color="#191919" />
+        
+        <SolidColorBrush x:Key="TextFieldColor"
+                         Color="#0C0C0C" />
+        
+        <SolidColorBrush x:Key="BorderColor"
+                         Color="#000000" />
+
+        <SolidColorBrush x:Key="TextColor"
+                         Color="#DDDDDD" />
+
+
 
         <!-- Global -->
         <Style TargetType="TextBox">
-            <Setter Property="Background"
-                    Value="Aqua" />
             <Setter Property="VerticalAlignment"
                     Value="Center" />
-            <Setter Property="FontSize"
-                    Value="12.5" />
             <Setter Property="Padding"
                     Value="1" />
+            <Setter Property="Background"
+                    Value="{StaticResource TextFieldColor}" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource TextColor}" />
+
         </Style>
-ss
         <Style TargetType="TextBlock">
-            <Setter Property="FontSize"
-                    Value="12.5" />
             <Setter Property="VerticalAlignment"
                     Value="Center" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource TextColor}" />
+        </Style>
+
+        <Style TargetType="Border">
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource BorderColor}" />
+            <Setter Property="BorderThickness"
+                    Value="1" />
+            <Setter Property="CornerRadius"
+                    Value="5" />
         </Style>
 
         <!-- x:Key -->
@@ -29,13 +55,21 @@ ss
                x:Key="DefaultTextBox"
                BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Margin"
-                    Value="5,5,4,5" />
+                    Value="0,5" />
             <Setter Property="Width"
-                    Value="40" />
+                    Value="35" />
         </Style>
         <Style TargetType="TextBlock"
                x:Key="TimeIdentifier"
                BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="Margin"
+                    Value="3,0,13,0" />
+        </Style>
+        <Style TargetType="TextBlock"
+               x:Key="RowText"
+               BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="Margin"
+                    Value="10,0,0,0" />
         </Style>
 
 

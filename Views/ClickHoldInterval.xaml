@@ -8,7 +8,7 @@
              d:DesignHeight="30"
              d:DesignWidth="360"
              Background="AntiqueWhite">
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -28,9 +28,8 @@
                  Text="0"
                  Style="{StaticResource DefaultTextBox}" />
         <TextBlock Grid.Column="2"
-                   Text="h" 
-                     Style="{StaticResource TimeIdentifier}"
-                   />
+                   Text="h"
+                   Style="{StaticResource TimeIdentifier}" />
         <TextBox Grid.Column="3"
                  Text="0"
                  Style="{StaticResource DefaultTextBox}" />
@@ -48,8 +47,8 @@
                  Style="{StaticResource DefaultTextBox}" />
         <TextBlock Grid.Column="8"
                    Text="ms"
+                   Margin="4,0,9,0"
                    Style="{StaticResource TimeIdentifier}" />
-
 
     </Grid>
 </UserControl>
