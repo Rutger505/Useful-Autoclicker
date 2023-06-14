@@ -7,6 +7,7 @@
         Title="Useful Autoclicker C#" Height="335" Width="400"
        
         Topmost="True"
+        ResizeMode="CanMinimize"
         >
     <Window.Resources>
         <Style TargetType="Rectangle">
@@ -17,9 +18,20 @@
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="#FFFFFF"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Text" Value="0"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="2"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <Style TargetType="Border">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#EBEBEB"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="20"/>
         </Style>
     </Window.Resources>
 
@@ -47,7 +59,6 @@
             <ColumnDefinition Width="20px"/>
         </Grid.ColumnDefinitions>
 
-
         <!--First section-->
         <Grid Grid.ColumnSpan="5" Grid.Column="0" Grid.Row="0" Background="#EBEBEB">
             <Grid.ColumnDefinitions>
@@ -70,43 +81,46 @@
 
         </Grid>
 
-        <Grid Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="2" Background="Transparent">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="14"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="17"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="12"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="30"/>
-            </Grid.ColumnDefinitions>
+        <Border  Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="2" BorderThickness="1"
+                 BorderBrush="#EBEBEB" >
+            <Grid Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="14"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="17"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Click interval:" Margin="10,5,5,5" 
+                <TextBlock Text="Click interval:" Margin="10,5,5,5" 
                        VerticalAlignment="Center" Grid.Column="0"/>
 
-            <TextBox Grid.Column="1" Margin="5,5,4,5" Background="#EBEBEB"/>
-            <TextBlock Text="h"  Grid.Column="2" Margin="0,0,7,0"
+                <TextBox Grid.Column="1" Margin="5,5,4,5" />
+                <TextBlock Text="h"  Grid.Column="2" Margin="0,0,7,0"
                        VerticalAlignment="Center" />
 
-            <TextBox Grid.Column="3" Margin="5,5,4,5" Background="#EBEBEB"/>
-            <TextBlock Text="m"  Grid.Column="4" Margin="0,0,7,0"
-                       VerticalAlignment="Center" />
-
-
-
-            <TextBox Grid.Column="5" Margin="5,5,4,5" Background="#EBEBEB"/>
-            <TextBlock Text="s"  Grid.Column="6" Margin="0,0,7,0"
+                <TextBox Grid.Column="3" Margin="5,5,4,5" />
+                <TextBlock Text="m"  Grid.Column="4" Margin="0,0,7,0"
                        VerticalAlignment="Center" />
 
 
-            <TextBox Grid.Column="7" Margin="5,5,4,5" Background="#EBEBEB"/>
-            <TextBlock Text="ms" Grid.Column="8" Margin="0,0,7,0"
-                       VerticalAlignment="Center" />
-        </Grid>
 
-        <Grid Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="4" Background="#EBEBEB">
+                <TextBox Grid.Column="5" Margin="5,5,4,5" />
+                <TextBlock Text="s"  Grid.Column="6" Margin="0,0,7,0"
+                       VerticalAlignment="Center" />
+
+
+                <TextBox Grid.Column="7" Margin="5,5,4,5" />
+                <TextBlock Text="ms" Grid.Column="8" Margin="0,0,7,0"
+                       VerticalAlignment="Center" />
+            </Grid>
+        </Border>
+
+        <Grid Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="4" Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="90"/>
                 <ColumnDefinition Width="*"/>
@@ -118,28 +132,27 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
-
 
             <TextBlock Text="Hold time:" Margin="10,5,5,5" 
                        VerticalAlignment="Center" Grid.Column="0"/>
 
-            <TextBox Grid.Column="1" Margin="5,5,4,5"/>
+            <TextBox Grid.Column="1" Margin="5,5,4,5" />
             <TextBlock Text="h"  Grid.Column="2" Margin="0,0,7,0"
                        VerticalAlignment="Center" />
 
-            <TextBox Grid.Column="3" Margin="5,5,4,5"/>
+            <TextBox Grid.Column="3" Margin="5,5,4,5" />
             <TextBlock Text="m"  Grid.Column="4" Margin="0,0,7,0"
                        VerticalAlignment="Center" />
 
 
 
-            <TextBox Grid.Column="5" Margin="5,5,4,5"/>
+            <TextBox Grid.Column="5" Margin="5,5,4,5" />
             <TextBlock Text="s"  Grid.Column="6" Margin="0,0,7,0"
                        VerticalAlignment="Center" />
 
 
-            <TextBox Grid.Column="7" Margin="5,5,4,5"/>
-            <TextBlock Text="ms" Grid.Column="8" Margin="0,0,14,0"
+            <TextBox Grid.Column="7" Margin="5,5,4,5" />
+            <TextBlock Text="ms" Grid.Column="8" Margin="0,0,7,0"
                        VerticalAlignment="Center" />
         </Grid>
 
@@ -206,7 +219,7 @@
 
                 <TextBlock Text="Button:" Grid.Column="0" Margin="10,0,5,0"
                        VerticalAlignment="Center"/>
-                <ComboBox Grid.Column="1" Margin="5,5,14,5" SelectedIndex="0">
+                <ComboBox  Grid.Column="1" Grid.Row="12"  Margin="5,5,14,5" SelectedIndex="0">
                     <ComboBoxItem>Left</ComboBoxItem>
                     <ComboBoxItem>Middle</ComboBoxItem>
                     <ComboBoxItem>Right</ComboBoxItem>
