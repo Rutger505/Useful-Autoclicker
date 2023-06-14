@@ -1,4 +1,0 @@
-C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\obj\Debug\Useful-Autoclicker.csproj.AssemblyReference.cache
-C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\obj\Debug\Useful-Autoclicker.csproj.SuggestedBindingRedirects.cache
-C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\obj\Debug\App.g.cs
-C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful-Autoclicker\obj\Debug\Useful-Autoclicker_MarkupCompile.cache

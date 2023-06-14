@@ -4,6 +4,40 @@
              xmlns:local="clr-namespace:Useful_Autoclicker"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <!-- Global -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background"
+                    Value="Aqua" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="FontSize"
+                    Value="12.5" />
+            <Setter Property="Padding"
+                    Value="1" />
+        </Style>
+ss
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize"
+                    Value="12.5" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+
+        <!-- x:Key -->
+        <Style TargetType="TextBox"
+               x:Key="DefaultTextBox"
+               BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Margin"
+                    Value="5,5,4,5" />
+            <Setter Property="Width"
+                    Value="40" />
+        </Style>
+        <Style TargetType="TextBlock"
+               x:Key="TimeIdentifier"
+               BasedOn="{StaticResource {x:Type TextBlock}}">
+        </Style>
+
+
     </Application.Resources>
 </Application>
