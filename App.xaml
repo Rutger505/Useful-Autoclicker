@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Useful_Autoclicker"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             StartupUri="MainWindow.xaml"
-             >
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
         <!-- Constants -->
         <SolidColorBrush x:Key="PrimairyColor"
@@ -18,7 +17,7 @@
 
         <SolidColorBrush x:Key="TextFieldColor"
                          Color="#0E0E0E" />
-        
+
         <SolidColorBrush x:Key="BorderColor"
                          Color="#000000" />
 
@@ -64,7 +63,7 @@
         </Style>
 
         <Style TargetType="Rectangle">
-            
+
         </Style>
 
         <Style TargetType="Button">
@@ -117,7 +116,7 @@
                     Value="0,0" />
             <Setter Property="BorderThickness"
                     Value="0" />
-            
+
         </Style>
 
 
