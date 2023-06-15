@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="Useful_Autoclicker.Views.Header"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Useful_Autoclicker.Views"
+             mc:Ignorable="d"
+             x:Name="root"
+             d:DesignHeight="21"
+             d:DesignWidth="400">
+    <Grid x:Name="HeaderGrid"
+          Background="{StaticResource HeaderColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="1" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Grid.Column="0"
+                   Text="{Binding Title, ElementName=root}"/>
+
+        <Rectangle Grid.Row="1"
+                   Grid.ColumnSpan="{Binding Path=ColumnDefinitions.Count, ElementName=HeaderGrid}"
+                   Style="{StaticResource HeaderLine}" />
+    </Grid>
+</UserControl>

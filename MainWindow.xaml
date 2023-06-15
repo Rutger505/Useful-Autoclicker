@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="ShellView"
         Height="330"
-        Width="400">
+        Width="400"
+        ResizeMode="CanMinimize"
+        Background="{StaticResource PrimairyColor}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
@@ -30,11 +32,11 @@
             <RowDefinition Height="13" />
 
             <!-- Input section (Click Delay)-->
-            <RowDefinition Height="30" />
+            <RowDefinition Height="32" />
             <!-- spacing between inputs-->
             <RowDefinition Height="10" />
             <!-- Input section (Hold Delay)-->
-            <RowDefinition Height="30" />
+            <RowDefinition Height="32" />
 
             <!-- spacing -->
             <RowDefinition Height="16" />
@@ -44,7 +46,7 @@
             <RowDefinition Height="13" />
 
             <!-- Input section (Randomize interval)-->
-            <RowDefinition Height="30" />
+            <RowDefinition Height="32" />
 
             <!-- spacing-->
             <RowDefinition Height="16" />
@@ -61,9 +63,42 @@
 
         </Grid.RowDefinitions>
 
+        <views:Header Grid.Column="0"
+                            Grid.Row="0"
+                            Grid.ColumnSpan="3"
+                            Title="Useful Autoclicker 3.0" />
+
+        <views:TitleSection Grid.Column="1"
+                            Grid.Row="3"
+                            Title="Click interval/Hold time" />
 
         <views:ClickHoldInterval Grid.Column="1"
-                                 Grid.Row="5" />
+                                 Grid.Row="5"
+                                 RowText="Click Interval:" />
+        <views:ClickHoldInterval Grid.Column="1"
+                                 Grid.Row="7"
+                                 RowText="Hold Time:" />
+
+        <views:TitleSection Grid.Column="1"
+                            Grid.Row="9"
+                            Title="Randomize Interval" />
+
+        <Grid Grid.Column="1"
+              Grid.Row="11">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <views:RandomizeClickHold Grid.Column="0"
+                                      RowText="Click range" />
+            <views:RandomizeClickHold Grid.Column="2"
+                                      RowText="Hold range" />
+        </Grid>
+        <views:TitleSection Grid.Column="1"
+                            Grid.Row="13"
+                            Title="Clicks/Button/Hotkey" />
 
     </Grid>
 </Window>

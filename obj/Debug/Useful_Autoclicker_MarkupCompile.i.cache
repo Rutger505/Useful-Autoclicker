@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\obj\Debug\
+C:\Users\rutge\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\obj\Debug\
 Useful_Autoclicker
 none
 false
 DEBUG;TRACE
-C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\App.xaml
-21600382845
+C:\Users\rutge\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\App.xaml
+5-58458803
 
-9-1314233244
-16-1122952792
-Views\ClickHoldInterval.xaml;MainWindow.xaml;
+121717187244
+16-371931454
+Views\ClickHoldInterval.xaml;MainWindow.xaml;Views\Header.xaml;Views\RandomizeClickHold.xaml;Views\TitleSection.xaml;
 
 True
 
