@@ -25,8 +25,31 @@
 
         <TextBlock Grid.Row="0"
                    Grid.Column="0"
-                   Text="{Binding Title, ElementName=root}"/>
+                   Text="{Binding Title, ElementName=root}" />
 
+        <Button Grid.Row="0"
+                Grid.Column="1"
+                Content="Default"
+                Margin="5,0"
+                Style="{StaticResource HeaderButton}" />
+        <Button Grid.Row="0"
+                Grid.Column="2"
+                Content="?"
+                Margin="5,0"
+                Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                Style="{StaticResource HeaderButton}" />
+        <Button Grid.Row="0"
+                Grid.Column="3"
+                Content="_"
+                Foreground="{StaticResource TextColor}"
+                Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                Style="{StaticResource HeaderButton}" />
+        <Button Grid.Row="0"
+                Grid.Column="4"
+                Content="X"
+                Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                Style="{StaticResource HeaderButton}" />
+        <!-- line -->
         <Rectangle Grid.Row="1"
                    Grid.ColumnSpan="{Binding Path=ColumnDefinitions.Count, ElementName=HeaderGrid}"
                    Style="{StaticResource HeaderLine}" />

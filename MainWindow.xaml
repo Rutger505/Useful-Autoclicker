@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:Useful_Autoclicker.Views"
         mc:Ignorable="d"
-        Title="ShellView"
         Height="330"
         Width="400"
-        ResizeMode="CanMinimize"
+        WindowStyle="None"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
         Background="{StaticResource PrimairyColor}">
     <Grid>
         <Grid.ColumnDefinitions>

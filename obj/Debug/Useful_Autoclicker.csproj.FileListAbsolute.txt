@@ -56,3 +56,5 @@ C:\Users\rutge\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-A
 C:\Users\rutge\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\obj\Debug\Useful_Autoclicker.csproj.CopyComplete
 C:\Users\rutge\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\obj\Debug\Views\Header.g.cs
 C:\Users\rutge\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\obj\Debug\Views\Header.baml
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\obj\Debug\Views\Header.g.cs
+C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\obj\Debug\Views\Header.baml
