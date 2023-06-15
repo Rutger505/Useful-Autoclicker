@@ -1,0 +1,7 @@
+
+bin/Debug/Useful_Autoclicker.exe
+*.pdb
+obj/Debug/App.g.cs
+obj/Debug/App.g.i.cs
+obj/
+bin/

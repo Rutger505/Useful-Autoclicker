@@ -40,15 +40,19 @@
                 Style="{StaticResource HeaderButton}" />
         <Button Grid.Row="0"
                 Grid.Column="3"
+                x:Name="Button_Minimize"
                 Content="_"
                 Foreground="{StaticResource TextColor}"
                 Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
-                Style="{StaticResource HeaderButton}" />
+                Style="{StaticResource HeaderButton}"
+                Click="Button_Minimize_Click"/>
         <Button Grid.Row="0"
                 Grid.Column="4"
+                x:Name="Button_Close"
                 Content="X"
                 Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
-                Style="{StaticResource HeaderButton}" />
+                Style="{StaticResource HeaderButton}"
+                Click="Button_Close_Click"/>
         <!-- line -->
         <Rectangle Grid.Row="1"
                    Grid.ColumnSpan="{Binding Path=ColumnDefinitions.Count, ElementName=HeaderGrid}"

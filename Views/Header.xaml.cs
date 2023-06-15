@@ -34,5 +34,15 @@ namespace Useful_Autoclicker.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Minimize_Click(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this).WindowState = WindowState.Minimized;
+        }
+
+        private void Button_Close_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

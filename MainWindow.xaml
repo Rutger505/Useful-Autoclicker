@@ -8,8 +8,12 @@
         Height="330"
         Width="400"
         WindowStyle="None"
-        MouseLeftButtonDown="Window_MouseLeftButtonDown"
         Background="{StaticResource PrimairyColor}">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"
+                      CornerRadius="15"
+                      GlassFrameThickness="0" />
+    </WindowChrome.WindowChrome>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
@@ -66,7 +70,8 @@
         <views:Header Grid.Column="0"
                       Grid.Row="0"
                       Grid.ColumnSpan="3"
-                      Title="Useful Autoclicker 3.0" />
+                      Title="Useful Autoclicker 3.0"
+                      MouseLeftButtonDown="Window_MouseLeftButtonDown" />
 
         <views:TitleSection Grid.Column="1"
                             Grid.Row="3"
