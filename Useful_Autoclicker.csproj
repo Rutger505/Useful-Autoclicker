@@ -69,8 +69,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\SettingsDefault.cs" />
-    <Compile Include="MainWindow.xaml.cs" />
     <Compile Include="Views\ClickHoldInterval.xaml.cs">
       <DependentUpon>ClickHoldInterval.xaml</DependentUpon>
     </Compile>
@@ -115,11 +117,11 @@
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\ClickHoldInterval.xaml">
+    <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\ClickHoldInterval.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
