@@ -24,8 +24,9 @@
         <SolidColorBrush x:Key="TextColor"
                          Color="#DDDDDD" />
 
-        <sys:Double x:Key="TextFontSize">10</sys:Double>
+        <sys:Double x:Key="TextFontSize">11</sys:Double>
 
+        
 
 
         <!-- Global -->
