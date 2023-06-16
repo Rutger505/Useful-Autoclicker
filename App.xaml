@@ -120,6 +120,47 @@
 
         </Style>
 
+        <Style x:Key="DefaultCheckBox"
+               TargetType="CheckBox"
+               BasedOn="{StaticResource {x:Type CheckBox}}">
+            <Setter Property="Background"
+                    Value="{StaticResource TextFieldColor}" />
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource BorderColor}" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+
+        <Style x:Key="DefaultComboBox"
+               TargetType="ComboBox"
+               BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="Margin"
+                    Value="0,5" />
+            <Setter Property="Width"
+                    Value="70" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="Padding"
+                    Value="1,0,0,0" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource TextColor}" />
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource BorderColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource TextFontSize}" />
+            <Setter Property="Background"
+                    Value="{StaticResource TextFieldColor}" />
+
+            <Style.Triggers>
+                <Trigger Property="IsEnabled"
+                         Value="False">
+                    <Setter Property="Background"
+                            Value="Red" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
 
     </Application.Resources>
 </Application>

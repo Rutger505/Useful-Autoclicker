@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\App.xaml
-5-58458803
+81587384935
 
-121717187244
+15-1731857250
 16-1122952792
-MainWindow.xaml;Views\ClickHoldInterval.xaml;Views\Header.xaml;Views\RandomizeClickHold.xaml;Views\TitleSection.xaml;
+MainWindow.xaml;Views\AutoclickOnButtonHold.xaml;Views\Button.xaml;Views\ClickHoldInterval.xaml;Views\Clicks.xaml;Views\Header.xaml;Views\RandomizeClickHold.xaml;Views\TitleSection.xaml;
 
 True
 

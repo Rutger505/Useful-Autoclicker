@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:Useful_Autoclicker.Views"
         mc:Ignorable="d"
-        Height="330"
+        Height="340"
         Width="400"
         WindowStyle="None"
+        Topmost="True"
         ResizeMode="NoResize"
         Background="{StaticResource PrimairyColor}">
     <WindowChrome.WindowChrome>
@@ -105,6 +106,22 @@
         <views:TitleSection Grid.Column="1"
                             Grid.Row="13"
                             Title="Clicks/Button/Hotkey" />
+
+        <WrapPanel Grid.Column="1"
+                   Grid.Row="15"
+                   Margin="-5">
+            <views:Clicks Height="32"
+                          Width="100"
+                          Margin="5" />
+
+            <views:AutoclickOnButtonHold Height="32"
+                                         Width="183"
+                                         Margin="5"/>
+
+            <views:Button Height="32"
+                          Width="190"
+                          Margin="5"/>
+        </WrapPanel>
 
     </Grid>
 </Window>

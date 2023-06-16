@@ -73,8 +73,17 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\SettingsDefault.cs" />
+    <Compile Include="Views\AutoclickOnButtonHold.xaml.cs">
+      <DependentUpon>AutoclickOnButtonHold.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Button.xaml.cs">
+      <DependentUpon>Button.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ClickHoldInterval.xaml.cs">
       <DependentUpon>ClickHoldInterval.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clicks.xaml.cs">
+      <DependentUpon>Clicks.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Header.xaml.cs">
       <DependentUpon>Header.xaml</DependentUpon>
@@ -121,7 +130,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AutoclickOnButtonHold.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ClickHoldInterval.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Clicks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
