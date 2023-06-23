@@ -1,2 +1,15 @@
-/bin/
-/obj/
+bin/
+obj/
+bin/Debug/Useful_Autoclicker.exe
+bin/Debug/Useful_Autoclicker.pdb
+obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+obj/Debug/MainWindow.g.cs
+obj/Debug/MainWindow.g.i.cs
+obj/Debug/Useful_Autoclicker.csproj.CoreCompileInputs.cache
+obj/Debug/Useful_Autoclicker.csproj.FileListAbsolute.txt
+obj/Debug/Useful_Autoclicker.csproj.GenerateResource.cache
+obj/Debug/Useful_Autoclicker.exe
+obj/Debug/Useful_Autoclicker.g.resources
+obj/Debug/Useful_Autoclicker.pdb
+obj/Debug/Useful_Autoclicker_MarkupCompile.cache
+obj/Debug/Useful_Autoclicker_MarkupCompile.lref

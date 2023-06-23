@@ -64,3 +64,9 @@ C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-
 C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\obj\Debug\Views\AutoclickOnButtonHold.baml
 C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\obj\Debug\Views\Button.g.cs
 C:\Users\Rutger\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\obj\Debug\Views\Button.baml
+C:\Users\rutge\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\obj\Debug\Views\AutoclickOnButtonHold.g.cs
+C:\Users\rutge\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\obj\Debug\Views\Button.g.cs
+C:\Users\rutge\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\obj\Debug\Views\Clicks.g.cs
+C:\Users\rutge\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\obj\Debug\Views\AutoclickOnButtonHold.baml
+C:\Users\rutge\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\obj\Debug\Views\Button.baml
+C:\Users\rutge\OneDrive - ROC Nijmegen\.Basis programeren\Visual Studio\Useful-Autoclicker\Useful_Autoclicker\obj\Debug\Views\Clicks.baml
