@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:Useful_Autoclicker.Views"
         mc:Ignorable="d"
         Height="340"
         Width="400"
@@ -127,9 +126,28 @@
         </Grid>
         <!--#endregion-->
 
-        <views:TitleSection Grid.Column="1"
-                            Grid.Row="3"
-                            Title="Click interval/Hold time" />
+
+
+        <!--#region Title Click interval/Hold time-->
+        <Grid Grid.Column="1"
+              Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="4" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       Text="Click interval/Hold time"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+
+            <Rectangle Grid.Row="2"
+                       Style="{StaticResource TitleSectionLine}"
+                       Width="80" />
+        </Grid>
+        <!--#endregion-->
+
 
         <!--#region ClickInterval-->
         <Border Grid.Column="1"
@@ -230,9 +248,28 @@
         </Border>
         <!--#endregion-->
 
-        <views:TitleSection Grid.Column="1"
-                            Grid.Row="9"
-                            Title="Randomize Interval" />
+
+
+        <!--#region Title Randomize Interval-->
+        <Grid Grid.Column="1"
+              Grid.Row="9">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="4" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       Text="Randomize Interval"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+
+            <Rectangle Grid.Row="2"
+                       Style="{StaticResource TitleSectionLine}"
+                       Width="80" />
+        </Grid>
+        <!--#endregion-->
+
 
         <!--#region RandomizeInterval-->
         <Grid Grid.Column="1"
@@ -290,9 +327,27 @@
         <!--#endregion-->
 
 
-        <views:TitleSection Grid.Column="1"
-                            Grid.Row="13"
-                            Title="Clicks/Button/Hotkey" />
+
+        <!--#region Title Clicks/Button/Hotkey-->
+        <Grid  Grid.Column="1"
+               Grid.Row="13">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="4" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       Text="Clicks/Button/Hotkey"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+
+            <Rectangle Grid.Row="2"
+                       Style="{StaticResource TitleSectionLine}"
+                       Width="80" />
+        </Grid>
+        <!--#endregion-->
+
 
         <!--#region Mics-->
         <WrapPanel Grid.Column="1"
@@ -378,6 +433,6 @@
                     Content="Select Hotkey(Back Quote)" />
             <!--#endregion-->
         </WrapPanel>
-
+        <!--#endregion-->
     </Grid>
 </Window>

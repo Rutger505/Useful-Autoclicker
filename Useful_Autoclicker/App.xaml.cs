@@ -18,13 +18,6 @@ namespace Useful_Autoclicker
         {
             await Task.Delay(1000);
             base.OnStartup(e);
-
-            Console.WriteLine("ClickDelay values:");
-            foreach (int delay in SettingsDefault.ClickDelay)
-            {
-                Console.WriteLine(delay);
-            }
-
         }
     }
 }

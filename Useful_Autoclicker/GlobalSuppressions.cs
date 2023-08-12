@@ -6,7 +6,5 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Naming", "VSSpell001:Spell Check", Justification = "<Pending>", Scope = "namespace", Target = "~N:Useful_Autoclicker")]
-[assembly: SuppressMessage("Naming", "VSSpell001:Spell Check", Justification = "<Pending>", Scope = "namespace", Target = "~N:Useful_Autoclicker.Views")]
 [assembly: SuppressMessage("Naming", "VSSpell001:Spell Check", Justification = "<Pending>", Scope = "namespace", Target = "~N:Useful_Autoclicker.Models")]
-[assembly: SuppressMessage("Naming", "VSSpell001:Spell Check", Justification = "<Pending>", Scope = "namespace", Target = "~N:Useful_Autoclicker.ViewModels")]
 [assembly: SuppressMessage("Naming", "VSSpell001:Spell Check", Justification = "<Pending>", Scope = "type", Target = "~N:Useful_Autoclicker")]

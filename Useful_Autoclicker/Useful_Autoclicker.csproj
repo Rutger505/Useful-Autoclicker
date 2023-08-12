@@ -73,12 +73,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\SettingsDefault.cs" />
-    <Compile Include="Views\AutoclickOnButtonHold.xaml.cs">
-      <DependentUpon>AutoclickOnButtonHold.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TitleSection.xaml.cs">
-      <DependentUpon>TitleSection.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -109,17 +103,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\AutoclickOnButtonHold.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TitleSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
