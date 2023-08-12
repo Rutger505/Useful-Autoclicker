@@ -120,8 +120,9 @@
                     Style="{StaticResource HeaderButton}"
                     Click="ButtonCloseClick" />
             <!-- line -->
-            <Rectangle Grid.Row="1"
-                       Grid.ColumnSpan="{Binding Path=ColumnDefinitions.Count, ElementName=HeaderGrid}"
+            <Rectangle Grid.Column="0"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="5"
                        Style="{StaticResource HeaderLine}" />
         </Grid>
         <!--#endregion-->
@@ -142,8 +143,9 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center" />
 
-            <Rectangle Grid.Row="2"
-                       Style="{StaticResource TitleSectionLine}"
+            <Rectangle Grid.Column="0"
+                       Grid.Row="2"
+                       Style="{StaticResource  TitleSectionLine}"
                        Width="80" />
         </Grid>
         <!--#endregion-->
@@ -264,7 +266,8 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center" />
 
-            <Rectangle Grid.Row="2"
+            <Rectangle Grid.Column="0"
+                       Grid.Row="2"
                        Style="{StaticResource TitleSectionLine}"
                        Width="80" />
         </Grid>
@@ -342,7 +345,8 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center" />
 
-            <Rectangle Grid.Row="2"
+            <Rectangle Grid.Column="0"
+                       Grid.Row="2"
                        Style="{StaticResource TitleSectionLine}"
                        Width="80" />
         </Grid>
