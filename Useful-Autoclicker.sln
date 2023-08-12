@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Useful_Autoclicker", "Useful_Autoclicker\Useful_Autoclicker.csproj", "{9B3543C5-3D56-4403-8683-9BE45EB58A4A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Useful_Autoclicker", "Useful_Autoclicker.csproj", "{9B3543C5-3D56-4403-8683-9BE45EB58A4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
