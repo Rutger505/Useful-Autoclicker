@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Useful_Autoclicker.Views.Button"
+﻿<UserControl x:Class="Useful_Autoclicker.Views.SelectButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -15,7 +15,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0"
-                       Text="Button: "
+                       Text="Press:"
                        Style="{StaticResource RowText}" />
             <TextBox Grid.Column="1"
                      Text="0"

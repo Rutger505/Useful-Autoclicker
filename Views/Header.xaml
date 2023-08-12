@@ -25,6 +25,7 @@
 
         <TextBlock Grid.Row="0"
                    Grid.Column="0"
+                     Margin="5,0, 0, 0"
                    Text="{Binding Title, ElementName=root}" />
 
         <Button Grid.Row="0"

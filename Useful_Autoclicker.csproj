@@ -76,8 +76,8 @@
     <Compile Include="Views\AutoclickOnButtonHold.xaml.cs">
       <DependentUpon>AutoclickOnButtonHold.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Button.xaml.cs">
-      <DependentUpon>Button.xaml</DependentUpon>
+    <Compile Include="Views\SelectButton.xaml.cs">
+      <DependentUpon>SelectButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ClickHoldInterval.xaml.cs">
       <DependentUpon>ClickHoldInterval.xaml</DependentUpon>
@@ -90,6 +90,9 @@
     </Compile>
     <Compile Include="Views\RandomizeClickHold.xaml.cs">
       <DependentUpon>RandomizeClickHold.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectHotkey.xaml.cs">
+      <DependentUpon>SelectHotkey.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TitleSection.xaml.cs">
       <DependentUpon>TitleSection.xaml</DependentUpon>
@@ -134,7 +137,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Button.xaml">
+    <Page Include="Views\SelectButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -151,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RandomizeClickHold.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SelectHotkey.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

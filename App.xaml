@@ -120,6 +120,16 @@
 
         </Style>
 
+        <Style TargetType="Button"
+               x:Key="SelectHotkeyButton"
+               BasedOn="{StaticResource {x:Type Button}}">
+            
+            
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource BorderColor}" />
+
+        </Style>
+
         <Style x:Key="DefaultCheckBox"
                TargetType="CheckBox"
                BasedOn="{StaticResource {x:Type CheckBox}}">

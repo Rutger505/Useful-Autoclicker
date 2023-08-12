@@ -114,15 +114,21 @@
                           Width="100"
                           Margin="5" />
 
+
+
             
 
-            <views:Button Height="32"
-                          Width="190"
-                          Margin="5"/>
+            <views:SelectButton Height="32"
+                                Width="190"
+                                Margin="5"/>
 
             <views:AutoclickOnButtonHold Height="32"
                                          Width="170"
                                          Margin="5" />
+
+            <views:SelectHotkey Height="32"
+                                Width="160"
+                                Margin="5" />
         </WrapPanel>
 
     </Grid>

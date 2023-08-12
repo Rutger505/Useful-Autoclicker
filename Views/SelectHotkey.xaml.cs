@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Useful_Autoclicker.Views
 {
     /// <summary>
-    /// Interaction logic for Button.xaml
+    /// Interaction logic for SelectHotkey.xaml
     /// </summary>
-    public partial class Button : UserControl
+    public partial class SelectHotkey : UserControl
     {
-        public Button()
+        public SelectHotkey()
         {
             InitializeComponent();
         }
