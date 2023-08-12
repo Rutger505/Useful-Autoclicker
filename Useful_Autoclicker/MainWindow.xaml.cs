@@ -28,5 +28,15 @@ namespace Useful_Autoclicker
         {
             DragMove();
         }
+
+        private void ButtonMinimizeClick(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this).WindowState = WindowState.Minimized;
+        }
+
+        private void ButtonCloseClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

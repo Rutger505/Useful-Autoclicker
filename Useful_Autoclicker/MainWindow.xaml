@@ -23,6 +23,7 @@
             <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
 
+        <!--#region Grid Rows-->
         <Grid.RowDefinitions>
 
             <!-- Custom header-->
@@ -66,30 +67,174 @@
 
             <!-- Spacing bottom -->
             <RowDefinition Height="10" />
-
         </Grid.RowDefinitions>
+        <!--#endregion-->
 
-        <views:Header Grid.Column="0"
-                      Grid.Row="0"
-                      Grid.ColumnSpan="3"
-                      Title="Useful Autoclicker 3.0"
-                      MouseLeftButtonDown="Window_MouseLeftButtonDown" />
+
+        <!--#region Header-->
+        <Grid x:Name="HeaderGrid"
+              Background="{StaticResource HeaderColor}"
+              Grid.Column="0"
+              Grid.Row="0"
+              Grid.ColumnSpan="3"
+              MouseLeftButtonDown="Window_MouseLeftButtonDown">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       Grid.Column="0"
+                       Margin="5,0, 0, 0"
+                       Text="Useful Autoclicker 3.0" />
+
+            <Button Grid.Row="0"
+                    Grid.Column="1"
+                    Content="Default"
+                    Margin="5,0"
+                    Style="{StaticResource HeaderButton}" />
+            <Button Grid.Row="0"
+                    Grid.Column="2"
+                    Content="?"
+                    Margin="5,0"
+                    Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                    Style="{StaticResource HeaderButton}" />
+            <Button Grid.Row="0"
+                    Grid.Column="3"
+                    Content="_"
+                    Foreground="{StaticResource TextColor}"
+                    Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                    Style="{StaticResource HeaderButton}"
+                    Click="ButtonMinimizeClick" />
+            <Button Grid.Row="0"
+                    Grid.Column="4"
+                    Content="X"
+                    Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                    Style="{StaticResource HeaderButton}"
+                    Click="ButtonCloseClick" />
+            <!-- line -->
+            <Rectangle Grid.Row="1"
+                       Grid.ColumnSpan="{Binding Path=ColumnDefinitions.Count, ElementName=HeaderGrid}"
+                       Style="{StaticResource HeaderLine}" />
+        </Grid>
+        <!--#endregion-->
 
         <views:TitleSection Grid.Column="1"
                             Grid.Row="3"
                             Title="Click interval/Hold time" />
 
-        <views:ClickHoldInterval Grid.Column="1"
-                                 Grid.Row="5"
-                                 RowText="Click Interval:" />
-        <views:ClickHoldInterval Grid.Column="1"
-                                 Grid.Row="7"
-                                 RowText="Hold Time:" />
+        <!--#region ClickInterval-->
+        <Border Grid.Column="1"
+                Grid.Row="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="Click Interval:"
+                           Style="{StaticResource RowText}" />
+                <TextBox Grid.Column="1"
+                         Text="0"
+                         Style="{StaticResource DefaultTextBox}" />
+                <TextBlock Grid.Column="2"
+                           Text="h"
+                           Style="{StaticResource TimeIdentifier}" />
+                <TextBox Grid.Column="3"
+                         Text="0"
+                         Style="{StaticResource DefaultTextBox}" />
+                <TextBlock Grid.Column="4"
+                           Text="m"
+                           Style="{StaticResource TimeIdentifier}" />
+                <TextBox Grid.Column="5"
+                         Text="0"
+                         Style="{StaticResource DefaultTextBox}" />
+                <TextBlock Grid.Column="6"
+                           Text="s"
+                           Style="{StaticResource TimeIdentifier}" />
+                <TextBox Grid.Column="7"
+                         Text="0"
+                         Style="{StaticResource DefaultTextBox}" />
+                <TextBlock Grid.Column="8"
+                           Text="ms"
+                           Margin="4,0,9,0"
+                           Style="{StaticResource TimeIdentifier}" />
+
+            </Grid>
+        </Border>
+        <!--#endregion-->
+
+
+        <!--#region HoldInterval-->
+        <Border Grid.Column="1"
+                Grid.Row="7">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="Hold Time:"
+                           Style="{StaticResource RowText}" />
+                <TextBox Grid.Column="1"
+                         Text="0"
+                         Style="{StaticResource DefaultTextBox}" />
+                <TextBlock Grid.Column="2"
+                           Text="h"
+                           Style="{StaticResource TimeIdentifier}" />
+                <TextBox Grid.Column="3"
+                         Text="0"
+                         Style="{StaticResource DefaultTextBox}" />
+                <TextBlock Grid.Column="4"
+                           Text="m"
+                           Style="{StaticResource TimeIdentifier}" />
+                <TextBox Grid.Column="5"
+                         Text="0"
+                         Style="{StaticResource DefaultTextBox}" />
+                <TextBlock Grid.Column="6"
+                           Text="s"
+                           Style="{StaticResource TimeIdentifier}" />
+                <TextBox Grid.Column="7"
+                         Text="0"
+                         Style="{StaticResource DefaultTextBox}" />
+                <TextBlock Grid.Column="8"
+                           Text="ms"
+                           Margin="4,0,9,0"
+                           Style="{StaticResource TimeIdentifier}" />
+
+            </Grid>
+        </Border>
+        <!--#endregion-->
 
         <views:TitleSection Grid.Column="1"
                             Grid.Row="9"
                             Title="Randomize Interval" />
 
+        <!--#region RandomizeInterval-->
         <Grid Grid.Column="1"
               Grid.Row="11">
             <Grid.ColumnDefinitions>
@@ -98,37 +243,140 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <views:RandomizeClickHold Grid.Column="0"
-                                      RowText="Click range" />
-            <views:RandomizeClickHold Grid.Column="2"
-                                      RowText="Hold range" />
+            <!--#region RandomizeClick-->
+            <Border Grid.Column="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               Text="Click range"
+                               Style="{StaticResource RowText}" />
+                    <TextBox Grid.Column="1"
+                             Text="0"
+                             Style="{StaticResource DefaultTextBox}" />
+                    <TextBlock Grid.Column="2"
+                               Text="ms"
+                               Style="{StaticResource TimeIdentifier}" />
+                </Grid>
+            </Border>
+
+            <!--#endregion-->
+            <!--#region RandomizeHold-->
+            <Border Grid.Column="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               Text="Hold range"
+                               Style="{StaticResource RowText}" />
+                    <TextBox Grid.Column="1"
+                             Text="0"
+                             Style="{StaticResource DefaultTextBox}" />
+                    <TextBlock Grid.Column="2"
+                               Text="ms"
+                               Style="{StaticResource TimeIdentifier}" />
+                </Grid>
+            </Border>
+            <!--#endregion-->
         </Grid>
+        <!--#endregion-->
+
+
         <views:TitleSection Grid.Column="1"
                             Grid.Row="13"
                             Title="Clicks/Button/Hotkey" />
 
+        <!--#region Mics-->
         <WrapPanel Grid.Column="1"
                    Grid.Row="15"
                    Margin="-5">
-            <views:Clicks Height="32"
-                          Width="100"
-                          Margin="5" />
+            <!--#region Clicks-->
+            <Border Height="32"
+                    Width="100"
+                    Margin="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
 
+                    <TextBlock Grid.Column="0"
+                               Text="Clicks: "
+                               Style="{StaticResource RowText}" />
+                    <TextBox Grid.Column="1"
+                             Text="0"
+                             Style="{StaticResource DefaultTextBox}"
+                             Margin="0,0,5,0" />
+                </Grid>
+            </Border>
+            <!--#endregion-->
 
+            <!--#region SelectButtons-->
+            <Border Height="32"
+                    Width="190"
+                    Margin="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
 
-            
+                    <TextBlock Grid.Column="0"
+                               Text="Press:"
+                               Style="{StaticResource RowText}" />
+                    <TextBox Grid.Column="1"
+                             Text="0"
+                             Style="{StaticResource DefaultTextBox}"
+                             Margin="10,0,5,0" />
+                    <ComboBox Grid.Column="1"
+                              SelectedIndex="0"
+                              Style="{StaticResource DefaultComboBox}"
+                              Margin="10,0,5,0">
+                        <ComboBoxItem Content="Left" />
+                        <ComboBoxItem Content="Right" />
+                        <ComboBoxItem Content="Middle" />
+                        <ComboBoxItem Content="Side Front" />
+                        <ComboBoxItem Content="Side Back" />
+                    </ComboBox>
+                </Grid>
+            </Border>
+            <!--#endregion-->
 
-            <views:SelectButton Height="32"
-                                Width="190"
-                                Margin="5"/>
+            <!--#region AutoclickOnHold-->
+            <Border Height="32"
+                    Width="170"
+                    Margin="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
 
-            <views:AutoclickOnButtonHold Height="32"
-                                         Width="170"
-                                         Margin="5" />
+                    <TextBlock Grid.Column="0"
+                               Text="Autoclick on button hold: "
+                               Style="{StaticResource RowText}" />
+                    <CheckBox Grid.Column="1"
+                              Style="{StaticResource DefaultCheckBox}"
+                              Margin="10,0,5,0" />
+                </Grid>
+            </Border>
+            <!--#endregion-->
 
-            <views:SelectHotkey Height="32"
-                                Width="160"
-                                Margin="5" />
+            <!--#region SelectHotkey-->
+            <Button Style="{StaticResource SelectHotkeyButton}"
+                    Height="32"
+                    Width="160"
+                    Margin="5"
+                    Content="Select Hotkey(Back Quote)" />
+            <!--#endregion-->
         </WrapPanel>
 
     </Grid>

@@ -76,24 +76,6 @@
     <Compile Include="Views\AutoclickOnButtonHold.xaml.cs">
       <DependentUpon>AutoclickOnButtonHold.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SelectButton.xaml.cs">
-      <DependentUpon>SelectButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ClickHoldInterval.xaml.cs">
-      <DependentUpon>ClickHoldInterval.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Clicks.xaml.cs">
-      <DependentUpon>Clicks.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Header.xaml.cs">
-      <DependentUpon>Header.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\RandomizeClickHold.xaml.cs">
-      <DependentUpon>RandomizeClickHold.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SelectHotkey.xaml.cs">
-      <DependentUpon>SelectHotkey.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\TitleSection.xaml.cs">
       <DependentUpon>TitleSection.xaml</DependentUpon>
     </Compile>
@@ -134,30 +116,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AutoclickOnButtonHold.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SelectButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ClickHoldInterval.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Clicks.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Header.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\RandomizeClickHold.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SelectHotkey.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
