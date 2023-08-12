@@ -1,0 +1,176 @@
+﻿<Application x:Class="Useful_Autoclicker.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Useful_Autoclicker"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!-- Constants -->
+        <SolidColorBrush x:Key="PrimairyColor"
+                         Color="#1B1B1B" />
+
+        <SolidColorBrush x:Key="HeaderColor"
+                         Color="#191919" />
+
+        <SolidColorBrush x:Key="HeaderLineColor"
+                         Color="#0E0E0E" />
+
+        <SolidColorBrush x:Key="TextFieldColor"
+                         Color="#0E0E0E" />
+
+        <SolidColorBrush x:Key="BorderColor"
+                         Color="#000000" />
+
+        <SolidColorBrush x:Key="TextColor"
+                         Color="#DDDDDD" />
+
+        <sys:Double x:Key="TextFontSize">11</sys:Double>
+
+        
+
+
+        <!-- Global -->
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="Padding"
+                    Value="1,0,0,0" />
+            <Setter Property="Background"
+                    Value="{StaticResource TextFieldColor}" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource TextColor}" />
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource BorderColor}" />
+
+            <Setter Property="FontSize"
+                    Value="{StaticResource TextFontSize}" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource TextColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource TextFontSize}" />
+        </Style>
+
+        <Style TargetType="Border">
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource BorderColor}" />
+            <Setter Property="BorderThickness"
+                    Value="1" />
+            <Setter Property="CornerRadius"
+                    Value="4" />
+        </Style>
+
+        <Style TargetType="Rectangle">
+
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background"
+                    Value="Transparent" />
+        </Style>
+
+        <!-- x:Key -->
+        <Style TargetType="TextBox"
+               x:Key="DefaultTextBox"
+               BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Margin"
+                    Value="0,5" />
+            <Setter Property="Width"
+                    Value="35" />
+        </Style>
+        <Style TargetType="TextBlock"
+               x:Key="TimeIdentifier"
+               BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="Margin"
+                    Value="3,0,13,0" />
+        </Style>
+        <Style TargetType="TextBlock"
+               x:Key="RowText"
+               BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="Margin"
+                    Value="10,0,0,0" />
+        </Style>
+        <Style TargetType="Rectangle"
+               x:Key="TitleSectionLine"
+               BasedOn="{StaticResource {x:Type Rectangle}}">
+            <Setter Property="Height"
+                    Value="1" />
+            <Setter Property="Fill"
+                    Value="{StaticResource TextColor}" />
+        </Style>
+        <Style TargetType="Rectangle"
+               x:Key="HeaderLine"
+               BasedOn="{StaticResource {x:Type Rectangle}}">
+            <Setter Property="Height"
+                    Value="1" />
+            <Setter Property="Fill"
+                    Value="{StaticResource HeaderLineColor}" />
+        </Style>
+
+        <Style TargetType="Button"
+               x:Key="HeaderButton"
+               BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Margin"
+                    Value="0,0" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+
+        </Style>
+
+        <Style TargetType="Button"
+               x:Key="SelectHotkeyButton"
+               BasedOn="{StaticResource {x:Type Button}}">
+            
+            
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource BorderColor}" />
+
+        </Style>
+
+        <Style x:Key="DefaultCheckBox"
+               TargetType="CheckBox"
+               BasedOn="{StaticResource {x:Type CheckBox}}">
+            <Setter Property="Background"
+                    Value="{StaticResource TextFieldColor}" />
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource BorderColor}" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+
+        <Style x:Key="DefaultComboBox"
+               TargetType="ComboBox"
+               BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="Margin"
+                    Value="0,5" />
+            <Setter Property="Width"
+                    Value="70" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="Padding"
+                    Value="1,0,0,0" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource TextColor}" />
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource BorderColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource TextFontSize}" />
+            <Setter Property="Background"
+                    Value="{StaticResource TextFieldColor}" />
+
+            <Style.Triggers>
+                <Trigger Property="IsEnabled"
+                         Value="False">
+                    <Setter Property="Background"
+                            Value="Red" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+
+    </Application.Resources>
+</Application>

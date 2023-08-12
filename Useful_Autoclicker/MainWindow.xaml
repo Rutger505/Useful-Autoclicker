@@ -1,0 +1,135 @@
+﻿<Window x:Class="Useful_Autoclicker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:Useful_Autoclicker.Views"
+        mc:Ignorable="d"
+        Height="340"
+        Width="400"
+        WindowStyle="None"
+        Topmost="True"
+        ResizeMode="NoResize"
+        Background="{StaticResource PrimairyColor}">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"
+                      CornerRadius="15"
+                      GlassFrameThickness="0" />
+    </WindowChrome.WindowChrome>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+
+            <!-- Custom header-->
+            <RowDefinition Height="20" />
+            <!-- Custom header line-->
+            <RowDefinition Height="1" />
+
+            <!-- spacing-->
+            <RowDefinition Height="10" />
+            <!-- title -->
+            <RowDefinition Height="16" />
+            <!-- spacing-->
+            <RowDefinition Height="13" />
+
+            <!-- Input section (Click Delay)-->
+            <RowDefinition Height="32" />
+            <!-- spacing between inputs-->
+            <RowDefinition Height="10" />
+            <!-- Input section (Hold Delay)-->
+            <RowDefinition Height="32" />
+
+            <!-- spacing -->
+            <RowDefinition Height="16" />
+            <!-- title -->
+            <RowDefinition Height="16" />
+            <!-- spacing-->
+            <RowDefinition Height="13" />
+
+            <!-- Input section (Randomize interval)-->
+            <RowDefinition Height="32" />
+
+            <!-- spacing-->
+            <RowDefinition Height="16" />
+            <!-- title -->
+            <RowDefinition Height="16" />
+            <!-- spacing-->
+            <RowDefinition Height="13" />
+
+            <!-- WrapPanel (miscellaneous) -->
+            <RowDefinition Height="auto" />
+
+            <!-- Spacing bottom -->
+            <RowDefinition Height="10" />
+
+        </Grid.RowDefinitions>
+
+        <views:Header Grid.Column="0"
+                      Grid.Row="0"
+                      Grid.ColumnSpan="3"
+                      Title="Useful Autoclicker 3.0"
+                      MouseLeftButtonDown="Window_MouseLeftButtonDown" />
+
+        <views:TitleSection Grid.Column="1"
+                            Grid.Row="3"
+                            Title="Click interval/Hold time" />
+
+        <views:ClickHoldInterval Grid.Column="1"
+                                 Grid.Row="5"
+                                 RowText="Click Interval:" />
+        <views:ClickHoldInterval Grid.Column="1"
+                                 Grid.Row="7"
+                                 RowText="Hold Time:" />
+
+        <views:TitleSection Grid.Column="1"
+                            Grid.Row="9"
+                            Title="Randomize Interval" />
+
+        <Grid Grid.Column="1"
+              Grid.Row="11">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <views:RandomizeClickHold Grid.Column="0"
+                                      RowText="Click range" />
+            <views:RandomizeClickHold Grid.Column="2"
+                                      RowText="Hold range" />
+        </Grid>
+        <views:TitleSection Grid.Column="1"
+                            Grid.Row="13"
+                            Title="Clicks/Button/Hotkey" />
+
+        <WrapPanel Grid.Column="1"
+                   Grid.Row="15"
+                   Margin="-5">
+            <views:Clicks Height="32"
+                          Width="100"
+                          Margin="5" />
+
+
+
+            
+
+            <views:SelectButton Height="32"
+                                Width="190"
+                                Margin="5"/>
+
+            <views:AutoclickOnButtonHold Height="32"
+                                         Width="170"
+                                         Margin="5" />
+
+            <views:SelectHotkey Height="32"
+                                Width="160"
+                                Margin="5" />
+        </WrapPanel>
+
+    </Grid>
+</Window>

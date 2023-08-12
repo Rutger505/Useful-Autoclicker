@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Useful_Autoclicker.Views.TitleSection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Useful_Autoclicker.Views"
+             mc:Ignorable="d"
+             x:Name="root"
+             d:DesignHeight="16" 
+             d:DesignWidth="360">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="4" />
+            <RowDefinition Height="1" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="{Binding Title, ElementName=root}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+
+        <Rectangle Grid.Row="2"
+                   Style="{StaticResource TitleSectionLine}" 
+                   Width="80"/>
+    </Grid>
+</UserControl>
