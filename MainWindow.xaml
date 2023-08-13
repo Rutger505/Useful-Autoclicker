@@ -108,14 +108,15 @@
                     Style="{StaticResource HeaderButton}" />
             <Button Grid.Row="0"
                     Grid.Column="3"
-                    Content="_"
+                    Padding="0,5,0,0"
+                    Content="⎯"
                     Foreground="{StaticResource TextColor}"
                     Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
                     Style="{StaticResource HeaderButton}"
                     Click="ButtonMinimizeClick" />
             <Button Grid.Row="0"
                     Grid.Column="4"
-                    Content="X"
+                    Content="⨉"
                     Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
                     Style="{StaticResource HeaderButton}"
                     Click="ButtonCloseClick" />
