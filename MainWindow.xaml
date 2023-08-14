@@ -9,13 +9,67 @@
         WindowStyle="None"
         Topmost="True"
         ResizeMode="NoResize"
-        Background="White">
+        Background="{StaticResource Primary}">
+
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"
                       CornerRadius="10"
                       GlassFrameThickness="0" />
     </WindowChrome.WindowChrome>
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--#region Title Bar-->
+        <StackPanel Grid.Row="0">
+
+            <Grid Height="25"
+                  Background="{StaticResource Secondary}"
+                  MouseDown="DragWindow">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock  Grid.Column="0"
+                            Text="Useful Autoclicker"
+                            Margin="10, 0, 0, 0"
+                            Foreground="{StaticResource Text}" />
+
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal">
+
+
+                    <Button Content="Default"
+                            Style="{StaticResource TitleBarButton}" />
+                    <Button Content="?"
+                            Width="20"
+                            Style="{StaticResource TitleBarButton}" />
+
+                    <Button Content="━"
+                            Padding="0, 3,0,0"
+                            Width="22"
+                            Click="MinimizeWindow"
+                            Style="{StaticResource TitleBarButton}" />
+                    <Button Content="🞪"
+                            Width="22"
+                            Click="CloseWindow"
+                            Style="{StaticResource TitleBarButton}"
+                            Template="{StaticResource CloseButton}" />
+
+                </StackPanel>
+            </Grid>
+
+
+
+
+            <Rectangle Height="1"
+                       Fill="{StaticResource Accent}"></Rectangle>
+        </StackPanel>
+        <!--#endregion-->
 
     </Grid>
 </Window>

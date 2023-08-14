@@ -1,9 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style TargetType="Border">
-        <!--<Setter Property="BorderBrush"
-                Value="{StaticResource BorderColor}" />-->
+    <Style x:Key="RoundedBorder"
+           TargetType="Border">
+        <Setter  Property="BorderBrush"
+                 Value="{StaticResource Accent}" />
         <Setter Property="BorderThickness"
                 Value="1" />
         <Setter Property="CornerRadius"

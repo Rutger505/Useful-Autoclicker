@@ -23,8 +23,6 @@
 
                 <ResourceDictionary Source="Theme/Styles/BorderStyles.xaml" />
 
-                <ResourceDictionary Source="Theme/Styles/RectangeStyles.xaml" />
-
                 <ResourceDictionary Source="Theme/Styles/TextBlockStyles.xaml" />
 
                 <ResourceDictionary Source="Theme/Styles/TextBoxStyles.xaml" />

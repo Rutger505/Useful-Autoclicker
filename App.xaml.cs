@@ -5,7 +5,6 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Useful_Autoclicker.Models;
 
 namespace Useful_Autoclicker
 {
@@ -14,10 +13,6 @@ namespace Useful_Autoclicker
     /// </summary>
     public partial class App : Application
     {
-        protected override async void OnStartup(StartupEventArgs e)
-        {
-            await Task.Delay(1000);
-            base.OnStartup(e);
-        }
+      
     }
 }
