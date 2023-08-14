@@ -11,23 +11,23 @@
 
             <ResourceDictionary.MergedDictionaries>
 
-                <ResourceDictionary Source="Styles/Colors.xaml" />
+                <ResourceDictionary Source="Theme/Styles/Colors.xaml" />
 
-                <ResourceDictionary Source="Styles/ButtonStyles.xaml" />
+                <ResourceDictionary Source="Theme/Styles/ButtonStyles.xaml" />
 
-                <ResourceDictionary Source="Styles/TextBoxStyles.xaml" />
+                <ResourceDictionary Source="Theme/Styles/TextBoxStyles.xaml" />
 
-                <ResourceDictionary Source="Styles/ComboBoxStyles.xaml" />
+                <ResourceDictionary Source="Theme/Styles/ComboBoxStyles.xaml" />
 
-                <ResourceDictionary Source="Styles/CheckBoxStyles.xaml" />
+                <ResourceDictionary Source="Theme/Styles/CheckBoxStyles.xaml" />
 
-                <ResourceDictionary Source="Styles/BorderStyles.xaml" />
+                <ResourceDictionary Source="Theme/Styles/BorderStyles.xaml" />
 
-                <ResourceDictionary Source="Styles/RectangeStyles.xaml" />
+                <ResourceDictionary Source="Theme/Styles/RectangeStyles.xaml" />
 
-                <ResourceDictionary Source="Styles/TextBlockStyles.xaml" />
+                <ResourceDictionary Source="Theme/Styles/TextBlockStyles.xaml" />
 
-                <ResourceDictionary Source="Styles/TextBoxStyles.xaml" />
+                <ResourceDictionary Source="Theme/Styles/TextBoxStyles.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
 

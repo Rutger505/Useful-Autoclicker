@@ -24,17 +24,18 @@ namespace Useful_Autoclicker
             InitializeComponent();
         }
 
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void DragWindow(object sender, MouseButtonEventArgs e)
         {
             DragMove();
         }
 
-        private void ButtonMinimizeClick(object sender, RoutedEventArgs e)
+        private void MinimizeWindow(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this).WindowState = WindowState.Minimized;
+            // ReSharper disable once PossibleNullReferenceException
+            GetWindow(this).WindowState = WindowState.Minimized;
         }
 
-        private void ButtonCloseClick(object sender, RoutedEventArgs e)
+        private void CloseWindow(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
