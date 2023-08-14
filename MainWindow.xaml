@@ -71,5 +71,88 @@
         </StackPanel>
         <!--#endregion-->
 
+
+        <StackPanel Grid.Row="1"
+                    Margin="20, 10, 20, 0">
+            <!--#region Set Delays-->
+            <TextBlock Text="Set Delays"
+                       HorizontalAlignment="Center"
+                       Background="{StaticResource Primary}" />
+
+            <Border Margin="0, -7, 0, 0"
+                    Panel.ZIndex="-1"
+                    Style="{StaticResource RoundedBorder}">
+
+                <StackPanel Margin="12, 18, 12, 14">
+
+                    <!--#region Click Interval-->
+                    <Grid>
+                        <TextBlock Text="Click Interval:" />
+
+                        <StackPanel HorizontalAlignment="Right"
+                                    Orientation="Horizontal">
+                            <TextBox Text="9999"
+                                     Style="{StaticResource TextBoxInline}" />
+                            <TextBlock Text="h"
+                                       Margin="4, 0, 0, 0" />
+
+                            <TextBox Text="9999"
+                                     Margin="12, 0, 0, 0"
+                                     Style="{StaticResource TextBoxInline}" />
+                            <TextBlock Text="m"
+                                       Margin="4, 0, 0, 0" />
+
+                            <TextBox Text="9999"
+                                     Margin="12, 0, 0, 0"
+                                     Style="{StaticResource TextBoxInline}" />
+                            <TextBlock Text="s"
+                                       Margin="4, 0, 0, 0" />
+
+                            <TextBox Text="9999"
+                                     Margin="12, 0, 0, 0"
+                                     Style="{StaticResource TextBoxInline}" />
+                            <TextBlock Text="ms"
+                                       Margin="4, 0, 0, 0" />
+                        </StackPanel>
+                    </Grid>
+                    <!--#endregion-->
+
+                    <!--#region Hold Time-->
+                    <Grid Margin="0,8,0,0">
+                        <TextBlock Text="Hold Time:" />
+
+                        <StackPanel HorizontalAlignment="Right"
+                                    Orientation="Horizontal">
+                            <TextBox Text="9999"
+                                     Style="{StaticResource TextBoxInline}" />
+                            <TextBlock Text="h"
+                                       Margin="4, 0, 0, 0" />
+
+                            <TextBox Text="9999"
+                                     Margin="12, 0, 0, 0"
+                                     Style="{StaticResource TextBoxInline}" />
+                            <TextBlock Text="m"
+                                       Margin="4, 0, 0, 0" />
+
+
+                            <TextBox Text="9999"
+                                     Margin="12, 0, 0, 0"
+                                     Style="{StaticResource TextBoxInline}" />
+                            <TextBlock Text="s"
+                                       Margin="4, 0, 0, 0" />
+
+
+                            <TextBox Text="9999"
+                                     Margin="12, 0, 0, 0"
+                                     Style="{StaticResource TextBoxInline}" />
+                            <TextBlock Text="ms"
+                                       Margin="4, 0, 0, 0" />
+                        </StackPanel>
+                    </Grid>
+                    <!--#endregion-->
+                </StackPanel>
+            </Border>
+            <!--#endregion-->
+        </StackPanel>
     </Grid>
 </Window>

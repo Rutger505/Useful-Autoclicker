@@ -99,7 +99,7 @@
 
                 <Setter Property="Background"
                         TargetName="border"
-                        Value="#EE0000" />
+                        Value="#BB0000" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
