@@ -91,25 +91,21 @@
 
                         <StackPanel HorizontalAlignment="Right"
                                     Orientation="Horizontal">
-                            <TextBox Text="9999"
-                                     Style="{StaticResource TextBoxInline}" />
+                            <TextBox Style="{StaticResource TextBoxInline}" />
                             <TextBlock Text="h"
                                        Margin="4, 0, 0, 0" />
 
-                            <TextBox Text="9999"
-                                     Margin="12, 0, 0, 0"
+                            <TextBox Margin="12, 0, 0, 0"
                                      Style="{StaticResource TextBoxInline}" />
                             <TextBlock Text="m"
                                        Margin="4, 0, 0, 0" />
 
-                            <TextBox Text="9999"
-                                     Margin="12, 0, 0, 0"
+                            <TextBox Margin="12, 0, 0, 0"
                                      Style="{StaticResource TextBoxInline}" />
                             <TextBlock Text="s"
                                        Margin="4, 0, 0, 0" />
 
-                            <TextBox Text="9999"
-                                     Margin="12, 0, 0, 0"
+                            <TextBox Margin="12, 0, 0, 0"
                                      Style="{StaticResource TextBoxInline}" />
                             <TextBlock Text="ms"
                                        Margin="4, 0, 0, 0" />
@@ -123,27 +119,23 @@
 
                         <StackPanel HorizontalAlignment="Right"
                                     Orientation="Horizontal">
-                            <TextBox Text="9999"
-                                     Style="{StaticResource TextBoxInline}" />
+                            <TextBox Style="{StaticResource TextBoxInline}" />
                             <TextBlock Text="h"
                                        Margin="4, 0, 0, 0" />
 
-                            <TextBox Text="9999"
-                                     Margin="12, 0, 0, 0"
+                            <TextBox Margin="12, 0, 0, 0"
                                      Style="{StaticResource TextBoxInline}" />
                             <TextBlock Text="m"
                                        Margin="4, 0, 0, 0" />
 
 
-                            <TextBox Text="9999"
-                                     Margin="12, 0, 0, 0"
+                            <TextBox Margin="12, 0, 0, 0"
                                      Style="{StaticResource TextBoxInline}" />
                             <TextBlock Text="s"
                                        Margin="4, 0, 0, 0" />
 
 
-                            <TextBox Text="9999"
-                                     Margin="12, 0, 0, 0"
+                            <TextBox Margin="12, 0, 0, 0"
                                      Style="{StaticResource TextBoxInline}" />
                             <TextBlock Text="ms"
                                        Margin="4, 0, 0, 0" />
@@ -153,6 +145,101 @@
                 </StackPanel>
             </Border>
             <!--#endregion-->
+
+
+            <!--#region Click Behaviour + Randomize Delays-->
+            <Grid Margin="0,17,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!--#region Click Behaviour-->
+                <TextBlock Grid.Column="0"
+                           Text="Click Behaviour"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           Background="{StaticResource Primary}" />
+
+                <Border Grid.Column="0"
+                        Margin="0, 8, 0, 0"
+                        Panel.ZIndex="-1"
+                        Style="{StaticResource RoundedBorder}">
+
+                    <StackPanel Margin="12, 18, 12, 14">
+                        <!--#region Mouse button-->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Mouse button:" />
+                            <ComboBox Margin="10, 0, 0, 0"
+                                      SelectedIndex="3"
+                                      Style="{StaticResource ComboBoxMouseButton}">
+                                <ComboBoxItem Content="Left" />
+                                <ComboBoxItem Content="Right" />
+                                <ComboBoxItem Content="Middle" />
+                                <ComboBoxItem Content="Side front" />
+                                <ComboBoxItem Content="Side back" />
+                            </ComboBox>
+                        </StackPanel>
+                        <!--#endregion-->
+
+                        <!--#region Repeat-->
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,5,0,0">
+                            <TextBlock Text="Repeat:" />
+                            <CheckBox  Margin="8,0, 0, 0"
+                                       Style="{StaticResource CheckBox}" />
+                            <TextBox Margin="25, 0, 0, 0"
+                                     Text="# many times"
+                                     Style="{StaticResource TextBoxRepeat}" />
+                        </StackPanel>
+                        <!--#endregion-->
+                    </StackPanel>
+
+                </Border>
+                <!--#endregion-->
+
+                <!--#region Randomize Delays-->
+                <TextBlock Grid.Column="2"
+                           Text="Randomize Delays"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           Background="{StaticResource Primary}" />
+
+                <Border Grid.Column="2"
+                        Margin="0, 8, 0, 0"
+                        Panel.ZIndex="-1"
+                        Style="{StaticResource RoundedBorder}">
+
+                    <StackPanel Margin="12, 18, 12, 14">
+                        <!--#region Click range-->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Click range:" />
+                            <TextBox Margin="18,0,0,0"
+                                     Style="{StaticResource TextBoxInline}" />
+                            <TextBlock Text="ms"
+                                       Margin="4,0,0,0" />
+                        </StackPanel>
+                        <!--#endregion-->
+
+                        <!--#region Repeat-->
+                        <StackPanel Margin="0,5,0,0"
+                                    Orientation="Horizontal">
+                            <TextBlock Text="Hold range:" />
+                            <TextBox Margin="18,0,0,0"
+                                     Style="{StaticResource TextBoxInline}" />
+                            <TextBlock Text="ms"
+                                       Margin="4,0,0,0" />
+                        </StackPanel>
+                        <!--#endregion-->
+                    </StackPanel>
+                </Border>
+                <!--#endregion-->
+            </Grid>
+            <!--#endregion-->
+
+
+
         </StackPanel>
     </Grid>
 </Window>
