@@ -9,6 +9,7 @@
         WindowStyle="None"
         Topmost="True"
         ResizeMode="NoResize"
+        Icon="Theme/Images/icon.ico"
         Background="{StaticResource Primary}">
 
     <WindowChrome.WindowChrome>
@@ -69,6 +70,16 @@
             <Rectangle Height="1"
                        Fill="{StaticResource Accent}"></Rectangle>
         </StackPanel>
+        <!--#endregion-->
+
+        <!--#region Version Number-->
+        <Canvas Grid.Row="1">
+            <TextBlock Canvas.Bottom="10"
+                       Canvas.Right="10"
+                       Opacity="0.5"
+                       FontSize="10"
+                       Text="V3.0.1" />
+        </Canvas>
         <!--#endregion-->
 
 
@@ -145,7 +156,6 @@
                 </StackPanel>
             </Border>
             <!--#endregion-->
-
 
             <!--#region Click Behaviour + Randomize Delays-->
             <Grid Margin="0,13,0,0">
