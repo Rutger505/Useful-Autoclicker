@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Height="330"
+        Height="343"
         Width="400"
         WindowStyle="None"
         Topmost="True"
@@ -148,7 +148,7 @@
 
 
             <!--#region Click Behaviour + Randomize Delays-->
-            <Grid Margin="0,17,0,0">
+            <Grid Margin="0,13,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="*" />
@@ -163,7 +163,7 @@
                            Background="{StaticResource Primary}" />
 
                 <Border Grid.Column="0"
-                        Margin="0, 8, 0, 0"
+                        Margin="0, 9, 0, 0"
                         Panel.ZIndex="-1"
                         Style="{StaticResource RoundedBorder}">
 
@@ -187,10 +187,10 @@
                         <StackPanel Orientation="Horizontal"
                                     Margin="0,5,0,0">
                             <TextBlock Text="Repeat:" />
-                            <CheckBox  Margin="8,0, 0, 0"
+                            <CheckBox  Margin="28,0, 0, 0"
                                        Style="{StaticResource CheckBox}" />
-                            <TextBox Margin="25, 0, 0, 0"
-                                     Text="# many times"
+                            <TextBox Margin="5, 0, 0, 0"
+                                     IsEnabled="false"
                                      Style="{StaticResource TextBoxRepeat}" />
                         </StackPanel>
                         <!--#endregion-->
@@ -207,7 +207,7 @@
                            Background="{StaticResource Primary}" />
 
                 <Border Grid.Column="2"
-                        Margin="0, 8, 0, 0"
+                        Margin="0, 9, 0, 0"
                         Panel.ZIndex="-1"
                         Style="{StaticResource RoundedBorder}">
 
@@ -238,7 +238,56 @@
             </Grid>
             <!--#endregion-->
 
+            <!--#region Hotkeys-->
+            <Grid Margin="0,13,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+                           Text="Hotkeys"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           Background="{StaticResource Primary}" />
 
+                <Border Grid.Column="0"
+                        Margin="0, 9, 0, 0"
+                        Panel.ZIndex="-1"
+                        Style="{StaticResource RoundedBorder}">
+
+                    <StackPanel Margin="12, 18, 12, 14">
+                        <!--#region Autoclick on button hold-->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Autoclick on button hold:" />
+                            <CheckBox Margin="12,0,0,0"
+                                      Style="{StaticResource CheckBox}" />
+                        </StackPanel>
+                        <!--#endregion-->
+
+                        <!--#region Start key-->
+                        <StackPanel Margin="0,8,0,0"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="Start key:" />
+                            <Border Margin="38,0,0,0"
+                                    Height="20"
+                                    Padding="3,0"
+                                    Background="{StaticResource Secondary}"
+                                    CornerRadius="3"
+                                    Style="{StaticResource RoundedBorder}">
+                                <TextBlock Text="F1" />
+                            </Border>
+                            <Button  Margin="5,0,0,0"
+                                     Content="Change"
+                                     Style="{StaticResource ChangeHotkeyButton}" />
+                        </StackPanel>
+                        <!--#endregion-->
+
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!--#endregion-->
 
         </StackPanel>
     </Grid>

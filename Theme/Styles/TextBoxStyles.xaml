@@ -72,13 +72,23 @@
         <!--#endregion-->
     </Style>
 
+
     <Style x:Key="TextBoxRepeat"
            TargetType="TextBox"
            BasedOn="{StaticResource TextBoxInline}">
         <Setter Property="Width"
                 Value="74" />
         <Setter Property="MaxLength"
-                Value="6" />
+                Value="9" />
+        <Setter Property="Text"
+                Value="# times" />
+
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Text" Value="0"/>
+            </Trigger>
+        </Style.Triggers>
+
 
     </Style>
 </ResourceDictionary>
