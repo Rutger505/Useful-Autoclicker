@@ -13,9 +13,11 @@ namespace Useful_Autoclicker.MVVM.ViewModels
     internal class MainViewModel : ObservableObject
     {
 
-        public SettingViewModel HomeVM { get; set; }
+        public SettingViewModel HomeViewModel { get; set; }
 
-        public HelpView HelpVM { get; set; }
+        public HelpView HelpViewModel { get; set; }
+
+        public RelayCommand HelpViewCommand { get; set; }
 
 
         private object _currentView;
@@ -30,11 +32,27 @@ namespace Useful_Autoclicker.MVVM.ViewModels
             }
         }
 
+        public bool HelpCheckBoxChecked { get; set; } = false;
+
+
         public MainViewModel()
         {
-            HomeVM = new SettingViewModel();
-            HelpVM = new HelpView();
-            CurrentView = HelpVM;
+            HomeViewModel = new SettingViewModel();
+            HelpViewModel = new HelpView();
+
+            HelpViewCommand = new RelayCommand(o =>
+            {
+                if (HelpCheckBoxChecked)
+                {
+                    CurrentView = HelpViewModel;
+                }
+                else
+                {
+                    CurrentView = HomeViewModel;
+                }
+            });
+
+            CurrentView = HomeViewModel;
         }
     }
 }

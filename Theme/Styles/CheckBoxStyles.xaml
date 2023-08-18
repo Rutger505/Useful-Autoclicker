@@ -1,9 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-
-
-
     <Style x:Key="CheckBox"
            TargetType="CheckBox">
 
@@ -25,7 +22,6 @@
                 Value="Bottom" />
         <Setter Property="HorizontalContentAlignment"
                 Value="Center" />
-
 
         <!--#region Corner Radius + hover effect-->
         <Setter Property="Template">
@@ -87,7 +83,51 @@
         <!--#endregion-->
     </Style>
 
+    <Style x:Key="HelpButton"
+           TargetType="{x:Type CheckBox}">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="VerticalAlignment"
+                Value="Center"/>
+        <Setter Property="Padding"
+                Value="7,0" />
+        <Setter Property="Height" Value="25" />
 
+        <!--#region template -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Grid x:Name="templateRoot"
+                          Background="Transparent"
+                          SnapsToDevicePixels="True">
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Focusable="False"
+                                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                          Margin="{TemplateBinding Padding}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          VerticalAlignment="{TemplateBinding VerticalAlignment}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    TargetName="templateRoot"
+                                    Value="{StaticResource Hover}" />
+                        </Trigger>
 
-
+                        <Trigger Property="IsChecked"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    TargetName="templateRoot"
+                                    Value="LightBlue" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <!--#endregion-->
+    </Style>
 </ResourceDictionary>

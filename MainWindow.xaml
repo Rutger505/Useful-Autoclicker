@@ -48,13 +48,12 @@
                 <StackPanel Grid.Column="1"
                             Orientation="Horizontal">
 
-
                     <Button Content="Default"
                             Style="{StaticResource TitleBarButton}" />
-                    <Button Content="?"
-                            Width="20"
-                            Style="{StaticResource TitleBarButton}" />
-
+                    <CheckBox Content="?"
+                              IsChecked="{Binding HelpCheckBoxChecked}"
+                              Command="{Binding HelpViewCommand}"
+                              Style="{DynamicResource HelpButton}" />
                     <Button Content="━"
                             Padding="0, 3,0,0"
                             Width="22"
