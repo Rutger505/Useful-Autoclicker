@@ -80,15 +80,5 @@
                 Value="74" />
         <Setter Property="MaxLength"
                 Value="9" />
-        <Setter Property="Text"
-                Value="# times" />
-
-        <Style.Triggers>
-            <Trigger Property="IsEnabled" Value="True">
-                <Setter Property="Text" Value="0"/>
-            </Trigger>
-        </Style.Triggers>
-
-
     </Style>
 </ResourceDictionary>
