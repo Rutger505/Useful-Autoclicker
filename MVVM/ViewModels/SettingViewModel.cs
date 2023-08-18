@@ -9,7 +9,7 @@ namespace Useful_Autoclicker.MVVM.ViewModels
 {
     internal class SettingViewModel : ObservableObject
     {
-        private bool _shouldRepeat;
+        private bool _shouldRepeat = false;
 
         public bool ShouldRepeat
         {
@@ -25,7 +25,18 @@ namespace Useful_Autoclicker.MVVM.ViewModels
 
         public string RepeatTextBoxText
         {
-            get { return ShouldRepeat ? RepeatAmount.ToString() : "# times"; }
+            get
+            {
+                if (ShouldRepeat)
+                {
+                    return RepeatAmount.ToString();
+                }
+                else
+                {
+                    return RepeatAmount == 0 ? "# times" : RepeatAmount.ToString();
+                }
+
+            }
             set
             {
                 if (ShouldRepeat)
@@ -36,7 +47,7 @@ namespace Useful_Autoclicker.MVVM.ViewModels
             }
         }
 
-        private int _repeatAmount = 100;
+        private int _repeatAmount;
 
         public int RepeatAmount
         {
@@ -47,5 +58,31 @@ namespace Useful_Autoclicker.MVVM.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        private bool _shouldAutoclickOnHold = false;
+
+        public bool ShouldAutoclickOnHold
+        {
+            get { return _shouldAutoclickOnHold; }
+            set
+            {
+                _shouldAutoclickOnHold = value;
+                ShouldUseHotkey = !value;
+            }
+        }
+
+        private bool _shouldUseHotkey = true;
+
+        public bool ShouldUseHotkey
+        {
+            get { return _shouldUseHotkey; }
+            set
+            {
+                _shouldUseHotkey = value;
+                OnPropertyChanged();
+            }
+        }
+
+
     }
 }

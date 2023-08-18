@@ -35,6 +35,10 @@
                 <views:SettingView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModels:HelpViewModel}">
+                <views:HelpView />
+            </DataTemplate>
+
         </ResourceDictionary>
 
     </Application.Resources>

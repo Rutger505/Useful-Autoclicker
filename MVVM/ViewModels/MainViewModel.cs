@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Useful_Autoclicker.Core;
+using Useful_Autoclicker.MVVM.Views;
 
 namespace Useful_Autoclicker.MVVM.ViewModels
 {
@@ -12,6 +14,9 @@ namespace Useful_Autoclicker.MVVM.ViewModels
     {
 
         public SettingViewModel HomeVM { get; set; }
+
+        public HelpView HelpVM { get; set; }
+
 
         private object _currentView;
 
@@ -28,7 +33,8 @@ namespace Useful_Autoclicker.MVVM.ViewModels
         public MainViewModel()
         {
             HomeVM = new SettingViewModel();
-            CurrentView = HomeVM;
+            HelpVM = new HelpView();
+            CurrentView = HelpVM;
         }
     }
 }

@@ -10,4 +10,28 @@
         <Setter Property="CornerRadius"
                 Value="5" />
     </Style>
+
+    <Style x:Key="HotkeyPresenter"
+           TargetType="Border"
+           BasedOn="{StaticResource RoundedBorder}">
+
+        <Setter Property="Height"
+                Value="20" />
+        <Setter Property="Padding"
+                Value="3,0" />
+        <Setter Property="CornerRadius"
+                Value="3" />
+
+        <Setter Property="Background"
+                Value="{StaticResource Secondary}" />
+
+
+        <Style.Triggers>
+            <Trigger Property="IsEnabled"
+                     Value="False">
+                <Setter Property="Opacity"
+                        Value="0.5" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

@@ -13,8 +13,7 @@
         <viewModels:SettingViewModel />
     </UserControl.DataContext>
 
-    <StackPanel Grid.Row="1"
-                Margin="20, 10, 20, 0">
+    <StackPanel Margin="20, 10, 20, 0">
         <!--#region Set Delays-->
         <TextBlock Text="Set Delays"
                    HorizontalAlignment="Center"
@@ -132,7 +131,7 @@
                                    Style="{StaticResource CheckBox}" />
                         <TextBox Margin="5, 0, 0, 0"
                                  IsEnabled="{Binding ShouldRepeat}"
-                                 Text="{Binding RepeatTextBoxText}"
+                                 Text="{Binding RepeatTextBoxText, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource TextBoxRepeat}" />
                     </StackPanel>
                     <!--#endregion-->
@@ -202,6 +201,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Autoclick on button hold:" />
                         <CheckBox Margin="12,0,0,0"
+                                  IsChecked="{Binding ShouldAutoclickOnHold}"
                                   Style="{StaticResource CheckBox}" />
                     </StackPanel>
                     <!--#endregion-->
@@ -212,15 +212,13 @@
 
                         <TextBlock Text="Start key:" />
                         <Border Margin="38,0,0,0"
-                                Height="20"
-                                Padding="3,0"
-                                Background="{StaticResource Secondary}"
-                                CornerRadius="3"
-                                Style="{StaticResource RoundedBorder}">
+                                IsEnabled="{Binding ShouldUseHotkey}"
+                                Style="{StaticResource HotkeyPresenter}">
                             <TextBlock Text="F1" />
                         </Border>
                         <Button  Margin="5,0,0,0"
                                  Content="Change"
+                                 IsEnabled="{Binding ShouldUseHotkey}"
                                  Style="{StaticResource ChangeHotkeyButton}" />
                     </StackPanel>
                     <!--#endregion-->
@@ -228,7 +226,6 @@
                 </StackPanel>
             </Border>
         </Grid>
-
         <!--#endregion-->
 
     </StackPanel>
