@@ -1,17 +1,75 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <!--#region Main theme colors-->
     <SolidColorBrush x:Key="Primary"
                      Color="#1B1B1B" />
     <SolidColorBrush x:Key="Secondary"
                      Color="#161616" />
     <SolidColorBrush x:Key="Accent"
                      Color="#0B0B0B" />
-    <SolidColorBrush x:Key="Hover"
-                     Color="#111111" />
-    <SolidColorBrush x:Key="Pressed"
-                     Color="#141414" />
-
     <SolidColorBrush x:Key="Text"
                      Color="#DDDDDD" />
+    <!--#endregion-->
+
+    <!--#region Element Interactivity colors-->
+    <!--#region Title Bar-->
+    <SolidColorBrush x:Key="TitleHover"
+                     Color="#111111" />
+    <SolidColorBrush x:Key="TitlePressing"
+                     Color="#141414" />
+    <SolidColorBrush x:Key="TitleHelpChecked"
+                     Color="#FF569DE5" />
+    <SolidColorBrush x:Key="TitleCloseHover"
+                     Color="#CC0000" />
+    <SolidColorBrush x:Key="TitleClosePressing"
+                     Color="#690000" />
+    <!--#endregion-->
+
+    <!--#region TextBox-->
+    <SolidColorBrush x:Key="TextBoxHover"
+                     Color="#FF7EB4EA" />
+    <SolidColorBrush x:Key="TextBoxFocused"
+                     Color="#FF569DE5" />
+    <!--#endregion-->
+
+    <!--#region CheckBox-->
+    <SolidColorBrush x:Key="CheckBoxHover"
+                     Color="#FF7EB4EA" />
+    <SolidColorBrush x:Key="CheckBoxPressing"
+                     Color="#FF569DE5" />
+    <!--#endregion-->
+
+    <!--#region Button-->
+    <SolidColorBrush x:Key="ButtonHover"
+                     Color="#FF3C7FB1" />
+    <SolidColorBrush x:Key="ButtonPressing"
+                     Color="#FF2C628B" />
+    <!--#endregion-->
+
+    <!--#region ComboBox-->
+    <SolidColorBrush x:Key="ComboBoxHover"
+                     Color="#FF7EB4EA" />
+    <SolidColorBrush x:Key="ComboBoxPressing"
+                     Color="#FF569DE5" />
+
+    <!--#region Not used yet..-->
+    <SolidColorBrush x:Key="ComboBoxItemSelectedBackground"
+                     Color="#FF569DE5" />
+    <SolidColorBrush x:Key="ComboBoxItemSelectedBorder"
+                     Color="#FF569DE5" />
+
+    <SolidColorBrush x:Key="ComboBoxItemHoverBackground"
+                     Color="#FF7EB4EA" />
+    <SolidColorBrush x:Key="ComboBoxItemHoverBorder"
+                     Color="#FF569DE5" />
+
+
+    <SolidColorBrush x:Key="ComboBoxItemPressingBackground"
+                     Color="#FF569DE5" />
+    <SolidColorBrush x:Key="ComboBoxItemPressingBorder"
+                     Color="#FF569DE5" />
+    <!--#endregion-->
+    <!--#endregion-->
+    <!--#endregion-->
 </ResourceDictionary>

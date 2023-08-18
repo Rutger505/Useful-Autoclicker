@@ -68,7 +68,13 @@
                                  Value="true">
                             <Setter Property="BorderBrush"
                                     TargetName="border"
-                                    Value="#FF7EB4EA" />
+                                    Value="{StaticResource CheckBoxHover}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter Property="BorderBrush"
+                                    TargetName="border"
+                                    Value="{StaticResource CheckBoxPressing}" />
                         </Trigger>
                         <Trigger Property="IsChecked"
                                  Value="true">
@@ -90,10 +96,11 @@
         <Setter Property="BorderThickness"
                 Value="0" />
         <Setter Property="VerticalAlignment"
-                Value="Center"/>
+                Value="Center" />
         <Setter Property="Padding"
                 Value="7,0" />
-        <Setter Property="Height" Value="25" />
+        <Setter Property="Height"
+                Value="25" />
 
         <!--#region template -->
         <Setter Property="Template">
@@ -115,14 +122,20 @@
                                  Value="True">
                             <Setter Property="Background"
                                     TargetName="templateRoot"
-                                    Value="{StaticResource Hover}" />
+                                    Value="{StaticResource TitleHover}" />
                         </Trigger>
 
                         <Trigger Property="IsChecked"
                                  Value="True">
                             <Setter Property="Background"
                                     TargetName="templateRoot"
-                                    Value="LightBlue" />
+                                    Value="{StaticResource TitleHelpChecked}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed"
+                                 Value="true">
+                            <Setter Property="Background"
+                                    TargetName="templateRoot"
+                                    Value="{StaticResource TitlePressing}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

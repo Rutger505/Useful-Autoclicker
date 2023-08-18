@@ -41,7 +41,14 @@ namespace Useful_Autoclicker.MVVM.ViewModels
             {
                 if (ShouldRepeat)
                 {
-                    RepeatAmount = int.Parse(value);
+                    if (int.TryParse(value, out int result))
+                    {
+                        RepeatAmount = result;
+                    }
+                    else
+                    {
+                        RepeatAmount = 0;
+                    }
                     OnPropertyChanged();
                 }
             }

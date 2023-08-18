@@ -42,6 +42,7 @@
 
                 <TextBlock  Grid.Column="0"
                             Text="Useful Autoclicker"
+                            FontSize="13"
                             Margin="10, 0, 0, 0"
                             Foreground="{StaticResource Text}" />
 
@@ -72,7 +73,7 @@
 
 
             <Rectangle Height="1"
-                       Fill="{StaticResource Accent}"></Rectangle>
+                       Fill="{StaticResource Accent}" />
         </StackPanel>
         <!--#endregion-->
 
@@ -87,7 +88,8 @@
         <!--#endregion-->
 
 
-        <ContentControl Grid.Row="1"
+        <ContentControl Focusable="False"
+                        Grid.Row="1"
                         Content="{Binding CurrentView}" />
     </Grid>
 </Window>

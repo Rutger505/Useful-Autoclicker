@@ -2,13 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
-
-    <SolidColorBrush x:Key="Button.MouseOver.Border"
-                     Color="#FF3C7FB1" />
-    <SolidColorBrush x:Key="Button.Pressed.Border"
-                     Color="#FF2C628B" />
-
-
     <!--#region Button No border + Transparent background-->
     <Style x:Key="StandardButton"
            TargetType="Button">
@@ -61,14 +54,14 @@
 
                             <Setter Property="Background"
                                     TargetName="border"
-                                    Value="{StaticResource Hover}" />
+                                    Value="{StaticResource TitleHover}" />
                         </Trigger>
                         <Trigger Property="IsPressed"
                                  Value="true">
 
                             <Setter Property="Background"
                                     TargetName="border"
-                                    Value="{StaticResource Pressed}" />
+                                    Value="{StaticResource TitlePressing}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -97,17 +90,16 @@
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver"
                      Value="true">
-
                 <Setter Property="Background"
                         TargetName="border"
-                        Value="#DD0000" />
+                        Value="{StaticResource TitleCloseHover}" />
             </Trigger>
             <Trigger Property="IsPressed"
                      Value="true">
 
                 <Setter Property="Background"
                         TargetName="border"
-                        Value="#BB0000" />
+                        Value="{StaticResource TitleClosePressing}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -152,13 +144,13 @@
                                  Value="true">
                             <Setter Property="BorderBrush"
                                     TargetName="border"
-                                    Value="{StaticResource Button.MouseOver.Border}" />
+                                    Value="{StaticResource ButtonHover}" />
                         </Trigger>
                         <Trigger Property="IsPressed"
                                  Value="true">
                             <Setter Property="BorderBrush"
                                     TargetName="border"
-                                    Value="{StaticResource Button.Pressed.Border}" />
+                                    Value="{StaticResource ButtonPressing}" />
                         </Trigger>
                         <Trigger Property="IsEnabled"
                                  Value="false">
