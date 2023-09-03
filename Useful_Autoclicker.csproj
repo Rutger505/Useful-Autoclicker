@@ -93,6 +93,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Core\Autoclicker\Autoclicker.cs" />
+    <Compile Include="Core\Autoclicker\InputListener.cs" />
+    <Compile Include="Core\Autoclicker\Settings.cs" />
+    <Compile Include="Core\Autoclicker\SettingsDefault.cs" />
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="MainWindow.xaml.cs">

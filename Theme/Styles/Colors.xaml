@@ -15,29 +15,30 @@
     <!--#region Element Interactivity colors-->
     <!--#region Title Bar-->
     <SolidColorBrush x:Key="TitleHover"
-                     Color="#111111" />
+                     Color="#101010" />
     <SolidColorBrush x:Key="TitlePressing"
                      Color="#141414" />
     <SolidColorBrush x:Key="TitleHelpChecked"
-                     Color="#FF569DE5" />
+                     Color="#FF2C628B" />
     <SolidColorBrush x:Key="TitleCloseHover"
                      Color="#CC0000" />
     <SolidColorBrush x:Key="TitleClosePressing"
                      Color="#690000" />
     <!--#endregion-->
 
+
     <!--#region TextBox-->
     <SolidColorBrush x:Key="TextBoxHover"
-                     Color="#FF7EB4EA" />
+                     Color="#FF3C7FB1" />
     <SolidColorBrush x:Key="TextBoxFocused"
-                     Color="#FF569DE5" />
+                     Color="#FF2C628B" />
     <!--#endregion-->
 
     <!--#region CheckBox-->
     <SolidColorBrush x:Key="CheckBoxHover"
-                     Color="#FF7EB4EA" />
+                     Color="#FF3C7FB1" />
     <SolidColorBrush x:Key="CheckBoxPressing"
-                     Color="#FF569DE5" />
+                     Color="#FF2C628B" />
     <!--#endregion-->
 
     <!--#region Button-->
@@ -49,9 +50,9 @@
 
     <!--#region ComboBox-->
     <SolidColorBrush x:Key="ComboBoxHover"
-                     Color="#FF7EB4EA" />
+                     Color="#FF3C7FB1" />
     <SolidColorBrush x:Key="ComboBoxPressing"
-                     Color="#FF569DE5" />
+                     Color="#FF2C628B" />
 
     <!--#region Not used yet..-->
     <SolidColorBrush x:Key="ComboBoxItemSelectedBackground"
