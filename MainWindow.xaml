@@ -10,7 +10,6 @@
         WindowStyle="None"
         Topmost="True"
         ResizeMode="NoResize"
-        Icon="Theme/Images/icon.ico"
         Background="{StaticResource Primary}">
 
     <WindowChrome.WindowChrome>
