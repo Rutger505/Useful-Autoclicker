@@ -25,20 +25,20 @@ namespace Useful_Autoclicker
             InitializeComponent();
         }
 
+
         private void DragWindow(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
-        }
-
-        private void MinimizeWindow(object sender, RoutedEventArgs e)
-        {
-            // ReSharper disable once PossibleNullReferenceException
-            GetWindow(this).WindowState = WindowState.Minimized;
+                DragMove();
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            Close();
+        }
+
+        private void MinimizeWindow(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
     }
 }

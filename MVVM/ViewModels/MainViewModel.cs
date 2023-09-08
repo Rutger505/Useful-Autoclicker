@@ -1,4 +1,5 @@
-﻿using Useful_Autoclicker.Core;
+﻿using System;
+using Useful_Autoclicker.Core;
 using Useful_Autoclicker.MVVM.Views;
 
 namespace Useful_Autoclicker.MVVM.ViewModels
@@ -6,12 +7,11 @@ namespace Useful_Autoclicker.MVVM.ViewModels
     internal class MainViewModel : ObservableObject
     {
 
-        public SettingViewModel HomeViewModel { get; set; }
+        public SettingViewModel HomeViewModel { get;  }
 
-        public HelpView HelpViewModel { get; set; }
+        public HelpView HelpViewModel { get;  }
 
-        public RelayCommand HelpViewCommand { get; set; }
-
+        public RelayCommand HelpViewCommand { get; }
 
         private object _currentView;
 
@@ -32,6 +32,7 @@ namespace Useful_Autoclicker.MVVM.ViewModels
         {
             HomeViewModel = new SettingViewModel();
             HelpViewModel = new HelpView();
+            CurrentView = HomeViewModel;
 
             HelpViewCommand = new RelayCommand(o =>
             {
@@ -44,8 +45,6 @@ namespace Useful_Autoclicker.MVVM.ViewModels
                     CurrentView = HomeViewModel;
                 }
             });
-
-            CurrentView = HomeViewModel;
         }
     }
 }
