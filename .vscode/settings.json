@@ -1,0 +1,12 @@
+{
+  "emeraldwalk.runonsave": {
+    "autoClearConsole": true,
+    "commands": [
+      {
+        "match": "\\.puml$",
+        "cmd": "java -jar Docs/uml/plantuml.jar  Docs/uml/*.puml -o img/ -svg -verbose"
+      }
+    ]
+  },
+  "cSpell.words": ["Autoclicker", "PDF", "puml", "PlantUML"]
+}
