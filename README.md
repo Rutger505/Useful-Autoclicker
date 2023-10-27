@@ -19,7 +19,7 @@
 
 ### Downloading <ins>without</ins> Java installed
 
-* Install Java SE from [here](https://www.java.com/en/download/)
+* Install Java SE from [Java JDK](https://www.oracle.com/java/technologies/downloads/#jdk21-windows)
 * Choose your correct operating system and download the installer
 * Click on the latest release on the right side
 * Click on the file "Useful-Autoclicker.jar"
@@ -33,34 +33,29 @@
 
 ## Not starting? try the following steps:
 
-### Downloading Java again
-1. download and install [Java SE](https://www.java.com/en/download/)
-2. download and install [Java JDK](https://www.oracle.com/java/technologies/downloads/#jdk20-windows) 
+### Downloading the newest version of Java
 
-### Setting the correct java path
- 1. Right click the autoclicker and click open width. 
- 2. Click "choose another app". 
- 3. Click "Choose an app on this PC". 
- 4. Go to your programFiles located in the windows drive(usually C:).
- 5. Click "java".
- 6. Click "jre".
- 7. Click "bin".
- 8. Click "javaw.exe".
- 9. Click ok.
- 10. If this does not work, try the same steps but select the JDK this time.
+download and install [Java JDK](https://www.oracle.com/java/technologies/downloads/#jdk21-windows)
 
-### Run the file using a batch file.
- 1. Make a txt file in the same directory as the Autoclicker. You can call it whatever you want.
- 2.  and paste the following code in this file.
+### Run the file using terminal
+
+1. Right click on the folder where the Autoclicker is located and click "open in terminal".
+2. Run the following command in the terminal:
+
 ```
 java -jar "Useful-Autoclicker.jar"
 ```
- 3. Then save it as a .bat file.
 
-### Did the autoclicker suddenly stopped working? try deleting the following file:
-1. Press the windows key + R. You should open the "run" window.
-2. Type in the following and click okay.
-```
-%appdata%
-```
-3. Find and delete the folder named: "Useful-Autoclicker".
+### Setting the correct java path
+
+1. Right click the autoclicker and click open width.
+2. Click "choose another app".
+3. Click "Choose an app on this PC".
+4. Go to your programFiles located in the windows drive(usually C:).
+5. Click "java".
+6. Click "jre".
+7. Click "bin".
+8. Click "javaw.exe".
+9. Click ok.
+10. If this does not work, try the same steps but select the JDK this time.
+
