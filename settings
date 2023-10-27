@@ -1,0 +1,16 @@
+clickDelay_ms 100
+clickDelay_s 0
+clickDelay_m 0
+clickDelay_h 0
+holdTime_ms 10
+holdTime_s 0
+holdTime_m 0
+holdTime_h 0
+shouldRandomize_clickDelay false
+shouldRandomize_holdTime false
+randomizeRange_clickDelay 20
+randomizeRange_holdTime 20
+hotkeyCode 59
+buttonNumber 0
+clicks 0
+autoclickOnHold false
