@@ -1,7 +1,11 @@
 package fileUtilities;
 
 import settings.Settings;
-import java.io.*;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ClickerData {
 
@@ -67,34 +71,35 @@ public class ClickerData {
 
         try {
             reader = new FileReader(FILE_NAME);
-        } catch (FileNotFoundException e) {
+
+            int[] temp = new int[Settings.getClickDelayArray().length];
+            for (int i = 0; i < Settings.getClickDelayArray().length; i++) {
+                temp[i] = Integer.parseInt(processValue(TEST_INT));
+            }
+            Settings.setClickDelay(temp);
+
+            int[] temp2 = new int[Settings.getHoldDelayArray().length];
+            for (int i = 0; i < Settings.getHoldDelayArray().length; i++) {
+                temp2[i] = Integer.parseInt(processValue(TEST_INT));
+            }
+            Settings.setHoldDelay(temp2);
+
+            Settings.setShouldRandomizeClick(Boolean.parseBoolean(processValue(TEST_BOOLEAN)));
+            Settings.setShouldRandomizeHold(Boolean.parseBoolean(processValue(TEST_BOOLEAN)));
+
+            Settings.setClickRandomizeRange(Integer.parseInt(processValue(TEST_INT)));
+            Settings.setHoldRandomizeRange(Integer.parseInt(processValue(TEST_INT)));
+
+            Settings.setHotkey(Integer.parseInt(processValue(TEST_INT)));
+
+            Settings.setButtonNumber(Integer.parseInt(processValue(TEST_INT)));
+
+            Settings.setClicks(Integer.parseInt(processValue(TEST_INT)));
+
+            Settings.setAutoclickOnMouseHold(Boolean.parseBoolean(processValue(TEST_BOOLEAN)));
+        } catch (Exception e) {
             shouldUseDefaults = true;
         }
-        int[] temp = new int[Settings.getClickDelayArray().length];
-        for (int i = 0; i < Settings.getClickDelayArray().length; i++) {
-            temp[i] = Integer.parseInt(processValue(TEST_INT));
-        }
-        Settings.setClickDelay(temp);
-
-        int[] temp2 = new int[Settings.getHoldDelayArray().length];
-        for (int i = 0; i < Settings.getHoldDelayArray().length; i++) {
-            temp2[i] = Integer.parseInt(processValue(TEST_INT));
-        }
-        Settings.setHoldDelay(temp2);
-
-        Settings.setShouldRandomizeClick(Boolean.parseBoolean(processValue(TEST_BOOLEAN)));
-        Settings.setShouldRandomizeHold(Boolean.parseBoolean(processValue(TEST_BOOLEAN)));
-
-        Settings.setClickRandomizeRange(Integer.parseInt(processValue(TEST_INT)));
-        Settings.setHoldRandomizeRange(Integer.parseInt(processValue(TEST_INT)));
-
-        Settings.setHotkey(Integer.parseInt(processValue(TEST_INT)));
-
-        Settings.setButtonNumber(Integer.parseInt(processValue(TEST_INT)));
-
-        Settings.setClicks(Integer.parseInt(processValue(TEST_INT)));
-
-        Settings.setAutoclickOnMouseHold(Boolean.parseBoolean(processValue(TEST_BOOLEAN)));
     }
 
     /**
@@ -107,23 +112,27 @@ public class ClickerData {
             return "0";
         }
 
-        String value = readValue();
-        if (type == TEST_BOOLEAN) {
-            if (value == null) {
-                return "false";
+        try {
+            String value = readValue();
+            if (type == TEST_BOOLEAN) {
+                if (value == null) {
+                    return "false";
+                }
+                if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
+                    return value;
+                } else {
+                    return "false";
+                }
+            } else if (type == TEST_INT) {
+                try {
+                    Integer.parseInt(value);
+                    return value;
+                } catch (NumberFormatException e) {
+                    return "0";
+                }
             }
-            if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
-                return value;
-            } else {
-                return "false";
-            }
-        } else if (type == TEST_INT) {
-            try {
-                Integer.parseInt(value);
-                return value;
-            } catch (NumberFormatException e) {
-                return "0";
-            }
+        } catch (Exception e) {
+            shouldUseDefaults = true;
         }
         throw new IllegalArgumentException("Type must be either TEST_BOOLEAN or TEST_INT.");
     }
