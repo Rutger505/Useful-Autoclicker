@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Useful-Autoclicker">
+    <output-path>$PROJECT_DIR$/out/artifacts/Useful_Autoclicker</output-path>
+    <root id="archive" name="Useful-Autoclicker.jar">
+      <element id="module-output" name="Useful-Autoclicker" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../.Librarys/jnativehook-2.2.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../.Librarys/mslinks-1.1.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
