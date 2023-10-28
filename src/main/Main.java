@@ -2,7 +2,6 @@ package main;
 
 import GUI.GUI;
 import fileUtilities.ClickerData;
-import fileUtilities.FileVisibility;
 import fileUtilities.RegisterApp;
 
 public class Main {

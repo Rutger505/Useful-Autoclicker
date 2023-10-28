@@ -35,9 +35,9 @@ public class ClickerData {
             settings.transferSettings();
             System.out.println("[INFO] Settings loaded");
         } catch (Exception e) {
-           System.out.println("[INFO] No compatible settings file found " + e);
+            System.out.println("[INFO] No compatible settings file found " + e);
         } finally {
-              FileVisibility.changeVisibility(SETTING_FILE_NAME, true);
+            FileVisibility.changeVisibility(SETTING_FILE_NAME, true);
         }
     }
 
