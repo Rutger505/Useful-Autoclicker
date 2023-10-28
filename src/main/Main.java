@@ -11,7 +11,7 @@ public class Main {
     */
    public static void main(String[] args) {
       new CheckRunning();
-      new ClickerData();
+      ClickerData.initialize();
       new RegisterApp();
 
       GUI gui = new GUI();

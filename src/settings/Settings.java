@@ -6,204 +6,204 @@ import fileUtilities.ClickerData;
 import java.awt.event.InputEvent;
 
 public class Settings {
-   // Autoclicker
-   private static int clicks = 0;
+    // Autoclicker
+    private static int clicks = 0;
 
-   private static long clickDelay = 100;
-   private static long clickDelayOriginal = 100;
-   private static int[] clickDelayArray = {100, 0, 0, 0};
+    private static long clickDelay = 100;
+    private static long clickDelayOriginal = 100;
+    private static int[] clickDelayArray = {100, 0, 0, 0};
 
 
-   private static long holdDelay = 10;
-   private static long holdDelayOriginal = 10;
-   private static int[] holdDelayArray = {10, 0, 0, 0};
+    private static long holdDelay = 10;
+    private static long holdDelayOriginal = 10;
+    private static int[] holdDelayArray = {10, 0, 0, 0};
 
-   private static boolean shouldRandomizeClick = false;
-   private static boolean shouldRandomizeHold = false;
+    private static boolean shouldRandomizeClick = false;
+    private static boolean shouldRandomizeHold = false;
 
-   private static int clickRandomizeRange = 20;
+    private static int clickRandomizeRange = 20;
 
-   private static int holdRandomizeRange = 20;
+    private static int holdRandomizeRange = 20;
 
-   private static int buttonNumber = 0;
-   private static int button = InputEvent.getMaskForButton(buttonNumber + 1);
+    private static int buttonNumber = 0;
+    private static int button = InputEvent.getMaskForButton(buttonNumber + 1);
 
-   // inputListener
-   private static int hotkey = 59;
-   private static String hotkeyText = NativeKeyEvent.getKeyText(hotkey);
-   private static boolean autoclickOnMouseHold = false;
+    // inputListener
+    private static int hotkey = 59;
+    private static String hotkeyText = NativeKeyEvent.getKeyText(hotkey);
+    private static boolean autoclickOnMouseHold = false;
 
-   public static int getClicks() {
-      return ClickerData.shouldUseDefaults ? DefaultSettings.clicks : clicks;
-   }
+    private Settings() {
+        throw new IllegalStateException("Utility class");
+    }
 
-   public static void setClicks(int clicks) {
-      Settings.clicks = clicks;
-      ClickerData.writeFile();
-   }
+    public static int getClicks() {
+        return clicks;
+    }
 
-   public static long getClickDelay() {
-      return ClickerData.shouldUseDefaults ? DefaultSettings.clickDelay : clickDelay;
-   }
+    public static void setClicks(int clicks) {
+        Settings.clicks = clicks;
+        ClickerData.saveSettings();
+    }
 
-   public static void setClickDelay(long clickDelay) {
-      Settings.clickDelay = clickDelay;
-      ClickerData.writeFile();
-   }
+    public static long getClickDelay() {
+        return clickDelay;
+    }
 
-   public static void setClickDelay(int[] clickDelayRaw) {
-      clickDelay = 0;
-      clickDelay += clickDelayRaw[3] * 3_600_000L;
-      clickDelay += clickDelayRaw[2] * 60_000L;
-      clickDelay += clickDelayRaw[1] * 1_000L;
-      clickDelay += clickDelayRaw[0];
-      // prevent lagging
-      if (clickDelay < 1) {
-         clickDelay = 1;
-      }
-      clickDelayOriginal = clickDelay;
-      clickDelayArray = clickDelayRaw;
-      ClickerData.writeFile();
-   }
+    public static void setClickDelay(long clickDelay) {
+        Settings.clickDelay = clickDelay;
+        ClickerData.saveSettings();
+    }
 
-   public static void setClickDelay(int element, int index){
-      clickDelayArray[index] = element;
-      setClickDelay(clickDelayArray);
-   }
+    public static void setClickDelay(int[] clickDelayRaw) {
+        clickDelay = 0;
+        clickDelay += clickDelayRaw[3] * 3_600_000L;
+        clickDelay += clickDelayRaw[2] * 60_000L;
+        clickDelay += clickDelayRaw[1] * 1_000L;
+        clickDelay += clickDelayRaw[0];
+        // prevent lagging
+        if (clickDelay < 1) {
+            clickDelay = 1;
+        }
+        clickDelayOriginal = clickDelay;
+        clickDelayArray = clickDelayRaw;
+        ClickerData.saveSettings();
+    }
 
-   public static long getClickDelayOriginal() {
-      return ClickerData.shouldUseDefaults ? DefaultSettings.clickDelayOriginal : clickDelayOriginal;
-   }
+    public static void setClickDelay(int element, int index) {
+        clickDelayArray[index] = element;
+        setClickDelay(clickDelayArray);
+    }
 
-   public static int[] getClickDelayArray() {
-      return ClickerData.shouldUseDefaults ? DefaultSettings.clickDelayArray : clickDelayArray;
-   }
+    public static long getClickDelayOriginal() {
+        return clickDelayOriginal;
+    }
 
-   public static long getHoldDelay() {
-      return ClickerData.shouldUseDefaults ? DefaultSettings.holdDelay : holdDelay;
-   }
+    public static int[] getClickDelayArray() {
+        return clickDelayArray;
+    }
 
-   public static void setHoldDelay(int[] holdDelayRaw) {
-      holdDelay = 0;
-      holdDelay += holdDelayRaw[3] * 3_600_000L;
-      holdDelay += holdDelayRaw[2] * 60_000L;
-      holdDelay += holdDelayRaw[1] * 1_000L;
-      holdDelay += holdDelayRaw[0];
-      // prevent not registering clicks
-      if (holdDelay < 1) {
-         holdDelay = 1;
-      }
-      holdDelayOriginal = holdDelay;
-      holdDelayArray = holdDelayRaw;
-      ClickerData.writeFile();
-   }
+    public static long getHoldDelay() {
+        return holdDelay;
+    }
 
-   public static void setHoldDelay(int element, int index){
-      holdDelayArray[index] = element;
-      setHoldDelay(holdDelayArray);
-   }
+    public static void setHoldDelay(int[] holdDelayRaw) {
+        holdDelay = 0;
+        holdDelay += holdDelayRaw[3] * 3_600_000L;
+        holdDelay += holdDelayRaw[2] * 60_000L;
+        holdDelay += holdDelayRaw[1] * 1_000L;
+        holdDelay += holdDelayRaw[0];
+        // prevent not registering clicks
+        if (holdDelay < 1) {
+            holdDelay = 1;
+        }
+        holdDelayOriginal = holdDelay;
+        holdDelayArray = holdDelayRaw;
+        ClickerData.saveSettings();
+    }
 
-   public static void setHoldDelay(long holdDelay) {
-      Settings.holdDelay = holdDelay;
-      ClickerData.writeFile();
-   }
+    public static void setHoldDelay(long holdDelay) {
+        Settings.holdDelay = holdDelay;
+        ClickerData.saveSettings();
+    }
 
-   public static long getHoldDelayOriginal() {
-      return ClickerData.shouldUseDefaults ? DefaultSettings.holdDelayOriginal : holdDelayOriginal;
-   }
+    public static void setHoldDelay(int element, int index) {
+        holdDelayArray[index] = element;
+        setHoldDelay(holdDelayArray);
+    }
 
-   public static int[] getHoldDelayArray() {
-      return ClickerData.shouldUseDefaults ? DefaultSettings.holdDelayArray : holdDelayArray;
-   }
+    public static long getHoldDelayOriginal() {
+        return holdDelayOriginal;
+    }
 
-   public static boolean shouldRandomizeClick() {
-      return ClickerData.shouldUseDefaults ? DefaultSettings.shouldRandomizeClick : shouldRandomizeClick;
-   }
+    public static int[] getHoldDelayArray() {
+        return holdDelayArray;
+    }
 
-   public static boolean shouldRandomizeHold() {
-      return ClickerData.shouldUseDefaults ? DefaultSettings.shouldRandomizeHold : shouldRandomizeHold;
-   }
+    public static boolean shouldRandomizeClick() {
+        return shouldRandomizeClick;
+    }
 
-   public static int getHoldRandomizeRange() {
-      return ClickerData.shouldUseDefaults ? DefaultSettings.holdRandomizeRange : holdRandomizeRange;
-   }
+    public static boolean shouldRandomizeHold() {
+        return shouldRandomizeHold;
+    }
 
-   public static void setHoldRandomizeRange(int holdRandomizeRange) {
-      Settings.holdRandomizeRange = holdRandomizeRange;
-      ClickerData.writeFile();
-   }
+    public static int getHoldRandomizeRange() {
+        return holdRandomizeRange;
+    }
 
-   public static int getClickRandomizeRange() {
-      return ClickerData.shouldUseDefaults ? DefaultSettings.clickRandomizeRange : clickRandomizeRange;
-   }
+    public static void setHoldRandomizeRange(int holdRandomizeRange) {
+        Settings.holdRandomizeRange = holdRandomizeRange;
+        ClickerData.saveSettings();
+    }
 
-   public static void setClickRandomizeRange(int clickRandomizeRange) {
-      Settings.clickRandomizeRange = clickRandomizeRange;
-      ClickerData.writeFile();
-   }
+    public static int getClickRandomizeRange() {
+        return clickRandomizeRange;
+    }
 
-   public static void setRandomizeRange(int element, int index){
-      if (index == 0){
-         setClickRandomizeRange(element);
-      } else if (index == 1){
-         setHoldRandomizeRange(element);
-      }
-   }
+    public static void setClickRandomizeRange(int clickRandomizeRange) {
+        Settings.clickRandomizeRange = clickRandomizeRange;
+        ClickerData.saveSettings();
+    }
 
-   public static int getButtonNumber() {
-      return ClickerData.shouldUseDefaults ? DefaultSettings.buttonNumber : buttonNumber;
-   }
+    public static void setRandomizeRange(int element, int index) {
+        if (index == 0) {
+            setClickRandomizeRange(element);
+        } else if (index == 1) {
+            setHoldRandomizeRange(element);
+        }
+    }
 
-   public static void setButtonNumber(int buttonNumber) {
-      Settings.buttonNumber = buttonNumber;
-      int number = buttonNumber + 1;
-      if (number == 2) {
-         number = 3;
-      } else if (number == 3) {
-         number = 2;
-      }
-      Settings.button = InputEvent.getMaskForButton(number);
-      ClickerData.writeFile();
-   }
+    public static int getButtonNumber() {
+        return buttonNumber;
+    }
 
-   public static int getButton() {
-      return ClickerData.shouldUseDefaults ? DefaultSettings.button : button;
-   }
+    public static void setButtonNumber(int buttonNumber) {
+        Settings.buttonNumber = buttonNumber;
+        int number = buttonNumber + 1;
+        if (number == 2) {
+            number = 3;
+        } else if (number == 3) {
+            number = 2;
+        }
+        Settings.button = InputEvent.getMaskForButton(number);
+        ClickerData.saveSettings();
+    }
 
-   public static int getHotkey() {
-      return ClickerData.shouldUseDefaults ? DefaultSettings.hotkey : hotkey;
-   }
+    public static int getButton() {
+        return button;
+    }
 
-   public static void setHotkey(int hotkey) {
-      Settings.hotkey = hotkey;
-      Settings.hotkeyText = NativeKeyEvent.getKeyText(hotkey);
-      ClickerData.writeFile();
-   }
+    public static int getHotkey() {
+        return hotkey;
+    }
 
-   public static String getHotkeyText() {
-      return ClickerData.shouldUseDefaults ? DefaultSettings.hotkeyText : hotkeyText;
-   }
+    public static void setHotkey(int hotkey) {
+        Settings.hotkey = hotkey;
+        Settings.hotkeyText = NativeKeyEvent.getKeyText(hotkey);
+        ClickerData.saveSettings();
+    }
 
-   public static boolean shouldAutoclickOnMouseHold() {
-      return ClickerData.shouldUseDefaults ? DefaultSettings.autoclickOnMouseHold : autoclickOnMouseHold;
-   }
+    public static String getHotkeyText() {
+        return hotkeyText;
+    }
 
-   public static void setShouldRandomizeClick(boolean shouldRandomizeClick) {
-      Settings.shouldRandomizeClick = shouldRandomizeClick;
-      ClickerData.writeFile();
-   }
+    public static boolean shouldAutoclickOnMouseHold() {
+        return autoclickOnMouseHold;
+    }
 
-   public static void setShouldRandomizeHold(boolean shouldRandomizeHold) {
-      Settings.shouldRandomizeHold = shouldRandomizeHold;
-      ClickerData.writeFile();
-   }
+    public static void setShouldRandomizeClick(boolean shouldRandomizeClick) {
+        Settings.shouldRandomizeClick = shouldRandomizeClick;
+        ClickerData.saveSettings();
+    }
 
-   public static void setAutoclickOnMouseHold(boolean autoclickOnMouseHold) {
-      Settings.autoclickOnMouseHold = autoclickOnMouseHold;
-      ClickerData.writeFile();
-   }
+    public static void setShouldRandomizeHold(boolean shouldRandomizeHold) {
+        Settings.shouldRandomizeHold = shouldRandomizeHold;
+        ClickerData.saveSettings();
+    }
 
-   private Settings(){
-      throw new IllegalStateException("Utility class");
-   }
+    public static void setAutoclickOnMouseHold(boolean autoclickOnMouseHold) {
+        Settings.autoclickOnMouseHold = autoclickOnMouseHold;
+        ClickerData.saveSettings();
+    }
 }
