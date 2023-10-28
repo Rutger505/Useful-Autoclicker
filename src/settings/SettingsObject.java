@@ -4,25 +4,25 @@ import java.io.Serializable;
 
 public class SettingsObject implements Serializable {
     // Autoclicker
-    private int clicks;
+    private final int clicks;
 
-    private int[] clickDelayArray;
+    private final int[] clickDelayArray;
 
 
-    private int[] holdDelayArray;
+    private final int[] holdDelayArray;
 
-    private boolean shouldRandomizeClick;
-    private boolean shouldRandomizeHold;
+    private final boolean shouldRandomizeClick;
+    private final boolean shouldRandomizeHold;
 
-    private int clickRandomizeRange;
+    private final int clickRandomizeRange;
 
-    private int holdRandomizeRange;
+    private final int holdRandomizeRange;
 
-    private int buttonNumber;
+    private final int buttonNumber;
 
     // inputListener
-    private int hotkey;
-    private boolean autoclickOnMouseHold;
+    private final int hotkey;
+    private final boolean autoclickOnMouseHold;
 
     public SettingsObject() {
         clicks = Settings.getClicks();

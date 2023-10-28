@@ -15,7 +15,7 @@ public class Main {
         OneInstance.Activate();
         ClickerData.initialize();
 
-        RegisterApp.RegisterApp();
+        new RegisterApp();
 
         GUI gui = new GUI();
         new InputListener(gui);

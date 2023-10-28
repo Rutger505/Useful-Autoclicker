@@ -10,20 +10,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="45eec62e-5b7a-4ee2-b3c6-29096388c9b3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/OneInstance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/e/dea0f984810201b8176be87916a124df350bde80" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/e/dea0f984810201b8176be87916a124df350bde80" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings" beforeDir="false" afterPath="$PROJECT_DIR$/settings" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fileUtilities/ClickerData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fileUtilities/ClickerData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fileUtilities/FileHider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fileUtilities/FileVisibility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/errorHandeling/Error.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/errorHandeling/Error.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fileUtilities/RegisterApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fileUtilities/RegisterApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/CheckRunning.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Autoclicker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Autoclicker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/InputListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/InputListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/OneInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/OneInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/settings/SettingsObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/settings/SettingsObject.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +41,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2XMY6Ebm7bMEeikKhsnm9m27BKa" />
   <component name="ProjectLevelVcsManager">
@@ -71,6 +70,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.21278942",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "preferences.sourceCode",
     "vue.rearranger.settings.migration": "true"
   }
@@ -94,7 +94,7 @@
       <updated>1698440239774</updated>
       <workItem from="1698441917830" duration="1217000" />
       <workItem from="1698443155265" duration="192000" />
-      <workItem from="1698492786793" duration="894000" />
+      <workItem from="1698492786793" duration="2014000" />
     </task>
     <servers />
   </component>

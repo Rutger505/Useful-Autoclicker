@@ -2,11 +2,12 @@ package resources;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class Constants {
     // icon
     private static final String ICON_PATH = "/resources/icon.png";
-    public static final Image FRAME_ICON = new ImageIcon(Constants.class.getResource(ICON_PATH)).getImage();
+    public static final Image FRAME_ICON = new ImageIcon(Objects.requireNonNull(Constants.class.getResource(ICON_PATH))).getImage();
 
     // colors
     public static final Color FRAME_COLOR = new Color(255, 255, 255);

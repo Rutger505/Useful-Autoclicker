@@ -13,13 +13,11 @@ import fileUtilities.FileVisibility;
 import settings.Settings;
 
 import javax.swing.text.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class InputListener implements NativeKeyListener, NativeMouseListener {
     private final HelpGUI helpGUI = new HelpGUI();
     private final GUI gui;
-    private Autoclicker clicker;
+    private final Autoclicker clicker;
 
     private boolean newHotkey;
     private int mouseButtonSelected;
@@ -35,103 +33,82 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
         this.clicker = new Autoclicker(this);
 
         // default button
-        gui.getDefaultsButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // click and hold delay
-                for (int i = 0; i < gui.getClickDelay().length; i++) {
-                    gui.getClickDelay()[i].setText("0");
-                    gui.getHoldDelay()[i].setText("0");
-                }
-                gui.getClickDelay()[0].setText("100");
-                gui.getHoldDelay()[0].setText("10");
+        gui.getDefaultsButton().addActionListener(e -> {
+            // click and hold delay
+            for (int i = 0; i < gui.getClickDelay().length; i++) {
+                gui.getClickDelay()[i].setText("0");
+                gui.getHoldDelay()[i].setText("0");
+            }
+            gui.getClickDelay()[0].setText("100");
+            gui.getHoldDelay()[0].setText("10");
 
-                Settings.setClickDelay(new int[]{100, 0, 0, 0});
-                Settings.setHoldDelay(new int[]{10, 0, 0, 0});
+            Settings.setClickDelay(new int[]{100, 0, 0, 0});
+            Settings.setHoldDelay(new int[]{10, 0, 0, 0});
 
-                // randomize the click and hold delay.
-                for (int i = 0; i < gui.getRandomizeRange().length; i++) {
-                    gui.getRandomizeRange()[i].setText("20");
-                    gui.getShouldRandomize()[i].setSelected(false);
-                }
-                Settings.setClickRandomizeRange(20);
-                Settings.setHoldRandomizeRange(20);
-                Settings.setShouldRandomizeClick(false);
-                Settings.setShouldRandomizeHold(false);
+            // randomize the click and hold delay.
+            for (int i = 0; i < gui.getRandomizeRange().length; i++) {
+                gui.getRandomizeRange()[i].setText("20");
+                gui.getShouldRandomize()[i].setSelected(false);
+            }
+            Settings.setClickRandomizeRange(20);
+            Settings.setHoldRandomizeRange(20);
+            Settings.setShouldRandomizeClick(false);
+            Settings.setShouldRandomizeHold(false);
 
-                // misc
-                gui.getClickAmount().setText("0");
-                Settings.setClicks(0);
+            // misc
+            gui.getClickAmount().setText("0");
+            Settings.setClicks(0);
 
-                gui.getButtonSelect().setSelectedIndex(0);
-                Settings.setButtonNumber(0);
+            gui.getButtonSelect().setSelectedIndex(0);
+            Settings.setButtonNumber(0);
 
-                gui.getAutoclickOnMouseHold().setSelected(false);
-                Settings.setAutoclickOnMouseHold(false);
-                if (!Settings.shouldAutoclickOnMouseHold()) {
-                    toggleClicker(false);
-                }
+            gui.getAutoclickOnMouseHold().setSelected(false);
+            Settings.setAutoclickOnMouseHold(false);
+            if (!Settings.shouldAutoclickOnMouseHold()) {
+                toggleClicker(false);
             }
         });
 
         // help gui button
-        gui.getHelpButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                helpGUI.setLocationRelativeTo(gui);
-                helpGUI.setVisible(true);
-            }
+        gui.getHelpButton().addActionListener(e -> {
+            helpGUI.setLocationRelativeTo(gui);
+            helpGUI.setVisible(true);
         });
 
         // autoclick on mouse hold
-        gui.getAutoclickOnMouseHold().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Settings.setAutoclickOnMouseHold(gui.getAutoclickOnMouseHold().isSelected());
+        gui.getAutoclickOnMouseHold().addActionListener(e -> {
+            Settings.setAutoclickOnMouseHold(gui.getAutoclickOnMouseHold().isSelected());
 
-                if (!Settings.shouldAutoclickOnMouseHold()) {
-                    toggleClicker(false);
-                }
+            if (!Settings.shouldAutoclickOnMouseHold()) {
+                toggleClicker(false);
             }
         });
 
         // should randomize click
-        gui.getShouldRandomize()[0].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Settings.setShouldRandomizeClick(gui.getShouldRandomize()[0].isSelected());
-                Settings.setClickDelay(Settings.getClickDelayOriginal());
-            }
+        gui.getShouldRandomize()[0].addActionListener(e -> {
+            Settings.setShouldRandomizeClick(gui.getShouldRandomize()[0].isSelected());
+            Settings.setClickDelay(Settings.getClickDelayOriginal());
         });
 
         // should randomize hold
-        gui.getShouldRandomize()[1].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Settings.setShouldRandomizeHold(gui.getShouldRandomize()[1].isSelected());
-                Settings.setHoldDelay(Settings.getHoldDelayOriginal());
+        gui.getShouldRandomize()[1].addActionListener(e -> {
+            Settings.setShouldRandomizeHold(gui.getShouldRandomize()[1].isSelected());
+            Settings.setHoldDelay(Settings.getHoldDelayOriginal());
 
-            }
         });
 
 
         // new hotkey button
-        gui.getNewHotkeyButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                toggleClicker(false);
-                newHotkey = true;
-                gui.getNewHotkeyButton().setText("Press new hotkey");
-            }
+        gui.getNewHotkeyButton().addActionListener(e -> {
+            toggleClicker(false);
+            newHotkey = true;
+            gui.getNewHotkeyButton().setText("Press new hotkey");
         });
 
         // combo box (button select)
-        gui.getButtonSelect().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Settings.setButtonNumber(gui.getButtonSelect().getSelectedIndex());
-                toggleClicker(false);
-            }
+        gui.getButtonSelect().addActionListener(e -> {
+            Settings.setButtonNumber(gui.getButtonSelect().getSelectedIndex());
+            toggleClicker(false);
         });
 
 
@@ -368,7 +345,6 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
      * Starts the clicker and updates the gui title.
      */
     private void startClicker() {
-        clicker = new Autoclicker(this);
         clicker.start();
         gui.setTitle(GUI.MAIN_FRAME_TITLE + "  -  Clicking");
     }
@@ -377,7 +353,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
      * Stops the clicker, sets registeredPressing to 0 and updates the gui title.
      */
     public void stopClicker() {
-        clicker.interrupt();
+        clicker.stop();
         registeredPressing = 0;
         gui.setTitle(GUI.MAIN_FRAME_TITLE + "  -  Stopped");
     }

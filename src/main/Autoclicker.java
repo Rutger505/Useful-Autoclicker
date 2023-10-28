@@ -7,7 +7,8 @@ import java.awt.*;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class Autoclicker extends Thread {
+public class Autoclicker {
+    private Thread autoclickerThread;
     private final Random random = new Random();
     private final InputListener inputListener;
     private Robot robot;
@@ -32,11 +33,19 @@ public class Autoclicker extends Thread {
         return running;
     }
 
+    public void start() {
+        autoclickerThread = new Thread(this::autoclickerMain);
+        autoclickerThread.start();
+    }
+
+    public void stop() {
+        autoclickerThread.interrupt();
+    }
+
     /**
      * Driver method
      */
-    @Override
-    public void run() {
+    public void autoclickerMain() {
         running = true;
 
         if (Settings.getClicks() == 0) {

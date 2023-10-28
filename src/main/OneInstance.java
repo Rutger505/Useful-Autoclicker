@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public class OneInstance {
-    private static final int port = 1324;
+    private static final int PORT = 1324;
     private static ServerSocket prevention;
 
 
@@ -29,7 +29,7 @@ public class OneInstance {
      */
     private static boolean isRunning() {
         try {
-            prevention = new ServerSocket(port);
+            prevention = new ServerSocket(PORT);
             return false;
         } catch (IOException e) {
             return true;
