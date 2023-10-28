@@ -12,7 +12,7 @@ public class RegisterApp {
     /**
      * Creates a shortcut in the start menu
      */
-    public RegisterApp() {
+    public static void RegisterApp() {
         try {
             File windowsDrive = getWindowsDrive();
             String user = System.getProperty("user.name");
@@ -33,7 +33,7 @@ public class RegisterApp {
      *
      * @return windows drive
      */
-    private File getWindowsDrive() {
+    private static File getWindowsDrive() {
         FileSystemView fileSystemView = FileSystemView.getFileSystemView();
         File[] drives = File.listRoots();
         File windowsDrive = null;
