@@ -23,6 +23,8 @@ public class Autoclicker {
             robot = new Robot();
         } catch (AWTException e) {
             Error.showError("Error starting Autoclicker", "Error starting Autoclicker try restarting the autoclicker", "(Autoclicker) Error creating robot");
+            Logger.fatal("Error creating robot (Object that simulates clicks");
+            System.exit(1);
         }
     }
 
@@ -34,11 +36,13 @@ public class Autoclicker {
     }
 
     public void start() {
+        Logger.trace("Starting Autoclicker");
         autoclickerThread = new Thread(this::autoclickerMain);
         autoclickerThread.start();
     }
 
     public void stop() {
+        Logger.info("Stopping Autoclicker");
         autoclickerThread.interrupt();
     }
 
@@ -49,18 +53,21 @@ public class Autoclicker {
         running = true;
 
         if (Settings.getClicks() == 0) {
+            Logger.trace("Entering infinite clicker loop");
             while (!Thread.currentThread().isInterrupted()) {
                 randomizeDelay();
 
                 clickCycle();
             }
         } else {
+            Logger.trace("Entering limited clicker loop");
             for (int i = 0; i < Settings.getClicks() && !Thread.interrupted(); i++) {
                 randomizeDelay();
 
                 clickCycle();
             }
         }
+        Logger.trace("End of clicker loop");
         running = false;
         inputListener.stopClicker();
     }
@@ -105,7 +112,7 @@ public class Autoclicker {
                 robot.mousePress(Settings.getButton());
             } catch (AWTException ignored) {
             }
-            System.out.println("error in mouse press");
+            Logger.error("error in mouse press");
         }
     }
 
@@ -121,7 +128,7 @@ public class Autoclicker {
                 robot.mouseRelease(Settings.getButton());
             } catch (AWTException ignored) {
             }
-            System.out.println("error in mouse release");
+            Logger.error("error in mouse release");
         }
     }
 

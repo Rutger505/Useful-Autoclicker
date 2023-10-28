@@ -1,5 +1,7 @@
 package fileUtilities;
 
+import main.Logger;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -29,8 +31,9 @@ public class FileVisibility {
 
             Files.setAttribute(path, "dos:hidden", hidden, LinkOption.NOFOLLOW_LINKS);
 
+            Logger.info(filename + " is now " + (hidden ? "hidden" : "visible"));
         } catch (IOException e) {
-            System.out.println("(FileHider)" + filename + " could not be hidden");
+            Logger.warn("(FileHider) " + filename + " could not be hidden");
         }
     }
 }

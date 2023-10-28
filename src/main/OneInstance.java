@@ -18,10 +18,13 @@ public class OneInstance {
      * Checks if the program is already running. Exits if it is.
      */
     public static void Activate() {
+
         if (isRunning()) {
             Error.showError("Already running", "Program is already running. Exiting...", "Program is already running. Exiting...");
+            Logger.fatal("Program is already running. Exiting...");
             System.exit(1);
         }
+        Logger.info("[INFO] Socket opened");
     }
 
     /**

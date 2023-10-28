@@ -200,7 +200,8 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
             GlobalScreen.registerNativeHook();
         } catch (NativeHookException e) {
             Error.showError("HotkeyListener", "The hotkeyListener was unable to start. Try restarting the program.", "(InputListener) JNativeHook could not be started");
-            e.printStackTrace();
+            Logger.fatal("JNativeHook could not be started " + e);
+            System.exit(1);
         }
         GlobalScreen.addNativeKeyListener(this);
         GlobalScreen.addNativeMouseListener(this);
@@ -229,7 +230,9 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
 
         if (newHotkey) {
             newHotkey(nativeEvent);
+            Logger.info("New hotkey recorded");
         } else if (keyPressed == Settings.getHotkey() && !Settings.shouldAutoclickOnMouseHold()) {
+            Logger.info("Hotkey pressed toggling Autoclicker");
             toggleClicker();
         }
     }
@@ -244,6 +247,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
 
         if (buttonPressed == mouseButtonSelected) {
             if (registeredPressing == 0) {
+                Logger.info("First mouse pressed. Starting Autoclicker");
                 toggleClicker(true);
             }
             registeredPressing++;
@@ -269,6 +273,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
             registeredPressing--;
 
             if (registeredPressing == 0) {
+                Logger.info("Last mouse released. Stopping Autoclicker");
                 toggleClicker(false);
             }
         }

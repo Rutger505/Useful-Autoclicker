@@ -1,5 +1,6 @@
 package fileUtilities;
 
+import main.Logger;
 import settings.SettingsObject;
 
 import java.io.FileInputStream;
@@ -33,9 +34,9 @@ public class ClickerData {
             in.close();
             fileIn.close();
             settings.transferSettings();
-            System.out.println("[INFO] Settings loaded");
+            Logger.info("Settings loaded");
         } catch (Exception e) {
-            System.out.println("[INFO] No compatible settings file found " + e);
+            Logger.warn("No compatible settings file found " + e);
         } finally {
             FileVisibility.changeVisibility(SETTING_FILE_NAME, true);
         }
@@ -54,9 +55,9 @@ public class ClickerData {
 
             out.close();
             fileOut.close();
-            System.out.println("[INFO] Settings saved");
+            Logger.info("Settings saved");
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.error("Settings could not be saved " + e);
         } finally {
             FileVisibility.changeVisibility(SETTING_FILE_NAME, true);
         }
