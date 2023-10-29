@@ -1,4 +1,4 @@
-package fileUtilities;
+package utils;
 
 import mslinks.ShellLinkHelper;
 
@@ -6,13 +6,13 @@ import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.nio.file.Paths;
 
-public class RegisterApp {
+public class StartMenuShortcut {
 
 
     /**
      * Creates a shortcut in the start menu
      */
-    public RegisterApp() {
+    public StartMenuShortcut() {
         try {
             File windowsDrive = getWindowsDrive();
             String user = System.getProperty("user.name");
@@ -22,8 +22,9 @@ public class RegisterApp {
             String targetPath = Paths.get("").toAbsolutePath().normalize() + programFileName;
             String linkPath = Paths.get(windowsDrive + "Users\\" + user + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs").toAbsolutePath().normalize() + linkFileName;
 
-
             ShellLinkHelper.createLink(targetPath, linkPath);
+
+            Logger.info("Created shortcut in start menu");
         } catch (Exception ignored) {
         }
     }
