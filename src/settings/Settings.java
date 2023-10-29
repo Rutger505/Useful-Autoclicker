@@ -3,58 +3,68 @@ package settings;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 
 import java.awt.event.InputEvent;
+import java.io.Serializable;
 
-public class Settings {
+public class Settings implements Serializable {
+    private static Settings instance;
+
     // Autoclicker
-    private static int clicks = 0;
+    private int clicks = 0;
 
-    private static long clickDelay = 100;
-    private static long clickDelayOriginal = 100;
-    private static int[] clickDelayArray = {100, 0, 0, 0};
+    private long clickDelay = 100;
+    private long clickDelayOriginal = 100;
+    private int[] clickDelayArray = {100, 0, 0, 0};
 
 
-    private static long holdDelay = 10;
-    private static long holdDelayOriginal = 10;
-    private static int[] holdDelayArray = {10, 0, 0, 0};
+    private long holdDelay = 10;
+    private long holdDelayOriginal = 10;
+    private int[] holdDelayArray = {10, 0, 0, 0};
 
-    private static boolean shouldRandomizeClick = false;
-    private static boolean shouldRandomizeHold = false;
+    private boolean shouldRandomizeClick = false;
+    private boolean shouldRandomizeHold = false;
 
-    private static int clickRandomizeRange = 20;
+    private int clickRandomizeRange = 20;
 
-    private static int holdRandomizeRange = 20;
+    private int holdRandomizeRange = 20;
 
-    private static int buttonNumber = 0;
-    private static int button = InputEvent.getMaskForButton(buttonNumber + 1);
+    private int buttonNumber = 0;
+    private int button = InputEvent.getMaskForButton(buttonNumber + 1);
 
     // inputListener
-    private static int hotkey = 59;
-    private static String hotkeyText = NativeKeyEvent.getKeyText(hotkey);
-    private static boolean autoclickOnMouseHold = false;
+    private int hotkey = 59;
+    private String hotkeyText = NativeKeyEvent.getKeyText(hotkey);
+    private boolean autoclickOnMouseHold = false;
 
-    private Settings() {
-        throw new IllegalStateException("Utility class");
+    public static Settings getInstance() {
+        if (instance == null) {
+            instance = new Settings();
+        }
+        return instance;
     }
 
-    public static int getClicks() {
+    public static void setNewInstance(Settings newInstance) {
+        instance = newInstance;
+    }
+
+    public int getClicks() {
         return clicks;
     }
 
-    public static void setClicks(int clicks) {
-        Settings.clicks = clicks;
+    public void setClicks(int clicks) {
+        this.clicks = clicks;
         SaveSettings.saveSettings();
     }
 
-    public static long getClickDelay() {
+    public long getClickDelay() {
         return clickDelay;
     }
 
-    public static void setClickDelay(long clickDelay) {
-        Settings.clickDelay = clickDelay;
+    public void setClickDelay(long clickDelay) {
+        this.clickDelay = clickDelay;
         SaveSettings.saveSettings();
     }
 
-    public static void setClickDelay(int[] clickDelayRaw) {
+    public void setClickDelay(int[] clickDelayRaw) {
         clickDelay = 0;
         clickDelay += clickDelayRaw[3] * 3_600_000L;
         clickDelay += clickDelayRaw[2] * 60_000L;
@@ -69,24 +79,24 @@ public class Settings {
         SaveSettings.saveSettings();
     }
 
-    public static void setClickDelay(int element, int index) {
+    public void setClickDelay(int element, int index) {
         clickDelayArray[index] = element;
         setClickDelay(clickDelayArray);
     }
 
-    public static long getClickDelayOriginal() {
+    public long getClickDelayOriginal() {
         return clickDelayOriginal;
     }
 
-    public static int[] getClickDelayArray() {
+    public int[] getClickDelayArray() {
         return clickDelayArray;
     }
 
-    public static long getHoldDelay() {
+    public long getHoldDelay() {
         return holdDelay;
     }
 
-    public static void setHoldDelay(int[] holdDelayRaw) {
+    public void setHoldDelay(int[] holdDelayRaw) {
         holdDelay = 0;
         holdDelay += holdDelayRaw[3] * 3_600_000L;
         holdDelay += holdDelayRaw[2] * 60_000L;
@@ -101,51 +111,51 @@ public class Settings {
         SaveSettings.saveSettings();
     }
 
-    public static void setHoldDelay(long holdDelay) {
-        Settings.holdDelay = holdDelay;
+    public void setHoldDelay(long holdDelay) {
+        this.holdDelay = holdDelay;
         SaveSettings.saveSettings();
     }
 
-    public static void setHoldDelay(int element, int index) {
+    public void setHoldDelay(int element, int index) {
         holdDelayArray[index] = element;
         setHoldDelay(holdDelayArray);
     }
 
-    public static long getHoldDelayOriginal() {
+    public long getHoldDelayOriginal() {
         return holdDelayOriginal;
     }
 
-    public static int[] getHoldDelayArray() {
+    public int[] getHoldDelayArray() {
         return holdDelayArray;
     }
 
-    public static boolean shouldRandomizeClick() {
+    public boolean shouldRandomizeClick() {
         return shouldRandomizeClick;
     }
 
-    public static boolean shouldRandomizeHold() {
+    public boolean shouldRandomizeHold() {
         return shouldRandomizeHold;
     }
 
-    public static int getHoldRandomizeRange() {
+    public int getHoldRandomizeRange() {
         return holdRandomizeRange;
     }
 
-    public static void setHoldRandomizeRange(int holdRandomizeRange) {
-        Settings.holdRandomizeRange = holdRandomizeRange;
+    public void setHoldRandomizeRange(int holdRandomizeRange) {
+        this.holdRandomizeRange = holdRandomizeRange;
         SaveSettings.saveSettings();
     }
 
-    public static int getClickRandomizeRange() {
+    public int getClickRandomizeRange() {
         return clickRandomizeRange;
     }
 
-    public static void setClickRandomizeRange(int clickRandomizeRange) {
-        Settings.clickRandomizeRange = clickRandomizeRange;
+    public void setClickRandomizeRange(int clickRandomizeRange) {
+        this.clickRandomizeRange = clickRandomizeRange;
         SaveSettings.saveSettings();
     }
 
-    public static void setRandomizeRange(int element, int index) {
+    public void setRandomizeRange(int element, int index) {
         if (index == 0) {
             setClickRandomizeRange(element);
         } else if (index == 1) {
@@ -153,56 +163,56 @@ public class Settings {
         }
     }
 
-    public static int getButtonNumber() {
+    public int getButtonNumber() {
         return buttonNumber;
     }
 
-    public static void setButtonNumber(int buttonNumber) {
-        Settings.buttonNumber = buttonNumber;
+    public void setButtonNumber(int buttonNumber) {
+        this.buttonNumber = buttonNumber;
         int number = buttonNumber + 1;
         if (number == 2) {
             number = 3;
         } else if (number == 3) {
             number = 2;
         }
-        Settings.button = InputEvent.getMaskForButton(number);
+        this.button = InputEvent.getMaskForButton(number);
         SaveSettings.saveSettings();
     }
 
-    public static int getButton() {
+    public int getButton() {
         return button;
     }
 
-    public static int getHotkey() {
+    public int getHotkey() {
         return hotkey;
     }
 
-    public static void setHotkey(int hotkey) {
-        Settings.hotkey = hotkey;
-        Settings.hotkeyText = NativeKeyEvent.getKeyText(hotkey);
+    public void setHotkey(int hotkey) {
+        this.hotkey = hotkey;
+        this.hotkeyText = NativeKeyEvent.getKeyText(hotkey);
         SaveSettings.saveSettings();
     }
 
-    public static String getHotkeyText() {
+    public String getHotkeyText() {
         return hotkeyText;
     }
 
-    public static boolean shouldAutoclickOnMouseHold() {
+    public boolean shouldAutoclickOnMouseHold() {
         return autoclickOnMouseHold;
     }
 
-    public static void setShouldRandomizeClick(boolean shouldRandomizeClick) {
-        Settings.shouldRandomizeClick = shouldRandomizeClick;
+    public void setShouldRandomizeClick(boolean shouldRandomizeClick) {
+        this.shouldRandomizeClick = shouldRandomizeClick;
         SaveSettings.saveSettings();
     }
 
-    public static void setShouldRandomizeHold(boolean shouldRandomizeHold) {
-        Settings.shouldRandomizeHold = shouldRandomizeHold;
+    public void setShouldRandomizeHold(boolean shouldRandomizeHold) {
+        this.shouldRandomizeHold = shouldRandomizeHold;
         SaveSettings.saveSettings();
     }
 
-    public static void setAutoclickOnMouseHold(boolean autoclickOnMouseHold) {
-        Settings.autoclickOnMouseHold = autoclickOnMouseHold;
+    public void setAutoclickOnMouseHold(boolean autoclickOnMouseHold) {
+        this.autoclickOnMouseHold = autoclickOnMouseHold;
         SaveSettings.saveSettings();
     }
 }

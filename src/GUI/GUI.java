@@ -2,6 +2,7 @@ package GUI;
 
 import resources.Constants;
 import settings.Settings;
+import settings.Settings;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -11,6 +12,7 @@ import java.awt.*;
  * GUI where settings can be changed
  */
 public class GUI extends JFrame {
+
     // title/version
     private static final double AUTOCLICKER_VERSION = 2.1;
     public static final String MAIN_FRAME_TITLE = "Useful Autoclicker " + AUTOCLICKER_VERSION;
@@ -33,6 +35,8 @@ public class GUI extends JFrame {
      */
     public GUI() {
         JComponentFactory components = new JComponentFactory();
+        Settings settings = Settings.getInstance();
+
 
         // main frame
         final int frameWidth = 400;
@@ -73,10 +77,10 @@ public class GUI extends JFrame {
         helpButton = components.buttonFactory("?", topButtonBorder, new int[]{360, 4, 17, 17});
 
         JLabel clickDelayL = components.labelFactory("Click interval:", false, false, new int[]{30, clickDelayItemsY, 80, labelHeight});
-        clickDelayTF = components.textFieldFactory(Settings.getClickDelayArray(), new int[][]{{290, clickDelayItemsY, textFieldWidth, textFieldHeight}, {230, clickDelayItemsY, textFieldWidth, textFieldHeight}, {170, clickDelayItemsY, textFieldWidth, textFieldHeight}, {110, clickDelayItemsY, textFieldWidth, textFieldHeight}});
+        clickDelayTF = components.textFieldFactory(settings.getClickDelayArray(), new int[][]{{290, clickDelayItemsY, textFieldWidth, textFieldHeight}, {230, clickDelayItemsY, textFieldWidth, textFieldHeight}, {170, clickDelayItemsY, textFieldWidth, textFieldHeight}, {110, clickDelayItemsY, textFieldWidth, textFieldHeight}});
 
         JLabel holdDelayL = components.labelFactory("Hold time:", false, false, new int[]{30, holdDelayItemsY, 80, labelHeight});
-        holdDelayTF = components.textFieldFactory(Settings.getHoldDelayArray(), new int[][]{{290, holdDelayItemsY, textFieldWidth, textFieldHeight}, {230, holdDelayItemsY, textFieldWidth, textFieldHeight}, {170, holdDelayItemsY, textFieldWidth, textFieldHeight}, {110, holdDelayItemsY, textFieldWidth, textFieldHeight}});
+        holdDelayTF = components.textFieldFactory(settings.getHoldDelayArray(), new int[][]{{290, holdDelayItemsY, textFieldWidth, textFieldHeight}, {230, holdDelayItemsY, textFieldWidth, textFieldHeight}, {170, holdDelayItemsY, textFieldWidth, textFieldHeight}, {110, holdDelayItemsY, textFieldWidth, textFieldHeight}});
 
         // second section ########################################################
         JLabel randomizeLabel = components.labelFactory("Randomize click interval", true, true, new int[]{0, 110, frameActualWidth, labelHeight});
@@ -84,25 +88,25 @@ public class GUI extends JFrame {
         JLabel clickRandomizeL = components.labelFactory("Click inter:", false, false, new int[]{30, randomizeItemsY, 80, labelHeight});
         JLabel holdRandomizeL = components.labelFactory("Hold time:", false, false, new int[]{200, randomizeItemsY, 80, labelHeight});
 
-        shouldRandomizeCB = components.checkBoxFactory(new boolean[]{Settings.shouldRandomizeClick(), Settings.shouldRandomizeHold()}, new int[][]{{95, randomizeItemsY, 15, 20}, {270, randomizeItemsY, 15, 20}});
+        shouldRandomizeCB = components.checkBoxFactory(new boolean[]{settings.shouldRandomizeClick(), settings.shouldRandomizeHold()}, new int[][]{{95, randomizeItemsY, 15, 20}, {270, randomizeItemsY, 15, 20}});
 
-        randomizeRangeTF = components.textFieldFactory(new int[]{Settings.getClickRandomizeRange(), Settings.getHoldRandomizeRange()}, new int[][]{{115, randomizeItemsY, textFieldWidth, textFieldHeight}, {290, randomizeItemsY, textFieldWidth, textFieldHeight}});
+        randomizeRangeTF = components.textFieldFactory(new int[]{settings.getClickRandomizeRange(), settings.getHoldRandomizeRange()}, new int[][]{{115, randomizeItemsY, textFieldWidth, textFieldHeight}, {290, randomizeItemsY, textFieldWidth, textFieldHeight}});
 
         // third section ########################################################
         JLabel miscellaneousLabel = components.labelFactory("Clicks/Button/Hotkey", true, true, new int[]{0, 180, frameActualWidth, labelHeight});
 
         JLabel clickAmountL = components.labelFactory("Clicks:", false, false, new int[]{30, clicksItems2Y, 80, labelHeight});
-        clickAmountTF = components.textFieldFactory(Settings.getClicks(), new int[]{70, clicksItems2Y, textFieldWidth, textFieldHeight});
+        clickAmountTF = components.textFieldFactory(settings.getClicks(), new int[]{70, clicksItems2Y, textFieldWidth, textFieldHeight});
 
         JLabel buttonSelectL = components.labelFactory("Button:", false, false, new int[]{205, clicksItemsY, 80, labelHeight});
         String[] buttonSelectOptions = {"left", "right", "middle", "side front", "side back"};
-        buttonSelectCB = components.comboBoxFactory(buttonSelectOptions, Settings.getButtonNumber(), new int[]{250, clicksItemsY, 90, 20});
+        buttonSelectCB = components.comboBoxFactory(buttonSelectOptions, settings.getButtonNumber(), new int[]{250, clicksItemsY, 90, 20});
 
-        newHotkeyButton = components.buttonFactory("Select Hotkey(" + Settings.getHotkeyText() + ")", null, new int[]{20, 210, 165, 30});
+        newHotkeyButton = components.buttonFactory("Select Hotkey(" + settings.getHotkeyText() + ")", null, new int[]{20, 210, 165, 30});
 
         // autoclick on hold
         JLabel autoclickOnMouseHoldLabel = components.labelFactory("Autoclick on button hold:", false, false, new int[]{135, 255, 190, 20});
-        autoclickOnMouseHoldCheckBox = components.checkBoxFactory(Settings.shouldAutoclickOnMouseHold(), new int[]{275, 255, 15, 20});
+        autoclickOnMouseHoldCheckBox = components.checkBoxFactory(settings.shouldAutoclickOnMouseHold(), new int[]{275, 255, 15, 20});
         JPanel autoclickOnMouseHoldPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 9));
         autoclickOnMouseHoldPanel.setBounds(125, 250, 175, 30);
         autoclickOnMouseHoldPanel.add(autoclickOnMouseHoldLabel);

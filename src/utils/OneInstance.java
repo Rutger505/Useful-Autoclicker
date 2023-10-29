@@ -22,7 +22,7 @@ public class OneInstance {
             Logger.fatal("Program is already running. Exiting...");
             System.exit(1);
         }
-        Logger.info("[INFO] Socket opened");
+        Logger.info("Socket opened");
     }
 
     /**

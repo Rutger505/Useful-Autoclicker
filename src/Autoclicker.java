@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Autoclicker {
     private Thread autoclickerThread;
+    private final Settings settings;
     private final Random random = new Random();
     private final InputListener inputListener;
     private Robot robot;
@@ -17,6 +18,7 @@ public class Autoclicker {
      */
     public Autoclicker(InputListener inputListener) {
         this.inputListener = inputListener;
+        settings = Settings.getInstance();
         try {
             robot = new Robot();
         } catch (AWTException e) {
@@ -50,7 +52,7 @@ public class Autoclicker {
     public void autoclickerMain() {
         running = true;
 
-        if (Settings.getClicks() == 0) {
+        if (settings.getClicks() == 0) {
             Logger.trace("Entering infinite clicker loop");
             while (!Thread.currentThread().isInterrupted()) {
                 randomizeDelay();
@@ -59,7 +61,7 @@ public class Autoclicker {
             }
         } else {
             Logger.trace("Entering limited clicker loop");
-            for (int i = 0; i < Settings.getClicks() && !Thread.interrupted(); i++) {
+            for (int i = 0; i < settings.getClicks() && !Thread.interrupted(); i++) {
                 randomizeDelay();
 
                 clickCycle();
@@ -74,12 +76,12 @@ public class Autoclicker {
      * Randomizes delay of click and hold delay.
      */
     private void randomizeDelay() {
-        if (Settings.shouldRandomizeClick() && Settings.getClickRandomizeRange() > 0) {
-            Settings.setClickDelay(Math.abs(Settings.getClickDelayOriginal() + random.nextInt(Settings.getClickRandomizeRange() * 2) - Settings.getClickRandomizeRange()));
+        if (settings.shouldRandomizeClick() && settings.getClickRandomizeRange() > 0) {
+            settings.setClickDelay(Math.abs(settings.getClickDelayOriginal() + random.nextInt(settings.getClickRandomizeRange() * 2) - settings.getClickRandomizeRange()));
         }
 
-        if (Settings.shouldRandomizeHold() && Settings.getHoldRandomizeRange() > 0) {
-            Settings.setHoldDelay(Math.abs(Settings.getHoldDelayOriginal() + random.nextInt(Settings.getHoldRandomizeRange() * 2) - Settings.getHoldRandomizeRange()));
+        if (settings.shouldRandomizeHold() && settings.getHoldRandomizeRange() > 0) {
+            settings.setHoldDelay(Math.abs(settings.getHoldDelayOriginal() + random.nextInt(settings.getHoldRandomizeRange() * 2) - settings.getHoldRandomizeRange()));
         }
     }
 
@@ -93,9 +95,9 @@ public class Autoclicker {
      */
     private void clickCycle() {
         mousePress();
-        waitMs(Settings.getHoldDelay());
+        waitMs(settings.getHoldDelay());
         mouseRelease();
-        waitMs(Settings.getClickDelay());
+        waitMs(settings.getClickDelay());
     }
 
     /**
@@ -103,11 +105,11 @@ public class Autoclicker {
      */
     private void mousePress() {
         try {
-            robot.mousePress(Settings.getButton());
+            robot.mousePress(settings.getButton());
         } catch (RuntimeException e) {
             try {
                 robot = new Robot();
-                robot.mousePress(Settings.getButton());
+                robot.mousePress(settings.getButton());
             } catch (AWTException ignored) {
             }
             Logger.error("error in mouse press");
@@ -119,11 +121,11 @@ public class Autoclicker {
      */
     private void mouseRelease() {
         try {
-            robot.mouseRelease(Settings.getButton());
+            robot.mouseRelease(settings.getButton());
         } catch (RuntimeException e) {
             try {
                 robot = new Robot();
-                robot.mouseRelease(Settings.getButton());
+                robot.mouseRelease(settings.getButton());
             } catch (AWTException ignored) {
             }
             Logger.error("error in mouse release");

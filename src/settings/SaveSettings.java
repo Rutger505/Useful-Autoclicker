@@ -11,12 +11,16 @@ import java.io.ObjectOutputStream;
 public class SaveSettings {
     private static final String SETTING_FILE_NAME = "settings";
 
+    private SaveSettings() {
+        throw new IllegalStateException("Utility class");
+    }
 
     /**
      * Tries to load data from settings file.
      */
     public static void initialize() {
         getSettings();
+        saveSettings(); // so the settings file is created if it doesn't exist yet.
     }
 
 
@@ -29,11 +33,9 @@ public class SaveSettings {
 
             FileInputStream fileIn = new FileInputStream(SETTING_FILE_NAME);
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            SettingsObject settings = (SettingsObject) in.readObject();
+            Settings loadedSettings = (Settings) in.readObject();
 
-            in.close();
-            fileIn.close();
-            settings.transferSettings();
+            Settings.setNewInstance(loadedSettings);
             Logger.info("Settings loaded");
         } catch (Exception e) {
             Logger.warn("No compatible settings file found " + e);
@@ -51,10 +53,8 @@ public class SaveSettings {
 
             FileOutputStream fileOut = new FileOutputStream(SETTING_FILE_NAME);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(new SettingsObject());
+            out.writeObject(Settings.getInstance());
 
-            out.close();
-            fileOut.close();
             Logger.info("Settings saved");
         } catch (Exception e) {
             Logger.error("Settings could not be saved " + e);

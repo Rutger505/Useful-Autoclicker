@@ -16,6 +16,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
     private final HelpGUI helpGUI = new HelpGUI();
     private final GUI gui;
     private final Autoclicker clicker;
+    private final Settings settings;
 
     private boolean newHotkey;
     private int mouseButtonSelected;
@@ -29,6 +30,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
     public InputListener(GUI gui) {
         this.gui = gui;
         this.clicker = new Autoclicker(this);
+        this.settings = Settings.getInstance();
 
         // default button
         gui.getDefaultsButton().addActionListener(e -> {
@@ -40,29 +42,29 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
             gui.getClickDelay()[0].setText("100");
             gui.getHoldDelay()[0].setText("10");
 
-            Settings.setClickDelay(new int[]{100, 0, 0, 0});
-            Settings.setHoldDelay(new int[]{10, 0, 0, 0});
+            settings.setClickDelay(new int[]{100, 0, 0, 0});
+            settings.setHoldDelay(new int[]{10, 0, 0, 0});
 
             // randomize the click and hold delay.
             for (int i = 0; i < gui.getRandomizeRange().length; i++) {
                 gui.getRandomizeRange()[i].setText("20");
                 gui.getShouldRandomize()[i].setSelected(false);
             }
-            Settings.setClickRandomizeRange(20);
-            Settings.setHoldRandomizeRange(20);
-            Settings.setShouldRandomizeClick(false);
-            Settings.setShouldRandomizeHold(false);
+            settings.setClickRandomizeRange(20);
+            settings.setHoldRandomizeRange(20);
+            settings.setShouldRandomizeClick(false);
+            settings.setShouldRandomizeHold(false);
 
             // misc
             gui.getClickAmount().setText("0");
-            Settings.setClicks(0);
+            settings.setClicks(0);
 
             gui.getButtonSelect().setSelectedIndex(0);
-            Settings.setButtonNumber(0);
+            settings.setButtonNumber(0);
 
             gui.getAutoclickOnMouseHold().setSelected(false);
-            Settings.setAutoclickOnMouseHold(false);
-            if (!Settings.shouldAutoclickOnMouseHold()) {
+            settings.setAutoclickOnMouseHold(false);
+            if (!settings.shouldAutoclickOnMouseHold()) {
                 toggleClicker(false);
             }
         });
@@ -75,23 +77,23 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
 
         // autoclick on mouse hold
         gui.getAutoclickOnMouseHold().addActionListener(e -> {
-            Settings.setAutoclickOnMouseHold(gui.getAutoclickOnMouseHold().isSelected());
+            settings.setAutoclickOnMouseHold(gui.getAutoclickOnMouseHold().isSelected());
 
-            if (!Settings.shouldAutoclickOnMouseHold()) {
+            if (!settings.shouldAutoclickOnMouseHold()) {
                 toggleClicker(false);
             }
         });
 
         // should randomize click
         gui.getShouldRandomize()[0].addActionListener(e -> {
-            Settings.setShouldRandomizeClick(gui.getShouldRandomize()[0].isSelected());
-            Settings.setClickDelay(Settings.getClickDelayOriginal());
+            settings.setShouldRandomizeClick(gui.getShouldRandomize()[0].isSelected());
+            settings.setClickDelay(settings.getClickDelayOriginal());
         });
 
         // should randomize hold
         gui.getShouldRandomize()[1].addActionListener(e -> {
-            Settings.setShouldRandomizeHold(gui.getShouldRandomize()[1].isSelected());
-            Settings.setHoldDelay(Settings.getHoldDelayOriginal());
+            settings.setShouldRandomizeHold(gui.getShouldRandomize()[1].isSelected());
+            settings.setHoldDelay(settings.getHoldDelayOriginal());
 
         });
 
@@ -105,7 +107,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
 
         // combo box (button select)
         gui.getButtonSelect().addActionListener(e -> {
-            Settings.setButtonNumber(gui.getButtonSelect().getSelectedIndex());
+            settings.setButtonNumber(gui.getButtonSelect().getSelectedIndex());
             toggleClicker(false);
         });
 
@@ -126,13 +128,13 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
                 @Override
                 public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
                     onTextAdd(fb, offset, length, text, attrs, limitDefault);
-                    Settings.setClickDelay(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
+                    settings.setClickDelay(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
                 }
 
                 @Override
                 public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
                     onTextRemove(fb, offset, length);
-                    Settings.setClickDelay(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
+                    settings.setClickDelay(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
 
                 }
             });
@@ -140,14 +142,14 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
                 @Override
                 public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
                     onTextAdd(fb, offset, length, text, attrs, limitDefault);
-                    Settings.setHoldDelay(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
+                    settings.setHoldDelay(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
 
                 }
 
                 @Override
                 public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
                     onTextRemove(fb, offset, length);
-                    Settings.setHoldDelay(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
+                    settings.setHoldDelay(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
 
                 }
             });
@@ -162,14 +164,14 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
                 @Override
                 public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
                     onTextAdd(fb, offset, length, text, attrs, limitDefault);
-                    Settings.setRandomizeRange(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
+                    settings.setRandomizeRange(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
 
                 }
 
                 @Override
                 public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
                     onTextRemove(fb, offset, length);
-                    Settings.setRandomizeRange(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
+                    settings.setRandomizeRange(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())), finalI);
 
                 }
             });
@@ -181,14 +183,14 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
             @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
                 onTextAdd(fb, offset, length, text, attrs, limitClicks);
-                Settings.setClicks(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())));
+                settings.setClicks(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())));
 
             }
 
             @Override
             public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
                 onTextRemove(fb, offset, length);
-                Settings.setClicks(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())));
+                settings.setClicks(advancedParseInt(fb.getDocument().getText(0, fb.getDocument().getLength())));
 
             }
         });
@@ -229,7 +231,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
         if (newHotkey) {
             newHotkey(nativeEvent);
             Logger.info("New hotkey recorded");
-        } else if (keyPressed == Settings.getHotkey() && !Settings.shouldAutoclickOnMouseHold()) {
+        } else if (keyPressed == settings.getHotkey() && !settings.shouldAutoclickOnMouseHold()) {
             Logger.info("Hotkey pressed toggling Autoclicker");
             toggleClicker();
         }
@@ -237,7 +239,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
 
     @Override
     public void nativeMousePressed(NativeMouseEvent nativeEvent) {
-        if (!Settings.shouldAutoclickOnMouseHold()) {
+        if (!settings.shouldAutoclickOnMouseHold()) {
             return;
         }
         mouseButtonSelected = gui.getButtonSelect().getSelectedIndex() + 1;
@@ -258,7 +260,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
 
     @Override
     public void nativeMouseReleased(NativeMouseEvent nativeEvent) {
-        if (!Settings.shouldAutoclickOnMouseHold()) {
+        if (!settings.shouldAutoclickOnMouseHold()) {
             return;
         }
         int buttonPressed = nativeEvent.getButton();
@@ -367,8 +369,8 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
      * @param e the key event
      */
     private void newHotkey(NativeKeyEvent e) {
-        Settings.setHotkey(e.getKeyCode());
-        gui.getNewHotkeyButton().setText("Select Hotkey(" + Settings.getHotkeyText() + ")");
+        settings.setHotkey(e.getKeyCode());
+        gui.getNewHotkeyButton().setText("Select Hotkey(" + settings.getHotkeyText() + ")");
         newHotkey = false;
     }
 
