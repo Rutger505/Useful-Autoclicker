@@ -1,7 +1,5 @@
-package main;
-
-import errorHandeling.Error;
 import settings.Settings;
+import utils.Logger;
 
 import java.awt.*;
 import java.util.Random;
@@ -22,7 +20,7 @@ public class Autoclicker {
         try {
             robot = new Robot();
         } catch (AWTException e) {
-            Error.showError("Error starting Autoclicker", "Error starting Autoclicker try restarting the autoclicker", "(Autoclicker) Error creating robot");
+            Logger.showError("Error starting Autoclicker try restarting the Autoclicker");
             Logger.fatal("Error creating robot (Object that simulates clicks");
             System.exit(1);
         }

@@ -1,7 +1,6 @@
 package settings;
 
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
-import fileUtilities.ClickerData;
 
 import java.awt.event.InputEvent;
 
@@ -43,7 +42,7 @@ public class Settings {
 
     public static void setClicks(int clicks) {
         Settings.clicks = clicks;
-        ClickerData.saveSettings();
+        SaveSettings.saveSettings();
     }
 
     public static long getClickDelay() {
@@ -52,7 +51,7 @@ public class Settings {
 
     public static void setClickDelay(long clickDelay) {
         Settings.clickDelay = clickDelay;
-        ClickerData.saveSettings();
+        SaveSettings.saveSettings();
     }
 
     public static void setClickDelay(int[] clickDelayRaw) {
@@ -67,7 +66,7 @@ public class Settings {
         }
         clickDelayOriginal = clickDelay;
         clickDelayArray = clickDelayRaw;
-        ClickerData.saveSettings();
+        SaveSettings.saveSettings();
     }
 
     public static void setClickDelay(int element, int index) {
@@ -99,12 +98,12 @@ public class Settings {
         }
         holdDelayOriginal = holdDelay;
         holdDelayArray = holdDelayRaw;
-        ClickerData.saveSettings();
+        SaveSettings.saveSettings();
     }
 
     public static void setHoldDelay(long holdDelay) {
         Settings.holdDelay = holdDelay;
-        ClickerData.saveSettings();
+        SaveSettings.saveSettings();
     }
 
     public static void setHoldDelay(int element, int index) {
@@ -134,7 +133,7 @@ public class Settings {
 
     public static void setHoldRandomizeRange(int holdRandomizeRange) {
         Settings.holdRandomizeRange = holdRandomizeRange;
-        ClickerData.saveSettings();
+        SaveSettings.saveSettings();
     }
 
     public static int getClickRandomizeRange() {
@@ -143,7 +142,7 @@ public class Settings {
 
     public static void setClickRandomizeRange(int clickRandomizeRange) {
         Settings.clickRandomizeRange = clickRandomizeRange;
-        ClickerData.saveSettings();
+        SaveSettings.saveSettings();
     }
 
     public static void setRandomizeRange(int element, int index) {
@@ -167,7 +166,7 @@ public class Settings {
             number = 2;
         }
         Settings.button = InputEvent.getMaskForButton(number);
-        ClickerData.saveSettings();
+        SaveSettings.saveSettings();
     }
 
     public static int getButton() {
@@ -181,7 +180,7 @@ public class Settings {
     public static void setHotkey(int hotkey) {
         Settings.hotkey = hotkey;
         Settings.hotkeyText = NativeKeyEvent.getKeyText(hotkey);
-        ClickerData.saveSettings();
+        SaveSettings.saveSettings();
     }
 
     public static String getHotkeyText() {
@@ -194,16 +193,16 @@ public class Settings {
 
     public static void setShouldRandomizeClick(boolean shouldRandomizeClick) {
         Settings.shouldRandomizeClick = shouldRandomizeClick;
-        ClickerData.saveSettings();
+        SaveSettings.saveSettings();
     }
 
     public static void setShouldRandomizeHold(boolean shouldRandomizeHold) {
         Settings.shouldRandomizeHold = shouldRandomizeHold;
-        ClickerData.saveSettings();
+        SaveSettings.saveSettings();
     }
 
     public static void setAutoclickOnMouseHold(boolean autoclickOnMouseHold) {
         Settings.autoclickOnMouseHold = autoclickOnMouseHold;
-        ClickerData.saveSettings();
+        SaveSettings.saveSettings();
     }
 }

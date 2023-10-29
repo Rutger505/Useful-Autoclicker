@@ -1,10 +1,8 @@
-package main;
-
 import GUI.GUI;
-import fileUtilities.ClickerData;
-import fileUtilities.RegisterApp;
-
-import java.util.Arrays;
+import settings.SaveSettings;
+import utils.Logger;
+import utils.OneInstance;
+import utils.StartMenuShortcut;
 
 public class Main {
     /**
@@ -14,17 +12,19 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        // CLASSES REORDER
+
         Logger.trace("Activating OneInstance");
         OneInstance.Activate();
         Logger.trace("Getting Settings from file");
-        ClickerData.initialize();
+        SaveSettings.initialize();
 
         Logger.trace("Making start menu shortcut");
-        new RegisterApp();
+        new StartMenuShortcut();
 
         Logger.trace("Starting GUI");
         GUI gui = new GUI();
-        
+
         Logger.trace("Starting InputListener");
         new InputListener(gui);
     }

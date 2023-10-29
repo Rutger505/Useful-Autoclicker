@@ -1,6 +1,4 @@
-package fileUtilities;
-
-import main.Logger;
+package utils;
 
 import java.io.File;
 import java.io.IOException;

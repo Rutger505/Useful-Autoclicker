@@ -1,4 +1,6 @@
-package main;
+package utils;
+
+import javax.swing.*;
 
 public class Logger {
     private static final String RESET = "\u001B[0m";
@@ -53,5 +55,14 @@ public class Logger {
      */
     public static void fatal(String message) {
         System.out.println(RED + "[FATAL] " + message + RESET);
+    }
+
+    /**
+     * Shows an error message
+     *
+     * @param message message of the error popup
+     */
+    public static void showError(String message) {
+        JOptionPane.showMessageDialog(null, message, "Useful-Autoclicker", JOptionPane.WARNING_MESSAGE);
     }
 }

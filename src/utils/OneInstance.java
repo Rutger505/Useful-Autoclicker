@@ -1,6 +1,4 @@
-package main;
-
-import errorHandeling.Error;
+package utils;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -20,7 +18,7 @@ public class OneInstance {
     public static void Activate() {
 
         if (isRunning()) {
-            Error.showError("Already running", "Program is already running. Exiting...", "Program is already running. Exiting...");
+            Logger.showError("Program is already running. Exiting...");
             Logger.fatal("Program is already running. Exiting...");
             System.exit(1);
         }

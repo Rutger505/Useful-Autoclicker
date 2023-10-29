@@ -1,19 +1,18 @@
-package fileUtilities;
+package utils;
 
-import main.Logger;
 import mslinks.ShellLinkHelper;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.nio.file.Paths;
 
-public class RegisterApp {
+public class StartMenuShortcut {
 
 
     /**
      * Creates a shortcut in the start menu
      */
-    public RegisterApp() {
+    public StartMenuShortcut() {
         try {
             File windowsDrive = getWindowsDrive();
             String user = System.getProperty("user.name");

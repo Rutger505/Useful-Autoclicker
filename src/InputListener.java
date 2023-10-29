@@ -1,5 +1,3 @@
-package main;
-
 import GUI.GUI;
 import GUI.HelpGUI;
 import com.github.kwhat.jnativehook.GlobalScreen;
@@ -8,9 +6,9 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 import com.github.kwhat.jnativehook.mouse.NativeMouseEvent;
 import com.github.kwhat.jnativehook.mouse.NativeMouseListener;
-import errorHandeling.Error;
-import fileUtilities.FileVisibility;
 import settings.Settings;
+import utils.FileVisibility;
+import utils.Logger;
 
 import javax.swing.text.*;
 
@@ -199,7 +197,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
         try {
             GlobalScreen.registerNativeHook();
         } catch (NativeHookException e) {
-            Error.showError("HotkeyListener", "The hotkeyListener was unable to start. Try restarting the program.", "(InputListener) JNativeHook could not be started");
+            Logger.showError("The hotkeyListener was unable to start.");
             Logger.fatal("JNativeHook could not be started " + e);
             System.exit(1);
         }

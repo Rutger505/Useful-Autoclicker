@@ -1,14 +1,14 @@
-package fileUtilities;
+package settings;
 
-import main.Logger;
-import settings.SettingsObject;
+import utils.FileVisibility;
+import utils.Logger;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class ClickerData {
+public class SaveSettings {
     private static final String SETTING_FILE_NAME = "settings";
 
 

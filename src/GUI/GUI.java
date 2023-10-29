@@ -1,6 +1,5 @@
 package GUI;
 
-import main.Logger;
 import resources.Constants;
 import settings.Settings;
 
