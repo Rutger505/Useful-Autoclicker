@@ -1,41 +1,34 @@
 # Useful Autoclicker
 
-## Powerful Autoclicker with great features
+A versatile Autoclicker for various applications.
 
-![Screenshot of Autoclicker](https://user-images.githubusercontent.com/119070855/232733386-f12beb46-be38-4c62-9a4d-d5b51dbf9995.png)
+![image](https://github.com/Rutger505/Useful-Autoclicker/assets/119070855/3fc634ab-53f0-48e1-b8c3-8c0d98fda2a5)
 
 ## Features
 
 * Both click and hold down the mouse button
 * Control timings mentioned above.
-* Randomize the timings.
+* Randomize timings.
 * Start the autoclicker by using a hotkey on your keyboard.
 * Change the hotkey button.
 * 5 buttons for autoclicking: left, middle, right, and the 2 side buttons.
 * Limit the number of clicks to a certain amount.
-* Autoclick when the button is pressed.
+* Autoclick when the seleced mouse button in pressed.
 
-## How to download
+## Downloading Autoclicker
 
-### Downloading <ins>without</ins> Java installed
+1. Download and install Java [here](https://www.java.com/). Already have Java? Skip this step.
+2. Click on the latest release on the right side
+   ![image](https://github.com/Rutger505/Useful-Autoclicker/assets/119070855/ab7729f1-3555-4802-9683-0dd692452e11)
+3. Click on the file "Useful-Autoclicker.jar"
+   ![image](https://github.com/Rutger505/Useful-Autoclicker/assets/119070855/f9b55088-b41d-4c43-803a-b3b55a527aca)
+4. Open your new Autoclicker!
 
-* Install Java SE from [Java JDK](https://www.oracle.com/java/technologies/downloads/#jdk21-windows)
-* Choose your correct operating system and download the installer
-* Click on the latest release on the right side
-* Click on the file "Useful-Autoclicker.jar"
-* Open your new Autoclicker!
+## Problems & Solutions
 
-### Downloading <ins>with</ins> Java installed
+### Download the latest version of Java
 
-* Click on the latest release on the right side
-* Click on the file "Useful-Autoclicker.jar"
-* Open your new Autoclicker!
-
-## Not starting? try the following steps:
-
-### Downloading the newest version of Java
-
-download and install [Java JDK](https://www.oracle.com/java/technologies/downloads/#jdk21-windows)
+1. Go to the [Java website](https://www.java.com/) and download and install Java again.
 
 ### Run the file using terminal
 
@@ -46,16 +39,11 @@ download and install [Java JDK](https://www.oracle.com/java/technologies/downloa
 java -jar "Useful-Autoclicker.jar"
 ```
 
-### Setting the correct java path
+### Opening with Java
 
-1. Right click the autoclicker and click open width.
-2. Click "choose another app".
-3. Click "Choose an app on this PC".
-4. Go to your programFiles located in the windows drive(usually C:).
-5. Click "java".
-6. Click "jre".
-7. Click "bin".
-8. Click "javaw.exe".
-9. Click ok.
-10. If this does not work, try the same steps but select the JDK this time.
+1. Right click the Useful-Autoclicker file.
+2. Click "Open with".
+3. Click "Choose another app".
+2. Click "Java(TM) Plantform SE Binary".
+3. Click "Always".
 

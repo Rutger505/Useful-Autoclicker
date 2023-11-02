@@ -58,11 +58,20 @@ public class Logger {
     }
 
     /**
-     * Shows an error message
+     * Shows an error message popup
      *
      * @param message message of the error popup
      */
     public static void showError(String message) {
         JOptionPane.showMessageDialog(null, message, "Useful-Autoclicker", JOptionPane.WARNING_MESSAGE);
+    }
+
+    /**
+     * Shows an info message popup
+     *
+     * @param message message of the info popup
+     */
+    public static void showInfo(String message) {
+        JOptionPane.showMessageDialog(null, message, "Useful-Autoclicker", JOptionPane.INFORMATION_MESSAGE);
     }
 }

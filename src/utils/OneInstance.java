@@ -16,7 +16,7 @@ public class OneInstance {
      * Checks if the program is already running. Exits if it is.
      */
     public static void Activate() {
-
+        Logger.trace("Activating OneInstance");
         if (isRunning()) {
             Logger.showError("Program is already running. Exiting...");
             Logger.fatal("Program is already running. Exiting...");

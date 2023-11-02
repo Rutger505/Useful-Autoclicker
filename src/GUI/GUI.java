@@ -2,7 +2,7 @@ package GUI;
 
 import resources.Constants;
 import settings.Settings;
-import settings.Settings;
+import utils.Logger;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -14,7 +14,7 @@ import java.awt.*;
 public class GUI extends JFrame {
 
     // title/version
-    private static final double AUTOCLICKER_VERSION = 2.1;
+    private static final double AUTOCLICKER_VERSION = 2.2;
     public static final String MAIN_FRAME_TITLE = "Useful Autoclicker " + AUTOCLICKER_VERSION;
 
     // components
@@ -34,6 +34,7 @@ public class GUI extends JFrame {
      * Makes GUI
      */
     public GUI() {
+        Logger.trace("Starting GUI");
         JComponentFactory components = new JComponentFactory();
         Settings settings = Settings.getInstance();
 

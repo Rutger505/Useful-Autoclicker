@@ -7,6 +7,7 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 import com.github.kwhat.jnativehook.mouse.NativeMouseEvent;
 import com.github.kwhat.jnativehook.mouse.NativeMouseListener;
 import settings.Settings;
+import utils.ApplicationDirectory;
 import utils.FileVisibility;
 import utils.Logger;
 
@@ -28,6 +29,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
      * @param gui GUI for making components
      */
     public InputListener(GUI gui) {
+        Logger.trace("Starting InputListener");
         this.gui = gui;
         this.clicker = new Autoclicker(this);
         this.settings = Settings.getInstance();
@@ -207,7 +209,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
         GlobalScreen.addNativeMouseListener(this);
 
         // hide JNativeHook file
-        FileVisibility.changeVisibility("JNativeHook.x86_64.dll", true);
+        FileVisibility.changeVisibility(ApplicationDirectory.getApplicationDirectory() + "JNativeHook.x86_64.dll", true);
     }
 
     /**

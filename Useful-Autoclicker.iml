@@ -9,6 +9,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jnativehook-2.2.2" level="project" />
-    <orderEntry type="library" name="mslinks-1.1.0" level="project" />
+  </component>
+  <component name="SonarLintModuleSettings">
+    <option name="uniqueId" value="9ed15a99-7f4f-41db-946e-936a540a43a6" />
   </component>
 </module>

@@ -10,16 +10,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="45eec62e-5b7a-4ee2-b3c6-29096388c9b3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/utils/ApplicationDirectory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/ShortcutFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Useful_Autoclicker.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Useful_Autoclicker.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mslinks_1_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings" beforeDir="false" afterPath="$PROJECT_DIR$/settings" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Autoclicker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Autoclicker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Useful-Autoclicker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Useful-Autoclicker.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/mslinks-1.1.0.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/InputListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InputListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/settings/SaveSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/settings/SaveSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/settings/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/settings/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/settings/SettingsObject.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/FileVisibility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/FileVisibility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/OneInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/OneInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Logger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/StartMenuShortcut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/StartMenuShortcut.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +73,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.21278942",
     "run.code.analysis.last.selected.profile": "pProject Default",
