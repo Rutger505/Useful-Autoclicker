@@ -65,4 +65,8 @@ public class Logger {
     public static void showError(String message) {
         JOptionPane.showMessageDialog(null, message, "Useful-Autoclicker", JOptionPane.WARNING_MESSAGE);
     }
+
+    public static void showInfo(String message) {
+        JOptionPane.showMessageDialog(null, message, "Useful-Autoclicker", JOptionPane.INFORMATION_MESSAGE);
+    }
 }

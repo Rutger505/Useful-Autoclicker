@@ -4,6 +4,8 @@ import utils.Logger;
 import utils.OneInstance;
 import utils.StartMenuShortcut;
 
+import static utils.ApplicationDirectory.getApplicationDirectory;
+
 public class Main {
     /**
      * Starts the program
@@ -12,15 +14,14 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        // CLASSES REORDER
+        getApplicationDirectory();
 
         Logger.trace("Activating OneInstance");
         OneInstance.Activate();
         Logger.trace("Getting Settings from file");
         SaveSettings.initialize();
 
-        Logger.trace("Making start menu shortcut");
-        new StartMenuShortcut();
+        StartMenuShortcut.createStartMenuShortcut();
 
         Logger.trace("Starting GUI");
         GUI gui = new GUI();

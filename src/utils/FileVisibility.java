@@ -31,7 +31,7 @@ public class FileVisibility {
 
             Logger.info(filename + " is now " + (hidden ? "hidden" : "visible"));
         } catch (IOException e) {
-            Logger.warn("(FileHider) " + filename + " could not be hidden");
+            Logger.error(filename + " could not be hidden " + e);
         }
     }
 }

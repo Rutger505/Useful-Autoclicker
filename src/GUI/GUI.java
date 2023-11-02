@@ -14,7 +14,7 @@ import java.awt.*;
 public class GUI extends JFrame {
 
     // title/version
-    private static final double AUTOCLICKER_VERSION = 2.1;
+    private static final double AUTOCLICKER_VERSION = 2.2;
     public static final String MAIN_FRAME_TITLE = "Useful Autoclicker " + AUTOCLICKER_VERSION;
 
     // components

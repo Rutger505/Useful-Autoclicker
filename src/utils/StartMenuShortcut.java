@@ -1,52 +1,31 @@
 package utils;
 
-import mslinks.ShellLinkHelper;
-
-import javax.swing.filechooser.FileSystemView;
-import java.io.File;
-import java.nio.file.Paths;
-
 public class StartMenuShortcut {
 
+    private StartMenuShortcut() {
+        throw new IllegalStateException("Utility class");
+    }
 
     /**
      * Creates a shortcut in the start menu
      */
-    public StartMenuShortcut() {
-        try {
-            File windowsDrive = getWindowsDrive();
-            String user = System.getProperty("user.name");
-            // get data paths
-            String programFileName = "\\Useful-Autoclicker.jar";
-            String linkFileName = "\\Useful-Autoclicker.lnk";
-            String targetPath = Paths.get("").toAbsolutePath().normalize() + programFileName;
-            String linkPath = Paths.get(windowsDrive + "Users\\" + user + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs").toAbsolutePath().normalize() + linkFileName;
+    public static void createStartMenuShortcut() {
+        Logger.trace("Making start menu shortcut");
 
-            ShellLinkHelper.createLink(targetPath, linkPath);
+        try {
+            String applicationFileName = "Useful-Autoclicker.jar";
+            String shortcutFileName = "Useful-Autoclicker.lnk";
+
+            String shortcutTarget = ApplicationDirectory.getApplicationDirectory() + applicationFileName;
+            String shortcutLocation = System.getProperty("user.home") + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\" + shortcutFileName;
+
+
+            ShortcutFactory.createShortcut(shortcutTarget, shortcutLocation);
 
             Logger.info("Created shortcut in start menu");
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            Logger.error("Failed making start menu shortcut " + e);
+            Logger.showError("Failed making start menu shortcut " + e);
         }
-    }
-
-    /**
-     * Gets windows drive
-     *
-     * @return windows drive
-     */
-    private File getWindowsDrive() {
-        FileSystemView fileSystemView = FileSystemView.getFileSystemView();
-        File[] drives = File.listRoots();
-        File windowsDrive = null;
-        for (File drive : drives) {
-            // if drive is local disk (windows disk)
-            String systemDriveDescription = fileSystemView.getSystemTypeDescription(drive);
-            if (systemDriveDescription.equals("Local Disk")) {
-                // set this drive to Windows Drive
-                windowsDrive = drive;
-                break;
-            }
-        }
-        return windowsDrive;
     }
 }
