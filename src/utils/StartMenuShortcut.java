@@ -25,7 +25,6 @@ public class StartMenuShortcut {
             Logger.info("Created shortcut in start menu");
         } catch (Exception e) {
             Logger.error("Failed making start menu shortcut " + e);
-            Logger.showError("Failed making start menu shortcut " + e);
         }
     }
 }
