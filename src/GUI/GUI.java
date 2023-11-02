@@ -2,6 +2,7 @@ package GUI;
 
 import resources.Constants;
 import settings.Settings;
+import utils.Logger;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -33,6 +34,7 @@ public class GUI extends JFrame {
      * Makes GUI
      */
     public GUI() {
+        Logger.trace("Starting GUI");
         JComponentFactory components = new JComponentFactory();
         Settings settings = Settings.getInstance();
 

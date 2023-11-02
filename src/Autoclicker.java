@@ -36,7 +36,7 @@ public class Autoclicker {
     }
 
     public void start() {
-        Logger.trace("Starting Autoclicker");
+        Logger.info("Starting Autoclicker");
         autoclickerThread = new Thread(this::autoclickerMain);
         autoclickerThread.start();
     }

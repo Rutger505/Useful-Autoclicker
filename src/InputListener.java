@@ -29,6 +29,7 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
      * @param gui GUI for making components
      */
     public InputListener(GUI gui) {
+        Logger.trace("Starting InputListener");
         this.gui = gui;
         this.clicker = new Autoclicker(this);
         this.settings = Settings.getInstance();

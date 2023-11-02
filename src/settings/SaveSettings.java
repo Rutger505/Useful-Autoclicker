@@ -21,6 +21,7 @@ public class SaveSettings {
      * Tries to load data from settings file.
      */
     public static void initialize() {
+        Logger.trace("Getting Settings from file");
         getSettings();
         saveSettings(); // so the settings file is created if it doesn't exist yet.
     }
