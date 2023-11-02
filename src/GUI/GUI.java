@@ -2,7 +2,6 @@ package GUI;
 
 import resources.Constants;
 import settings.Settings;
-import settings.Settings;
 
 import javax.swing.*;
 import javax.swing.border.Border;
