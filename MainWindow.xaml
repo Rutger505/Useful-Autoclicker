@@ -39,11 +39,11 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock  Grid.Column="0"
-                            Text="Useful Autoclicker"
-                            FontSize="13"
-                            Margin="10, 0, 0, 0"
-                            Foreground="{StaticResource Text}" />
+                <TextBlock Grid.Column="0"
+                           Text="Useful Autoclicker"
+                           FontSize="13"
+                           Margin="10, 0, 0, 0"
+                           Foreground="{StaticResource Text}" />
 
                 <StackPanel Grid.Column="1"
                             Orientation="Horizontal">
@@ -67,8 +67,6 @@
 
                 </StackPanel>
             </Grid>
-
-
 
 
             <Rectangle Height="1"

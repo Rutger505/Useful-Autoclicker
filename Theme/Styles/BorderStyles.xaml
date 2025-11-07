@@ -3,8 +3,8 @@
 
     <Style x:Key="RoundedBorder"
            TargetType="Border">
-        <Setter  Property="BorderBrush"
-                 Value="{StaticResource Accent}" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource Accent}" />
         <Setter Property="BorderThickness"
                 Value="1" />
         <Setter Property="CornerRadius"

@@ -1,95 +1,76 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Useful_Autoclicker.Core;
+﻿using Useful_Autoclicker.Core;
 
-namespace Useful_Autoclicker.MVVM.ViewModels
+namespace Useful_Autoclicker.MVVM.ViewModels;
+
+internal class SettingViewModel : ObservableObject
 {
-    internal class SettingViewModel : ObservableObject
+    private int _repeatAmount;
+
+    private bool _shouldAutoclickOnHold;
+    private bool _shouldRepeat;
+
+    private bool _shouldUseHotkey = true;
+
+    public bool ShouldRepeat
     {
-        private bool _shouldRepeat = false;
-
-        public bool ShouldRepeat
+        get => _shouldRepeat;
+        set
         {
-            get { return _shouldRepeat; }
-            set
-            {
-                _shouldRepeat = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(RepeatTextBoxText));
-            }
+            _shouldRepeat = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(RepeatTextBoxText));
         }
+    }
 
 
-        public string RepeatTextBoxText
+    public string RepeatTextBoxText
+    {
+        get
         {
-            get
+            if (ShouldRepeat) return RepeatAmount.ToString();
+
+            return RepeatAmount == 0 ? "# times" : RepeatAmount.ToString();
+        }
+        set
+        {
+            if (ShouldRepeat)
             {
-                if (ShouldRepeat)
-                {
-                    return RepeatAmount.ToString();
-                }
+                if (int.TryParse(value, out var result))
+                    RepeatAmount = result;
                 else
-                {
-                    return RepeatAmount == 0 ? "# times" : RepeatAmount.ToString();
-                }
-
-            }
-            set
-            {
-                if (ShouldRepeat)
-                {
-                    if (int.TryParse(value, out int result))
-                    {
-                        RepeatAmount = result;
-                    }
-                    else
-                    {
-                        RepeatAmount = 0;
-                    }
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private int _repeatAmount;
-
-        public int RepeatAmount
-        {
-            get { return _repeatAmount; }
-            set
-            {
-                _repeatAmount = value;
+                    RepeatAmount = 0;
                 OnPropertyChanged();
             }
         }
+    }
 
-        private bool _shouldAutoclickOnHold = false;
-
-        public bool ShouldAutoclickOnHold
+    public int RepeatAmount
+    {
+        get => _repeatAmount;
+        set
         {
-            get { return _shouldAutoclickOnHold; }
-            set
-            {
-                _shouldAutoclickOnHold = value;
-                ShouldUseHotkey = !value;
-            }
+            _repeatAmount = value;
+            OnPropertyChanged();
         }
+    }
 
-        private bool _shouldUseHotkey = true;
-
-        public bool ShouldUseHotkey
+    public bool ShouldAutoclickOnHold
+    {
+        get => _shouldAutoclickOnHold;
+        set
         {
-            get { return _shouldUseHotkey; }
-            set
-            {
-                _shouldUseHotkey = value;
-                OnPropertyChanged();
-            }
+            _shouldAutoclickOnHold = value;
+            ShouldUseHotkey = !value;
         }
+    }
 
-
+    public bool ShouldUseHotkey
+    {
+        get => _shouldUseHotkey;
+        set
+        {
+            _shouldUseHotkey = value;
+            OnPropertyChanged();
+        }
     }
 }

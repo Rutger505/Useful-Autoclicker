@@ -126,9 +126,9 @@
                     <StackPanel Orientation="Horizontal"
                                 Margin="0,5,0,0">
                         <TextBlock Text="Repeat:" />
-                        <CheckBox  Margin="28,0, 0, 0"
-                                   IsChecked="{Binding ShouldRepeat}"
-                                   Style="{StaticResource CheckBox}" />
+                        <CheckBox Margin="28,0, 0, 0"
+                                  IsChecked="{Binding ShouldRepeat}"
+                                  Style="{StaticResource CheckBox}" />
                         <TextBox Margin="5, 0, 0, 0"
                                  IsEnabled="{Binding ShouldRepeat}"
                                  Text="{Binding RepeatTextBoxText, UpdateSourceTrigger=PropertyChanged}"
@@ -216,10 +216,10 @@
                                 Style="{StaticResource HotkeyPresenter}">
                             <TextBlock Text="F1" />
                         </Border>
-                        <Button  Margin="5,0,0,0"
-                                 Content="Change"
-                                 IsEnabled="{Binding ShouldUseHotkey}"
-                                 Style="{StaticResource ChangeHotkeyButton}" />
+                        <Button Margin="5,0,0,0"
+                                Content="Change"
+                                IsEnabled="{Binding ShouldUseHotkey}"
+                                Style="{StaticResource ChangeHotkeyButton}" />
                     </StackPanel>
                     <!--#endregion-->
 

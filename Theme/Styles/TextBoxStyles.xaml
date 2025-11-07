@@ -30,7 +30,6 @@
                 Value="0" />
 
 
-
         <!--#region Hover effect + corner radius-->
         <Setter Property="Template">
             <Setter.Value>

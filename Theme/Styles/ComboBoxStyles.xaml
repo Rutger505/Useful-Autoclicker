@@ -113,8 +113,9 @@
                           SnapsToDevicePixels="true">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"
-                                              Width="0" />
+                            <ColumnDefinition
+                                MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"
+                                Width="0" />
                         </Grid.ColumnDefinitions>
                         <Popup x:Name="PART_Popup"
                                AllowsTransparency="true"

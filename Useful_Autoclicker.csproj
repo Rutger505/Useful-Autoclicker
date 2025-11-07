@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
-    <ApplicationIcon>Theme\Images\icon.ico</ApplicationIcon>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <!--    <UseWPF>true</UseWPF>-->
+        <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+        <ApplicationIcon>Theme\Images\icon.ico</ApplicationIcon>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="Theme\Images\icon.ico" />
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="Theme\Images\icon.ico"/>
+    </ItemGroup>
 
 </Project>
