@@ -5,7 +5,8 @@ pkgbase = useful-autoclicker-git
 	url = https://github.com/Rutger505/Useful-Autoclicker
 	arch = x86_64
 	arch = aarch64
-	license = unknown
+	license = MIT
+	license = LGPL-3.0-or-later
 	makedepends = git
 	makedepends = java-environment>=8
 	depends = java-runtime>=8

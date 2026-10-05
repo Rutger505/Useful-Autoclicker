@@ -39,9 +39,16 @@ public class StartMenuShortcut {
     }
 
     private static void createWindowsShortcut(Path jar) throws IOException {
-        String shortcutLocation = System.getProperty("user.home") + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Useful-Autoclicker.lnk";
-        ShortcutFactory.createShortcut(jar.toString(), shortcutLocation);
-        Logger.info("Created shortcut in start menu");
+        Path shortcut = AppPaths.windowsRoamingDir().resolve("Microsoft\\Windows\\Start Menu\\Programs\\Useful-Autoclicker.lnk");
+        String script = "$shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut($env:SHORTCUT_PATH); "
+                + "$shortcut.TargetPath = $env:SHORTCUT_TARGET; "
+                + "$shortcut.Save()";
+        ProcessBuilder powershell = new ProcessBuilder("powershell", "-NoProfile", "-NonInteractive", "-Command", script);
+        // passed as environment variables so paths never need quoting inside the script
+        powershell.environment().put("SHORTCUT_PATH", shortcut.toString());
+        powershell.environment().put("SHORTCUT_TARGET", jar.toString());
+        powershell.start();
+        Logger.info("Creating shortcut in start menu " + shortcut);
     }
 
     private static void createDesktopEntry(Path jar) throws IOException {

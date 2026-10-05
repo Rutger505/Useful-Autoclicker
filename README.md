@@ -84,3 +84,6 @@ java -jar "Useful-Autoclicker.jar"
 2. Click "Java(TM) Plantform SE Binary".
 3. Click "Always".
 
+## License
+
+MIT, see [LICENSE](LICENSE). Bundles [JNativeHook](https://github.com/kwhat/jnativehook), licensed under the LGPL-3.0.

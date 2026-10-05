@@ -21,7 +21,7 @@ public class AppPaths {
 
     public static Path configDir() {
         if (Platform.isWindows()) {
-            return windowsDir("APPDATA", "AppData\\Roaming");
+            return windowsRoamingDir().resolve(WINDOWS_APP_NAME);
         }
         if (Platform.isMac()) {
             return HOME.resolve("Library/Application Support").resolve(WINDOWS_APP_NAME);
@@ -31,7 +31,7 @@ public class AppPaths {
 
     public static Path cacheDir() {
         if (Platform.isWindows()) {
-            return windowsDir("LOCALAPPDATA", "AppData\\Local");
+            return windowsBaseDir("LOCALAPPDATA", "AppData\\Local").resolve(WINDOWS_APP_NAME);
         }
         if (Platform.isMac()) {
             return HOME.resolve("Library/Caches").resolve(WINDOWS_APP_NAME);
@@ -74,10 +74,13 @@ public class AppPaths {
         }
     }
 
-    private static Path windowsDir(String envVariable, String fallbackRelativeToHome) {
+    public static Path windowsRoamingDir() {
+        return windowsBaseDir("APPDATA", "AppData\\Roaming");
+    }
+
+    private static Path windowsBaseDir(String envVariable, String fallbackRelativeToHome) {
         String value = System.getenv(envVariable);
-        Path base = value == null || value.isEmpty() ? HOME.resolve(fallbackRelativeToHome) : Paths.get(value);
-        return base.resolve(WINDOWS_APP_NAME);
+        return value == null || value.isEmpty() ? HOME.resolve(fallbackRelativeToHome) : Paths.get(value);
     }
 
     private static Path xdgDir(String envVariable, String fallbackRelativeToHome) {
