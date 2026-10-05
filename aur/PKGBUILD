@@ -9,6 +9,7 @@ url="https://github.com/Rutger505/Useful-Autoclicker"
 license=('unknown')
 depends=('java-runtime>=8' 'libx11' 'libxtst' 'libxt' 'libxinerama' 'libxkbcommon-x11')
 makedepends=('git' 'java-environment>=8')
+options=('!debug')
 provides=("$_pkgname")
 conflicts=("$_pkgname")
 source=("$_pkgname::git+$url.git")
