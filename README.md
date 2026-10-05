@@ -24,6 +24,38 @@ A versatile Autoclicker for various applications.
    ![image](https://github.com/Rutger505/Useful-Autoclicker/assets/119070855/f9b55088-b41d-4c43-803a-b3b55a527aca)
 4. Open your new Autoclicker!
 
+On Linux, run it with `java -jar Useful-Autoclicker.jar`. The first launch adds a desktop entry so it shows up in your
+app launcher.
+
+## Where files are stored
+
+* Windows: settings in `%APPDATA%\Useful-Autoclicker`, native hook library in `%LOCALAPPDATA%\Useful-Autoclicker`
+* Linux: settings in `$XDG_CONFIG_HOME/useful-autoclicker` (default `~/.config`), native hook library in
+  `$XDG_CACHE_HOME/useful-autoclicker` (default `~/.cache`)
+
+## Controlling a running Autoclicker
+
+`java -jar Useful-Autoclicker.jar --toggle` toggles the clicker of the already running Autoclicker, just like pressing
+the hotkey.
+
+## Wayland / Hyprland
+
+The Autoclicker runs through XWayland. Wayland doesn't let apps listen to global key presses, so the hotkey only works
+while an XWayland window has focus. Bind the toggle in your compositor instead, for Hyprland in `hyprland.conf`:
+
+```
+bind = , F6, exec, java -jar /path/to/Useful-Autoclicker.jar --toggle
+```
+
+To skip starting a JVM on every press, send the command to the running Autoclicker directly:
+
+```
+bind = , F6, exec, bash -c 'echo toggle > /dev/tcp/127.0.0.1/1324'
+```
+
+Clicks are sent through XWayland too, so they only reach XWayland windows (most games, Wine/Proton, Minecraft).
+"Autoclick on button hold" has the same limitation.
+
 ## Problems & Solutions
 
 ### Download the latest version of Java

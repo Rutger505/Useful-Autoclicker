@@ -39,10 +39,8 @@ public class GUI extends JFrame {
         Settings settings = Settings.getInstance();
 
 
-        // main frame
-        final int frameWidth = 400;
-        final int frameHeight = 330;
-        final int frameActualWidth = 384;
+        final int contentWidth = 384;
+        final int contentHeight = 290;
 
         // text field sizes
         final int textFieldWidth = 35;
@@ -70,7 +68,7 @@ public class GUI extends JFrame {
         JLabel[] hourL = components.labelFactory("h", false, false, new int[][]{{148, clickDelayItemsY, timeIdentifierLabelWidth, labelHeight}, {148, holdDelayItemsY, timeIdentifierLabelWidth, labelHeight}});
 
         // first section ########################################################
-        JLabel delayLabel = components.labelFactory("Click interval/Hold time", true, true, new int[]{0, 0, frameActualWidth, labelHeight + 5});
+        JLabel delayLabel = components.labelFactory("Click interval/Hold time", true, true, new int[]{0, 0, contentWidth, labelHeight + 5});
 
         Color topButtonBorderColor = new Color(200, 200, 200);
         Border topButtonBorder = BorderFactory.createLineBorder(topButtonBorderColor, 1);
@@ -84,7 +82,7 @@ public class GUI extends JFrame {
         holdDelayTF = components.textFieldFactory(settings.getHoldDelayArray(), new int[][]{{290, holdDelayItemsY, textFieldWidth, textFieldHeight}, {230, holdDelayItemsY, textFieldWidth, textFieldHeight}, {170, holdDelayItemsY, textFieldWidth, textFieldHeight}, {110, holdDelayItemsY, textFieldWidth, textFieldHeight}});
 
         // second section ########################################################
-        JLabel randomizeLabel = components.labelFactory("Randomize click interval", true, true, new int[]{0, 110, frameActualWidth, labelHeight});
+        JLabel randomizeLabel = components.labelFactory("Randomize click interval", true, true, new int[]{0, 110, contentWidth, labelHeight});
 
         JLabel clickRandomizeL = components.labelFactory("Click inter:", false, false, new int[]{30, randomizeItemsY, 80, labelHeight});
         JLabel holdRandomizeL = components.labelFactory("Hold time:", false, false, new int[]{200, randomizeItemsY, 80, labelHeight});
@@ -94,7 +92,7 @@ public class GUI extends JFrame {
         randomizeRangeTF = components.textFieldFactory(new int[]{settings.getClickRandomizeRange(), settings.getHoldRandomizeRange()}, new int[][]{{115, randomizeItemsY, textFieldWidth, textFieldHeight}, {290, randomizeItemsY, textFieldWidth, textFieldHeight}});
 
         // third section ########################################################
-        JLabel miscellaneousLabel = components.labelFactory("Clicks/Button/Hotkey", true, true, new int[]{0, 180, frameActualWidth, labelHeight});
+        JLabel miscellaneousLabel = components.labelFactory("Clicks/Button/Hotkey", true, true, new int[]{0, 180, contentWidth, labelHeight});
 
         JLabel clickAmountL = components.labelFactory("Clicks:", false, false, new int[]{30, clicksItems2Y, 80, labelHeight});
         clickAmountTF = components.textFieldFactory(settings.getClicks(), new int[]{70, clicksItems2Y, textFieldWidth, textFieldHeight});
@@ -159,10 +157,12 @@ public class GUI extends JFrame {
         // frame itself
         setIconImage(Constants.FRAME_ICON);
         setTitle(MAIN_FRAME_TITLE);
-        setSize(frameWidth, frameHeight);
         setResizable(false);
         getContentPane().setBackground(Constants.FRAME_COLOR);
         setLayout(null);
+        // size the content instead of the frame, window decorations differ per platform and can be absent (e.g. Hyprland)
+        getContentPane().setPreferredSize(new Dimension(contentWidth, contentHeight));
+        pack();
         setLocationRelativeTo(null);
         setAlwaysOnTop(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

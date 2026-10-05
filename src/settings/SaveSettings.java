@@ -1,68 +1,59 @@
 package settings;
 
-import utils.ApplicationDirectory;
-import utils.FileVisibility;
+import utils.AppPaths;
 import utils.Logger;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.Properties;
 
 public class SaveSettings {
-    private static final String SETTING_FILE_NAME = "settings";
-    private static final String SETTING_FILE_ABSOLUTE_PATH = ApplicationDirectory.getApplicationDirectory() + SETTING_FILE_NAME;
+    private static final Path SETTINGS_FILE = AppPaths.configDir().resolve("settings.properties");
+    private static final Path TEMPORARY_FILE = SETTINGS_FILE.resolveSibling("settings.properties.tmp");
 
     private SaveSettings() {
         throw new IllegalStateException("Utility class");
     }
 
     /**
-     * Tries to load data from settings file.
+     * Loads settings from the settings file, keeping defaults for anything missing.
      */
     public static void initialize() {
-        Logger.trace("Getting Settings from file");
-        getSettings();
-        saveSettings(); // so the settings file is created if it doesn't exist yet.
-    }
+        Logger.trace("Getting Settings from " + SETTINGS_FILE);
+        if (!Files.exists(SETTINGS_FILE)) {
+            Logger.info("No settings file yet, using defaults");
+            return;
+        }
 
-
-    /**
-     * Gets settings from the settings file.
-     */
-    private static void getSettings() {
-        try {
-            FileVisibility.changeVisibility(SETTING_FILE_ABSOLUTE_PATH, false);
-
-            FileInputStream fileIn = new FileInputStream(SETTING_FILE_ABSOLUTE_PATH);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            Settings loadedSettings = (Settings) in.readObject();
-
-            Settings.setNewInstance(loadedSettings);
+        try (InputStream in = Files.newInputStream(SETTINGS_FILE)) {
+            Properties properties = new Properties();
+            properties.load(in);
+            Settings.getInstance().load(properties);
             Logger.info("Settings loaded");
-        } catch (Exception e) {
-            Logger.warn("No compatible settings file found " + e);
-        } finally {
-            FileVisibility.changeVisibility(SETTING_FILE_ABSOLUTE_PATH, true);
+        } catch (IOException | IllegalArgumentException e) {
+            Logger.warn("Settings file could not be read, using defaults " + e);
         }
     }
 
     /**
      * Saves settings to the settings file.
      */
-    public static void saveSettings() {
+    public static synchronized void saveSettings() {
         try {
-            FileVisibility.changeVisibility(SETTING_FILE_ABSOLUTE_PATH, false);
-
-            FileOutputStream fileOut = new FileOutputStream(SETTING_FILE_ABSOLUTE_PATH);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(Settings.getInstance());
+            Files.createDirectories(SETTINGS_FILE.getParent());
+            try (OutputStream out = Files.newOutputStream(TEMPORARY_FILE)) {
+                Settings.getInstance().toProperties().store(out, "Useful Autoclicker settings");
+            }
+            // write-then-rename so a crash mid-write never leaves a truncated settings file behind
+            Files.move(TEMPORARY_FILE, SETTINGS_FILE, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
 
             Logger.info("Settings saved");
-        } catch (Exception e) {
+        } catch (IOException e) {
             Logger.error("Settings could not be saved " + e);
-        } finally {
-            FileVisibility.changeVisibility(SETTING_FILE_ABSOLUTE_PATH, true);
         }
     }
 }

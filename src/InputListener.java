@@ -7,13 +7,13 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 import com.github.kwhat.jnativehook.mouse.NativeMouseEvent;
 import com.github.kwhat.jnativehook.mouse.NativeMouseListener;
 import settings.Settings;
-import utils.ApplicationDirectory;
-import utils.FileVisibility;
 import utils.Logger;
 
 import javax.swing.text.*;
 
 public class InputListener implements NativeKeyListener, NativeMouseListener {
+    public static final String TOGGLE_COMMAND = "toggle";
+
     private final HelpGUI helpGUI = new HelpGUI();
     private final GUI gui;
     private final Autoclicker clicker;
@@ -87,17 +87,10 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
         });
 
         // should randomize click
-        gui.getShouldRandomize()[0].addActionListener(e -> {
-            settings.setShouldRandomizeClick(gui.getShouldRandomize()[0].isSelected());
-            settings.setClickDelay(settings.getClickDelayOriginal());
-        });
+        gui.getShouldRandomize()[0].addActionListener(e -> settings.setShouldRandomizeClick(gui.getShouldRandomize()[0].isSelected()));
 
         // should randomize hold
-        gui.getShouldRandomize()[1].addActionListener(e -> {
-            settings.setShouldRandomizeHold(gui.getShouldRandomize()[1].isSelected());
-            settings.setHoldDelay(settings.getHoldDelayOriginal());
-
-        });
+        gui.getShouldRandomize()[1].addActionListener(e -> settings.setShouldRandomizeHold(gui.getShouldRandomize()[1].isSelected()));
 
 
         // new hotkey button
@@ -207,9 +200,26 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
         }
         GlobalScreen.addNativeKeyListener(this);
         GlobalScreen.addNativeMouseListener(this);
+    }
 
-        // hide JNativeHook file
-        FileVisibility.changeVisibility(ApplicationDirectory.getApplicationDirectory() + "JNativeHook.x86_64.dll", true);
+    /**
+     * Handles a command sent by another invocation of the program, e.g. from a Wayland compositor keybind
+     * where the global hotkey listener can't see key presses.
+     */
+    public void handleCommand(String command) {
+        if (TOGGLE_COMMAND.equals(command)) {
+            onHotkey();
+        } else {
+            Logger.warn("Unknown command: " + command);
+        }
+    }
+
+    private void onHotkey() {
+        if (settings.shouldAutoclickOnMouseHold()) {
+            return;
+        }
+        Logger.info("Hotkey pressed toggling Autoclicker");
+        toggleClicker();
     }
 
     /**
@@ -233,9 +243,8 @@ public class InputListener implements NativeKeyListener, NativeMouseListener {
         if (newHotkey) {
             newHotkey(nativeEvent);
             Logger.info("New hotkey recorded");
-        } else if (keyPressed == settings.getHotkey() && !settings.shouldAutoclickOnMouseHold()) {
-            Logger.info("Hotkey pressed toggling Autoclicker");
-            toggleClicker();
+        } else if (keyPressed == settings.getHotkey()) {
+            onHotkey();
         }
     }
 
