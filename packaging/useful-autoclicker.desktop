@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Useful Autoclicker
+Comment=A versatile Autoclicker for various applications
+Exec=useful-autoclicker
+Icon=useful-autoclicker
+Categories=Utility;
+Terminal=false
+Actions=Toggle;
+
+[Desktop Action Toggle]
+Name=Toggle clicking
+Exec=useful-autoclicker --toggle

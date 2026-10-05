@@ -11,7 +11,7 @@ public class Autoclicker {
     private final Random random = new Random();
     private final InputListener inputListener;
     private Robot robot;
-    private boolean running;
+    private volatile boolean running;
 
     /**
      * Sets up robot
@@ -37,6 +37,7 @@ public class Autoclicker {
 
     public void start() {
         Logger.info("Starting Autoclicker");
+        running = true;
         autoclickerThread = new Thread(this::autoclickerMain);
         autoclickerThread.start();
     }
@@ -50,20 +51,14 @@ public class Autoclicker {
      * Driver method
      */
     public void autoclickerMain() {
-        running = true;
-
         if (settings.getClicks() == 0) {
             Logger.trace("Entering infinite clicker loop");
             while (!Thread.currentThread().isInterrupted()) {
-                randomizeDelay();
-
                 clickCycle();
             }
         } else {
             Logger.trace("Entering limited clicker loop");
             for (int i = 0; i < settings.getClicks() && !Thread.interrupted(); i++) {
-                randomizeDelay();
-
                 clickCycle();
             }
         }
@@ -72,17 +67,11 @@ public class Autoclicker {
         inputListener.stopClicker();
     }
 
-    /**
-     * Randomizes delay of click and hold delay.
-     */
-    private void randomizeDelay() {
-        if (settings.shouldRandomizeClick() && settings.getClickRandomizeRange() > 0) {
-            settings.setClickDelay(Math.abs(settings.getClickDelayOriginal() + random.nextInt(settings.getClickRandomizeRange() * 2) - settings.getClickRandomizeRange()));
+    private long randomize(long delay, boolean shouldRandomize, int range) {
+        if (!shouldRandomize || range <= 0) {
+            return delay;
         }
-
-        if (settings.shouldRandomizeHold() && settings.getHoldRandomizeRange() > 0) {
-            settings.setHoldDelay(Math.abs(settings.getHoldDelayOriginal() + random.nextInt(settings.getHoldRandomizeRange() * 2) - settings.getHoldRandomizeRange()));
-        }
+        return Math.abs(delay + random.nextInt(range * 2) - range);
     }
 
     /**
@@ -95,9 +84,9 @@ public class Autoclicker {
      */
     private void clickCycle() {
         mousePress();
-        waitMs(settings.getHoldDelay());
+        waitMs(randomize(settings.getHoldDelay(), settings.shouldRandomizeHold(), settings.getHoldRandomizeRange()));
         mouseRelease();
-        waitMs(settings.getClickDelay());
+        waitMs(randomize(settings.getClickDelay(), settings.shouldRandomizeClick(), settings.getClickRandomizeRange()));
     }
 
     /**
