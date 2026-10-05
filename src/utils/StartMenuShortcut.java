@@ -9,6 +9,7 @@ import java.nio.file.StandardCopyOption;
 
 public class StartMenuShortcut {
     private static final String ICON_RESOURCE = "/resources/icon.png";
+    private static final String DESKTOP_ENTRY = "applications/useful-autoclicker.desktop";
 
     private StartMenuShortcut() {
         throw new IllegalStateException("Utility class");
@@ -44,6 +45,13 @@ public class StartMenuShortcut {
     }
 
     private static void createDesktopEntry(Path jar) throws IOException {
+        for (Path dataDir : AppPaths.xdgDataDirs()) {
+            if (Files.exists(dataDir.resolve(DESKTOP_ENTRY))) {
+                Logger.info("Desktop entry installed by package manager, skipping");
+                return;
+            }
+        }
+
         Path icon = AppPaths.dataDir().resolve("icon.png");
         Files.createDirectories(icon.getParent());
         try (InputStream in = StartMenuShortcut.class.getResourceAsStream(ICON_RESOURCE)) {
@@ -59,7 +67,7 @@ public class StartMenuShortcut {
                 + "Categories=Utility;\n"
                 + "Terminal=false\n";
 
-        Path desktopEntry = AppPaths.xdgDataHome().resolve("applications/useful-autoclicker.desktop");
+        Path desktopEntry = AppPaths.xdgDataHome().resolve(DESKTOP_ENTRY);
         Files.createDirectories(desktopEntry.getParent());
         Files.write(desktopEntry, entry.getBytes(StandardCharsets.UTF_8));
         Logger.info("Created desktop entry " + desktopEntry);

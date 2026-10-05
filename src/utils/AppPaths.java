@@ -3,6 +3,8 @@ package utils;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Per-user directories following each platform's conventions:
@@ -39,6 +41,20 @@ public class AppPaths {
 
     public static Path xdgDataHome() {
         return xdgBaseDir("XDG_DATA_HOME", ".local/share");
+    }
+
+    public static List<Path> xdgDataDirs() {
+        String value = System.getenv("XDG_DATA_DIRS");
+        if (value == null || value.isEmpty()) {
+            value = "/usr/local/share:/usr/share";
+        }
+        List<Path> dirs = new ArrayList<>();
+        for (String dir : value.split(":")) {
+            if (!dir.isEmpty() && Paths.get(dir).isAbsolute()) {
+                dirs.add(Paths.get(dir));
+            }
+        }
+        return dirs;
     }
 
     public static Path dataDir() {
