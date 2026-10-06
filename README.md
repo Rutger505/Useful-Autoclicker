@@ -29,7 +29,7 @@ A versatile Autoclicker for various applications.
 On Arch, install `useful-autoclicker-git` from the AUR (`yay -S useful-autoclicker-git`). This adds a
 `useful-autoclicker` command and an app launcher entry. To build it locally, run `makepkg -si` in the `aur` folder.
 
-On other distros, run `./build.sh` (needs a JDK) and start it with `java -jar out/Useful-Autoclicker.jar`. The first
+On other distros, run `./build.sh` (needs JDK 17 or newer, the jar still runs on Java 8) and start it with `java -jar out/Useful-Autoclicker.jar`. The first
 launch adds a desktop entry so it shows up in your app launcher.
 
 ## Where files are stored
@@ -58,8 +58,11 @@ To skip starting a JVM on every press, send the command to the running Autoclick
 bind = , F6, exec, bash -c 'echo toggle > /dev/tcp/127.0.0.1/1324'
 ```
 
-Clicks are sent through XWayland too, so they only reach XWayland windows (most games, Wine/Proton, Minecraft).
-"Autoclick on button hold" has the same limitation.
+Clicks go through the compositor's virtual pointer (`wlr-virtual-pointer`), so they reach every app, Wayland or
+XWayland. This needs Java 17 or newer and a compositor that supports the protocol, like Hyprland or Sway. Elsewhere
+clicks only reach XWayland windows.
+
+"Autoclick on button hold" only detects presses in XWayland windows.
 
 ## Problems & Solutions
 

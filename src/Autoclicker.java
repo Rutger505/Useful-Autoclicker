@@ -1,5 +1,6 @@
 import settings.Settings;
 import utils.Logger;
+import utils.VirtualMouse;
 
 import java.awt.*;
 import java.util.Random;
@@ -11,6 +12,7 @@ public class Autoclicker {
     private final Random random = new Random();
     private final InputListener inputListener;
     private Robot robot;
+    private final VirtualMouse virtualMouse = VirtualMouse.createForSession();
     private volatile boolean running;
 
     /**
@@ -93,6 +95,10 @@ public class Autoclicker {
      * Press mouse button
      */
     private void mousePress() {
+        if (virtualMouse != null) {
+            virtualMouse.press(settings.getButtonNumber());
+            return;
+        }
         try {
             robot.mousePress(settings.getButton());
         } catch (RuntimeException e) {
@@ -109,6 +115,10 @@ public class Autoclicker {
      * Release mouse button
      */
     private void mouseRelease() {
+        if (virtualMouse != null) {
+            virtualMouse.release(settings.getButtonNumber());
+            return;
+        }
         try {
             robot.mouseRelease(settings.getButton());
         } catch (RuntimeException e) {
