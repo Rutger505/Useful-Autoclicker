@@ -1,5 +1,6 @@
 import settings.Settings;
 import utils.Logger;
+import utils.Ydotool;
 
 import java.awt.*;
 import java.util.Random;
@@ -11,6 +12,7 @@ public class Autoclicker {
     private final Random random = new Random();
     private final InputListener inputListener;
     private Robot robot;
+    private final Ydotool ydotool;
     private volatile boolean running;
 
     /**
@@ -19,6 +21,12 @@ public class Autoclicker {
     public Autoclicker(InputListener inputListener) {
         this.inputListener = inputListener;
         settings = Settings.getInstance();
+        ydotool = Ydotool.isWaylandSession() && Ydotool.isInstalled() ? new Ydotool() : null;
+        if (ydotool != null) {
+            Logger.info("Wayland session, clicking through ydotool");
+        } else if (Ydotool.isWaylandSession()) {
+            Logger.showInfo("Install ydotool to click in Wayland apps. Without it clicks only reach XWayland windows.");
+        }
         try {
             robot = new Robot();
         } catch (AWTException e) {
@@ -93,6 +101,10 @@ public class Autoclicker {
      * Press mouse button
      */
     private void mousePress() {
+        if (ydotool != null) {
+            ydotool.press(settings.getButtonNumber());
+            return;
+        }
         try {
             robot.mousePress(settings.getButton());
         } catch (RuntimeException e) {
@@ -109,6 +121,10 @@ public class Autoclicker {
      * Release mouse button
      */
     private void mouseRelease() {
+        if (ydotool != null) {
+            ydotool.release(settings.getButtonNumber());
+            return;
+        }
         try {
             robot.mouseRelease(settings.getButton());
         } catch (RuntimeException e) {

@@ -15,6 +15,7 @@ pkgbase = useful-autoclicker-git
 	depends = libxt
 	depends = libxinerama
 	depends = libxkbcommon-x11
+	optdepends = ydotool: clicking in native Wayland apps
 	provides = useful-autoclicker
 	conflicts = useful-autoclicker
 	options = !debug

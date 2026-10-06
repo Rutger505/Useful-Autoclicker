@@ -58,8 +58,19 @@ To skip starting a JVM on every press, send the command to the running Autoclick
 bind = , F6, exec, bash -c 'echo toggle > /dev/tcp/127.0.0.1/1324'
 ```
 
-Clicks are sent through XWayland too, so they only reach XWayland windows (most games, Wine/Proton, Minecraft).
-"Autoclick on button hold" has the same limitation.
+To click in native Wayland apps (like your browser), install [ydotool](https://github.com/ReimuNotMoe/ydotool). The
+Autoclicker uses it automatically in a Wayland session. Without it, clicks only reach XWayland windows. ydotoold needs
+access to `/dev/uinput`, which the `ydotool` package grants to the `input` group:
+
+```
+sudo pacman -S ydotool
+sudo usermod -aG input $USER
+systemctl --user enable ydotool
+```
+
+Then log out and back in.
+
+"Autoclick on button hold" still only detects presses in XWayland windows.
 
 ## Problems & Solutions
 
